@@ -1,4 +1,4 @@
-The Online Gallery System shall allow a customer to view available artworks of an artist by providing the artist's name
+The Online Gallery System shall allow a customer to view available artworks of an artist by providing the artist's first and name
 
 The Online Gallery System shall allow a customer to view an artwork drawn randomly from all available artworks
 
