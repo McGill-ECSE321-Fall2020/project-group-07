@@ -1,1 +1,0 @@
-web: java -jar OnlineGallery-Backend/build/libs/OnlineGallery-Backend-0.0.1-SNAPSHOT.jar 
