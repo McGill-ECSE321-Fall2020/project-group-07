@@ -1,9 +1,0 @@
-language: java
-
-branches:
-  only:
-  - persistence-build
-
-script:
-- chmod +x gradlew
-- ./gradlew build
