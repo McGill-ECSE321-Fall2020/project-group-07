@@ -7,27 +7,27 @@ import javax.persistence.Id;
 public class Artwork{
 private String name;
    
-   private void setName(String value) {
+   public void setName(String value) {
 this.name = value;
     }
 @Id
-private String getName() {
+public String getName() {
 return this.name;
     }
 private double price;
 
-private void setPrice(double value) {
+public void setPrice(double value) {
 this.price = value;
     }
-private double getPrice() {
+public double getPrice() {
 return this.price;
     }
 private double xDim;
 
-private void setXDim(double value) {
+public void setXDim(double value) {
 this.xDim = value;
     }
-private double getXDim() {
+public double getXDim() {
 return this.xDim;
     }
 private double yDim;
