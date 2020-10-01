@@ -1,5 +1,5 @@
-R1 - Upon the receipt of an artist's first and last name from a customer, a summary of that artist's available artworks comprising of artwork names, prices, and dimensions shall be generated for that customer. 
-R2 - After the deletion of the artwork and/customer associated with an order from the system, said order shall still retain the customer name, artwork name, and artist name.
-R3 - At end of each month, the artist shall be informed of the number of views upon each of his/her available artworks in the system.
-R4 - A summary of the day's orders and shipiments shall be prepared between 2AM and 5AM of next morning
-R5 - The daily summary of orders and shipments shall only be allowed to be viewed by Admin
+R1 - Functional - Upon the receipt of an artist's first and last name from a customer, a summary of that artist's available artworks comprising of artwork names, prices, and dimensions shall be generated for that customer. 
+R2 - Functional - After the deletion of the artwork and/customer associated with an order from the system, said order shall still retain the customer name, artwork name, and artist name.
+R3 - Functional - At end of each month, the artist shall be informed of the number of views upon each of his/her available artworks in the system.
+R4 - Functional - A summary of the day's orders and shipiments shall be prepared between 2AM and 5AM of next morning
+R5 - Non-Functional (secutiry) - The daily summary of orders and shipments shall only be allowed to be viewed by Admin
