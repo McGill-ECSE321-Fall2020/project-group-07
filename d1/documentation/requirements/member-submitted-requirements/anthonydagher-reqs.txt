@@ -1,0 +1,10 @@
+The Online Gallery System shall be able to process user requests in less than 5 seconds, 80% of the time. 
+(i.e. display artwork from a user's search)
+
+The Online Gallery System shall allow the artist to upload artwork to their profile at any time.
+
+The Online Gallery System shall allow the artist to set a price for each of their pieces.
+
+The Online Gallery System shall remove artwork from display after its purchase by a customer.
+
+The Online Gallery System shall allow users to log in to their registered profiles.

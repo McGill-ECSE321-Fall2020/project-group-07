@@ -1,0 +1,5 @@
+R1-F: The online gallery system shall allow the artist to retrieve its record of art pieces sold since its registration on the system.
+R2-F: the online gallery system shall detect a failed payment.
+R3-NF: the online gallery system shall inform the buyer that the art piece has been shipped along with an expected date with a latency of no greater than 2 hours.
+R4-F: the online gallery system shall be able to perform an authentication of a costumer or artist credentials when they try to log in into the system.
+R5-F: the online gallery system shall delete all the art pieces associated with an artist from the online gallery if the artist decides to delete his account.
