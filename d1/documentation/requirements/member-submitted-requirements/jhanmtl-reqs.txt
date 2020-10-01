@@ -1,5 +1,3 @@
-The Online Gallery System shall allow a customer to view available artworks of an artist by providing the artist's first and last name
-
-The Online Gallery System shall allow a customer to view an artwork chosen randomly from all available artworks
-
-The Online Gallery System shall allow a customer to view available artworks sorted by their times of acquisition from latest to earliest
+R1 - Upon the receipt of an artist's first and last name, a summary of that artist's available artworks comprising of artwork names, prices, and dimensions shall be generated. 
+R2 - After the deletion of the artwork and/customer associated with an order from the system, said order shall still retain the customer name, artwork name, and artist name.
+R3 - At end of each month, the artist shall be informed of the number of views upon each of his/her available artworks in the system.
