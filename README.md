@@ -1,6 +1,7 @@
 # Online Art Gallery 
 [![Build Status](https://travis-ci.com/McGill-ECSE321-Fall2020/project-group-07.svg?token=vJf8oFjyu6KgrpLfTQtr&branch=master)](https://travis-ci.com/McGill-ECSE321-Fall2020/project-group-07)
 [![GitHub issues](https://img.shields.io/badge/issues-11-red)](https://github.com/McGill-ECSE321-Fall2020/project-group-07/issues)
+[![GitHub milestones](https://img.shields.io/badge/milestones-0-green)](https://github.com/McGill-ECSE321-Fall2020/project-group-07/milestones)
 ## The Team
 
 ##### Anthony Dagher: : U2 Software Engineering student. Like others, I am still learning as much as I can about software development and coding in general. I'm hoping to gain useful knowledge (applicable in the real world) through this project, as well as improve teamworking skills.
