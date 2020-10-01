@@ -1,7 +1,7 @@
 # Online Art Gallery
 ## The Team
 
-##### Anthony Dagher:
+##### Anthony Dagher: : U2 Software Engineering student. Like others, I am still learning as much as I can about software development and coding in general. I'm hoping to gain useful knowledge (applicable in the real world) through this project, as well as improve teamworking skills.
 
 ##### Jay Han:
 
