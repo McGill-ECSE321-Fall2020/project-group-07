@@ -4,9 +4,9 @@
 [![GitHub milestones](https://img.shields.io/badge/milestones-0-green)](https://github.com/McGill-ECSE321-Fall2020/project-group-07/milestones)
 ## The Team
 
-##### Anthony Dagher: : U2 Software Engineering student. Like others, I am still learning as much as I can about software development and coding in general. I'm hoping to gain useful knowledge (applicable in the real world) through this project, as well as improve teamworking skills.
+##### Anthony Dagher: U2 Software Engineering student. Like others, I am still learning as much as I can about software development and coding in general. I'm hoping to gain useful knowledge (applicable in the real world) through this project, as well as improve teamworking skills.
 
-##### Jay Han:
+##### Jay Han:  U4 Mechanical Engineering minoring in Software. Interest in Computer Vision and ML in general. Excited to apply Agile project management techniques.
 
 ##### Keon Olsz: 
 
@@ -29,7 +29,7 @@ write access to the backend via RESTful service calls.
 | Names         | Roles         | Individual Effort (in hours)  |
 | ------------- |:-------------:| -----------------------------:|
 | Anthony       |               |                               |
-| Jay           |               |                               |
+| Jay           | database, scrum master              |                               |
 | Keon          |               |                               |
 | Massimo       |               |                               |
 | Natalia       |               |                               |
