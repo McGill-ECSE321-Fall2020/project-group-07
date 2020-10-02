@@ -28,7 +28,7 @@ write access to the backend via RESTful service calls.
 ### Sprint 1
 | Names         | Roles         | Individual Effort (in hours)  |
 | ------------- |:-------------:| -----------------------------:|
-| Anthony       |               |                               |
+| Anthony       | requirements              |                               |
 | Jay           | database, scrum master              |                               |
 | Keon          |               |                               |
 | Massimo       |               |                               |
