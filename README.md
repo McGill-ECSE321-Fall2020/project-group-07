@@ -12,7 +12,7 @@
 
 ##### Massimo Vadacchino:
 
-##### Natalia Tabet:
+##### Natalia Tabet: U3 electrical engineering student with minor in software engineering. By combining software and electrical engineering fields I hope to gain a broader insight on the overall architecture and design of intelligent systems such as robotics and automation. 
 
 ## The Project
 
@@ -32,6 +32,6 @@ write access to the backend via RESTful service calls.
 | Jay           | database, scrum master              |                               |
 | Keon          |               |                               |
 | Massimo       |               |                               |
-| Natalia       |               |                               |
+| Natalia       | model design              |                               |
 
 __For more information:__ [place wiki link here]
