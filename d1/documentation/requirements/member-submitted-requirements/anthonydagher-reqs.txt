@@ -1,10 +1,6 @@
-The Online Gallery System shall be able to process user requests in less than 5 seconds, 80% of the time. 
+R1 - (NF) -  The Online Gallery System shall be capable of processing user requests in less than 5 seconds, 80% of the time. 
 (i.e. display artwork from a user's search)
-
-The Online Gallery System shall allow the artist to upload artwork to their profile at any time.
-
-The Online Gallery System shall allow the artist to set a price for each of their pieces.
-
-The Online Gallery System shall remove artwork from display after its purchase by a customer.
-
-The Online Gallery System shall allow users to log in to their registered profiles.
+R2 - (F) - The Online Gallery System shall display a list of all available artwork upon user request.
+R3 - (F) - The Online Gallery System shall display detailed artwork descriptions for every piece upon user request.
+R4 - (F) - The Online Gallery System shall update the artwork availability after a purchase by a customer.
+R5 - (F)-  The Online Gallery System shall display the number of items in a customer's basket on each page of the site after a log-in by a user.
