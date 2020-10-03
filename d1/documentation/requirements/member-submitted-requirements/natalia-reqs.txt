@@ -6,3 +6,15 @@ R3-NF: the online gallery system shall inform the buyer that the art piece has b
 R4-F: the online gallery system shall be able to perform an authentication of a costumer or artist credentials when they try to log in into the system.
 R5-F: the online gallery system shall delete all the art pieces associated with an artist from the online gallery, along with its registration record and 
       bank account information if an artist decides to delete his account.
+      
+----------- Jay comments ---------------
+
+R1 - I think just change 'its record' to 'his/her record' and 'since its registration' to 'his/her registration'. Also, req overall could be shortened like 'The Sys shall generated an accounting report for the artist by retrieving his/her record of art pieces sold since his/her registration'
+
+R2 - It's good, I am just not sure if it's too many things in one req
+
+R3 - just add 'after receiving confirmation from shipping company' at the end
+
+R4 - nothing to say at the moment
+
+R5 - again, just change 'its registration' to 'his/her'
