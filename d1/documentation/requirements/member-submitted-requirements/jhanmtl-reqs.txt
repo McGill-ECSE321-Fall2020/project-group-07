@@ -1,4 +1,4 @@
-R1 - Functional - After receiving an artist's first and last name from a customer, the System shall generate a summary of that artist's available artworks comprising of artwork names for the customer in under 5 seconds.
+R1 - Functional - After receiving an artist's first and last name from a customer, the System shall generate a summary of that artist's available artworks comprising of artwork names, artwork prices, and artwork dimensions for the customer in under 5 seconds.
 
 R2 - Functional - After the deletion of the artwork and customer instances associated with an order from the System, the System shall still be able to retrieve the customer name, artwork name, and artist name associated with that order 
 
