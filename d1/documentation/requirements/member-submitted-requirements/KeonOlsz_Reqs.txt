@@ -1,0 +1,5 @@
+Req1(Func): The online gallery system shall allow the customer place an order for the artwork they choose.
+
+Req2(Func): The online gallery system shall allow the customer to choose to pickup their artwork or to have it mailed to them.
+
+Req3(Func): The online gallery system shall process the gallery's commission from sold artwork.
