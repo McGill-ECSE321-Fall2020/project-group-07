@@ -10,7 +10,7 @@
 
 ##### Keon Olsz: 
 
-##### Massimo Vadacchino:
+##### Massimo Vadacchino: U2 Software Engineering student. I enjoy learning about software development, the many tools that come along with it, and hope to learn a lot more about real-world software tool applications like travicCI, heroku, etc...
 
 ##### Natalia Tabet: U3 electrical engineering student with minor in software engineering. By combining software and electrical engineering fields I hope to gain a broader insight on the overall architecture and design of intelligent systems such as robotics and automation. 
 
@@ -26,12 +26,12 @@ write access to the backend via RESTful service calls.
 ## Overview 
 
 ### Sprint 1
-| Names         | Roles         | Individual Effort (in hours)  |
-| ------------- |:-------------:| -----------------------------:|
+| Names         | Roles                     | Individual Effort (in hours)  |
+| ------------- |:-------------------------:| -----------------------------:|
 | Anthony       | requirements              |                               |
-| Jay           | database, scrum master              |                               |
-| Keon          |               |                               |
-| Massimo       |               |                               |
+| Jay           | database, scrum master    |                               |
+| Keon          |                           |                               |
+| Massimo       | domain model, requirments |                               |
 | Natalia       | model design              |                               |
 
 __For more information:__ [place wiki link here]
