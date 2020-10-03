@@ -4,3 +4,15 @@ R2 - (F) - The Online Gallery System shall display a list of all available artwo
 R3 - (F) - The Online Gallery System shall display detailed artwork descriptions for every piece upon user request.
 R4 - (F) - The Online Gallery System shall update the artwork availability after a purchase by a customer.
 R5 - (F)-  The Online Gallery System shall display the number of items in a customer's basket on each page of the site after a log-in by a user.
+
+
+------------------------------------------ Jay Comments (thought this would be a good place for keeping things organized) --------------------------------
+R1 - I think it's better to say "capable of processing 'a' user's requests ... " because it could be interpreted currently as processing the requests of all the users logged into the system at the moment.
+
+R2 - same as R1, 'upon a user's request'
+
+R3 - see R2
+
+R4 - just to be explicit, add 'update artwork availability after its purchase ...' to be certain that we are talking about updating the artwork that's sold
+
+R5 - I think stick to either piece or artwork rather than introducing items as a new word, also not terribly sure about basket. I think your main idea could still be conveyed without the basket, "display number of orders of a customer on each page ..." 
