@@ -2,16 +2,10 @@ package ca.mcgill.ecse321.onlinegallery.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import PhysicalGallery;
 import javax.persistence.CascadeType;
 import javax.persistence.OneToOne;
-import Address;
 import java.util.Set;
 import javax.persistence.OneToMany;
-import User;
-import Registration;
-import Purchase;
-import Shipment;
 
 @Entity
 public class OnlineGallery{

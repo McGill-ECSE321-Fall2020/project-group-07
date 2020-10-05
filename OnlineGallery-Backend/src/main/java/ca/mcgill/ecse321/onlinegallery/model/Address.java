@@ -1,6 +1,7 @@
+package ca.mcgill.ecse321.onlinegallery.model;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import ca.mcgill.ecse321.onlinegallery.model.OnlineGallery;
 import javax.persistence.ManyToOne;
 
 @Entity
