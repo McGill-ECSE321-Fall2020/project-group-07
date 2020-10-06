@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Admin extends UserRole{
+public class GalleryAdmin extends UserRole{
    private Integer adminId;
 
 public void setAdminId(Integer value) {

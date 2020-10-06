@@ -7,7 +7,7 @@ import java.util.Set;
 import javax.persistence.OneToMany;
 
 @Entity
-public class User{
+public class GalleryUser{
    private Integer userId;
 
 public void setUserId(Integer value) {
@@ -52,14 +52,14 @@ public String getPhoneNumber() {
       this.onlineGallery = onlineGallery;
    }
    
-   private Set<Registration> registrations;
+   private Set<GalleryRegistration> registrations;
    
    @OneToMany(mappedBy="user" )
-   public Set<Registration> getRegistrations() {
+   public Set<GalleryRegistration> getRegistrations() {
       return this.registrations;
    }
    
-   public void setRegistrations(Set<Registration> registrationss) {
+   public void setRegistrations(Set<GalleryRegistration> registrationss) {
       this.registrations = registrationss;
    }
    

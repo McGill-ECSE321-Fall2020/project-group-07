@@ -5,7 +5,7 @@
       <contents xmi:type="ecore:EAnnotation" xmi:id="_rNsTUQaeEeunR66qYk_Vyg" source="codegen">
         <details xmi:id="_rNsTUgaeEeunR66qYk_Vyg" key="codegenDirectory" value="/ca.mcgill.ecse321.onlinegallery.model/src-gen"/>
         <details xmi:id="_rN6VwAaeEeunR66qYk_Vyg" key="observedFolders" value="/ca.mcgill.ecse321.onlinegallery.model/src"/>
-        <details xmi:id="_jXHPAAdWEeuwycpdDT7s-g" key="AssociatedSourceCode" value="/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/OnlineGallery.java;3124736096/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/PhysicalGallery.java;231926450/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Address.java;292333505/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Registration.java;3408841088/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/User.java;1404505482/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Admin.java;901043391/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/UserRole.java;2277200495/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Artist.java;740710875/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Profile.java;2441965716/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Artwork.java;3798837615/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Customer.java;1358346482/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Purchase.java;2503736871/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Shipment.java;3060837232/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/ShipmentStatus.java;3178675296/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/ArtworkStatus.java;2103645098/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/ShipmentType.java;1388162076/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/PaymentMethod.java;2345925657/1;"/>
+        <details xmi:id="_jXHPAAdWEeuwycpdDT7s-g" key="AssociatedSourceCode" value="/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/OnlineGallery.java;403648003/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/PhysicalGallery.java;231926450/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Address.java;292333505/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/UserRole.java;1513530618/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Artist.java;740710875/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Profile.java;2441965716/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Artwork.java;3798837615/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Customer.java;1358346482/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Purchase.java;2503736871/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/Shipment.java;3060837232/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/ShipmentStatus.java;3178675296/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/ArtworkStatus.java;2103645098/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/ShipmentType.java;1388162076/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/PaymentMethod.java;2345925657/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/GalleryRegistration.java;1418447606/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/GalleryUser.java;4278452535/1;/ca.mcgill.ecse321.onlinegallery.model/src-gen/ca/mcgill/ecse321/onlinegallery/model/GalleryAdmin.java;4223635842/1;"/>
       </contents>
     </eAnnotations>
     <elementImport xmi:id="_oHzZEAahEeunR66qYk_Vyg">
@@ -115,7 +115,7 @@
                   <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_zXZJ0QdYEeuwycpdDT7s-g" value="1"/>
                 </ownedAttribute>
               </packagedElement>
-              <packagedElement xmi:type="uml:Class" xmi:id="_XHd68AdZEeuwycpdDT7s-g" name="Registration">
+              <packagedElement xmi:type="uml:Class" xmi:id="_XHd68AdZEeuwycpdDT7s-g" name="GalleryRegistration">
                 <ownedAttribute xmi:id="_bn6AQAdZEeuwycpdDT7s-g" name="registrationId" visibility="public">
                   <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
                 </ownedAttribute>
@@ -137,7 +137,7 @@
                   <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_-NIu5AdZEeuwycpdDT7s-g" value="1"/>
                 </ownedAttribute>
               </packagedElement>
-              <packagedElement xmi:type="uml:Class" xmi:id="_C6rRgAdZEeuwycpdDT7s-g" name="User">
+              <packagedElement xmi:type="uml:Class" xmi:id="_C6rRgAdZEeuwycpdDT7s-g" name="GalleryUser">
                 <ownedAttribute xmi:id="_D2BfcAdZEeuwycpdDT7s-g" name="userId" visibility="public">
                   <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
                 </ownedAttribute>
@@ -163,7 +163,7 @@
                   <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QRVUIgdaEeuwycpdDT7s-g" value="*"/>
                 </ownedAttribute>
               </packagedElement>
-              <packagedElement xmi:type="uml:Class" xmi:id="_hEK_MAdaEeuwycpdDT7s-g" name="Admin">
+              <packagedElement xmi:type="uml:Class" xmi:id="_hEK_MAdaEeuwycpdDT7s-g" name="GalleryAdmin">
                 <generalization xmi:id="_oM4HQAdaEeuwycpdDT7s-g" general="_L7mC8AdaEeuwycpdDT7s-g"/>
                 <ownedAttribute xmi:id="_tUuK0AdaEeuwycpdDT7s-g" name="adminId" visibility="public">
                   <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>

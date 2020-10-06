@@ -5,7 +5,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Registration{
+public class GalleryRegistration{
    private Integer registrationId;
 
 public void setRegistrationId(Integer value) {
@@ -50,14 +50,14 @@ public Boolean getIsLoggedIn() {
       this.onlineGallery = onlineGallery;
    }
    
-   private User user;
+   private GalleryUser user;
    
    @ManyToOne(optional=false)
-   public User getUser() {
+   public GalleryUser getUser() {
       return this.user;
    }
    
-   public void setUser(User user) {
+   public void setUser(GalleryUser user) {
       this.user = user;
    }
    

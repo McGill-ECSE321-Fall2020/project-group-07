@@ -40,25 +40,25 @@ public Integer getSystemId() {
       this.allAddresses = allAddressess;
    }
    
-   private Set<User> allUsers;
+   private Set<GalleryUser> allUsers;
    
    @OneToMany(mappedBy="onlineGallery" , cascade={CascadeType.ALL})
-   public Set<User> getAllUsers() {
+   public Set<GalleryUser> getAllUsers() {
       return this.allUsers;
    }
    
-   public void setAllUsers(Set<User> allUserss) {
+   public void setAllUsers(Set<GalleryUser> allUserss) {
       this.allUsers = allUserss;
    }
    
-   private Set<Registration> allRegistrations;
+   private Set<GalleryRegistration> allRegistrations;
    
    @OneToMany(mappedBy="onlineGallery" , cascade={CascadeType.ALL})
-   public Set<Registration> getAllRegistrations() {
+   public Set<GalleryRegistration> getAllRegistrations() {
       return this.allRegistrations;
    }
    
-   public void setAllRegistrations(Set<Registration> allRegistrationss) {
+   public void setAllRegistrations(Set<GalleryRegistration> allRegistrationss) {
       this.allRegistrations = allRegistrationss;
    }
    

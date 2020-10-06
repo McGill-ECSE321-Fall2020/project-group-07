@@ -589,7 +589,7 @@
       <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_UIoyUgdZEeuwycpdDT7s-g"/>
       <visibility xmi:id="_UIr1oQdZEeuwycpdDT7s-g" label="+"/>
       <cardinality xmi:id="_UIr1ogdZEeuwycpdDT7s-g" label="*" max="-1"/>
-      <type xmi:id="_UIr1owdZEeuwycpdDT7s-g" name="User">
+      <type xmi:id="_UIr1owdZEeuwycpdDT7s-g" name="GalleryUser">
         <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_C6rRgAdZEeuwycpdDT7s-g"/>
       </type>
     </attributes>
@@ -597,7 +597,7 @@
       <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_5BiMsgdZEeuwycpdDT7s-g"/>
       <visibility xmi:id="_5Bko8QdZEeuwycpdDT7s-g" label="+"/>
       <cardinality xmi:id="_5Bko8gdZEeuwycpdDT7s-g" label="*" max="-1"/>
-      <type xmi:id="_5BlQAAdZEeuwycpdDT7s-g" name="Registration">
+      <type xmi:id="_5BlQAAdZEeuwycpdDT7s-g" name="GalleryRegistration">
         <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_XHd68AdZEeuwycpdDT7s-g"/>
       </type>
     </attributes>
@@ -615,70 +615,6 @@
       <cardinality xmi:id="_wN_WogddEeuwycpdDT7s-g" label="*" max="-1"/>
       <type xmi:id="_wN_WowddEeuwycpdDT7s-g" name="Shipment">
         <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_W-F_sAddEeuwycpdDT7s-g"/>
-      </type>
-    </attributes>
-  </nodes>
-  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_C6r4kAdZEeuwycpdDT7s-g" containment="_35KyQAdgEeuTCYRtJNp2Nw" name="User" package="_T3aegAagEeunR66qYk_Vyg" associationsIn="_UIqngAdZEeuwycpdDT7s-g _-NJ9AAdZEeuwycpdDT7s-g _QRXJUAdaEeuwycpdDT7s-g">
-    <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_C6rRgAdZEeuwycpdDT7s-g"/>
-    <visualProperties xmi:id="_C6r4kQdZEeuwycpdDT7s-g" position="930.0,458.0" size="-1.0,-1.0"/>
-    <visibility xmi:id="_C6r4kgdZEeuwycpdDT7s-g" label="+"/>
-    <attributes xmi:id="_D2CtkAdZEeuwycpdDT7s-g" name="userId">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_D2BfcAdZEeuwycpdDT7s-g"/>
-      <stereotypes xmi:id="_FVixcAdZEeuwycpdDT7s-g" name="PrimaryKey">
-        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_FViKYAdZEeuwycpdDT7s-g"/>
-      </stereotypes>
-      <visibility xmi:id="_D2CtkQdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_D2CtkgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_E5ypkAdZEeuwycpdDT7s-g" name="Integer">
-        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_PshzYAdZEeuwycpdDT7s-g" name="email">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_PshMUAdZEeuwycpdDT7s-g"/>
-      <visibility xmi:id="_PshzYQdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_PshzYgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_RfwEgAdZEeuwycpdDT7s-g" name="String">
-        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_Pv7ssAdZEeuwycpdDT7s-g" name="name">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_Pv7FoAdZEeuwycpdDT7s-g"/>
-      <visibility xmi:id="_Pv7ssQdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_Pv7ssgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_QgvekAdZEeuwycpdDT7s-g" name="String">
-        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_SC1jcAdZEeuwycpdDT7s-g" name="phoneNumber">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_SC08YAdZEeuwycpdDT7s-g"/>
-      <visibility xmi:id="_SC1jcQdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_SC1jcgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_TGhOAAdZEeuwycpdDT7s-g" name="String">
-        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_UIrOkAdZEeuwycpdDT7s-g" name="onlineGallery">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_UIoLQQdZEeuwycpdDT7s-g"/>
-      <visibility xmi:id="_UIrOkQdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_UIrOkgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_UIrOkwdZEeuwycpdDT7s-g" name="OnlineGallery">
-        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_f57hAAdXEeuwycpdDT7s-g"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_-NKkEAdZEeuwycpdDT7s-g" name="registrations">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_-NIH0QdZEeuwycpdDT7s-g"/>
-      <visibility xmi:id="_-NKkEQdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_-NKkEgdZEeuwycpdDT7s-g" label="1..*" max="-1" min="1"/>
-      <type xmi:id="_-NKkEwdZEeuwycpdDT7s-g" name="Registration">
-        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_XHd68AdZEeuwycpdDT7s-g"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_QRXwYAdaEeuwycpdDT7s-g" name="userRoles">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_QRVUIAdaEeuwycpdDT7s-g"/>
-      <visibility xmi:id="_QRXwYQdaEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_QRXwYgdaEeuwycpdDT7s-g" label="1..*" max="-1" min="1"/>
-      <type xmi:id="_QRXwYwdaEeuwycpdDT7s-g" name="UserRole">
-        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_L7mC8AdaEeuwycpdDT7s-g"/>
       </type>
     </attributes>
   </nodes>
@@ -744,62 +680,6 @@
       <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_Fj2VcAakEeunR66qYk_Vyg"/>
     </literals>
   </nodes>
-  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_XHfwIAdZEeuwycpdDT7s-g" containment="_3hxl8AdgEeuTCYRtJNp2Nw" name="Registration" package="_T3aegAagEeunR66qYk_Vyg" associationsIn="_5Bja0AdZEeuwycpdDT7s-g" associationsOut="_-NJ9AAdZEeuwycpdDT7s-g">
-    <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_XHd68AdZEeuwycpdDT7s-g"/>
-    <visualProperties xmi:id="_XHfwIQdZEeuwycpdDT7s-g" position="1265.0,455.0" size="-1.0,-1.0"/>
-    <visibility xmi:id="_XHfwIgdZEeuwycpdDT7s-g" label="+"/>
-    <attributes xmi:id="_bn6nUAdZEeuwycpdDT7s-g" name="registrationId">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_bn6AQAdZEeuwycpdDT7s-g"/>
-      <stereotypes xmi:id="_dM0IkAdZEeuwycpdDT7s-g" name="PrimaryKey">
-        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_dMzhgAdZEeuwycpdDT7s-g"/>
-      </stereotypes>
-      <visibility xmi:id="_bn6nUQdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_bn6nUgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_cv90gAdZEeuwycpdDT7s-g" name="Integer">
-        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_eXaTcAdZEeuwycpdDT7s-g" name="password">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_eXZsYAdZEeuwycpdDT7s-g"/>
-      <visibility xmi:id="_eXaTcQdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_eXaTcgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_vNBlsAdZEeuwycpdDT7s-g" name="String">
-        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_ea1a4QdZEeuwycpdDT7s-g" name="userName">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_ea1a4AdZEeuwycpdDT7s-g"/>
-      <visibility xmi:id="_ea1a4gdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_ea1a4wdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_fb2zAAdZEeuwycpdDT7s-g" name="String">
-        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_1G48EAdZEeuwycpdDT7s-g" name="isLoggedIn">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_1G4VAAdZEeuwycpdDT7s-g"/>
-      <visibility xmi:id="_1G48EQdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_1G48EgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_2TocAAdZEeuwycpdDT7s-g" name="Boolean">
-        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_5BkB4AdZEeuwycpdDT7s-g" name="onlineGallery">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_5BhloQdZEeuwycpdDT7s-g"/>
-      <visibility xmi:id="_5BkB4QdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_5BkB4gdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_5BkB4wdZEeuwycpdDT7s-g" name="OnlineGallery">
-        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_f57hAAdXEeuwycpdDT7s-g"/>
-      </type>
-    </attributes>
-    <attributes xmi:id="_-NKkFAdZEeuwycpdDT7s-g" name="user">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_-NIu4gdZEeuwycpdDT7s-g"/>
-      <visibility xmi:id="_-NKkFQdZEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_-NKkFgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_-NKkFwdZEeuwycpdDT7s-g" name="User">
-        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_C6rRgAdZEeuwycpdDT7s-g"/>
-      </type>
-    </attributes>
-  </nodes>
   <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_L7mC8QdaEeuwycpdDT7s-g" containment="_4z8YcAdgEeuTCYRtJNp2Nw" name="UserRole" package="_T3aegAagEeunR66qYk_Vyg" abstractClass="true" associationsOut="_QRXJUAdaEeuwycpdDT7s-g" subclassedBy="_oM4uUAdaEeuwycpdDT7s-g _ory34AdaEeuwycpdDT7s-g _pCbPMAdaEeuwycpdDT7s-g">
     <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_L7mC8AdaEeuwycpdDT7s-g"/>
     <visualProperties xmi:id="_L7mC8gdaEeuwycpdDT7s-g" position="991.0,664.0" size="-1.0,-1.0"/>
@@ -808,7 +688,7 @@
       <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_QRVUIwdaEeuwycpdDT7s-g"/>
       <visibility xmi:id="_QRYXcQdaEeuwycpdDT7s-g" label="+"/>
       <cardinality xmi:id="_QRYXcgdaEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_QRYXcwdaEeuwycpdDT7s-g" name="User">
+      <type xmi:id="_QRYXcwdaEeuwycpdDT7s-g" name="GalleryUser">
         <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_C6rRgAdZEeuwycpdDT7s-g"/>
       </type>
     </attributes>
@@ -820,22 +700,6 @@
       <visibility xmi:id="_SytrwQdaEeuwycpdDT7s-g" label="+"/>
       <cardinality xmi:id="_SytrwgdaEeuwycpdDT7s-g" label="1" max="1" min="1"/>
       <type xmi:id="_VHejsAdaEeuwycpdDT7s-g" name="Integer">
-        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      </type>
-    </attributes>
-  </nodes>
-  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_hEQewAdaEeuwycpdDT7s-g" containment="_4XxZ0AdgEeuTCYRtJNp2Nw" name="Admin" package="_T3aegAagEeunR66qYk_Vyg" generalizations="_oM4uUAdaEeuwycpdDT7s-g">
-    <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_hEK_MAdaEeuwycpdDT7s-g"/>
-    <visualProperties xmi:id="_hEQewQdaEeuwycpdDT7s-g" position="785.0,599.0" size="-1.0,-1.0"/>
-    <visibility xmi:id="_hEQewgdaEeuwycpdDT7s-g" label="+"/>
-    <attributes xmi:id="_tUux4AdaEeuwycpdDT7s-g" name="adminId">
-      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_tUuK0AdaEeuwycpdDT7s-g"/>
-      <stereotypes xmi:id="_vF5NgAdaEeuwycpdDT7s-g" name="PrimaryKey">
-        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_vF4mcAdaEeuwycpdDT7s-g"/>
-      </stereotypes>
-      <visibility xmi:id="_tUux4QdaEeuwycpdDT7s-g" label="+"/>
-      <cardinality xmi:id="_tUux4gdaEeuwycpdDT7s-g" label="1" max="1" min="1"/>
-      <type xmi:id="_uu5CwAdaEeuwycpdDT7s-g" name="Integer">
         <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </type>
     </attributes>
@@ -1269,6 +1133,142 @@
       <cardinality xmi:id="_9ZnqcQddEeuwycpdDT7s-g" label="1" max="1" min="1"/>
       <type xmi:id="_9ZnqcgddEeuwycpdDT7s-g" name="Address">
         <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_WCQb0AdYEeuwycpdDT7s-g"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_C6r4kAdZEeuwycpdDT7s-g" containment="_35KyQAdgEeuTCYRtJNp2Nw" name="GalleryUser" package="_T3aegAagEeunR66qYk_Vyg" associationsIn="_UIqngAdZEeuwycpdDT7s-g _-NJ9AAdZEeuwycpdDT7s-g _QRXJUAdaEeuwycpdDT7s-g">
+    <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_C6rRgAdZEeuwycpdDT7s-g"/>
+    <visualProperties xmi:id="_C6r4kQdZEeuwycpdDT7s-g" position="930.0,458.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_C6r4kgdZEeuwycpdDT7s-g" label="+"/>
+    <attributes xmi:id="_D2CtkAdZEeuwycpdDT7s-g" name="userId">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_D2BfcAdZEeuwycpdDT7s-g"/>
+      <stereotypes xmi:id="_FVixcAdZEeuwycpdDT7s-g" name="PrimaryKey">
+        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_FViKYAdZEeuwycpdDT7s-g"/>
+      </stereotypes>
+      <visibility xmi:id="_D2CtkQdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_D2CtkgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_E5ypkAdZEeuwycpdDT7s-g" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_PshzYAdZEeuwycpdDT7s-g" name="email">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_PshMUAdZEeuwycpdDT7s-g"/>
+      <visibility xmi:id="_PshzYQdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_PshzYgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_RfwEgAdZEeuwycpdDT7s-g" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_Pv7ssAdZEeuwycpdDT7s-g" name="name">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_Pv7FoAdZEeuwycpdDT7s-g"/>
+      <visibility xmi:id="_Pv7ssQdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_Pv7ssgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_QgvekAdZEeuwycpdDT7s-g" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_SC1jcAdZEeuwycpdDT7s-g" name="phoneNumber">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_SC08YAdZEeuwycpdDT7s-g"/>
+      <visibility xmi:id="_SC1jcQdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_SC1jcgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_TGhOAAdZEeuwycpdDT7s-g" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_UIrOkAdZEeuwycpdDT7s-g" name="onlineGallery">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_UIoLQQdZEeuwycpdDT7s-g"/>
+      <visibility xmi:id="_UIrOkQdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_UIrOkgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_UIrOkwdZEeuwycpdDT7s-g" name="OnlineGallery">
+        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_f57hAAdXEeuwycpdDT7s-g"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_-NKkEAdZEeuwycpdDT7s-g" name="registrations">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_-NIH0QdZEeuwycpdDT7s-g"/>
+      <visibility xmi:id="_-NKkEQdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_-NKkEgdZEeuwycpdDT7s-g" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_-NKkEwdZEeuwycpdDT7s-g" name="GalleryRegistration">
+        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_XHd68AdZEeuwycpdDT7s-g"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_QRXwYAdaEeuwycpdDT7s-g" name="userRoles">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_QRVUIAdaEeuwycpdDT7s-g"/>
+      <visibility xmi:id="_QRXwYQdaEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_QRXwYgdaEeuwycpdDT7s-g" label="1..*" max="-1" min="1"/>
+      <type xmi:id="_QRXwYwdaEeuwycpdDT7s-g" name="UserRole">
+        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_L7mC8AdaEeuwycpdDT7s-g"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_XHfwIAdZEeuwycpdDT7s-g" containment="_3hxl8AdgEeuTCYRtJNp2Nw" name="GalleryRegistration" package="_T3aegAagEeunR66qYk_Vyg" associationsIn="_5Bja0AdZEeuwycpdDT7s-g" associationsOut="_-NJ9AAdZEeuwycpdDT7s-g">
+    <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_XHd68AdZEeuwycpdDT7s-g"/>
+    <visualProperties xmi:id="_XHfwIQdZEeuwycpdDT7s-g" position="1265.0,455.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_XHfwIgdZEeuwycpdDT7s-g" label="+"/>
+    <attributes xmi:id="_bn6nUAdZEeuwycpdDT7s-g" name="registrationId">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_bn6AQAdZEeuwycpdDT7s-g"/>
+      <stereotypes xmi:id="_dM0IkAdZEeuwycpdDT7s-g" name="PrimaryKey">
+        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_dMzhgAdZEeuwycpdDT7s-g"/>
+      </stereotypes>
+      <visibility xmi:id="_bn6nUQdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_bn6nUgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_cv90gAdZEeuwycpdDT7s-g" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_eXaTcAdZEeuwycpdDT7s-g" name="password">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_eXZsYAdZEeuwycpdDT7s-g"/>
+      <visibility xmi:id="_eXaTcQdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_eXaTcgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_vNBlsAdZEeuwycpdDT7s-g" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_ea1a4QdZEeuwycpdDT7s-g" name="userName">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_ea1a4AdZEeuwycpdDT7s-g"/>
+      <visibility xmi:id="_ea1a4gdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_ea1a4wdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_fb2zAAdZEeuwycpdDT7s-g" name="String">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_1G48EAdZEeuwycpdDT7s-g" name="isLoggedIn">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_1G4VAAdZEeuwycpdDT7s-g"/>
+      <visibility xmi:id="_1G48EQdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_1G48EgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_2TocAAdZEeuwycpdDT7s-g" name="Boolean">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_5BkB4AdZEeuwycpdDT7s-g" name="onlineGallery">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_5BhloQdZEeuwycpdDT7s-g"/>
+      <visibility xmi:id="_5BkB4QdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_5BkB4gdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_5BkB4wdZEeuwycpdDT7s-g" name="OnlineGallery">
+        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_f57hAAdXEeuwycpdDT7s-g"/>
+      </type>
+    </attributes>
+    <attributes xmi:id="_-NKkFAdZEeuwycpdDT7s-g" name="user">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_-NIu4gdZEeuwycpdDT7s-g"/>
+      <visibility xmi:id="_-NKkFQdZEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_-NKkFgdZEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_-NKkFwdZEeuwycpdDT7s-g" name="GalleryUser">
+        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_C6rRgAdZEeuwycpdDT7s-g"/>
+      </type>
+    </attributes>
+  </nodes>
+  <nodes xsi:type="com.yattasolutions.uml.diagrams.classifier:ClassifierVisual" xmi:id="_hEQewAdaEeuwycpdDT7s-g" containment="_4XxZ0AdgEeuTCYRtJNp2Nw" name="GalleryAdmin" package="_T3aegAagEeunR66qYk_Vyg" generalizations="_oM4uUAdaEeuwycpdDT7s-g">
+    <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_hEK_MAdaEeuwycpdDT7s-g"/>
+    <visualProperties xmi:id="_hEQewQdaEeuwycpdDT7s-g" position="785.0,599.0" size="-1.0,-1.0"/>
+    <visibility xmi:id="_hEQewgdaEeuwycpdDT7s-g" label="+"/>
+    <attributes xmi:id="_tUux4AdaEeuwycpdDT7s-g" name="adminId">
+      <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_tUuK0AdaEeuwycpdDT7s-g"/>
+      <stereotypes xmi:id="_vF5NgAdaEeuwycpdDT7s-g" name="PrimaryKey">
+        <modelElement href="ca.mcgill.ecse321.onlinegallery.model.uml#_vF4mcAdaEeuwycpdDT7s-g"/>
+      </stereotypes>
+      <visibility xmi:id="_tUux4QdaEeuwycpdDT7s-g" label="+"/>
+      <cardinality xmi:id="_tUux4gdaEeuwycpdDT7s-g" label="1" max="1" min="1"/>
+      <type xmi:id="_uu5CwAdaEeuwycpdDT7s-g" name="Integer">
+        <modelElement href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
       </type>
     </attributes>
   </nodes>

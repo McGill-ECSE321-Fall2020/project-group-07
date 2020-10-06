@@ -6,14 +6,14 @@ import javax.persistence.Id;
 
 @Entity
 public abstract class UserRole{
-   private User user;
+   private GalleryUser user;
    
    @ManyToOne(optional=false)
-   public User getUser() {
+   public GalleryUser getUser() {
       return this.user;
    }
    
-   public void setUser(User user) {
+   public void setUser(GalleryUser user) {
       this.user = user;
    }
    
