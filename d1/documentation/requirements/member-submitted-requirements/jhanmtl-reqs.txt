@@ -1,0 +1,11 @@
+R1 - Functional - After receiving an artist's first and last name from a customer, the System shall generate a summary of that artist's available artworks comprising of artwork names, artwork prices, and artwork dimensions for the customer in under 5 seconds.
+
+R2 - Functional - After the deletion of the artwork and customer instances associated with an order from the System, the System shall be able to retrieve the customer name, artwork name, and artist name associated with that order 
+
+R3 - Functional - After receiving a starting and ending date from a artist, the System shall inform the artist of the number of customer views upon each of his/her available artworks during the period defined as beginning at 6:00:00 AM of the starting date and up to 6:00:00 AM of the ending date
+
+R4 - Functional - Between 2:00:00 AM and 5:00:00 AM, the System shall send a summary of the previous day's orders and shipiments to the Admin for review.
+
+R5 - Non-Functional (security) - The System's history of all the orders and shipments of the gallery shall only visible only to the Admin.
+
+R6 - Non-Functional (size/memory) - As a mobile application, the System shall be no more than 1.5Mb of space when downloaded upon the user's device.

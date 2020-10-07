@@ -1,0 +1,29 @@
+Req.1.F: The Online Gallery System shall perform an authentication of the user's credentials in less than 1 minute upon trying to log into the system.
+
+Req.2.F: The Online Gallery System shall display a list of all available artworks in less than 2 minutes upon a user logging into the Online Gallery System.
+
+Req.3.F: The Online Gallery System shall allow customers to place an order on any unsold artwork. 
+
+Req.4.F: The Online Gallery System shall update an artwork's availability in less than 1 minute upon a customer's purchase.
+
+Req.5.F: The Online Gallery System shall allow customers to chose to either pickup up each of their respective purchased artworks at the physical art gallery or to have it mailed to them. 
+
+Req.6.F: The Online Gallery System shall display a notification and prevent the customer's purchase upon a failed transaction in which they provided the improper bank information/credentials.
+
+Req.7.F: The Online Gallery System shall delete all art pieces associated with an artist from the Online Gallery, along with their registration record and bank account information upon the deletion of their account.
+
+Req.8.F: Upon the registration of an artist's profile, the Online Gallery System shall allow said artist to edit this profile at any time.
+
+Req.9.F: A daily summary of the number of art pieces sold, their costs, and the most visited artists shall be generated in less than 6 minutes by the Online Gallery System.
+
+Req.10.F: Upon a customer entering an artwork's name, the Online Gallery System shall display said artwork's description.
+
+Req.11.F: Upon a customer entering an artist's first and last name, the Online Gallery System shall display a summary of said artist's available artworks comprising of each artwork's name, price, and dimension in under 5 seconds.
+
+Req.12.F: Upon a customer's purchase of an artwork, the Online Gallery System shall calculate the gallery's commission from said sold artwork.
+
+Req.13.NF: The Online Gallery System's history, comprising of all purchases and shipments, shall be only visible to the Admin.
+
+Req.14.NF: The Online Gallery System shall be at most 20Mb when downloaded upon the user's device.
+
+Req.15.NF: The Online Gallery System shall have at least 1 help icon per page describing the possible actions a user could do on the page.
