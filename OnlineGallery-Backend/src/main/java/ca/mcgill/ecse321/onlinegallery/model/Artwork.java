@@ -18,25 +18,6 @@ public void setArtworkId(Integer value) {
 public Integer getArtworkId() {
     return this.artworkId;
 }
-private Artist artist;
-
-@ManyToOne(optional=false)
-public Artist getArtist() {
-   return this.artist;
-}
-
-public void setArtist(Artist artist) {
-   this.artist = artist;
-}
-
-private String description;
-
-public void setDescription(String value) {
-    this.description = value;
-}
-public String getDescription() {
-    return this.description;
-}
 private String name;
 
 public void setName(String value) {
@@ -45,13 +26,13 @@ public void setName(String value) {
 public String getName() {
     return this.name;
 }
-private double commission;
+private String description;
 
-public void setCommission(double value) {
-    this.commission = value;
+public void setDescription(String value) {
+    this.description = value;
 }
-public double getCommission() {
-    return this.commission;
+public String getDescription() {
+    return this.description;
 }
 private double price;
 
@@ -60,6 +41,14 @@ public void setPrice(double value) {
 }
 public double getPrice() {
     return this.price;
+}
+private ArtworkStatus status;
+
+public void setStatus(ArtworkStatus value) {
+    this.status = value;
+}
+public ArtworkStatus getStatus() {
+    return this.status;
 }
 private int numViews;
 
@@ -77,17 +66,44 @@ public void setOnSite(Boolean value) {
 public Boolean getOnSite() {
     return this.onSite;
 }
-private ArtworkStatus status;
+private String dimension;
 
-public void setStatus(ArtworkStatus value) {
-    this.status = value;
+public void setDimension(String value) {
+    this.dimension = value;
 }
-public ArtworkStatus getStatus() {
-    return this.status;
+public String getDimension() {
+    return this.dimension;
 }
+private double weight;
+
+public void setWeight(double value) {
+    this.weight = value;
+}
+public double getWeight() {
+    return this.weight;
+}
+private double shippingCost;
+
+public void setShippingCost(double value) {
+    this.shippingCost = value;
+}
+public double getShippingCost() {
+    return this.shippingCost;
+}
+   private Artist artist;
+   
+   @ManyToOne(optional=false)
+   public Artist getArtist() {
+      return this.artist;
+   }
+   
+   public void setArtist(Artist artist) {
+      this.artist = artist;
+   }
+   
    private Set<Customer> viewers;
    
-   @ManyToMany(mappedBy="browsePieces" )
+   @ManyToMany(mappedBy="browseArtworks" )
    public Set<Customer> getViewers() {
       return this.viewers;
    }
@@ -98,7 +114,7 @@ public ArtworkStatus getStatus() {
    
    private Purchase purchase;
    
-   @OneToOne(mappedBy="artwork" )
+   @OneToOne
    public Purchase getPurchase() {
       return this.purchase;
    }

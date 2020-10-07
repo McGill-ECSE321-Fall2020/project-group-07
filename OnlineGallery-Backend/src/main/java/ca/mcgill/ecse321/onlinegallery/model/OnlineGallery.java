@@ -18,37 +18,23 @@ public void setSystemId(Integer value) {
 public Integer getSystemId() {
     return this.systemId;
 }
+private int daysUp;
+
+public void setDaysUp(int value) {
+    this.daysUp = value;
+}
+public int getDaysUp() {
+    return this.daysUp;
+}
    private PhysicalGallery physicalGallery;
    
-   @OneToOne(mappedBy="onlineGallery" , cascade={CascadeType.ALL}, optional=false)
+   @OneToOne(mappedBy="onlineGallery" , cascade={CascadeType.ALL})
    public PhysicalGallery getPhysicalGallery() {
       return this.physicalGallery;
    }
    
    public void setPhysicalGallery(PhysicalGallery physicalGallery) {
       this.physicalGallery = physicalGallery;
-   }
-   
-   private Set<Address> allAddresses;
-   
-   @OneToMany(mappedBy="onlineGallery" , cascade={CascadeType.ALL})
-   public Set<Address> getAllAddresses() {
-      return this.allAddresses;
-   }
-   
-   public void setAllAddresses(Set<Address> allAddressess) {
-      this.allAddresses = allAddressess;
-   }
-   
-   private Set<GalleryUser> allUsers;
-   
-   @OneToMany(mappedBy="onlineGallery" , cascade={CascadeType.ALL})
-   public Set<GalleryUser> getAllUsers() {
-      return this.allUsers;
-   }
-   
-   public void setAllUsers(Set<GalleryUser> allUserss) {
-      this.allUsers = allUserss;
    }
    
    private Set<GalleryRegistration> allRegistrations;

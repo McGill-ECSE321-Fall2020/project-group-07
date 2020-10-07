@@ -2,9 +2,9 @@ package ca.mcgill.ecse321.onlinegallery.model;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import Date;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
+import Date;
 
 @Entity
 public class Purchase{
@@ -17,54 +17,6 @@ public void setPurchaseId(Integer value) {
 public Integer getPurchaseId() {
     return this.purchaseId;
 }
-private Date date;
-
-public void setDate(Date value) {
-    this.date = value;
-}
-public Date getDate() {
-    return this.date;
-}
-private String customerName;
-
-public void setCustomerName(String value) {
-    this.customerName = value;
-}
-public String getCustomerName() {
-    return this.customerName;
-}
-private String artistName;
-
-public void setArtistName(String value) {
-    this.artistName = value;
-}
-public String getArtistName() {
-    return this.artistName;
-}
-private String artworkName;
-
-public void setArtworkName(String value) {
-    this.artworkName = value;
-}
-public String getArtworkName() {
-    return this.artworkName;
-}
-private double price;
-
-public void setPrice(double value) {
-    this.price = value;
-}
-public double getPrice() {
-    return this.price;
-}
-private String dimension;
-
-public void setDimension(String value) {
-    this.dimension = value;
-}
-public String getDimension() {
-    return this.dimension;
-}
 private double commission;
 
 public void setCommission(double value) {
@@ -73,34 +25,61 @@ public void setCommission(double value) {
 public double getCommission() {
     return this.commission;
 }
-private double weight;
+private ShipmentType shipmentType;
 
-public void setWeight(double value) {
-    this.weight = value;
+public void setShipmentType(ShipmentType value) {
+    this.shipmentType = value;
 }
-public double getWeight() {
-    return this.weight;
+public ShipmentType getShipmentType() {
+    return this.shipmentType;
 }
-   private Customer customer;
+private PaymentMethod paymentMethod;
+
+public void setPaymentMethod(PaymentMethod value) {
+    this.paymentMethod = value;
+}
+public PaymentMethod getPaymentMethod() {
+    return this.paymentMethod;
+}
+private Customer customer;
+
+@ManyToOne(optional=false)
+public Customer getCustomer() {
+   return this.customer;
+}
+
+public void setCustomer(Customer customer) {
+   this.customer = customer;
+}
+
+private Artwork artworkOrdered;
+
+@OneToOne(mappedBy="purchase" , optional=false)
+public Artwork getArtworkOrdered() {
+   return this.artworkOrdered;
+}
+
+public void setArtworkOrdered(Artwork artworkOrdered) {
+   this.artworkOrdered = artworkOrdered;
+}
+
+private Date date;
+
+public void setDate(Date value) {
+    this.date = value;
+}
+public Date getDate() {
+    return this.date;
+}
+   private Shipment shipment;
    
-   @ManyToOne(optional=false)
-   public Customer getCustomer() {
-      return this.customer;
+   @ManyToOne
+   public Shipment getShipment() {
+      return this.shipment;
    }
    
-   public void setCustomer(Customer customer) {
-      this.customer = customer;
-   }
-   
-   private Artwork artwork;
-   
-   @OneToOne(optional=false)
-   public Artwork getArtwork() {
-      return this.artwork;
-   }
-   
-   public void setArtwork(Artwork artwork) {
-      this.artwork = artwork;
+   public void setShipment(Shipment shipment) {
+      this.shipment = shipment;
    }
    
    private OnlineGallery onlineGallery;
@@ -112,17 +91,6 @@ public double getWeight() {
    
    public void setOnlineGallery(OnlineGallery onlineGallery) {
       this.onlineGallery = onlineGallery;
-   }
-   
-   private Shipment shipment;
-   
-   @ManyToOne
-   public Shipment getShipment() {
-      return this.shipment;
-   }
-   
-   public void setShipment(Shipment shipment) {
-      this.shipment = shipment;
    }
    
    }

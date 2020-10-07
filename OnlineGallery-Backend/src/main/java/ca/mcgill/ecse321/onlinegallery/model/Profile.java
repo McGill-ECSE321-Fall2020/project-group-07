@@ -17,17 +17,6 @@ public void setProfileId(Integer value) {
 public Integer getProfileId() {
     return this.profileId;
 }
-private Artist artist;
-
-@OneToOne(optional=false)
-public Artist getArtist() {
-   return this.artist;
-}
-
-public void setArtist(Artist artist) {
-   this.artist = artist;
-}
-
 private double totalEarnings;
 
 public void setTotalEarnings(double value) {
@@ -44,14 +33,6 @@ public void setNumSold(int value) {
 public int getNumSold() {
     return this.numSold;
 }
-private double rating;
-
-public void setRating(double value) {
-    this.rating = value;
-}
-public double getRating() {
-    return this.rating;
-}
 private String selfDescription;
 
 public void setSelfDescription(String value) {
@@ -60,6 +41,25 @@ public void setSelfDescription(String value) {
 public String getSelfDescription() {
     return this.selfDescription;
 }
+private double rating;
+
+public void setRating(double value) {
+    this.rating = value;
+}
+public double getRating() {
+    return this.rating;
+}
+   private Artist artist;
+   
+   @OneToOne(optional=false)
+   public Artist getArtist() {
+      return this.artist;
+   }
+   
+   public void setArtist(Artist artist) {
+      this.artist = artist;
+   }
+   
    private Set<Artwork> artworks;
    
    @OneToMany

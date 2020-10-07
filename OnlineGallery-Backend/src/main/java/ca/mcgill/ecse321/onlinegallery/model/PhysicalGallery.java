@@ -15,6 +15,14 @@ public void setGalleryId(Integer value) {
 public Integer getGalleryId() {
     return this.galleryId;
 }
+private String address;
+
+public void setAddress(String value) {
+    this.address = value;
+}
+public String getAddress() {
+    return this.address;
+}
    private OnlineGallery onlineGallery;
    
    @OneToOne(optional=false)
@@ -24,17 +32,6 @@ public Integer getGalleryId() {
    
    public void setOnlineGallery(OnlineGallery onlineGallery) {
       this.onlineGallery = onlineGallery;
-   }
-   
-   private Address address;
-   
-   @OneToOne(optional=false)
-   public Address getAddress() {
-      return this.address;
-   }
-   
-   public void setAddress(Address address) {
-      this.address = address;
    }
    
    }
