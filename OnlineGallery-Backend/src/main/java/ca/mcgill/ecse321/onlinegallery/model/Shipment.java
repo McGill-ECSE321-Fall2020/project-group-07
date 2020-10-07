@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import java.util.Set;
 import javax.persistence.OneToMany;
@@ -60,6 +61,8 @@ public void setShippingCompany(String value) {
 public String getShippingCompany() {
     return this.shippingCompany;
 }
+
+@Enumerated
 private ShipmentStatus status;
 
 public void setStatus(ShipmentStatus value) {

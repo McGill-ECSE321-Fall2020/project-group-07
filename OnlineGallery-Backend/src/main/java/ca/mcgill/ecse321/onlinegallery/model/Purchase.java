@@ -1,10 +1,11 @@
 package ca.mcgill.ecse321.onlinegallery.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
-import Date;
+import java.sql.Date;
 
 @Entity
 public class Purchase{
@@ -25,6 +26,8 @@ public void setCommission(double value) {
 public double getCommission() {
     return this.commission;
 }
+
+@Enumerated
 private ShipmentType shipmentType;
 
 public void setShipmentType(ShipmentType value) {
@@ -33,6 +36,8 @@ public void setShipmentType(ShipmentType value) {
 public ShipmentType getShipmentType() {
     return this.shipmentType;
 }
+
+@Enumerated
 private PaymentMethod paymentMethod;
 
 public void setPaymentMethod(PaymentMethod value) {

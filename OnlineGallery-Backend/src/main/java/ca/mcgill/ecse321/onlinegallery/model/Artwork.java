@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.model;
 
 import javax.persistence.Entity;
+import javax.persistence.Enumerated;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.util.Set;
@@ -42,6 +43,8 @@ public void setPrice(double value) {
 public double getPrice() {
     return this.price;
 }
+
+@Enumerated
 private ArtworkStatus status;
 
 public void setStatus(ArtworkStatus value) {
