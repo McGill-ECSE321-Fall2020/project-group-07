@@ -1,5 +1,6 @@
 package ca.mcgill.ecse321.onlinegallery.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -65,16 +66,21 @@ public class Customer {
 		return this.bankInfo;
 	}
 	
-//   private Set<Artwork> browseArtworks;
-//   
-//   @ManyToMany
-//   public Set<Artwork> getBrowseArtworks() {
-//      return this.browseArtworks;
-//   }
-//   
-//   public void setBrowseArtworks(Set<Artwork> browseArtworkss) {
-//      this.browseArtworks = browseArtworkss;
-//   }
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            },
+            mappedBy = "viewers")
+	   private Set<Artwork> browseArtworks;
+	   
+	   public Set<Artwork> getBrowseArtworks() {
+	      return this.browseArtworks;
+	   }
+	   
+	   public void setBrowseArtworks(Set<Artwork> browseArtworkss) {
+	      this.browseArtworks = browseArtworkss;
+	   }
 //   
 //   private Set<Purchase> purchases;
 //   

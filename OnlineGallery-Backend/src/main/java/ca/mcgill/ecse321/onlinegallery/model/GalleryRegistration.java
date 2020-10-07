@@ -72,6 +72,20 @@ public class GalleryRegistration {
 		this.galleryCustomers = galleryCustomerss;
 	}
 	
+	
+	@OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "galleryRegistration")
+	private Set<Artist> galleryArtists;
+
+	public Set<Artist> getGalleryArtists() {
+		return this.galleryArtists;
+	}
+
+	public void setGalleryArtists(Set<Artist> galleryArtistss) {
+		this.galleryArtists = galleryArtistss;
+	}
+	
 //	private OnlineGallery onlineGallery;
 //
 //	@ManyToOne(optional = false)
@@ -139,16 +153,7 @@ public class GalleryRegistration {
 //
 
 //
-//	private Set<Artist> galleryArtists;
-//
-//	@OneToMany(mappedBy = "galleryRegistration", cascade = { CascadeType.ALL })
-//	public Set<Artist> getGalleryArtists() {
-//		return this.galleryArtists;
-//	}
-//
-//	public void setGalleryArtists(Set<Artist> galleryArtistss) {
-//		this.galleryArtists = galleryArtistss;
-//	}
+
 //
 
 
