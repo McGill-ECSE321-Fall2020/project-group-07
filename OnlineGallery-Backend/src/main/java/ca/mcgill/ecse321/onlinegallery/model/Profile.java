@@ -53,8 +53,7 @@ public class Profile {
 	
 	
     @OneToMany(
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.ALL
         )
 	private Set<Artwork> artworks;
 
