@@ -49,7 +49,7 @@ public class GalleryRegistration {
 		this.userName = value;
 	}
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional=false)
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional=true)
 	private GalleryAdmin galleryAdmin;
 
 	public GalleryAdmin getGalleryAdmin() {
@@ -60,38 +60,29 @@ public class GalleryRegistration {
 		this.galleryAdmin = galleryAdmin;
 	}
 
-	@OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "galleryRegistration")
-	private Set<Customer> galleryCustomers;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional=true)
+	private Customer galleryCustomer;
 	
-	public Set<Customer> getGalleryCustomers() {
-		return this.galleryCustomers;
+	public Customer getGalleryCustomer() {
+		return this.galleryCustomer;
 	}
 
-	public void setGalleryCustomers(Set<Customer> galleryCustomerss) {
-		this.galleryCustomers = galleryCustomerss;
+	public void setGalleryCustomer(Customer galleryCustomer) {
+		this.galleryCustomer = galleryCustomer;
 	}
 	
 	
-	@OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
-            mappedBy = "galleryRegistration")
-	private Set<Artist> galleryArtists;
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional=true)
+	private Artist galleryArtist;
 
-	public Set<Artist> getGalleryArtists() {
-		return this.galleryArtists;
+	public Artist getGalleryArtist() {
+		return this.galleryArtist;
 	}
 
-	public void setGalleryArtists(Set<Artist> galleryArtistss) {
-		this.galleryArtists = galleryArtistss;
+	public void setGalleryArtist(Artist galleryArtist) {
+		this.galleryArtist = galleryArtist;
 	}
-//	
-//	
-//	
-//	
-//	
-//	
+
     @ManyToOne(fetch=FetchType.LAZY,optional = false)
     @JoinColumn(name = "system_id", nullable = false)
 	private OnlineGallery onlineGallery;

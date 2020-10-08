@@ -157,10 +157,10 @@ public class OnlineGalleryPersistenceTest {
 		reg.setGalleryAdmin(admin);
 		admin.setGalleryRegistration(reg);
 		
-		reg.setGalleryCustomers(allCustomers);
+		reg.setGalleryCustomer(customer);
 		customer.setGalleryRegistration(reg);
 		
-		reg.setGalleryArtists(allArtists);
+		reg.setGalleryArtist(artist);
 		artist.setGalleryRegistration(reg);
 		
 		artist.setProfile(profile);
@@ -190,6 +190,8 @@ public class OnlineGalleryPersistenceTest {
 		// if you do some print statements or inspect in 
 		// psql, you will see everything is persisted
 		regRepo.save(reg);
+		
+		
 		
 		
 		// now this only is persisting

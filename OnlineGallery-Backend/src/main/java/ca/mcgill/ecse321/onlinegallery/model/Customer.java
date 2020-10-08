@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import java.util.Set;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -37,8 +38,9 @@ public class Customer {
     public Customer() {}
 
 	
-    @ManyToOne(fetch=FetchType.LAZY,optional = false)
-    @JoinColumn(name = "registration_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, 
+    		cascade=CascadeType.ALL, 
+            mappedBy = "galleryCustomer")
 	private GalleryRegistration galleryRegistration;
 	
 	public GalleryRegistration getGalleryRegistration() {
