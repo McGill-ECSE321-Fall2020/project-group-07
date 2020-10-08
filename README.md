@@ -1,4 +1,2 @@
-This is the repo for ECSE321 project, group 07.
+# Online Art Gallery
 
-
-More info to come.
