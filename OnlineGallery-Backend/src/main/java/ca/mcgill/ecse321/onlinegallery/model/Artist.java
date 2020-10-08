@@ -34,8 +34,9 @@ public class Artist {
     
     public Artist() {}
     
-    @ManyToOne(fetch=FetchType.LAZY,optional = false)
-    @JoinColumn(name = "registration_id", nullable = false)
+    @OneToOne(fetch = FetchType.LAZY, 
+    		cascade=CascadeType.ALL, 
+            mappedBy = "galleryArtist")
 	private GalleryRegistration galleryRegistration;
 
 	public GalleryRegistration getGalleryRegistration() {
