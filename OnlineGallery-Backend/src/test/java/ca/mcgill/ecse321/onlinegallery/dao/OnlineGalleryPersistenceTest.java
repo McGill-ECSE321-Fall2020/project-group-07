@@ -21,6 +21,16 @@ import ca.mcgill.ecse321.onlinegallery.model.*;
 //              instructions and details in comments below                      //
 ///////////////////////////////////////////////////////////////////////////////////
 
+// you may see that there are already many Crud Repository interfaces in the dao package
+// don't get too excited. they are all empty. but even so, they can already save. I created them in helping
+// debugging and rewriting the JPA annotations
+
+// also, whenever you write something new, always good idea to run the default
+// src/test/java/ca.mcgill.ecse321.onlinegallery.OnlineGalleryApplicationTests.java as a junit test to make 
+// sure everything can start up. many times even that will fail ...
+
+// anyways ...
+
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class OnlineGalleryPersistenceTest {
@@ -31,12 +41,24 @@ public class OnlineGalleryPersistenceTest {
 	// for examle, the model is set up such that GalleryRegistration is the owner of all of its associations
 	// with Customer, Artist, Admin. By saving GallerRegistration, all those others will also be saved
 	
+	
 	@Autowired
 	private GalleryRegistrationRepository regRepo;
 	
 	@Autowired 
 	private OnlineGalleryRepository onlineRepo;
+	
+	
+//	@AfterEach
+//	public void clearDatabase() {
+//		// i didn't bother with emptying the db because I was only working getting persisting to work
+		// you should refer to the tutorial for this part. you SHOULD clear the db every test to 
+		// avoid inconsistencies
+//	}
 
+	
+	// here we go with the actual useful stuff
+	
 	@Test
 	public void testPersisting() {
 		
@@ -50,7 +72,6 @@ public class OnlineGalleryPersistenceTest {
 		
 		// after you are comfortable, test the associations. more details on the 
 		// associations after
-		
 		
 		
 		
@@ -95,17 +116,17 @@ public class OnlineGalleryPersistenceTest {
 		// I am doing the root of the system, OnlineGallery, first. 
 		// The JPA is set up so that OnlineGallery is the owning class of all of its associations
 		// see the diagram. OnlineGallery is associated with Purchases, Shipments, Registration, 
-		// and PhysicalGallery
+		// and PhysicalGallery. all associations are bidirectional
 		
+		// notice how i am setting both ends of every association?
 		og.setAllRegistrations(allReg);
-		
 		reg.setOnlineGallery(og);
-		reg.setGalleryAdmin(admin);
+		
+		reg.setGalleryAdmin(admin);				//this is jumping ahead to the Registration - Admin, but the idea is same
 		admin.setGalleryRegistration(reg);
 		
 		og.setAllShipments(allShipment);
 		shipment.setOnlineGallery(og);
-		
 		
 		og.setAllPurchases(allPurchase);
 		purchase.setOnlineGallery(og);
@@ -113,11 +134,16 @@ public class OnlineGalleryPersistenceTest {
 		og.setPhysicalGallery(pg);
 		pg.setOnlineGallery(og);
 		
-		
+		//AFTER you've set the association on both ends
+		// persist the OnlineGallery object
+		// all associated objects are also by Cascading persisted!
 		onlineRepo.save(og);
 		
 		
-		
+		// same idea for the next level in the composition
+		// OnlineGallery was top composition level
+		// now move on to Registration
+		// same pattern, see if you can follow
 		Set<Customer> allCustomers = new HashSet<Customer>();
 		allCustomers.add(customer);
 		
@@ -150,8 +176,6 @@ public class OnlineGalleryPersistenceTest {
 		purchase.setCustomer(customer);
 		customer.setPurchases(allPurchase);
 		
-
-		
 		purchase.setCommission(0.15);
 		art.setNumViews(-3);
 
@@ -161,7 +185,19 @@ public class OnlineGalleryPersistenceTest {
 		purchase.setShipment(shipment);
 		shipment.setPurchases(allPurchase);
 		
+		
+		// see how I only saved Registration object?
+		// if you do some print statements or inspect in 
+		// psql, you will see everything is persisted
 		regRepo.save(reg);
+		
+		
+		// now this only is persisting
+		// the empty CrudRepository interfaces are enough to ssave
+		// but you need to write the query methods for fetching
+		// and asserting that what you saved was right (they should be)
+		// see the tutorial on that
+		// and also this link https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
 
 		
 	}
