@@ -19,6 +19,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
+
 @Entity
 @Table(name="customer")
 public class Customer {
@@ -81,16 +83,21 @@ public class Customer {
 	   public void setBrowseArtworks(Set<Artwork> browseArtworkss) {
 	      this.browseArtworks = browseArtworkss;
 	   }
-//   
-//   private Set<Purchase> purchases;
-//   
-//   @OneToMany(mappedBy="customer" )
-//   public Set<Purchase> getPurchases() {
-//      return this.purchases;
-//   }
-//   
-//   public void setPurchases(Set<Purchase> purchasess) {
-//      this.purchases = purchasess;
-//   }
+   
+
+   @OneToMany(cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY,
+            mappedBy = "customer")
+   private Set<Purchase> purchases;
+   
+   public Set<Purchase> getPurchases() {
+      return this.purchases;
+   }
+   
+   public void setPurchases(Set<Purchase> purchasess) {
+      this.purchases = purchasess;
+   }
+   
+   
 
 }

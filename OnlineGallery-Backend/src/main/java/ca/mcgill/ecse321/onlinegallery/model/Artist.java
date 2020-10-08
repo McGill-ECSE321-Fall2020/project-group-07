@@ -14,6 +14,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
+
 import java.util.Set;
 import javax.persistence.OneToMany;
 

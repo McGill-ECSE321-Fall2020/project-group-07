@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -37,6 +38,10 @@ public class Purchase {
 	@Enumerated
 	private PaymentMethod paymentMethod;
 	
+	@Column(name="date")
+	private Date date;
+
+	
 	public Purchase() {}
 	
 	
@@ -53,20 +58,60 @@ public class Purchase {
        this.artworkOrdered = artworkOrdered;
     }
 	
-	
-	
+    @ManyToOne(fetch=FetchType.LAZY,optional = true)
+    @JoinColumn(name = "customer_id")
+    private Customer customer;
+    
+    public Customer getCustomer() {
+       return this.customer;
+    }
+    
+    public void setCustomer(Customer customer) {
+       this.customer = customer;
+    }
 
+    @ManyToOne(fetch=FetchType.LAZY,optional = true)
+    @JoinColumn(name = "shipment_id")
+    private Shipment shipment;
+   
+	public Shipment getShipment() {
+		return this.shipment;
+	}
+
+	public void setShipment(Shipment shipment) {
+		this.shipment = shipment;
+	}
+    
+    
+    
+    @ManyToOne(fetch=FetchType.LAZY,optional=true)
+    @JoinColumn(name = "system_id")	
+	private OnlineGallery onlineGallery;
+
+	public OnlineGallery getOnlineGallery() {
+		return this.onlineGallery;
+	}
+
+	public void setOnlineGallery(OnlineGallery onlineGallery) {
+		this.onlineGallery = onlineGallery;
+	}
+    
+    
+    
+    
+    
+    
+    
 	public void setPurchaseId(Long value) {
 		this.purchaseId = value;
 	}
 
-	@Id
 	public Long getPurchaseId() {
 		return this.purchaseId;
 	}
 
 
-	public void setCommission(Long value) {
+	public void setCommission(double value) {
 		this.commission = value;
 	}
 
@@ -74,64 +119,32 @@ public class Purchase {
 		return this.commission;
 	}
 
+	public void setPaymentMethod(PaymentMethod value) {
+		this.paymentMethod = value;
+	}
 
-//
-//public void setShipmentType(ShipmentType value) {
-//    this.shipmentType = value;
-//}
-//public ShipmentType getShipmentType() {
-//    return this.shipmentType;
-//}
-//
+	public PaymentMethod getPaymentMethod() {
+		return this.paymentMethod;
+	}
 
-//
-//public void setPaymentMethod(PaymentMethod value) {
-//    this.paymentMethod = value;
-//}
-//public PaymentMethod getPaymentMethod() {
-//    return this.paymentMethod;
-//}
-//private Customer customer;
-//
-//@ManyToOne(optional=false)
-//public Customer getCustomer() {
-//   return this.customer;
-//}
-//
-//public void setCustomer(Customer customer) {
-//   this.customer = customer;
-//}
-//
 
-//
-//private Date date;
-//
-//public void setDate(Date value) {
-//    this.date = value;
-//}
-//public Date getDate() {
-//    return this.date;
-//}
-//   private Shipment shipment;
-//   
-//   @ManyToOne
-//   public Shipment getShipment() {
-//      return this.shipment;
-//   }
-//   
-//   public void setShipment(Shipment shipment) {
-//      this.shipment = shipment;
-//   }
-//   
-//   private OnlineGallery onlineGallery;
-//   
-//   @ManyToOne(optional=false)
-//   public OnlineGallery getOnlineGallery() {
-//      return this.onlineGallery;
-//   }
-//   
-//   public void setOnlineGallery(OnlineGallery onlineGallery) {
-//      this.onlineGallery = onlineGallery;
-//   }
+	public void setDate(Date value) {
+		this.date = value;
+	}
+
+	public Date getDate() {
+		return this.date;
+	}
+	
+	public void setShipmentType(ShipmentType value) {
+		this.shipmentType = value;
+	}
+
+	public ShipmentType getShipmentType() {
+		return this.shipmentType;
+	}
+
+
+
 
 }

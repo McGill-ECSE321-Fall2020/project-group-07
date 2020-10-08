@@ -14,110 +14,158 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import ca.mcgill.ecse321.onlinegallery.model.Artist;
-import ca.mcgill.ecse321.onlinegallery.model.Artwork;
-import ca.mcgill.ecse321.onlinegallery.model.Customer;
-import ca.mcgill.ecse321.onlinegallery.model.GalleryAdmin;
-import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
-import ca.mcgill.ecse321.onlinegallery.model.Profile;
+import ca.mcgill.ecse321.onlinegallery.model.*;
+
+///////////////////////////////////////////////////////////////////////////////////
+//      use this as a starter file to write your persistence tests               //
+//              instructions and details in comments below                      //
+///////////////////////////////////////////////////////////////////////////////////
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class OnlineGalleryPersistenceTest {
 
+	// notice how i didn't import a Crud Repo interface for every class?
+	// if you look at the JPA annotations in the classes themselves there are notations like CascadeStyle.ALL
+	// that means the persistence is cascaded from the owner class of an association to the owned class
+	// for examle, the model is set up such that GalleryRegistration is the owner of all of its associations
+	// with Customer, Artist, Admin. By saving GallerRegistration, all those others will also be saved
+	
 	@Autowired
 	private GalleryRegistrationRepository regRepo;
 	
-	@Autowired
-	private GalleryAdminRepository adminRepo;
-	
-	@Autowired
-	private CustomerRepository customerRepo;
-	
-	@Autowired
-	private ArtistRepository artistRepo;
-	
-	@Autowired
-	private ProfileRepository profileRepo;
-	
-	@Autowired
-	private ArtworkRepository artRepo;	
-
-//	@AfterEach
-//	public void clearDatabase() {
-//		registrationRepo.deleteAll();
-//		adminRepo.deleteAll();
-//	}
+	@Autowired 
+	private OnlineGalleryRepository onlineRepo;
 
 	@Test
-	public void testPersistAndLoadRegistration() {
-	
-		GalleryRegistration reg = new GalleryRegistration();
-		reg.setUserName("homer");
+	public void testPersisting() {
 		
+		// this is a kind of one-size-fits all method that tests writing everything
+		// you should pick and choose what you need
+		// but know that you must test writing the classed to you itself, as well
+		// as all its associations.
+		
+		// for classes that have optional associations, start with just testing the 
+		// class itself with 0 classes associated with it
+		
+		// after you are comfortable, test the associations. more details on the 
+		// associations after
+		
+		
+		
+		
+		// just instantiating all the classes that we will be persisting
+		OnlineGallery og = new OnlineGallery();
+		PhysicalGallery pg = new PhysicalGallery();
+		Shipment shipment = new Shipment();
+		Purchase purchase = new Purchase();
 		GalleryAdmin admin=new GalleryAdmin();
-		
+		GalleryRegistration reg = new GalleryRegistration();
 		Customer customer = new Customer();
+		Artist artist = new Artist();
+		Profile profile = new Profile();
+		Artwork art= new Artwork();
+
+		
+		// setting some of their property for viewing in debugging if you have psql
+		reg.setUserName("donutLover69");
+		art.setName("still life in blue");
+		profile.setSelfDescription("starving artist");
+		artist.setBankInfo("no account, no money");
+		customer.setBankInfo("lots of money, lots of accounts");
+		og.setDaysUp(100);
+		pg.setAddress("100 art road");
+		shipment.setShippingCompany("massimo trucking");
+		
+		//some of the associations between classes, especially 1 -- *, takes a set as a input
+		//for example see the relationship between OnlineGallery and GalleryRegistration
+		//here just making the sets for later
+		Set<Purchase> allPurchase = new HashSet<Purchase>();
+		allPurchase.add(purchase);
+		
+		Set<Shipment> allShipment = new HashSet<Shipment>();
+		allShipment.add(shipment);
+		
+		Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
+		allReg.add(reg);
+		
+		
+		// now the fun starts
+		
+		// I am doing the root of the system, OnlineGallery, first. 
+		// The JPA is set up so that OnlineGallery is the owning class of all of its associations
+		// see the diagram. OnlineGallery is associated with Purchases, Shipments, Registration, 
+		// and PhysicalGallery
+		
+		og.setAllRegistrations(allReg);
+		
+		reg.setOnlineGallery(og);
+		reg.setGalleryAdmin(admin);
+		admin.setGalleryRegistration(reg);
+		
+		og.setAllShipments(allShipment);
+		shipment.setOnlineGallery(og);
+		
+		
+		og.setAllPurchases(allPurchase);
+		purchase.setOnlineGallery(og);
+		
+		og.setPhysicalGallery(pg);
+		pg.setOnlineGallery(og);
+		
+		
+		onlineRepo.save(og);
+		
+		
+		
 		Set<Customer> allCustomers = new HashSet<Customer>();
 		allCustomers.add(customer);
 		
-		Artist artist = new Artist();
 		Set<Artist> allArtists = new HashSet<Artist>();
 		allArtists.add(artist);
 		
+		Set<Artwork> allArt = new HashSet<Artwork>();
+		allArt.add(art);
+		
+		
 		reg.setGalleryAdmin(admin);
-		reg.setGalleryCustomers(allCustomers);
-		reg.setGalleryArtists(allArtists);
-		
 		admin.setGalleryRegistration(reg);
-		customer.setGalleryRegistration(reg);
-		artist.setGalleryRegistration(reg);
 		
-		Profile profile = new Profile();
+		reg.setGalleryCustomers(allCustomers);
+		customer.setGalleryRegistration(reg);
+		
+		reg.setGalleryArtists(allArtists);
+		artist.setGalleryRegistration(reg);
 		
 		artist.setProfile(profile);
 		profile.setArtist(artist);
 		
-		Artwork art= new Artwork();
-		Set<Artwork> allArt = new HashSet<Artwork>();
-		allArt.add(art);
-		
 		artist.setArtworks(allArt);
 		art.setArtist(artist);
 		
-		profile.setArtworks(allArt);
+
+		purchase.setArtworkOrdered(art);
+		art.setPurchase(purchase);
 		
+		purchase.setCustomer(customer);
+		customer.setPurchases(allPurchase);
+		
+
+		
+		purchase.setCommission(0.15);
+		art.setNumViews(-3);
+
 		art.setViewers(allCustomers);
 		customer.setBrowseArtworks(allArt);
 		
-		System.out.println(art.getViewers());
+		purchase.setShipment(shipment);
+		shipment.setPurchases(allPurchase);
 		
 		regRepo.save(reg);
+
 		
 	}
 	
-//	@Test
-//	public void testPersistAndLoadArtist() {
-//	
-//		GalleryRegistration reg = new GalleryRegistration();
-//		reg.setUserName("homer");
-//		
-//		GalleryAdmin admin=new GalleryAdmin();
-//		
-//		Customer customer = new Customer();
-//		Set<Customer> allCustomers = new HashSet<Customer>();
-//		allCustomers.add(customer);
-//		
-//		Artist artist = new Artist();
-//		Set<Artist> allArtists = new HashSet<Artist>();
-//		allArtists.add(artist);
-//		
-//		reg.setGalleryAdmin(admin);
-//		reg.setGalleryCustomers(allCustomers);
-//		reg.setGalleryArtists(allArtists);
-//		
-//		
-//	}
 	
 }
 

@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.onlinegallery.model;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -85,76 +86,84 @@ public class GalleryRegistration {
 	public void setGalleryArtists(Set<Artist> galleryArtistss) {
 		this.galleryArtists = galleryArtistss;
 	}
+//	
+//	
+//	
+//	
+//	
+//	
+    @ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @JoinColumn(name = "system_id", nullable = false)
+	private OnlineGallery onlineGallery;
+	public OnlineGallery getOnlineGallery() {
+		return this.onlineGallery;
+	}
+
+	public void setOnlineGallery(OnlineGallery onlineGallery) {
+		this.onlineGallery = onlineGallery;
+	}
+
 	
-//	private OnlineGallery onlineGallery;
-//
-//	@ManyToOne(optional = false)
-//	public OnlineGallery getOnlineGallery() {
-//		return this.onlineGallery;
-//	}
-//
-//	public void setOnlineGallery(OnlineGallery onlineGallery) {
-//		this.onlineGallery = onlineGallery;
-//	}
-//
-//
-//	public void setFirstName(String value) {
-//		this.firstName = value;
-//	}
-//
-//	public String getFirstName() {
-//		return this.firstName;
-//	}
-//
-//
-//	public void setLastName(String value) {
-//		this.lastName = value;
-//	}
-//
-//	public String getLastName() {
-//		return this.lastName;
-//	}
-//
-//
-//	public void setEmail(String value) {
-//		this.email = value;
-//	}
-//
-//	public String getEmail() {
-//		return this.email;
-//	}
-//
-//
-//	public void setPhoneNumber(String value) {
-//		this.phoneNumber = value;
-//	}
-//
-//	public String getPhoneNumber() {
-//		return this.phoneNumber;
-//	}
-//
-//
-//	public void setPassword(String value) {
-//		this.password = value;
-//	}
-//
-//	public String getPassword() {
-//		return this.password;
-//	}
-//
-//
-//	public void setIsLoggedIn(Boolean value) {
-//		this.isLoggedIn = value;
-//	}
-//
-//	public Boolean getIsLoggedIn() {
-//		return this.isLoggedIn;
-//	}
-//
+	
+	
+	
+	
+	
+	
+	
+	
+	public void setFirstName(String value) {
+		this.firstName = value;
+	}
 
-//
+	public String getFirstName() {
+		return this.firstName;
+	}
 
-//
+
+	public void setLastName(String value) {
+		this.lastName = value;
+	}
+
+	public String getLastName() {
+		return this.lastName;
+	}
+
+
+	public void setEmail(String value) {
+		this.email = value;
+	}
+
+	public String getEmail() {
+		return this.email;
+	}
+
+
+	public void setPhoneNumber(String value) {
+		this.phoneNumber = value;
+	}
+
+	public String getPhoneNumber() {
+		return this.phoneNumber;
+	}
+
+
+	public void setPassword(String value) {
+		this.password = value;
+	}
+
+	public String getPassword() {
+		return this.password;
+	}
+
+
+	public void setIsLoggedIn(Boolean value) {
+		this.isLoggedIn = value;
+	}
+
+	public Boolean getIsLoggedIn() {
+		return this.isLoggedIn;
+	}
 
 
 }
