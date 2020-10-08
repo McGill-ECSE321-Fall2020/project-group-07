@@ -119,7 +119,7 @@ public class OnlineGalleryPersistenceTest {
 		artist.setProfile(profile);
 		profile.setArtist(artist);
 		
-		onlineRepo.save(og);
+		onlineRepo.save(og);								// need to save og first
 		regRepo.save(reg);
 		
 		Long artistUniqueId = artist.getArtistId();				
