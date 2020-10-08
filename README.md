@@ -22,6 +22,8 @@ In teams of five students, you will gather requirements, design a multi-tier sof
 | Massimo       |                           |                               |
 | Natalia       |                           |                               |
 
+For more detailed information: [wiki!](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki)
+
 ### Sprint 2
 ### Sprint 3
 ### Sprint 4
