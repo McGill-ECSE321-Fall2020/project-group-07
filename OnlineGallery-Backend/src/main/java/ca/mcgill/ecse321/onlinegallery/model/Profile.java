@@ -1,74 +1,123 @@
 package ca.mcgill.ecse321.onlinegallery.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
 import java.util.Set;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Profile{
-   private Integer profileId;
+@Table(name="profiles")
+public class Profile {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    @Column(name = "profile_id")
+	private long profileId;
 
-public void setProfileId(Integer value) {
-    this.profileId = value;
-}
-@Id
-public Integer getProfileId() {
-    return this.profileId;
-}
-private double totalEarnings;
+    @Column(name="total_earnings")
+	private double totalEarnings;
+    
+    @Column(name="num_sold")
+	private int numSold;
+    
+    @Column(name="self_description")
+	private String selfDescription;
+    
+    @Column(name="rating")
+	private double rating;
 
-public void setTotalEarnings(double value) {
-    this.totalEarnings = value;
-}
-public double getTotalEarnings() {
-    return this.totalEarnings;
-}
-private int numSold;
+    public Profile() {}
 
-public void setNumSold(int value) {
-    this.numSold = value;
-}
-public int getNumSold() {
-    return this.numSold;
-}
-private String selfDescription;
+    @OneToOne(fetch = FetchType.LAZY, 
+    		cascade=CascadeType.ALL, 
+            mappedBy = "profile")    
+	private Artist artist;
 
-public void setSelfDescription(String value) {
-    this.selfDescription = value;
-}
-public String getSelfDescription() {
-    return this.selfDescription;
-}
-private double rating;
+	public Artist getArtist() {
+		return this.artist;
+	}
 
-public void setRating(double value) {
-    this.rating = value;
+	public void setArtist(Artist artist) {
+		this.artist = artist;
+	}
+	
+	
+    @OneToMany(
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+        )
+	private Set<Artwork> artworks;
+
+	public Set<Artwork> getArtworks() {
+		return this.artworks;
+	}
+
+	public void setArtworks(Set<Artwork> artworkss) {
+		this.artworks = artworkss;
+	}
+	
+	
+	
+	
+	
+	
+    
+	public void setProfileId(Long value) {
+		this.profileId = value;
+	}
+
+	public Long getProfileId() {
+		return this.profileId;
+	}
+
+
+	public void setTotalEarnings(double value) {
+		this.totalEarnings = value;
+	}
+
+	public double getTotalEarnings() {
+		return this.totalEarnings;
+	}
+
+
+	public void setNumSold(int value) {
+		this.numSold = value;
+	}
+
+	public int getNumSold() {
+		return this.numSold;
+	}
+
+
+	public void setSelfDescription(String value) {
+		this.selfDescription = value;
+	}
+
+	public String getSelfDescription() {
+		return this.selfDescription;
+	}
+
+
+	public void setRating(double value) {
+		this.rating = value;
+	}
+
+	public double getRating() {
+		return this.rating;
+	}
+
+
+
+
+
 }
-public double getRating() {
-    return this.rating;
-}
-   private Artist artist;
-   
-   @OneToOne(optional=false)
-   public Artist getArtist() {
-      return this.artist;
-   }
-   
-   public void setArtist(Artist artist) {
-      this.artist = artist;
-   }
-   
-   private Set<Artwork> artworks;
-   
-   @OneToMany
-   public Set<Artwork> getArtworks() {
-      return this.artworks;
-   }
-   
-   public void setArtworks(Set<Artwork> artworkss) {
-      this.artworks = artworkss;
-   }
-   
-   }

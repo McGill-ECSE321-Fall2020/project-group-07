@@ -1,129 +1,201 @@
 package ca.mcgill.ecse321.onlinegallery.model;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
 import java.util.Set;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-public class Artwork{
-   private Integer artworkId;
+@Table(name="artworks")
+public class Artwork {
+	
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+    @GenericGenerator(name = "native", strategy = "native")
+    @Column(name = "artwork_id")
+	private Long artworkId;
+    
+    @Column(name="name")
+	private String name;
+    
+    @Column(name="description")
+	private String description;
+    
+    @Column(name="price")
+	private double price;
+    
+    @Column(name="onsite")
+	private Boolean onSite;
+    
+    @Column(name="numViews")
+	private int numViews;
+    
+    @Column(name="dimension")
+	private String dimension;
+    
+    @Column(name="weight")
+	private double weight;
+    
+    @Column(name="shipping_cost")
+	private double shippingCost;
 
-public void setArtworkId(Integer value) {
-    this.artworkId = value;
-}
-@Id
-public Integer getArtworkId() {
-    return this.artworkId;
-}
-private String name;
+    @Column(name="status")
+	@Enumerated
+	private ArtworkStatus status;
+    
+	public void setStatus(ArtworkStatus value) {
+		this.status = value;
+	}
 
-public void setName(String value) {
-    this.name = value;
-}
-public String getName() {
-    return this.name;
-}
-private String description;
+	public ArtworkStatus getStatus() {
+		return this.status;
+	}
+    
+    
+    public Artwork() {}
+    
+    
+    @ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @JoinColumn(name = "artist_id", nullable = false)
+	private Artist artist;
 
-public void setDescription(String value) {
-    this.description = value;
-}
-public String getDescription() {
-    return this.description;
-}
-private double price;
+	public Artist getArtist() {
+		return this.artist;
+	}
 
-public void setPrice(double value) {
-    this.price = value;
-}
-public double getPrice() {
-    return this.price;
-}
+	public void setArtist(Artist artist) {
+		this.artist = artist;
+	}
+	
+	
+	@ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            })
+    @JoinTable(name = "post_tags",
+            joinColumns = { @JoinColumn(name = "artwork_id") },
+            inverseJoinColumns = { @JoinColumn(name = "customer_id") })
+	private Set<Customer> viewers;
 
-@Enumerated
-private ArtworkStatus status;
+	public Set<Customer> getViewers() {
+		return this.viewers;
+	}
 
-public void setStatus(ArtworkStatus value) {
-    this.status = value;
-}
-public ArtworkStatus getStatus() {
-    return this.status;
-}
-private int numViews;
+	public void setViewers(Set<Customer> viewerss) {
+		this.viewers = viewerss;
+	}
+	
+	
+	
 
-public void setNumViews(int value) {
-    this.numViews = value;
-}
-public int getNumViews() {
-    return this.numViews;
-}
-private Boolean onSite;
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional=true)
+	private Purchase purchase;
 
-public void setOnSite(Boolean value) {
-    this.onSite = value;
-}
-public Boolean getOnSite() {
-    return this.onSite;
-}
-private String dimension;
+	public Purchase getPurchase() {
+		return this.purchase;
+	}
 
-public void setDimension(String value) {
-    this.dimension = value;
-}
-public String getDimension() {
-    return this.dimension;
-}
-private double weight;
+	public void setPurchase(Purchase purchase) {
+		this.purchase = purchase;
+	}
+	
+	
+    
+    
 
-public void setWeight(double value) {
-    this.weight = value;
-}
-public double getWeight() {
-    return this.weight;
-}
-private double shippingCost;
+	public void setArtworkId(Long value) {
+		this.artworkId = value;
+	}
 
-public void setShippingCost(double value) {
-    this.shippingCost = value;
+	public Long getArtworkId() {
+		return this.artworkId;
+	}
+
+
+	public void setName(String value) {
+		this.name = value;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+
+	public void setDescription(String value) {
+		this.description = value;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+
+
+	public void setPrice(double value) {
+		this.price = value;
+	}
+
+	public double getPrice() {
+		return this.price;
+	}
+
+
+	public void setNumViews(int value) {
+		this.numViews = value;
+	}
+
+	public int getNumViews() {
+		return this.numViews;
+	}
+
+
+	public void setOnSite(Boolean value) {
+		this.onSite = value;
+	}
+
+	public Boolean getOnSite() {
+		return this.onSite;
+	}
+
+
+	public void setDimension(String value) {
+		this.dimension = value;
+	}
+
+	public String getDimension() {
+		return this.dimension;
+	}
+
+
+	public void setWeight(double value) {
+		this.weight = value;
+	}
+
+	public double getWeight() {
+		return this.weight;
+	}
+
+
+	public void setShippingCost(double value) {
+		this.shippingCost = value;
+	}
+
+	public double getShippingCost() {
+		return this.shippingCost;
+	}
+
+
 }
-public double getShippingCost() {
-    return this.shippingCost;
-}
-   private Artist artist;
-   
-   @ManyToOne(optional=false)
-   public Artist getArtist() {
-      return this.artist;
-   }
-   
-   public void setArtist(Artist artist) {
-      this.artist = artist;
-   }
-   
-   private Set<Customer> viewers;
-   
-   @ManyToMany(mappedBy="browseArtworks" )
-   public Set<Customer> getViewers() {
-      return this.viewers;
-   }
-   
-   public void setViewers(Set<Customer> viewerss) {
-      this.viewers = viewerss;
-   }
-   
-   private Purchase purchase;
-   
-   @OneToOne
-   public Purchase getPurchase() {
-      return this.purchase;
-   }
-   
-   public void setPurchase(Purchase purchase) {
-      this.purchase = purchase;
-   }
-   
-   }
