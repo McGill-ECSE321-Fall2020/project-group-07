@@ -39,7 +39,7 @@ public class OnlineGalleryPersistenceTest {
 	}
 	
 	@Test
-	public void testPersistingAndLoadingRegistrationAssociations() {
+	public void testPersistingAndLoadingRegistrationAttributesAndAssociations() {
 		
 		// boilerplate to propagate the persistence OnlineGallery which lines
 		// upstream of GalleryRegistration in the composition tree
