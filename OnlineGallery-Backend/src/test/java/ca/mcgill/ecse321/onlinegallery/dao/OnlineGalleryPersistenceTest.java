@@ -42,12 +42,16 @@ public class OnlineGalleryPersistenceTest {
 	@Autowired
 	private CustomerRepository custRepo;
 	
+	@Autowired
+	private PhysicalGalleryRepository pgRepo;
+	
 	@AfterEach
 	public void clearDatabase() {
 		onlineRepo.deleteAll();
 		regRepo.deleteAll();
 		artistRepo.deleteAll();
 		custRepo.deleteAll();
+		pgRepo.deleteAll();
 	}
 	
 	@Test
@@ -646,6 +650,54 @@ public class OnlineGalleryPersistenceTest {
 				assertEquals(artworkUniqueId, a.getArtworkId());
 			}
 			
+			
+		}
+		
+		@Test
+		public void testPersistingAndLoadingPhysicalGalleryAttributesAndAssociations() {
+			PhysicalGallery pg = new PhysicalGallery();
+			OnlineGallery og = new OnlineGallery();
+			
+			
+			
+			String pgAddress = "popayan";
+			pg.setAddress(pgAddress);
+			//pgRepo.save(pg);
+			
+			
+			int ogDaysUp = 100;
+			og.setDaysUp(ogDaysUp);
+			
+			og.setPhysicalGallery(pg);
+			pg.setOnlineGallery(og);
+			
+			onlineRepo.save(og);
+			pgRepo.save(pg);
+			Long pgID = pg.getGalleryId();
+			Long ogID = og.getSystemId();
+			
+			pg = null;
+			
+			pg = pgRepo.findPhysicalGalleryByAddress(pgAddress);
+			assertNotNull(pg);
+			assertEquals(pgAddress, pg.getAddress());
+			assertEquals(pgID, pg.getGalleryId());
+			//test association
+			assertNotNull(pg.getOnlineGallery());
+			assertEquals(pg.getOnlineGallery().getSystemId(), og.getSystemId());
+			assertEquals(pg.getOnlineGallery().getDaysUp(), og.getDaysUp());
+			
+			
+			pg = null;
+			
+			pg = pgRepo.findPhysicalGalleryByGalleryId(pgID);
+			assertNotNull(pg);
+			assertEquals(pgAddress, pg.getAddress());
+			assertEquals(pgID, pg.getGalleryId());
+			//test association
+			assertNotNull(pg.getOnlineGallery());
+			assertEquals(pg.getOnlineGallery().getSystemId(), og.getSystemId());
+			assertEquals(pg.getOnlineGallery().getDaysUp(), og.getDaysUp());
 			
 		}
 }
