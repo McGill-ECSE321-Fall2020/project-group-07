@@ -30,6 +30,12 @@ public class OnlineGalleryPersistenceTest {
 	@Autowired 
 	private OnlineGalleryRepository onlineRepo;
 	
+	@Autowired 
+	private ArtworkRepository artworkRepo;
+	
+	@Autowired 
+	private GalleryAdminRepository adminRepo;
+	
 	@Autowired
 	private PurchaseRepository purchaseRepo;
 
@@ -710,6 +716,172 @@ public class OnlineGalleryPersistenceTest {
 			assertEquals(pg.getOnlineGallery().getSystemId(), og.getSystemId());
 			assertEquals(pg.getOnlineGallery().getDaysUp(), og.getDaysUp());
 			
+		}
+		
+		@Test
+		public void testPersistingAndLoadingArtworkAttributesAndAssociations() {
+			
+			//instantiating needed classes
+			OnlineGallery og = new OnlineGallery();
+			GalleryRegistration reg = new GalleryRegistration();
+			Customer customer = new Customer();
+			Purchase purchase = new Purchase();
+			Artist artist = new Artist();
+			Artwork artwork = new Artwork();
+			Profile profile = new Profile();
+			
+			String userName="LisaSimpson"; //not sure if necessary
+			reg.setUserName(userName);
+
+			Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
+			allReg.add(reg);
+			
+			Set<Customer> allCustomer = new HashSet<Customer>();
+			allCustomer.add(customer);
+			
+			Set<Purchase> allPurchase = new HashSet<Purchase>();
+			allPurchase.add(purchase);
+			
+			Set<Artist> allArtists = new HashSet<Artist>();
+			allArtists.add(artist);
+			
+			Set<Artwork> allArt = new HashSet<Artwork>();
+			allArt.add(artwork);
+			
+			//setting associations
+			og.setAllRegistrations(allReg);
+			reg.setOnlineGallery(og);
+			
+			reg.setGalleryCustomer(customer);
+			customer.setGalleryRegistration(reg);
+			
+			reg.setGalleryArtist(artist);
+			artist.setGalleryRegistration(reg);
+			
+			artist.setProfile(profile);
+			profile.setArtist(artist);
+			
+			artist.setArtworks(allArt);
+			artwork.setArtist(artist);
+			
+			purchase.setArtworkOrdered(artwork);
+			artwork.setPurchase(purchase);
+			
+			customer.setBrowseArtworks(allArt); //not sure about this
+			artwork.setViewers(allCustomer);
+			
+			//setting attributes
+			String artworkname = "Masterpiece";
+			String description = "so beautiful";
+			double price = 1000;
+			ArtworkStatus status = ArtworkStatus.AVAILABLE;
+			boolean onSite = true;
+			int numViews = 25;
+			String dimension = "24x48";
+			double weight = 10;
+			double shippingCost = 50;
+			
+			artwork.setName(artworkname);
+			artwork.setDescription(description);
+			artwork.setPrice(price);
+			artwork.setStatus(status);
+			artwork.setOnSite(onSite);
+			artwork.setNumViews(numViews);
+			artwork.setDimension(dimension);
+			artwork.setWeight(weight);
+			artwork.setShippingCost(shippingCost);
+			
+			//persisting 
+			onlineRepo.save(og);
+			regRepo.save(reg);
+			artworkRepo.save(artwork);
+			
+			//saving primary
+			Long purchaseId = purchase.getPurchaseId();		
+			Long customerId = customer.getCustomerId();
+			Long artworkId = artwork.getArtworkId();
+			Long artistId = artist.getArtistId();
+			String regId = reg.getUserName();
+			
+			og = null;
+			reg = null;
+			customer = null;
+			purchase = null;
+			artist = null;
+			artwork =null;
+			
+			//retrieving artwork from db
+			artwork = artworkRepo.findArtworkByArtworkId(artworkId);
+			
+			//testing associations
+			assertEquals(artistId, artwork.getArtist().getArtistId());
+			assertEquals(artworkId,artwork.getArtworkId());
+			assertEquals(purchaseId,artwork.getPurchase().getPurchaseId());
+			assertEquals(customerId, artwork.getViewers().iterator().next().getCustomerId());
+			//not sure what to do with customer association
+			
+			//testing attributes
+			assertEquals(artworkname, artwork.getName());
+			assertEquals(description, artwork.getDescription());
+			assertEquals(price, artwork.getPrice());
+			assertEquals(status, artwork.getStatus());
+			assertEquals(onSite, artwork.getOnSite());
+			assertEquals(numViews, artwork.getNumViews());
+			assertEquals(dimension, artwork.getDimension());
+			assertEquals(weight, artwork.getWeight());
+			assertEquals(shippingCost, artwork.getShippingCost());
+
+		}
+		
+		@Test
+		public void testPersistingAndLoadingGalleryAdminAttributesAndAssociations() {
+			
+			//instantiating needed classes
+			GalleryAdmin admin=new GalleryAdmin();
+			OnlineGallery og = new OnlineGallery();
+			GalleryRegistration reg = new GalleryRegistration();
+
+
+			//not exactly sure what has sets are needed	
+			Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
+			allReg.add(reg);
+			
+			//setting attributes
+			reg.setUserName("NedFlanders");
+			
+			
+			//setting associations
+			reg.setGalleryAdmin(admin);
+			admin.setGalleryRegistration(reg);
+			
+			og.setAllRegistrations(allReg);
+			reg.setOnlineGallery(og);
+			
+			//persisting
+			onlineRepo.save(og);
+			regRepo.save(reg);
+			adminRepo.save(admin);
+		
+		
+			//storing values
+			Long adminId = admin.getAdminId();
+			Long systemId = og.getSystemId();
+			String regId = reg.getUserName();
+			
+			//deleting local Objects
+			admin = null;
+			reg = null;
+			og =null;
+			
+			//retrieving admin from db
+			admin = adminRepo.findGalleryAdminByAdminId(adminId);
+			
+			//assertion tests for attributes
+			assertEquals(adminId,admin.getAdminId());
+			//assertion tests for associations
+			assertEquals(regId,admin.getGalleryRegistration().getUserName());
+			assertEquals(systemId,admin.getGalleryRegistration().getOnlineGallery().getSystemId());
+
 		}
 }
 
