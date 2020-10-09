@@ -32,11 +32,11 @@ public class OnlineGalleryPersistenceTest {
 	
 	
 	
-	@AfterEach
-	public void clearDatabase() {
-		onlineRepo.deleteAll();
-		regRepo.deleteAll();
-	}
+//	@AfterEach
+//	public void clearDatabase() {
+//		onlineRepo.deleteAll();
+//		regRepo.deleteAll();
+//	}
 	
 	@Test
 	public void testPersistingAndLoadingRegistrationAttributesAndAssociations() {
