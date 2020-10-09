@@ -36,12 +36,14 @@ public class OnlineGalleryPersistenceTest {
 	@Autowired
 	private ShipmentRepository shipmentRepo;
 	
-	
+	@Autowired 
+	private ArtistRepository artistRepo;
 	
 	@AfterEach
 	public void clearDatabase() {
 		onlineRepo.deleteAll();
 		regRepo.deleteAll();
+		artistRepo.deleteAll();
 	}
 	
 	@Test
@@ -432,5 +434,133 @@ public class OnlineGalleryPersistenceTest {
 		assertEquals(purchaseId, shipment.getPurchases().iterator().next().getPurchaseId());
 		
 	}
+	// Artist test
+		@Test
+		public void testPersistingAndLoadingArtistyAttributesAndAssociations() {
+			
+			Artist artist = new Artist();
+			// creating other classes for association testing
+			OnlineGallery og = new OnlineGallery();
+			GalleryRegistration reg = new GalleryRegistration();
+			Profile profile = new Profile();
+			Artwork art = new Artwork();
+			
+			// properties/attributes
+			reg.setUserName("CamNewton");
+			String bankInfo = "TD";
+			artist.setBankInfo(bankInfo);
+			
+			// creating the sets
+			// artwork
+			Set<Artwork> allArt = new HashSet<Artwork>();
+			allArt.add(art);
+			// GalleryRegistration
+			Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
+			allReg.add(reg);
+			
+			// setting associations
+			// gallery registration
+			artist.setGalleryRegistration(reg);
+			reg.setGalleryArtist(artist);
+
+			// profile
+			artist.setProfile(profile);
+			profile.setArtist(artist);
+			// artwork
+			artist.setArtworks(allArt);
+			art.setArtist(artist);
+			// online gallery
+			og.setAllRegistrations(allReg);
+			reg.setOnlineGallery(og);
+			
+			// persist
+			onlineRepo.save(og);
+			regRepo.save(reg);
+			artistRepo.save(artist);
+			
+			// storing values locally for testing
+			Long systemID = og.getSystemId();
+			Long artistID = artist.getArtistId();
+			String regID = reg.getUserName();
+			Long artworkID = art.getArtworkId();
+			Long profileID = profile.getProfileId();
+			
+			// clear artist, and set it equal to that of the repo (persistence)
+			artist = null;
+			artist = artistRepo.findArtistByArtistId(artistID);
+			
+			// tests
+			assertNotNull(artist);
+			
+			assertEquals(bankInfo, artist.getBankInfo());
+			assertEquals(artistID, artist.getArtistId());
+			
+			assertEquals(systemID, artist.getGalleryRegistration().getOnlineGallery().getSystemId());
+			assertEquals(regID, artist.getGalleryRegistration().getUserName());
+			assertEquals(artworkID, artist.getArtworks().iterator().next().getArtworkId());
+			assertEquals(profileID, artist.getProfile().getProfileId());
+		}
+		// OnlineGallery test
+		@Test
+		public void testPersistingAndLoadingGalleryAttributesAndAssociations() {
+			
+			OnlineGallery og = new OnlineGallery();
+			// creating other classes for associations testing
+			PhysicalGallery pg = new PhysicalGallery();
+			Shipment shipment = new Shipment();
+			Purchase purchase = new Purchase();
+			GalleryRegistration reg = new GalleryRegistration();
+			
+			// properties/attributes
+			reg.setUserName("josh");
+			int days = 100;
+			og.setDaysUp(days);
+			
+			// creating the sets 
+			Set<Shipment> allShipment = new HashSet<Shipment>();
+			allShipment.add(shipment);
+			
+			Set<Purchase> allPurchase = new HashSet<Purchase>();
+			allPurchase.add(purchase);
+			
+			Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
+			allReg.add(reg);
+			
+			// setting associations
+			// physical gallery
+			pg.setOnlineGallery(og);
+			og.setPhysicalGallery(pg);
+			// shipments
+			og.setAllShipments(allShipment);
+			shipment.setOnlineGallery(og);
+			// purchases
+			og.setAllPurchases(allPurchase);
+			purchase.setOnlineGallery(og);
+			// registrations
+			og.setAllRegistrations(allReg);
+			reg.setOnlineGallery(og);
+			
+			// persist the OnlineGallery object
+			onlineRepo.save(og);
+			
+			// storing values for testing
+			Long systemID = og.getSystemId();
+			Long pgID = pg.getGalleryId();
+			Long shipmentID = shipment.getShipmentId();
+			Long purchaseID = purchase.getPurchaseId();
+			String regID = reg.getUserName();
+			
+			// clear gallery, and set it equal to that of the repo (persistence)
+			og = null;
+			og = onlineRepo.findOnlineGalleryBySystemId(systemID);
+			
+			//tests
+			assertEquals(pgID, og.getPhysicalGallery().getGalleryId());
+			assertEquals(shipmentID, og.getAllShipments().iterator().next().getShipmentId());
+			assertEquals(purchaseID, og.getAllPurchases().iterator().next().getPurchaseId());
+			assertEquals(regID, og.getAllRegistrations().iterator().next().getUserName());
+			assertEquals(days, og.getDaysUp());
+			assertEquals(systemID, og.getSystemId());
+		}
 }
 

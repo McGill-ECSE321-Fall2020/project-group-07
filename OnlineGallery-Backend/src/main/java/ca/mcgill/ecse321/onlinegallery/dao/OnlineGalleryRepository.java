@@ -5,4 +5,6 @@ import ca.mcgill.ecse321.onlinegallery.model.*;
 
 public interface OnlineGalleryRepository extends CrudRepository<OnlineGallery, Long> {
 
+	// find object by ID
+	OnlineGallery findOnlineGalleryBySystemId(Long systemId);
 }
