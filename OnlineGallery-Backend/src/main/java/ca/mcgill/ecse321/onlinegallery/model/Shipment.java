@@ -19,43 +19,40 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.ManyToOne;
 
 @Entity
-@Table(name="shipment")
+@Table(name = "shipment")
 public class Shipment {
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "shipment_id")
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
+	@Column(name = "shipment_id")
 	private Long shipmentId;
-    
-    @Column(name="source")
+
+	@Column(name = "source")
 	private String sourceAddress;
-    
-    @Column(name="destination")
+
+	@Column(name = "destination")
 	private String destinationAddress;
-    
-    @Column(name="total")
+
+	@Column(name = "total")
 	private double totalAmount;
-    
-    @Column(name="shipper")
+
+	@Column(name = "shipper")
 	private String shippingCompany;
-	
-    @Column(name="shipping_status")
+
+	@Column(name = "shipping_status")
 	@Enumerated
 	private ShipmentStatus status;
-	
-    @Column(name="recepient_name")
+
+	@Column(name = "recepient_name")
 	private String receipientName;
-    
-    public Shipment() {}
-    
-    
-    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            mappedBy = "shipment"
-            )
-    private Set<Purchase> purchases;
-    
+
+	public Shipment() {
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "shipment")
+	private Set<Purchase> purchases;
+
 	public Set<Purchase> getPurchases() {
 		return this.purchases;
 	}
@@ -64,10 +61,8 @@ public class Shipment {
 		this.purchases = purchasess;
 	}
 
-    
-    
-    @ManyToOne(fetch=FetchType.EAGER,optional = false)
-    @JoinColumn(name = "system_id", nullable = false)    
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "system_id", nullable = false)
 	private OnlineGallery onlineGallery;
 
 	public OnlineGallery getOnlineGallery() {
@@ -77,12 +72,6 @@ public class Shipment {
 	public void setOnlineGallery(OnlineGallery onlineGallery) {
 		this.onlineGallery = onlineGallery;
 	}
-    
-    
-       
-      
-    
-
 
 	public void setShipmentId(Long value) {
 		this.shipmentId = value;
@@ -92,8 +81,6 @@ public class Shipment {
 		return this.shipmentId;
 	}
 
-	
-
 	public void setSourceAddress(String value) {
 		this.sourceAddress = value;
 	}
@@ -101,7 +88,6 @@ public class Shipment {
 	public String getSourceAddress() {
 		return this.sourceAddress;
 	}
-
 
 	public void setDestinationAddress(String value) {
 		this.destinationAddress = value;
@@ -111,7 +97,6 @@ public class Shipment {
 		return this.destinationAddress;
 	}
 
-
 	public void setTotalAmount(double value) {
 		this.totalAmount = value;
 	}
@@ -119,7 +104,6 @@ public class Shipment {
 	public double getTotalAmount() {
 		return this.totalAmount;
 	}
-
 
 	public void setShippingCompany(String value) {
 		this.shippingCompany = value;
@@ -129,8 +113,6 @@ public class Shipment {
 		return this.shippingCompany;
 	}
 
-
-
 	public void setStatus(ShipmentStatus value) {
 		this.status = value;
 	}
@@ -139,7 +121,6 @@ public class Shipment {
 		return this.status;
 	}
 
-
 	public void setReceipientName(String value) {
 		this.receipientName = value;
 	}
@@ -147,7 +128,5 @@ public class Shipment {
 	public String getReceipientName() {
 		return this.receipientName;
 	}
-
-
 
 }

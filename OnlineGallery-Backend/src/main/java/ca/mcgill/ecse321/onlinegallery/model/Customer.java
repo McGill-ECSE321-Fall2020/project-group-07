@@ -23,26 +23,24 @@ import org.hibernate.annotations.OnDeleteAction;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 public class Customer {
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "customer_id")
-	private Long customerId;
-    
-    @Column(name="bank_info")
-	private String bankInfo;
-    
-    public Customer() {}
 
-	
-    @OneToOne(fetch = FetchType.EAGER, 
-    		cascade=CascadeType.ALL, 
-            mappedBy = "galleryCustomer")
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
+	@Column(name = "customer_id")
+	private Long customerId;
+
+	@Column(name = "bank_info")
+	private String bankInfo;
+
+	public Customer() {
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "galleryCustomer")
 	private GalleryRegistration galleryRegistration;
-	
+
 	public GalleryRegistration getGalleryRegistration() {
 		return this.galleryRegistration;
 	}
@@ -51,16 +49,13 @@ public class Customer {
 		this.galleryRegistration = galleryRegistration;
 	}
 
-
 	public void setCustomerId(Long value) {
 		this.customerId = value;
 	}
 
-
 	public Long getCustomerId() {
 		return this.customerId;
 	}
-
 
 	public void setBankInfo(String value) {
 		this.bankInfo = value;
@@ -69,37 +64,27 @@ public class Customer {
 	public String getBankInfo() {
 		return this.bankInfo;
 	}
-	
-    @ManyToMany(fetch = FetchType.EAGER,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            },
-            mappedBy = "viewers")
-	   private Set<Artwork> browseArtworks;
-	   
-	   public Set<Artwork> getBrowseArtworks() {
-	      return this.browseArtworks;
-	   }
-	   
-	   public void setBrowseArtworks(Set<Artwork> browseArtworkss) {
-	      this.browseArtworks = browseArtworkss;
-	   }
-   
 
-   @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.EAGER,
-            mappedBy = "customer")
-   private Set<Purchase> purchases;
-   
-   public Set<Purchase> getPurchases() {
-      return this.purchases;
-   }
-   
-   public void setPurchases(Set<Purchase> purchasess) {
-      this.purchases = purchasess;
-   }
-   
-   
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE }, mappedBy = "viewers")
+	private Set<Artwork> browseArtworks;
+
+	public Set<Artwork> getBrowseArtworks() {
+		return this.browseArtworks;
+	}
+
+	public void setBrowseArtworks(Set<Artwork> browseArtworkss) {
+		this.browseArtworks = browseArtworkss;
+	}
+
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
+	private Set<Purchase> purchases;
+
+	public Set<Purchase> getPurchases() {
+		return this.purchases;
+	}
+
+	public void setPurchases(Set<Purchase> purchasess) {
+		this.purchases = purchasess;
+	}
 
 }

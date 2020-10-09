@@ -20,63 +20,60 @@ import java.sql.Date;
 @Entity
 @Table(name = "purchase")
 public class Purchase {
-	
+
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "artwork_id")
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
+	@Column(name = "artwork_id")
 	private Long purchaseId;
-	
-	@Column(name="commission")
+
+	@Column(name = "commission")
 	private double commission;
-	
-	@Column(name="shipment_type")
+
+	@Column(name = "shipment_type")
 	@Enumerated
 	private ShipmentType shipmentType;
-	
-	@Column(name="payment_method")
+
+	@Column(name = "payment_method")
 	@Enumerated
 	private PaymentMethod paymentMethod;
-	
-	@Column(name="date")
+
+	@Column(name = "date")
 	private Date date;
-	
-	@Column(name="paid")
+
+	@Column(name = "paid")
 	private Boolean paid;
 
-	
-	public Purchase() {}
-	
-	
-	
-    @OneToOne(fetch = FetchType.EAGER, 
-    		cascade=CascadeType.ALL, 
-            mappedBy = "purchase")
-    private Artwork artworkOrdered;
-    public Artwork getArtworkOrdered() {
-       return this.artworkOrdered;
-    }
-    
-    public void setArtworkOrdered(Artwork artworkOrdered) {
-       this.artworkOrdered = artworkOrdered;
-    }
-	
-    @ManyToOne(fetch=FetchType.EAGER,optional = true)
-    @JoinColumn(name = "customer_id")
-    private Customer customer;
-    
-    public Customer getCustomer() {
-       return this.customer;
-    }
-    
-    public void setCustomer(Customer customer) {
-       this.customer = customer;
-    }
+	public Purchase() {
+	}
 
-    @ManyToOne(fetch=FetchType.EAGER,optional = true)
-    @JoinColumn(name = "shipment_id")
-    private Shipment shipment;
-   
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "purchase")
+	private Artwork artworkOrdered;
+
+	public Artwork getArtworkOrdered() {
+		return this.artworkOrdered;
+	}
+
+	public void setArtworkOrdered(Artwork artworkOrdered) {
+		this.artworkOrdered = artworkOrdered;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
+
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "shipment_id")
+	private Shipment shipment;
+
 	public Shipment getShipment() {
 		return this.shipment;
 	}
@@ -84,11 +81,9 @@ public class Purchase {
 	public void setShipment(Shipment shipment) {
 		this.shipment = shipment;
 	}
-    
-    
-    
-    @ManyToOne(fetch=FetchType.EAGER,optional=true)
-    @JoinColumn(name = "system_id")	
+
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "system_id")
 	private OnlineGallery onlineGallery;
 
 	public OnlineGallery getOnlineGallery() {
@@ -98,13 +93,7 @@ public class Purchase {
 	public void setOnlineGallery(OnlineGallery onlineGallery) {
 		this.onlineGallery = onlineGallery;
 	}
-    
-    
-    
-    
-    
-    
-    
+
 	public void setPurchaseId(Long value) {
 		this.purchaseId = value;
 	}
@@ -112,7 +101,6 @@ public class Purchase {
 	public Long getPurchaseId() {
 		return this.purchaseId;
 	}
-
 
 	public void setCommission(double value) {
 		this.commission = value;
@@ -130,7 +118,6 @@ public class Purchase {
 		return this.paymentMethod;
 	}
 
-
 	public void setDate(Date value) {
 		this.date = value;
 	}
@@ -138,7 +125,7 @@ public class Purchase {
 	public Date getDate() {
 		return this.date;
 	}
-	
+
 	public void setShipmentType(ShipmentType value) {
 		this.shipmentType = value;
 	}
@@ -146,16 +133,13 @@ public class Purchase {
 	public ShipmentType getShipmentType() {
 		return this.shipmentType;
 	}
-	
+
 	public void setPaid(boolean paid) {
-		this.paid=paid;
+		this.paid = paid;
 	}
-	
+
 	public Boolean getPaid() {
 		return this.paid;
 	}
-
-
-
 
 }

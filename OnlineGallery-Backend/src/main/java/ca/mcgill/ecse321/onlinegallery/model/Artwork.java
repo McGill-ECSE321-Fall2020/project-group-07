@@ -19,43 +19,43 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="artworks")
+@Table(name = "artworks")
 public class Artwork {
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "artwork_id")
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
+	@Column(name = "artwork_id")
 	private Long artworkId;
-    
-    @Column(name="name")
+
+	@Column(name = "name")
 	private String name;
-    
-    @Column(name="description")
+
+	@Column(name = "description")
 	private String description;
-    
-    @Column(name="price")
+
+	@Column(name = "price")
 	private double price;
-    
-    @Column(name="onsite")
+
+	@Column(name = "onsite")
 	private Boolean onSite;
-    
-    @Column(name="numViews")
+
+	@Column(name = "numViews")
 	private int numViews;
-    
-    @Column(name="dimension")
+
+	@Column(name = "dimension")
 	private String dimension;
-    
-    @Column(name="weight")
+
+	@Column(name = "weight")
 	private double weight;
-    
-    @Column(name="shipping_cost")
+
+	@Column(name = "shipping_cost")
 	private double shippingCost;
 
-    @Column(name="status")
+	@Column(name = "status")
 	@Enumerated
 	private ArtworkStatus status;
-    
+
 	public void setStatus(ArtworkStatus value) {
 		this.status = value;
 	}
@@ -63,13 +63,12 @@ public class Artwork {
 	public ArtworkStatus getStatus() {
 		return this.status;
 	}
-    
-    
-    public Artwork() {}
-    
-    
-    @ManyToOne(fetch=FetchType.EAGER,optional = false)
-    @JoinColumn(name = "artist_id", nullable = false)
+
+	public Artwork() {
+	}
+
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "artist_id", nullable = false)
 	private Artist artist;
 
 	public Artist getArtist() {
@@ -79,16 +78,10 @@ public class Artwork {
 	public void setArtist(Artist artist) {
 		this.artist = artist;
 	}
-	
-	
-	@ManyToMany(fetch = FetchType.EAGER,
-            cascade = {
-                CascadeType.PERSIST,
-                CascadeType.MERGE
-            })
-    @JoinTable(name = "post_tags",
-            joinColumns = { @JoinColumn(name = "artwork_id") },
-            inverseJoinColumns = { @JoinColumn(name = "customer_id") })
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@JoinTable(name = "post_tags", joinColumns = { @JoinColumn(name = "artwork_id") }, inverseJoinColumns = {
+			@JoinColumn(name = "customer_id") })
 	private Set<Customer> viewers;
 
 	public Set<Customer> getViewers() {
@@ -98,11 +91,8 @@ public class Artwork {
 	public void setViewers(Set<Customer> viewerss) {
 		this.viewers = viewerss;
 	}
-	
-	
-	
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,optional=true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
 	private Purchase purchase;
 
 	public Purchase getPurchase() {
@@ -112,10 +102,6 @@ public class Artwork {
 	public void setPurchase(Purchase purchase) {
 		this.purchase = purchase;
 	}
-	
-	
-    
-    
 
 	public void setArtworkId(Long value) {
 		this.artworkId = value;
@@ -125,7 +111,6 @@ public class Artwork {
 		return this.artworkId;
 	}
 
-
 	public void setName(String value) {
 		this.name = value;
 	}
@@ -133,7 +118,6 @@ public class Artwork {
 	public String getName() {
 		return this.name;
 	}
-
 
 	public void setDescription(String value) {
 		this.description = value;
@@ -143,7 +127,6 @@ public class Artwork {
 		return this.description;
 	}
 
-
 	public void setPrice(double value) {
 		this.price = value;
 	}
@@ -151,7 +134,6 @@ public class Artwork {
 	public double getPrice() {
 		return this.price;
 	}
-
 
 	public void setNumViews(int value) {
 		this.numViews = value;
@@ -161,7 +143,6 @@ public class Artwork {
 		return this.numViews;
 	}
 
-
 	public void setOnSite(Boolean value) {
 		this.onSite = value;
 	}
@@ -169,7 +150,6 @@ public class Artwork {
 	public Boolean getOnSite() {
 		return this.onSite;
 	}
-
 
 	public void setDimension(String value) {
 		this.dimension = value;
@@ -179,7 +159,6 @@ public class Artwork {
 		return this.dimension;
 	}
 
-
 	public void setWeight(double value) {
 		this.weight = value;
 	}
@@ -188,7 +167,6 @@ public class Artwork {
 		return this.weight;
 	}
 
-
 	public void setShippingCost(double value) {
 		this.shippingCost = value;
 	}
@@ -196,6 +174,5 @@ public class Artwork {
 	public double getShippingCost() {
 		return this.shippingCost;
 	}
-
 
 }

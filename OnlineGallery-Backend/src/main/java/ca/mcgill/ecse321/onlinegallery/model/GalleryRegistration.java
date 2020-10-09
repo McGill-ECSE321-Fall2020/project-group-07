@@ -14,32 +14,33 @@ import java.util.Set;
 import javax.persistence.OneToMany;
 
 @Entity
-@Table(name="registrations")
+@Table(name = "registrations")
 public class GalleryRegistration {
-	
+
 	@Id
-	@Column(name="username")
+	@Column(name = "username")
 	private String userName;
-	
-	@Column(name="firstname")
+
+	@Column(name = "firstname")
 	private String firstName;
-	
-	@Column(name="lastname")
+
+	@Column(name = "lastname")
 	private String lastName;
-	
-	@Column(name="email")
+
+	@Column(name = "email")
 	private String email;
-	
-	@Column(name="number")
+
+	@Column(name = "number")
 	private String phoneNumber;
-	
-	@Column(name="password")
+
+	@Column(name = "password")
 	private String password;
-	
-	@Column(name="loggedin")
+
+	@Column(name = "loggedin")
 	private Boolean isLoggedIn;
-	
-	public GalleryRegistration() {}
+
+	public GalleryRegistration() {
+	}
 
 	public String getUserName() {
 		return this.userName;
@@ -49,7 +50,7 @@ public class GalleryRegistration {
 		this.userName = value;
 	}
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,optional=true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
 	private GalleryAdmin galleryAdmin;
 
 	public GalleryAdmin getGalleryAdmin() {
@@ -60,9 +61,9 @@ public class GalleryRegistration {
 		this.galleryAdmin = galleryAdmin;
 	}
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,optional=true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
 	private Customer galleryCustomer;
-	
+
 	public Customer getGalleryCustomer() {
 		return this.galleryCustomer;
 	}
@@ -70,9 +71,8 @@ public class GalleryRegistration {
 	public void setGalleryCustomer(Customer galleryCustomer) {
 		this.galleryCustomer = galleryCustomer;
 	}
-	
-	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,optional=true)
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
 	private Artist galleryArtist;
 
 	public Artist getGalleryArtist() {
@@ -83,9 +83,10 @@ public class GalleryRegistration {
 		this.galleryArtist = galleryArtist;
 	}
 
-    @ManyToOne(fetch=FetchType.EAGER,optional = false)
-    @JoinColumn(name = "system_id", nullable = false)
+	@ManyToOne(fetch = FetchType.EAGER, optional = false)
+	@JoinColumn(name = "system_id", nullable = false)
 	private OnlineGallery onlineGallery;
+
 	public OnlineGallery getOnlineGallery() {
 		return this.onlineGallery;
 	}
@@ -94,15 +95,6 @@ public class GalleryRegistration {
 		this.onlineGallery = onlineGallery;
 	}
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	public void setFirstName(String value) {
 		this.firstName = value;
 	}
@@ -110,7 +102,6 @@ public class GalleryRegistration {
 	public String getFirstName() {
 		return this.firstName;
 	}
-
 
 	public void setLastName(String value) {
 		this.lastName = value;
@@ -120,7 +111,6 @@ public class GalleryRegistration {
 		return this.lastName;
 	}
 
-
 	public void setEmail(String value) {
 		this.email = value;
 	}
@@ -128,7 +118,6 @@ public class GalleryRegistration {
 	public String getEmail() {
 		return this.email;
 	}
-
 
 	public void setPhoneNumber(String value) {
 		this.phoneNumber = value;
@@ -138,7 +127,6 @@ public class GalleryRegistration {
 		return this.phoneNumber;
 	}
 
-
 	public void setPassword(String value) {
 		this.password = value;
 	}
@@ -147,7 +135,6 @@ public class GalleryRegistration {
 		return this.password;
 	}
 
-
 	public void setIsLoggedIn(Boolean value) {
 		this.isLoggedIn = value;
 	}
@@ -155,6 +142,5 @@ public class GalleryRegistration {
 	public Boolean getIsLoggedIn() {
 		return this.isLoggedIn;
 	}
-
 
 }
