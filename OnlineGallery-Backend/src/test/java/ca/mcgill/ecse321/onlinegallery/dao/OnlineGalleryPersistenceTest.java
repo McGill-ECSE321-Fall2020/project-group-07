@@ -29,6 +29,12 @@ public class OnlineGalleryPersistenceTest {
 	
 	@Autowired
 	private PurchaseRepository purchaseRepo;
+
+	@Autowired
+	private ProfileRepository profileRepo;
+	
+	@Autowired
+	private ShipmentRepository shipmentRepo;
 	
 	
 	
@@ -252,6 +258,178 @@ public class OnlineGalleryPersistenceTest {
 		assertEquals(ogId,purchase.getOnlineGallery().getSystemId());
 		
 		
+		
+	}
+
+	@Test
+	public void testPersistingAndLoadingProfileAttributesAndAssociations() {
+		
+		//Upstream of Profile in composition tree
+		OnlineGallery og = new OnlineGallery();
+		
+		GalleryRegistration gr = new GalleryRegistration();
+		String userName="RedditUser01101001";
+		gr.setUserName(userName);
+		
+		Artist artist = new Artist();
+		Profile profile = new Profile();
+		
+		// setting up all the associations
+		Set<GalleryRegistration> allGR = new HashSet<GalleryRegistration>();
+		allGR.add(gr);
+		
+		og.setAllRegistrations(allGR);
+		gr.setOnlineGallery(og);
+		
+		gr.setGalleryArtist(artist);
+		artist.setGalleryRegistration(gr);
+		
+		profile.setArtist(artist);
+		artist.setProfile(profile);
+		
+		//Setting attributes of Profile
+		int numSold = 9001;
+		double totalEarnings = -69;
+		String selfDescription = "Scrooge McDuck";
+		double rating = 420;
+		
+		profile.setNumSold(numSold);
+		profile.setRating(rating);
+		profile.setSelfDescription(selfDescription);
+		profile.setTotalEarnings(totalEarnings);
+		
+		onlineRepo.save(og);								
+		regRepo.save(gr);
+		
+		
+		// getting primary keys of all the objects associated with profile + profile itself
+		Long profileId = profile.getProfileId();
+		Long artistId = artist.getArtistId();
+		
+		//losing everything
+		profile = null;
+		artist = null;
+	
+		//retrieve from database
+		profile = profileRepo.findProfileByProfileId(profileId);
+		
+		//checking attributes
+		assertEquals(profileId, profile.getProfileId());
+		assertEquals(numSold, profile.getNumSold());
+		assertEquals(totalEarnings, profile.getTotalEarnings());
+		assertEquals(selfDescription, profile.getSelfDescription());
+		assertEquals(rating, profile.getRating());
+		
+		//checking associations
+		assertEquals(artistId, profile.getArtist().getArtistId());		
+
+	}
+	
+	@Test
+	public void testPersistingAndLoadingShipmentAttributesAndAssociations() {
+		
+		//Upstream of Shipment in composition tree + mandatory associations
+		OnlineGallery og = new OnlineGallery();
+		GalleryRegistration gr = new GalleryRegistration();
+		String userName="4ChanUser10010110";
+		gr.setUserName(userName);
+		
+		Artist artist = new Artist();	
+		Artwork artwork = new Artwork();
+		Customer customer=new Customer();					
+		Profile profile = new Profile();
+		Shipment shipment = new Shipment();
+		Purchase purchase = new Purchase();
+		
+		//Setting up all the associations
+		
+		Set<GalleryRegistration> allRegistrations = new HashSet<GalleryRegistration>();
+		allRegistrations.add(gr);
+		
+		Set<Artwork> artworks = new HashSet<Artwork>();
+		artworks.add(artwork);
+		
+		Set<Purchase> purchases = new HashSet<Purchase>();
+		purchases.add(purchase);
+		
+		Set<Shipment> allShipments = new HashSet<Shipment>();
+		allShipments.add(shipment);
+		
+		Set<Purchase> allPurchases = new HashSet<Purchase>();
+		allPurchases.add(purchase);
+		
+		og.setAllPurchases(allPurchases);
+		og.setAllRegistrations(allRegistrations);
+		og.setAllShipments(allShipments);
+		
+		purchase.setOnlineGallery(og);
+		gr.setOnlineGallery(og);
+		shipment.setOnlineGallery(og);
+		
+		gr.setGalleryCustomer(customer);
+		customer.setGalleryRegistration(gr);
+		
+		customer.setPurchases(purchases);
+		purchase.setCustomer(customer);
+		
+		purchase.setArtworkOrdered(artwork);
+		artwork.setPurchase(purchase);
+		
+		artwork.setArtist(artist);
+		artist.setArtworks(artworks);
+		
+		artist.setProfile(profile);
+		profile.setArtist(artist);
+		
+		purchase.setShipment(shipment);
+		shipment.setPurchases(purchases);
+		
+		artist.setGalleryRegistration(gr);
+		gr.setGalleryArtist(artist);
+		
+		//Setting attributes of the shipment
+		String sourceAddress = "EzClap Pepega Road 7777777";
+		String destinationAddress = "Much WOW Jebaited L_ 420420420";
+		double totalAmount = 69696969696969.0;
+		String shippingCompany = "You'll Never Get Your Shipment LULW";
+		ShipmentStatus status = ShipmentStatus.SHIPPED;
+		String reciepientName = "Eminem";
+		
+		shipment.setSourceAddress(sourceAddress);
+		shipment.setDestinationAddress(destinationAddress);
+		shipment.setTotalAmount(totalAmount);
+		shipment.setShippingCompany(shippingCompany);
+		shipment.setStatus(status);
+		shipment.setReceipientName(reciepientName);
+	
+		onlineRepo.save(og);								
+		regRepo.save(gr);
+		
+		//Getting primary keys of all the objects associated with shipment + shipment itself
+		Long purchaseId=purchase.getPurchaseId();		
+		Long shipmentId=shipment.getShipmentId();
+		Long ogId=og.getSystemId();
+
+		//Losing everything
+		purchase=null;
+		shipment=null;
+		og=null;
+		
+		//retrieve from database
+		shipment = shipmentRepo.findShipmentByShipmentId(shipmentId);
+		
+		//checking attributes
+		assertEquals(shipmentId, shipment.getShipmentId());
+		assertEquals(sourceAddress, shipment.getSourceAddress());
+		assertEquals(destinationAddress, shipment.getDestinationAddress());
+		assertEquals(totalAmount, shipment.getTotalAmount());
+		assertEquals(shippingCompany, shipment.getShippingCompany());
+		assertEquals(status, shipment.getStatus());
+		assertEquals(reciepientName, shipment.getReceipientName());
+		
+		//checking associations
+		assertEquals(ogId, shipment.getOnlineGallery().getSystemId());
+		assertEquals(purchaseId, shipment.getPurchases().iterator().next().getPurchaseId());
 		
 	}
 }
