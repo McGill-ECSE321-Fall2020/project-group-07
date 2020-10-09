@@ -46,7 +46,7 @@ public class Purchase {
 	
 	
 	
-    @OneToOne(fetch = FetchType.LAZY, 
+    @OneToOne(fetch = FetchType.EAGER, 
     		cascade=CascadeType.ALL, 
             mappedBy = "purchase")
     private Artwork artworkOrdered;
@@ -58,7 +58,7 @@ public class Purchase {
        this.artworkOrdered = artworkOrdered;
     }
 	
-    @ManyToOne(fetch=FetchType.LAZY,optional = true)
+    @ManyToOne(fetch=FetchType.EAGER,optional = true)
     @JoinColumn(name = "customer_id")
     private Customer customer;
     
@@ -70,7 +70,7 @@ public class Purchase {
        this.customer = customer;
     }
 
-    @ManyToOne(fetch=FetchType.LAZY,optional = true)
+    @ManyToOne(fetch=FetchType.EAGER,optional = true)
     @JoinColumn(name = "shipment_id")
     private Shipment shipment;
    
@@ -84,7 +84,7 @@ public class Purchase {
     
     
     
-    @ManyToOne(fetch=FetchType.LAZY,optional=true)
+    @ManyToOne(fetch=FetchType.EAGER,optional=true)
     @JoinColumn(name = "system_id")	
 	private OnlineGallery onlineGallery;
 

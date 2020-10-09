@@ -49,7 +49,7 @@ public class GalleryRegistration {
 		this.userName = value;
 	}
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional=true)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,optional=true)
 	private GalleryAdmin galleryAdmin;
 
 	public GalleryAdmin getGalleryAdmin() {
@@ -60,7 +60,7 @@ public class GalleryRegistration {
 		this.galleryAdmin = galleryAdmin;
 	}
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional=true)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,optional=true)
 	private Customer galleryCustomer;
 	
 	public Customer getGalleryCustomer() {
@@ -72,7 +72,7 @@ public class GalleryRegistration {
 	}
 	
 	
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional=true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,optional=true)
 	private Artist galleryArtist;
 
 	public Artist getGalleryArtist() {
@@ -83,7 +83,7 @@ public class GalleryRegistration {
 		this.galleryArtist = galleryArtist;
 	}
 
-    @ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @ManyToOne(fetch=FetchType.EAGER,optional = false)
     @JoinColumn(name = "system_id", nullable = false)
 	private OnlineGallery onlineGallery;
 	public OnlineGallery getOnlineGallery() {

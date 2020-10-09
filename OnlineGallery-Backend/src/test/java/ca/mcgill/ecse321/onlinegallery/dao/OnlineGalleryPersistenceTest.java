@@ -16,114 +16,160 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import ca.mcgill.ecse321.onlinegallery.model.*;
 
-///////////////////////////////////////////////////////////////////////////////////
-//      use this as a starter file to write your persistence tests               //
-//              instructions and details in comments below                      //
-///////////////////////////////////////////////////////////////////////////////////
-
-// you may see that there are already many Crud Repository interfaces in the dao package
-// don't get too excited. they are all empty. but even so, they can already save. I created them in helping
-// debugging and rewriting the JPA annotations
-
-// also, whenever you write something new, always good idea to run the default
-// src/test/java/ca.mcgill.ecse321.onlinegallery.OnlineGalleryApplicationTests.java as a junit test to make 
-// sure everything can start up. many times even that will fail ...
-
-// anyways ...
 
 @ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class OnlineGalleryPersistenceTest {
 
-	// notice how i didn't import a Crud Repo interface for every class?
-	// if you look at the JPA annotations in the classes themselves there are notations like CascadeStyle.ALL
-	// that means the persistence is cascaded from the owner class of an association to the owned class
-	// for examle, the model is set up such that GalleryRegistration is the owner of all of its associations
-	// with Customer, Artist, Admin. By saving GallerRegistration, all those others will also be saved
-	
-	
 	@Autowired
 	private GalleryRegistrationRepository regRepo;
 	
 	@Autowired 
 	private OnlineGalleryRepository onlineRepo;
 	
+	@Autowired
+	private PurchaseRepository purchaseRepo;
 	
-//	@AfterEach
-//	public void clearDatabase() {
-//		// i didn't bother with emptying the db because I was only working getting persisting to work
-		// you should refer to the tutorial for this part. you SHOULD clear the db every test to 
-		// avoid inconsistencies
-//	}
-
 	
-	// here we go with the actual useful stuff
+	
+	@AfterEach
+	public void clearDatabase() {
+		onlineRepo.deleteAll();
+		regRepo.deleteAll();
+	}
 	
 	@Test
-	public void testPersisting() {
+	public void testPersistingAndLoadingRegistrationAttributesAndAssociations() {
 		
-		// this is a kind of one-size-fits all method that tests writing everything
-		// you should pick and choose what you need
-		// but know that you must test writing the classed to you itself, as well
-		// as all its associations.
+		// boilerplate to propagate the persistence OnlineGallery which lines
+		// upstream of GalleryRegistration in the composition tree
 		
-		// for classes that have optional associations, start with just testing the 
-		// class itself with 0 classes associated with it
-		
-		// after you are comfortable, test the associations. more details on the 
-		// associations after
-		
-		
-		
-		// just instantiating all the classes that we will be persisting
 		OnlineGallery og = new OnlineGallery();
-		PhysicalGallery pg = new PhysicalGallery();
+		GalleryRegistration reg = new GalleryRegistration();
+		
+		// boiler plate to propagate the persistence of the classes that are 
+		// downstream of GalleryRegistration in the composition tree, which
+		// also happens to be the only direct association type that GalleryRegistration has: compositions
+		
+		Artist artist = new Artist();						//these objects all generate primary keys internally
+		Customer customer=new Customer();					//but if you call object.getObjectID right now it would retur null
+		GalleryAdmin admin = new GalleryAdmin();			//because those keys aren't generated until the obj is saved!
+		
+		Profile profile = new Profile();					//this Profile class is created because Artist must have a Profile
+		
+		
+		// setting up all the bidirectional associations before persisting
+		Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
+		allReg.add(reg);
+		
+		og.setAllRegistrations(allReg);
+		reg.setOnlineGallery(og);
+		
+		
+		reg.setGalleryCustomer(customer);
+		customer.setGalleryRegistration(reg);
+		
+		reg.setGalleryAdmin(admin);
+		admin.setGalleryRegistration(reg);
+		
+		reg.setGalleryArtist(artist);
+		artist.setGalleryRegistration(reg);
+		
+		artist.setProfile(profile);
+		profile.setArtist(artist);
+		
+		// setting attributes of GalleryRegistration prior to persisting everything
+		
+		String userName="donutLover69";
+		String firstName="Homer";
+		String lastName="Simpson";
+		String email="doh@nuts.com";
+		String phoneNumber="555-GOT-DONUTS";
+		String passWord="123";
+		Boolean isLoggedIn=false;
+		
+		reg.setUserName(userName);
+		reg.setFirstName(firstName);
+		reg.setLastName(lastName);
+		reg.setEmail(email);
+		reg.setPhoneNumber(phoneNumber);
+		reg.setPassword(passWord);
+		reg.setIsLoggedIn(isLoggedIn);
+		
+		// persist OnlineGallery first
+		onlineRepo.save(og);								// persisting GalleryRegistration also persist all classes in its associations
+		regRepo.save(reg);
+		
+		Long artistUniqueId = artist.getArtistId();			// get the unique id generated when each object is persisted for comparison later		
+		Long customerUniqueId=customer.getCustomerId();		
+		Long adminUniqueId = admin.getAdminId();
+		Long ogUniqueId=og.getSystemId();
+		
+		
+		// null everything
+		reg=null;
+		artist=null;
+		customer=null;
+		admin=null;
+		
+		// load back the saved GalleryRegistration
+		reg=regRepo.findGalleryRegisrationByUserName(userName);
+		
+		// test attributes
+		
+		assertEquals(userName,reg.getUserName());
+		assertEquals(firstName,reg.getFirstName());
+		assertEquals(lastName,reg.getLastName());
+		assertEquals(email,reg.getEmail());
+		assertEquals(phoneNumber,reg.getPhoneNumber());
+		assertEquals(passWord,reg.getPassword());
+		assertEquals(isLoggedIn,reg.getIsLoggedIn());	
+		
+		//test associations
+		assertEquals(artistUniqueId,reg.getGalleryArtist().getArtistId());
+		assertEquals(customerUniqueId,reg.getGalleryCustomer().getCustomerId());
+		assertEquals(adminUniqueId,reg.getGalleryAdmin().getAdminId());
+		assertEquals(ogUniqueId,reg.getOnlineGallery().getSystemId());
+	}
+	
+	@Test
+	public void testPersistingAndLoadingPurchaseAttributesAndAssociations() {
+		
+		
+		// boilerplate to propagate the persistence through all the classes that lie upstream
+		// of the Purchase class in the composition tree
+		
+		OnlineGallery og = new OnlineGallery();
+		GalleryRegistration reg = new GalleryRegistration();
+		String userName="donutLover69";
+		reg.setUserName(userName);
+		
+		Artist artist = new Artist();	
+		Artwork artwork = new Artwork();
+		Customer customer=new Customer();					
+		Profile profile = new Profile();
 		Shipment shipment = new Shipment();
 		Purchase purchase = new Purchase();
-		GalleryAdmin admin=new GalleryAdmin();
-		GalleryRegistration reg = new GalleryRegistration();
-		Customer customer = new Customer();
-		Artist artist = new Artist();
-		Profile profile = new Profile();
-		Artwork art= new Artwork();
 
 		
-		// setting some of their property for viewing in debugging if you have psql
-		reg.setUserName("donutLover69");
-		art.setName("still life in blue");
-		profile.setSelfDescription("starving artist");
-		artist.setBankInfo("no account, no money");
-		customer.setBankInfo("lots of money, lots of accounts");
-		og.setDaysUp(100);
-		pg.setAddress("100 art road");
-		shipment.setShippingCompany("massimo trucking");
+		Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
+		allReg.add(reg);
 		
-		//some of the associations between classes, especially 1 -- *, takes a set as a input
-		//for example see the relationship between OnlineGallery and GalleryRegistration
-		//here just making the sets for later
+		Set<Artwork> allArt = new HashSet<Artwork>();
+		allArt.add(artwork);
+		
 		Set<Purchase> allPurchase = new HashSet<Purchase>();
 		allPurchase.add(purchase);
 		
 		Set<Shipment> allShipment = new HashSet<Shipment>();
 		allShipment.add(shipment);
 		
-		Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
-		allReg.add(reg);
+		Set<Customer> allCustomer = new HashSet<Customer>();
+		allCustomer.add(customer);
 		
 		
-		// now the fun starts
-		
-		// I am doing the root of the system, OnlineGallery, first. 
-		// The JPA is set up so that OnlineGallery is the owning class of all of its associations
-		// see the diagram. OnlineGallery is associated with Purchases, Shipments, Registration, 
-		// and PhysicalGallery. all associations are bidirectional
-		
-		// notice how i am setting both ends of every association?
 		og.setAllRegistrations(allReg);
 		reg.setOnlineGallery(og);
-		
-		reg.setGalleryAdmin(admin);				//this is jumping ahead to the Registration - Admin, but the idea is same
-		admin.setGalleryRegistration(reg);
 		
 		og.setAllShipments(allShipment);
 		shipment.setOnlineGallery(og);
@@ -131,32 +177,7 @@ public class OnlineGalleryPersistenceTest {
 		og.setAllPurchases(allPurchase);
 		purchase.setOnlineGallery(og);
 		
-		og.setPhysicalGallery(pg);
-		pg.setOnlineGallery(og);
-		
-		//AFTER you've set the association on both ends
-		// persist the OnlineGallery object
-		// all associated objects are also by Cascading persisted!
-		onlineRepo.save(og);
-		
-		
-		// same idea for the next level in the composition
-		// OnlineGallery was top composition level
-		// now move on to Registration
-		// same pattern, see if you can follow
-		Set<Customer> allCustomers = new HashSet<Customer>();
-		allCustomers.add(customer);
-		
-		Set<Artist> allArtists = new HashSet<Artist>();
-		allArtists.add(artist);
-		
-		Set<Artwork> allArt = new HashSet<Artwork>();
-		allArt.add(art);
-		
-		
-		reg.setGalleryAdmin(admin);
-		admin.setGalleryRegistration(reg);
-		
+
 		reg.setGalleryCustomer(customer);
 		customer.setGalleryRegistration(reg);
 		
@@ -166,44 +187,72 @@ public class OnlineGalleryPersistenceTest {
 		artist.setProfile(profile);
 		profile.setArtist(artist);
 		
+	
 		artist.setArtworks(allArt);
-		art.setArtist(artist);
-		
+		artwork.setArtist(artist);
 
-		purchase.setArtworkOrdered(art);
-		art.setPurchase(purchase);
+
 		
+		purchase.setArtworkOrdered(artwork);
+		artwork.setPurchase(purchase);
+		
+				
 		purchase.setCustomer(customer);
 		customer.setPurchases(allPurchase);
 		
-		purchase.setCommission(0.15);
-		art.setNumViews(-3);
-
-		art.setViewers(allCustomers);
-		customer.setBrowseArtworks(allArt);
 		
 		purchase.setShipment(shipment);
 		shipment.setPurchases(allPurchase);
 		
+		// now setting the attributes of the purchase itself for asserting later
 		
-		// see how I only saved Registration object?
-		// if you do some print statements or inspect in 
-		// psql, you will see everything is persisted
+		double commission=0.314;
+		ShipmentType shipmentType = ShipmentType.ONSITE_PICKUP;
+		PaymentMethod paymentMethod = PaymentMethod.WIRETRANSFER;
+		
+		purchase.setCommission(commission);
+		purchase.setShipmentType(shipmentType);
+		purchase.setPaymentMethod(paymentMethod);
+		
+		onlineRepo.save(og);								
 		regRepo.save(reg);
 		
-		
-		
-		
-		// now this only is persisting
-		// the empty CrudRepository interfaces are enough to ssave
-		// but you need to write the query methods for fetching
-		// and asserting that what you saved was right (they should be)
-		// see the tutorial on that
-		// and also this link https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#jpa.query-methods.query-creation
+		// get the primary key of all the objects associated with purchase
 
+		Long purchaseId=purchase.getPurchaseId();		
+		Long customerId=customer.getCustomerId();
+		Long artworkId=artwork.getArtworkId();
+		Long shipmentId=shipment.getShipmentId();
+		Long ogId=og.getSystemId();
+		
+		// null everything
+		
+		purchase=null;
+		purchase=null;
+		artwork=null;
+		customer=null;
+		shipment=null;
+		og=null;
+		
+		
+		
+		//retrieve purchase from db
+		purchase=purchaseRepo.findPurchaseByPurchaseId(purchaseId);
+	
+		//checking attributes
+		assertEquals(purchaseId,purchase.getPurchaseId());
+		assertEquals(commission,purchase.getCommission());
+		assertEquals(shipmentType.name(),purchase.getShipmentType().name());
+		assertEquals(paymentMethod.name(),purchase.getPaymentMethod().name());
+		
+		//checking associations
+		assertEquals(artworkId,purchase.getArtworkOrdered().getArtworkId());
+		assertEquals(customerId,purchase.getCustomer().getCustomerId());
+		assertEquals(shipmentId,purchase.getShipment().getShipmentId());
+		assertEquals(ogId,purchase.getOnlineGallery().getSystemId());
+		
+		
 		
 	}
-	
-	
 }
 

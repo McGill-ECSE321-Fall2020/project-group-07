@@ -25,7 +25,7 @@ public class PhysicalGallery {
 	
 	public PhysicalGallery() {}
 	
-    @OneToOne(fetch = FetchType.LAZY, 
+    @OneToOne(fetch = FetchType.EAGER, 
     		cascade=CascadeType.ALL, 
             mappedBy = "physicalGallery")
 	private OnlineGallery onlineGallery;

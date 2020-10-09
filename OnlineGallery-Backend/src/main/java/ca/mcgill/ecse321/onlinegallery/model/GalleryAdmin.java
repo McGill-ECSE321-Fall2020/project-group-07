@@ -23,7 +23,7 @@ public class GalleryAdmin {
     @Column(name = "admin_id")
 	private Long adminId;
     
-    @OneToOne(fetch = FetchType.LAZY, 
+    @OneToOne(fetch = FetchType.EAGER, 
     		cascade=CascadeType.ALL, 
             mappedBy = "galleryAdmin")
     private GalleryRegistration galleryRegistration;

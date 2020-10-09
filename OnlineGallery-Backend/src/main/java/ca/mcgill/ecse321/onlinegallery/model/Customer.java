@@ -38,7 +38,7 @@ public class Customer {
     public Customer() {}
 
 	
-    @OneToOne(fetch = FetchType.LAZY, 
+    @OneToOne(fetch = FetchType.EAGER, 
     		cascade=CascadeType.ALL, 
             mappedBy = "galleryCustomer")
 	private GalleryRegistration galleryRegistration;
@@ -70,7 +70,7 @@ public class Customer {
 		return this.bankInfo;
 	}
 	
-    @ManyToMany(fetch = FetchType.LAZY,
+    @ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                 CascadeType.PERSIST,
                 CascadeType.MERGE
@@ -88,7 +88,7 @@ public class Customer {
    
 
    @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "customer")
    private Set<Purchase> purchases;
    
