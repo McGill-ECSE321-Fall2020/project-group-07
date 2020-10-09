@@ -51,24 +51,7 @@ public class Profile {
 		this.artist = artist;
 	}
 	
-	
-    @OneToMany(
-            cascade = CascadeType.ALL
-        )
-	private Set<Artwork> artworks;
-
-	public Set<Artwork> getArtworks() {
-		return this.artworks;
-	}
-
-	public void setArtworks(Set<Artwork> artworkss) {
-		this.artworks = artworkss;
-	}
-	
-	
-	
-	
-	
+		
 	
     
 	public void setProfileId(Long value) {
