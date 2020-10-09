@@ -23,7 +23,7 @@ The team is composed of 5 McGill University students within the Faculty of Engin
 | Jay Han                |Project Manager, Developer| 35            |   |   |          |
 | Massimo Vadacchino     | CI lead, Developer       | 27.5  |   |   |          |
 | Keon Olsz              | Software Developer       | 15 |   |   |          |
-| Natalia Tabet          | Software Developer       | fill this in  |   |   |          |
+| Natalia Tabet          | Software Developer       | 26  |   |   |          |
 
 ### Sprint 1
 
@@ -35,4 +35,4 @@ The project report for Sprint 1 can be found [here](https://github.com/McGill-EC
 | Jay Han| Gradle setup, TravisCI setup, Heroku database setup, <ins>persistence tests for _GalleryRegistration, Purchase_ classes</ins>, CrudRepository interfaces for both classes, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model,git management, JPA annotation corrections |35|
 | Keon Olsz |<ins>Persistece tests for _GalleryAdmin, Artwork_ classes</ins>, CrudRepository interfaces for both classes, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model, collect & organize final 15 requirements, CrudRepository classes for both respective tests |15|
  |Massimo Vadacchino| UMLLab code generation, project wiki setup, Readme.md setup, project report, <ins>persistence tests for _Profile, Shipment_ classes</ins>, CrudRepository interfaces for both classes, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model, re-phrase final list of requirements, merged/finalized domain model, merged/finalized usecase diagrams | 27.5|
- | Natalia Tabet | UMLLab code generation, <ins>persistence tests for _PhysicalGallery, Customer_ classes</ins>, CrudRepository interfaces for both classes, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model | fil lthis in |
+ | Natalia Tabet | UMLLab code generation, <ins>persistence tests for _PhysicalGallery, Customer_ classes</ins>, CrudRepository interfaces for both classes, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model, model diagrams merging. | 26 |
