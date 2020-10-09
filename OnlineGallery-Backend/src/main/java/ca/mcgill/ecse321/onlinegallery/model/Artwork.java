@@ -68,7 +68,7 @@ public class Artwork {
     public Artwork() {}
     
     
-    @ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @ManyToOne(fetch=FetchType.EAGER,optional = false)
     @JoinColumn(name = "artist_id", nullable = false)
 	private Artist artist;
 
@@ -81,7 +81,7 @@ public class Artwork {
 	}
 	
 	
-	@ManyToMany(fetch = FetchType.LAZY,
+	@ManyToMany(fetch = FetchType.EAGER,
             cascade = {
                 CascadeType.PERSIST,
                 CascadeType.MERGE
@@ -102,7 +102,7 @@ public class Artwork {
 	
 	
 
-	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional=true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,optional=true)
 	private Purchase purchase;
 
 	public Purchase getPurchase() {

@@ -35,7 +35,7 @@ public class OnlineGallery {
 	
     
     
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional=true)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,optional=true)
     private PhysicalGallery physicalGallery;
 	
 	public PhysicalGallery getPhysicalGallery() {
@@ -48,7 +48,7 @@ public class OnlineGallery {
     
 
 	@OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "onlineGallery")    
 	private Set<GalleryRegistration> allRegistrations;
 	
@@ -62,7 +62,7 @@ public class OnlineGallery {
 	
 	
 	@OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "onlineGallery")  
 	private Set<Purchase> allPurchases;
 
@@ -76,7 +76,7 @@ public class OnlineGallery {
 	
 	
 	@OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "onlineGallery")  
 	private Set<Shipment> allShipments;
 

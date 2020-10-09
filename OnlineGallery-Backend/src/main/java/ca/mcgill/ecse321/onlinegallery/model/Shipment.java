@@ -51,7 +51,7 @@ public class Shipment {
     
     
     @OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "shipment"
             )
     private Set<Purchase> purchases;
@@ -66,7 +66,7 @@ public class Shipment {
 
     
     
-    @ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @ManyToOne(fetch=FetchType.EAGER,optional = false)
     @JoinColumn(name = "system_id", nullable = false)    
 	private OnlineGallery onlineGallery;
 

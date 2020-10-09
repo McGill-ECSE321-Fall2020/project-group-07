@@ -34,7 +34,7 @@ public class Artist {
     
     public Artist() {}
     
-    @OneToOne(fetch = FetchType.LAZY, 
+    @OneToOne(fetch = FetchType.EAGER, 
     		cascade=CascadeType.ALL, 
             mappedBy = "galleryArtist")
 	private GalleryRegistration galleryRegistration;
@@ -48,7 +48,7 @@ public class Artist {
 	}
 	
 
-    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL,optional=false)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL,optional=false)
 	private Profile profile;
 
 	public Profile getProfile() {
@@ -61,7 +61,7 @@ public class Artist {
 	
 	
 	@OneToMany(cascade = CascadeType.ALL,
-            fetch = FetchType.LAZY,
+            fetch = FetchType.EAGER,
             mappedBy = "artist")
 	private Set<Artwork> artworks;
 	
