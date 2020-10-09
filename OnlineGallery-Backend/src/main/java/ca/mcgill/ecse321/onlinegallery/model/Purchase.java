@@ -40,6 +40,9 @@ public class Purchase {
 	
 	@Column(name="date")
 	private Date date;
+	
+	@Column(name="paid")
+	private Boolean paid;
 
 	
 	public Purchase() {}
@@ -142,6 +145,14 @@ public class Purchase {
 
 	public ShipmentType getShipmentType() {
 		return this.shipmentType;
+	}
+	
+	public void setPaid(boolean paid) {
+		this.paid=paid;
+	}
+	
+	public Boolean getPaid() {
+		return this.paid;
 	}
 
 

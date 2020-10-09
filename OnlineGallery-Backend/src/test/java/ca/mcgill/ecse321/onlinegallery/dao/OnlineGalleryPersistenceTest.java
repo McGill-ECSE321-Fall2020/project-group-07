@@ -5,6 +5,9 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.sql.Date;
+import java.time.LocalDate;
+import java.time.Month;
 
 import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.AfterEach;
@@ -225,10 +228,16 @@ public class OnlineGalleryPersistenceTest {
 		double commission=0.314;
 		ShipmentType shipmentType = ShipmentType.ONSITE_PICKUP;
 		PaymentMethod paymentMethod = PaymentMethod.WIRETRANSFER;
+		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
+		Boolean paid = false;
+
+		
 		
 		purchase.setCommission(commission);
 		purchase.setShipmentType(shipmentType);
 		purchase.setPaymentMethod(paymentMethod);
+		purchase.setDate(date);
+		purchase.setPaid(paid);
 		
 		onlineRepo.save(og);								
 		regRepo.save(reg);
@@ -260,6 +269,8 @@ public class OnlineGalleryPersistenceTest {
 		assertEquals(commission,purchase.getCommission());
 		assertEquals(shipmentType.name(),purchase.getShipmentType().name());
 		assertEquals(paymentMethod.name(),purchase.getPaymentMethod().name());
+		assertEquals(date,purchase.getDate());
+		assertEquals(paid,purchase.getPaid());
 		
 		//checking associations
 		assertEquals(artworkId,purchase.getArtworkOrdered().getArtworkId());
