@@ -1,6 +1,7 @@
+# Online Art Gallery
 [![Build Status](https://travis-ci.com/McGill-ECSE321-Fall2020/project-group-07.svg?token=uVygPvq8RcZYse4EpgeN&branch=master)](https://travis-ci.com/McGill-ECSE321-Fall2020/project-group-07)
 
-# Project Overview
+## Project Overview
 This project develops an Online Gallery System to help a Montreal gallery promote local artists during the pandemic. In this system, artists create their personal profiles and upload their artworks. Each day, artists receive an update on the total number of views on their artworks by customers. Customers can browse available artworks either by artist, randomly, or by chronological order. Once a customer purchases an artwork, they then have the option of specifying a delivery to their home or a pickup at the physical address of the gallery itself. The administrator of the Online Gallery System has access to a log of all past purchases and shipments for record-keeping and also troubleshooting.
 
 ### About us
@@ -20,7 +21,7 @@ The team is composed of 5 McGill University students within the Faculty of Engin
 |------------------------|------|-----------|----------|----------|----------|
 | Anthony Dagher         | Software Developer       | 15  |   |   |          |
 | Jay Han                |Project Manager, Developer| 35            |   |   |          |
-| Massimo Vadacchino     | CI lead, Developer       | fill this in  |   |   |          |
+| Massimo Vadacchino     | CI lead, Developer       | 27.5  |   |   |          |
 | Keon Olsz              | Software Developer       | 15 |   |   |          |
 | Natalia Tabet          | Software Developer       | fill this in  |   |   |          |
 
@@ -33,5 +34,5 @@ The project report for Sprint 1 can be found [here](https://github.com/McGill-EC
 | Anthony Dagher| <ins>Persistence tests for _OnlineGallery, Artist_ classes</ins>, CrudRepository classes for both respective tests, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model, collect & organize final 15 requirements, re-phrase final list of requirements & use cases |15|
 | Jay Han| Gradle setup, TravisCI setup, Heroku database setup, <ins>persistence tests for _GalleryRegistration, Purchase_ classes</ins>, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model,git management, JPA annotation corrections |35|
 | Keon Olsz |<ins>Persistece tests for _GalleryAdmin, Artwork_ classes</ins>, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model, collect & organize final 15 requirements, CrudRepository classes for both respective tests |15|
- |Massimo Vadacchino| UMLLab code generation, project wiki setup, Readme.md setup, project report, <ins>persistence tests for _Profile, Shipment_ classes</ins>, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model | fill this in|
+ |Massimo Vadacchino| UMLLab code generation, project wiki setup, Readme.md setup, project report, <ins>persistence tests for _Profile, Shipment_ classes</ins>, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model, re-phrase final list of requirements, merged/finalized domain model | 27.5|
  | Natalia Tabet | UMLLab code generation, <ins>persistence tests for _PhysicalGallery, Customer_ classes</ins>, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model | fil lthis in |
