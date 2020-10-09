@@ -32,11 +32,11 @@ public class OnlineGalleryPersistenceTest {
 	
 	
 	
-	@AfterEach
-	public void clearDatabase() {
-		onlineRepo.deleteAll();
-		regRepo.deleteAll();
-	}
+//	@AfterEach
+//	public void clearDatabase() {
+//		onlineRepo.deleteAll();
+//		regRepo.deleteAll();
+//	}
 	
 	@Test
 	public void testPersistingAndLoadingRegistrationAttributesAndAssociations() {
@@ -141,7 +141,7 @@ public class OnlineGalleryPersistenceTest {
 		
 		OnlineGallery og = new OnlineGallery();
 		GalleryRegistration reg = new GalleryRegistration();
-		String userName="donutLover69";
+		String userName="donutLover70";
 		reg.setUserName(userName);
 		
 		Artist artist = new Artist();	
