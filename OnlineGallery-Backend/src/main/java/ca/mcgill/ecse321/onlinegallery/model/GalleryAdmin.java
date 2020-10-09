@@ -14,23 +14,21 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="admin")
+@Table(name = "admin")
 public class GalleryAdmin {
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "admin_id")
-	private Long adminId;
-    
-    @OneToOne(fetch = FetchType.EAGER, 
-    		cascade=CascadeType.ALL, 
-            mappedBy = "galleryAdmin")
-    private GalleryRegistration galleryRegistration;
-    
-    public GalleryAdmin() {}
 
-    
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
+	@Column(name = "admin_id")
+	private Long adminId;
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "galleryAdmin")
+	private GalleryRegistration galleryRegistration;
+
+	public GalleryAdmin() {
+	}
+
 	public Long getAdminId() {
 		return this.adminId;
 	}

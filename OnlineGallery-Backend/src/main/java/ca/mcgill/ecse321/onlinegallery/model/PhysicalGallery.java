@@ -13,21 +13,20 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="physical_gallery")
+@Table(name = "physical_gallery")
 public class PhysicalGallery {
-	
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
-    @GenericGenerator(name = "native", strategy = "native")
-    @Column(name = "physical_id")
+
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
+	@GenericGenerator(name = "native", strategy = "native")
+	@Column(name = "physical_id")
 	private Long galleryId;
 	private String address;
-	
-	public PhysicalGallery() {}
-	
-    @OneToOne(fetch = FetchType.EAGER, 
-    		cascade=CascadeType.ALL, 
-            mappedBy = "physicalGallery")
+
+	public PhysicalGallery() {
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "physicalGallery")
 	private OnlineGallery onlineGallery;
 
 	public OnlineGallery getOnlineGallery() {
@@ -38,7 +37,6 @@ public class PhysicalGallery {
 		this.onlineGallery = onlineGallery;
 	}
 
-	
 	public void setGalleryId(Long value) {
 		this.galleryId = value;
 	}
@@ -47,7 +45,6 @@ public class PhysicalGallery {
 		return this.galleryId;
 	}
 
-
 	public void setAddress(String value) {
 		this.address = value;
 	}
@@ -55,7 +52,5 @@ public class PhysicalGallery {
 	public String getAddress() {
 		return this.address;
 	}
-
-
 
 }
