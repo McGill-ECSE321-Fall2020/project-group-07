@@ -1,6 +1,6 @@
 Req.1.F: The Online Gallery System shall perform an authentication of the user's credentials in less than 1 minute upon trying to log into the system.
 
-Req.2.F: The Online Gallery System shall display all available artworks in less than 2 minutes upon a user logging into the Online Gallery System.
+Req.2.F: The Online Gallery System shall display 15 random available artworks in less than 2 minutes upon a user logging into the Online Gallery System.
 
 Req.3.F: The Online Gallery System shall allow customers to place an order on any unsold artwork. 
 
