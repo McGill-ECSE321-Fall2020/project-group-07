@@ -39,11 +39,15 @@ public class OnlineGalleryPersistenceTest {
 	@Autowired 
 	private ArtistRepository artistRepo;
 	
+	@Autowired
+	private CustomerRepository custRepo;
+	
 	@AfterEach
 	public void clearDatabase() {
 		onlineRepo.deleteAll();
 		regRepo.deleteAll();
 		artistRepo.deleteAll();
+		custRepo.deleteAll();
 	}
 	
 	@Test
@@ -561,6 +565,88 @@ public class OnlineGalleryPersistenceTest {
 			assertEquals(regID, og.getAllRegistrations().iterator().next().getUserName());
 			assertEquals(days, og.getDaysUp());
 			assertEquals(systemID, og.getSystemId());
+		}
+		
+		@Test
+		public void testPersistingAndLoadingCustomerAttributesAndAssociations() {
+			
+			OnlineGallery og = new OnlineGallery();
+			GalleryRegistration reg = new GalleryRegistration();
+			String userName="natalia";
+			reg.setUserName(userName);
+			
+			Artist artist = new Artist();
+			Artwork art  = new Artwork();
+			Profile profile = new Profile ();
+			Purchase purchase = new Purchase();
+			
+			Customer customer = new Customer();
+			String bankInfo = "royal";
+			customer.setBankInfo(bankInfo);
+			
+			Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
+			allReg.add(reg);
+			
+			Set<Customer> allCostumers = new HashSet<Customer>();
+			allCostumers.add(customer);
+			
+			Set<Purchase> allPurchases = new HashSet<Purchase>();
+			allPurchases.add(purchase);
+			
+			Set<Artwork> allArtworks = new HashSet<Artwork>();
+			allArtworks.add(art);
+			
+			og.setAllRegistrations(allReg);
+			reg.setOnlineGallery(og);
+			
+			og.setAllPurchases(allPurchases);
+			purchase.setOnlineGallery(og);
+			
+			reg.setGalleryCustomer(customer);
+			customer.setGalleryRegistration(reg);
+			
+			reg.setGalleryArtist(artist);
+			artist.setGalleryRegistration(reg);
+			
+			artist.setProfile(profile);
+			profile.setArtist(artist);
+			
+			artist.setArtworks(allArtworks);
+			art.setArtist(artist);
+		
+			customer.setBrowseArtworks(allArtworks);
+			art.setViewers(allCostumers);
+			
+			customer.setPurchases(allPurchases);
+			purchase.setCustomer(customer);
+			
+			onlineRepo.save(og);
+			regRepo.save(reg);
+			
+			Long artworkUniqueId = art.getArtworkId();			
+			Long customerUniqueId=customer.getCustomerId();		
+			Long purchaseUniqueId = purchase.getPurchaseId();
+			
+			
+			customer = null;
+			
+			customer = custRepo.findCustomerByBankInfo(bankInfo);
+			
+			assertNotNull(customer);
+			assertEquals(bankInfo, customer.getBankInfo());
+			assertEquals(customerUniqueId, customer.getCustomerId());
+			
+			//test association
+			assertEquals(userName, customer.getGalleryRegistration().getUserName());
+			assertEquals(allPurchases.size(), customer.getPurchases().size());
+			for (Purchase p : allPurchases) {
+				assertEquals(purchaseUniqueId, p.getPurchaseId());
+			}
+			for (Artwork a : allArtworks) {
+				assertEquals(artworkUniqueId, a.getArtworkId());
+			}
+			
+			
 		}
 }
 
