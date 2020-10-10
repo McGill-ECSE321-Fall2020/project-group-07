@@ -22,7 +22,7 @@ The team is composed of 5 McGill University students within the Faculty of Engin
 | Anthony Dagher         | Software Developer       | 20  |   |   |          |
 | Jay Han                |Project Manager, Developer| 35            |   |   |          |
 | Keon Olsz              | Software Developer       | 20 |   |   |          |
-| Massimo Vadacchino     | CI lead, Developer       | 27.5  |   |   |          |
+| Massimo Vadacchino     | CI lead, Developer       | 30  |   |   |          |
 | Natalia Tabet          | Software Developer       | 26  |   |   |          |
 
 ### Sprint 1
