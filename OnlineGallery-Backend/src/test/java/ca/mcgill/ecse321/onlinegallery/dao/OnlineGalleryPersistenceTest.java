@@ -48,6 +48,9 @@ public class OnlineGalleryPersistenceTest {
 	
 	@Autowired
 	private PurchaseRepository purchaseRepo;
+	
+	@Autowired
+	private ShipmentRepository shipRepo;
 
 	@AfterEach
 	public void clearDatabase() {
@@ -521,24 +524,26 @@ public class OnlineGalleryPersistenceTest {
 		
 		Artwork art = new Artwork();
 		Purchase purchase = new Purchase();
+		Shipment shipment = new Shipment();
 		
 		customer.getPurchase().add(purchase);
+		customer.getShipment().add(shipment);
 		
 		customer.getBrowsedArtwork().add(art);
 		art.getViewers().add(customer);
-		
-			// still has to do shipment
-		
+				
 		custRepo.save(customer);
 
 		Long custId=customer.getCustomerId();
 		Long artId=art.getArtworkId();
 		Long purchaseId=purchase.getPurchaseId();
+		Long shipmentId=shipment.getShipmentId();
 		
 		customer=null;
 		art=null;
 		purchase=null;
 		reg=null;
+		shipment=null;
 		
 		customer=custRepo.findCustomerByCustomerId(custId);
 
@@ -553,7 +558,9 @@ public class OnlineGalleryPersistenceTest {
 		purchase=customer.getPurchase().iterator().next();
 		assertEquals(purchase.getPurchaseId(),purchaseId);
 		
-			//still needs to do shipment
+		shipment=customer.getShipment().iterator().next();
+		assertEquals(shipment.getShipmentId(),shipmentId);
+		
 		
 		//test associations to customer
 		reg=regRepo.findGalleryRegisrationByUserName(userName);
@@ -567,8 +574,183 @@ public class OnlineGalleryPersistenceTest {
 		assertEquals(customer.getBankInfo(),bankInfo);
 		
 		
+	}
+	
+	@Test
+	public void testPurchase() {
+		GalleryRegistration reg=new GalleryRegistration();
+		Customer customer = new Customer();
+		Artwork art = new Artwork();
+		Shipment shipment = new Shipment();
+		Purchase purchase = new Purchase();
+		
+		double commission=0.13;
+		ShipmentType shipType=ShipmentType.OFFSITE_DELIVERY;
+		PaymentMethod paymentMethod=PaymentMethod.CREDIT;
+		boolean paid=true;
+		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
+		
+		purchase.setCommission(commission);
+		purchase.setShipmentType(shipType);
+		purchase.setPaymentMethod(paymentMethod);
+		purchase.setPaid(paid);
+		purchase.setDate(date);
 		
 		
+		String userName="bananaFartman15";		
+		reg.setUserName(userName);
+		
+		reg.setCustomer(customer);
+		
+		customer.setGalleryRegistration(reg);
+		customer.getPurchase().add(purchase);
+		customer.getShipment().add(shipment);
+		
+
+		purchase.setArtwork(art);
+		art.setPurchase(purchase);
+		
+		purchase.setShipment(shipment);
+		shipment.getPurchase().add(purchase);
+		
+		custRepo.save(customer);
+		purchaseRepo.save(purchase);
+
+		
+		Long purchaseId=purchase.getPurchaseId();
+		Long artId=art.getArtworkId();
+		Long shipId=shipment.getShipmentId();
+		Long customerId=customer.getCustomerId();
+		
+		purchase=null;
+		shipment=null;
+		art=null;
+
+		//checking purchase attributes
+		purchase=purchaseRepo.findPurchaseByPurchaseId(purchaseId);
+		assertNotNull(purchase);
+		assertEquals(purchase.getCommission(),commission);
+		assertEquals(purchase.getShipmentType(),shipType);
+		assertEquals(purchase.getPaymentMethod(),paymentMethod);
+		assertEquals(purchase.isPaid(),paid);
+		assertEquals(purchase.getDate(),date);
+		
+		//checking associations from purchase
+		assertEquals(purchase.getShipment().getShipmentId(),shipId);
+		assertEquals(purchase.getArtwork().getArtworkId(),artId);
+		
+		//checking associations to purchase
+		shipment=shipRepo.findShipmentByShipmentId(shipId);
+		purchase=shipment.getPurchase().iterator().next();
+		assertNotNull(purchase);
+		assertEquals(purchase.getCommission(),commission);
+		assertEquals(purchase.getShipmentType(),shipType);
+		assertEquals(purchase.getPaymentMethod(),paymentMethod);
+		assertEquals(purchase.isPaid(),paid);
+		assertEquals(purchase.getDate(),date);
+		
+		art=artRepo.findArtworkByArtworkId(artId);
+		purchase=art.getPurchase();
+		assertNotNull(purchase);
+		assertEquals(purchase.getCommission(),commission);
+		assertEquals(purchase.getShipmentType(),shipType);
+		assertEquals(purchase.getPaymentMethod(),paymentMethod);
+		assertEquals(purchase.isPaid(),paid);
+		assertEquals(purchase.getDate(),date);
+		
+		customer=custRepo.findCustomerByCustomerId(customerId);
+		purchase=customer.getPurchase().iterator().next();
+		assertNotNull(purchase);
+		assertEquals(purchase.getCommission(),commission);
+		assertEquals(purchase.getShipmentType(),shipType);
+		assertEquals(purchase.getPaymentMethod(),paymentMethod);
+		assertEquals(purchase.isPaid(),paid);
+		assertEquals(purchase.getDate(),date);
+				
+	}
+	
+	@Test
+	public void testShipment() {
+		GalleryRegistration reg=new GalleryRegistration();
+		Customer customer = new Customer();
+		Shipment shipment = new Shipment();
+		Purchase purchase = new Purchase();
+		
+		String sourceAddress="here";
+		String destAddress="there";
+		double totalAmount=24.9;
+		String shippingCompany="BigRed Trucking";
+		ShipmentStatus status=ShipmentStatus.CREATED;
+		String recipientName="nemo";
+		
+		shipment.setSourceAddress(sourceAddress);
+		shipment.setDestinationAddress(destAddress);
+		shipment.setTotalAmount(totalAmount);
+		shipment.setShippingCompany(shippingCompany);
+		shipment.setShipmentStatus(status);
+		shipment.setRecipientName(recipientName);
+		
+		
+		String userName="bananaFartman15";		
+		reg.setUserName(userName);
+		
+		reg.setCustomer(customer);
+		
+		customer.setGalleryRegistration(reg);
+		customer.getPurchase().add(purchase);
+		customer.getShipment().add(shipment);
+
+
+		purchase.setShipment(shipment);
+		shipment.getPurchase().add(purchase);
+
+		custRepo.save(customer);
+		shipRepo.save(shipment);
+
+		
+		Long purchaseId=purchase.getPurchaseId();
+		Long shipId=shipment.getShipmentId();
+		Long customerId=customer.getCustomerId();
+		
+		purchase=null;
+		shipment=null;
+		customer=null;
+
+		//checking shipment attributes
+		shipment=shipRepo.findShipmentByShipmentId(shipId);
+		assertNotNull(shipment);
+		assertEquals(shipment.getSourceAddress(),sourceAddress);
+		assertEquals(shipment.getDestinationAddress(),destAddress);
+		assertEquals(shipment.getTotalAmount(),totalAmount);
+		assertEquals(shipment.getShippingCompany(),shippingCompany);
+		assertEquals(shipment.getShipmentStatus(),status);
+		assertEquals(shipment.getRecipientName(),recipientName);
+		
+		//checking assocations from shipment
+		assertEquals(shipment.getPurchase().iterator().next().getPurchaseId(),purchaseId);
+		
+		//checking associations to shipment
+		purchase=purchaseRepo.findPurchaseByPurchaseId(purchaseId);
+		shipment=purchase.getShipment();
+		assertNotNull(shipment);
+		assertEquals(shipment.getSourceAddress(),sourceAddress);
+		assertEquals(shipment.getDestinationAddress(),destAddress);
+		assertEquals(shipment.getTotalAmount(),totalAmount);
+		assertEquals(shipment.getShippingCompany(),shippingCompany);
+		assertEquals(shipment.getShipmentStatus(),status);
+		assertEquals(shipment.getRecipientName(),recipientName);
+		
+		customer=custRepo.findCustomerByCustomerId(customerId);
+		shipment=customer.getShipment().iterator().next();
+		assertNotNull(shipment);
+		assertEquals(shipment.getSourceAddress(),sourceAddress);
+		assertEquals(shipment.getDestinationAddress(),destAddress);
+		assertEquals(shipment.getTotalAmount(),totalAmount);
+		assertEquals(shipment.getShippingCompany(),shippingCompany);
+		assertEquals(shipment.getShipmentStatus(),status);
+		assertEquals(shipment.getRecipientName(),recipientName);
+		
+				
 	}
 	
 	

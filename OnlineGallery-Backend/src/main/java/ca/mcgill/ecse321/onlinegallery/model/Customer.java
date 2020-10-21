@@ -69,7 +69,7 @@ public class Customer {
 	}
 
 	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinColumn(name="customerId")
+	@JoinColumn(name="customer_id")
 	private Set<Purchase> purchase;
 
 	public Set<Purchase> getPurchase() {
@@ -80,14 +80,15 @@ public class Customer {
 	}
 
 
-//
-//	private Set<Shipment> shipment;
-//
-//	public Set<Shipment> getShipment() {
-//		if (this.shipment == null) {
-//			this.shipment = new HashSet<Shipment>();
-//		}
-//		return this.shipment;
-//	}
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
+	@JoinColumn(name="customer_id")
+	private Set<Shipment> shipment;
+
+	public Set<Shipment> getShipment() {
+		if (this.shipment == null) {
+			this.shipment = new HashSet<Shipment>();
+		}
+		return this.shipment;
+	}
 
 }

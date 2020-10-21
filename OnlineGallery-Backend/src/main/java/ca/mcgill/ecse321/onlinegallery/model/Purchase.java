@@ -9,6 +9,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -53,14 +55,14 @@ public class Purchase {
 		return this.shipmentType;
 	}
 
-	private PaymentMethod paymentType;
+	private PaymentMethod paymentMethod;
 
-	public void setPaymentType(PaymentMethod value) {
-		this.paymentType = value;
+	public void setPaymentMethod(PaymentMethod value) {
+		this.paymentMethod = value;
 	}
 
-	public PaymentMethod getPaymentType() {
-		return this.paymentType;
+	public PaymentMethod getPaymentMethod() {
+		return this.paymentMethod;
 	}
 
 	private boolean paid;
@@ -94,21 +96,16 @@ public class Purchase {
 		return this.artwork;
 	}
 
-//	/**
-//	 * <pre>
-//	 *           1..*     0..1
-//	 * Purchase ------------------------- Shipment
-//	 *           purchase        &gt;       shipment
-//	 * </pre>
-//	 */
-//	private Shipment shipment;
-//
-//	public void setShipment(Shipment value) {
-//		this.shipment = value;
-//	}
-//
-//	public Shipment getShipment() {
-//		return this.shipment;
-//	}
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "shipment_id")
+	private Shipment shipment;
+
+	public void setShipment(Shipment value) {
+		this.shipment = value;
+	}
+
+	public Shipment getShipment() {
+		return this.shipment;
+	}
 
 }
