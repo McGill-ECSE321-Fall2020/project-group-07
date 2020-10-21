@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>ca.mcgill.ecse321.onlinegallery.model</name>
+	<name>onlinegallery.model</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -14,11 +14,4 @@
 	<natures>
 		<nature>org.eclipse.jdt.core.javanature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>src-gen</name>
-			<type>2</type>
-			<location>C:/Users/TazMa/OneDrive/Desktop/ArtGalleryMassimo/project-group-07/OnlineGallery-Backend/src/main/java</location>
-		</link>
-	</linkedResources>
 </projectDescription>

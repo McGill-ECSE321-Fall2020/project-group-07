@@ -1,72 +1,31 @@
 package ca.mcgill.ecse321.onlinegallery.model;
 
+import java.util.Set;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
-
-import java.util.Set;
-import javax.persistence.OneToMany;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "artist")
 public class Artist {
-
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name = "artist_id")
+	@Column(name = "id")
 	private Long artistId;
-
-	@Column(name = "bank_info")
-	private String bankInfo;
-
-	public Artist() {
-	}
-
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "galleryArtist")
-	private GalleryRegistration galleryRegistration;
-
-	public GalleryRegistration getGalleryRegistration() {
-		return this.galleryRegistration;
-	}
-
-	public void setGalleryRegistration(GalleryRegistration galleryRegistration) {
-		this.galleryRegistration = galleryRegistration;
-	}
-
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = false)
-	private Profile profile;
-
-	public Profile getProfile() {
-		return this.profile;
-	}
-
-	public void setProfile(Profile profile) {
-		this.profile = profile;
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "artist")
-	private Set<Artwork> artworks;
-
-	public Set<Artwork> getArtworks() {
-		return this.artworks;
-	}
-
-	public void setArtworks(Set<Artwork> artworkss) {
-		this.artworks = artworkss;
-	}
 
 	public void setArtistId(Long value) {
 		this.artistId = value;
@@ -76,12 +35,47 @@ public class Artist {
 		return this.artistId;
 	}
 
+	private String bankInfo;
+
 	public void setBankInfo(String value) {
 		this.bankInfo = value;
 	}
 
 	public String getBankInfo() {
 		return this.bankInfo;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "artist")
+	private GalleryRegistration galleryRegistration;
+
+	public void setGalleryRegistration(GalleryRegistration value) {
+		this.galleryRegistration = value;
+	}
+
+	public GalleryRegistration getGalleryRegistration() {
+		return this.galleryRegistration;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
+	private Profile profile;
+
+	public void setProfile(Profile value) {
+		this.profile = value;
+	}
+
+	public Profile getProfile() {
+		return this.profile;
+	}
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "artist_id")
+	private Set<Artwork> artwork;
+
+	public Set<Artwork> getArtwork() {
+		if (this.artwork == null) {
+			this.artwork = new HashSet<Artwork>();
+		}
+		return this.artwork;
 	}
 
 }

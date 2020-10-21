@@ -1,4 +1,3 @@
-
 package ca.mcgill.ecse321.onlinegallery.model;
 
 import javax.persistence.CascadeType;
@@ -20,29 +19,26 @@ public class GalleryAdmin {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name = "admin_id")
+	@Column(name = "id")
 	private Long adminId;
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "galleryAdmin")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "admin")
 	private GalleryRegistration galleryRegistration;
 
-	public GalleryAdmin() {
-	}
-
-	public Long getAdminId() {
-		return this.adminId;
-	}
-
-	public void setAdminId(Long value) {
-		this.adminId = value;
+	public void setGalleryRegistration(GalleryRegistration value) {
+		this.galleryRegistration = value;
 	}
 
 	public GalleryRegistration getGalleryRegistration() {
 		return this.galleryRegistration;
 	}
 
-	public void setGalleryRegistration(GalleryRegistration galleryRegistration) {
-		this.galleryRegistration = galleryRegistration;
+	public void setAdminId(Long value) {
+		this.adminId = value;
+	}
+
+	public Long getAdminId() {
+		return this.adminId;
 	}
 
 }
