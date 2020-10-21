@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -26,7 +27,7 @@ public class PhysicalGalleryRestController {
 		return convertToDto(pg);
 	}
 	
-	@PostMapping(value = { "/update_physicaladdress/{address}", "/update_physicaladdress/{address}/" })
+	@PutMapping(value = { "/update_physicaladdress/{address}", "/update_physicaladdress/{address}/" })
 	public PhysicalGalleryDto updatePhysicalAddress(@PathVariable("address") String address) throws IllegalArgumentException {
 		PhysicalGallery pg = service.updateAddress(address);
 		return convertToDto(pg);
@@ -35,7 +36,14 @@ public class PhysicalGalleryRestController {
 	@DeleteMapping(value = { "/deletephysical", "/deletephysical/" })
 	public PhysicalGalleryDto deletePhysicalGallery() throws IllegalArgumentException {
 		PhysicalGallery pg = service.deletePhysicalGallery();
-		return convertToDto(pg);
+		PhysicalGalleryDto dto;
+		try {
+			dto=convertToDto(pg);
+		}
+		catch(IllegalArgumentException e){
+			dto=null;
+		}
+		return dto;
 	}
 	
 	@GetMapping(value= {"/physicalgallery","physicalgallery/"})

@@ -42,7 +42,6 @@ public class PhysicalGalleryService {
 		pg.setAddress(address);
 
 		og.setPhysicalGallery(pg);
-		pg.setOnlineGallery(og);
 
 		onlineRepo.save(og);
 		return pg;
@@ -77,14 +76,20 @@ public class PhysicalGalleryService {
 	
 	@Transactional
 	public PhysicalGallery deletePhysicalGallery() {
-		PhysicalGallery pg;
-		if (physicalRepo.findAll().iterator().hasNext()) {
-			pg=physicalRepo.findAll().iterator().next();
+		OnlineGallery og;
+		
+		if (onlineRepo.findAll().iterator().hasNext()) {
+			og = onlineRepo.findAll().iterator().next();
 		} else {
-			pg=null;
+			og = new OnlineGallery();
+			og.setDaysUp(0);
 		}
 		
+		PhysicalGallery pg=og.getPhysicalGallery();
+		og.setPhysicalGallery(null);
+		
 		physicalRepo.deleteAll();
+		
 		return pg;
 	}
 
