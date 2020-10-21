@@ -19,13 +19,13 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.HashSet;
 
 @Entity
-@Table(name="online_gallery")
+@Table(name = "online_gallery")
 public class OnlineGallery {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name="id")
+	@Column(name = "id")
 	private Long systemId;
 
 	public void setSystemId(Long value) {
@@ -35,8 +35,8 @@ public class OnlineGallery {
 	public Long getSystemId() {
 		return this.systemId;
 	}
-	
-	@Column(name="days_up")
+
+	@Column(name = "days_up")
 	private int daysUp;
 
 	public void setDaysUp(int value) {
@@ -47,8 +47,6 @@ public class OnlineGallery {
 		return this.daysUp;
 	}
 
-	
-	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
 	private PhysicalGallery physicalGallery;
 
@@ -60,10 +58,8 @@ public class OnlineGallery {
 		return this.physicalGallery;
 	}
 
-
-	
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)
-	@JoinColumn(name="online_gallery_id")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+	@JoinColumn(name = "online_gallery_id")
 	private Set<GalleryRegistration> allRegistrations;
 
 	public Set<GalleryRegistration> getAllRegistrations() {

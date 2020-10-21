@@ -13,15 +13,15 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="admin")
+@Table(name = "admin")
 public class GalleryAdmin {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name="id")
+	@Column(name = "id")
 	private Long adminId;
-	
+
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "admin")
 	private GalleryRegistration galleryRegistration;
 
@@ -40,7 +40,5 @@ public class GalleryAdmin {
 	public Long getAdminId() {
 		return this.adminId;
 	}
-
-
 
 }

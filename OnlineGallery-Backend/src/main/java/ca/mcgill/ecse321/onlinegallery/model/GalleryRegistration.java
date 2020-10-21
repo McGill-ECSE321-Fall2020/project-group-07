@@ -17,11 +17,11 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.HashSet;
 
 @Entity
-@Table(name="registrations")
+@Table(name = "registrations")
 public class GalleryRegistration {
-	
+
 	@Id
-	@Column(name="username")
+	@Column(name = "username")
 	private String userName;
 
 	public void setUserName(String value) {
@@ -105,10 +105,11 @@ public class GalleryRegistration {
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, optional = true)
 	private Customer customer;
-	
+
 	public void setCustomer(Customer customer) {
-		this.customer=customer;
+		this.customer = customer;
 	}
+
 	public Customer getCustomer() {
 		return this.customer;
 	}
@@ -124,14 +125,11 @@ public class GalleryRegistration {
 		return this.artist;
 	}
 
-
-	
 	@Override
 	public String toString() {
-		String info = this.getUserName()+"\n"+this.getFirstName()+"\n"+this.getLastName()+"\n"+this.getEmail()+"\n"+this.getPhoneNumber()+"\n"+this.getIsLoggedIn();
+		String info = this.getUserName() + "\n" + this.getFirstName() + "\n" + this.getLastName() + "\n"
+				+ this.getEmail() + "\n" + this.getPhoneNumber() + "\n" + this.getIsLoggedIn();
 		return info;
 	}
-	
-
 
 }

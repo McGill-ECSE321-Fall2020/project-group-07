@@ -20,13 +20,13 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.HashSet;
 
 @Entity
-@Table(name="artwork")
+@Table(name = "artwork")
 public class Artwork {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name="art_id")
+	@Column(name = "art_id")
 	private Long artworkId;
 
 	public void setArtworkId(Long value) {
@@ -127,19 +127,18 @@ public class Artwork {
 		return this.shippingCost;
 	}
 
-	
-	@ManyToMany(fetch = FetchType.EAGER,cascade = { CascadeType.ALL })
+	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
 	@JoinTable(name = "art_viewer", joinColumns = { @JoinColumn(name = "art_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "customer_id") })
 	private Set<Customer> viewers;
-	
+
 	public Set<Customer> getViewers() {
-	   if (this.viewers == null) {
-		   this.viewers = new HashSet<Customer>();
-	   }
-	   return this.viewers;
+		if (this.viewers == null) {
+			this.viewers = new HashSet<Customer>();
+		}
+		return this.viewers;
 	}
-	
+
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
 	private Purchase purchase;
 
@@ -150,8 +149,5 @@ public class Artwork {
 	public Purchase getPurchase() {
 		return this.purchase;
 	}
-
-
-
 
 }

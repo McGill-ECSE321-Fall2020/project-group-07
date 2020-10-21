@@ -17,13 +17,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="purchase")
+@Table(name = "purchase")
 
 public class Purchase {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name="purchase_id")
+	@Column(name = "purchase_id")
 	private Long purchaseId;
 
 	public void setPurchaseId(Long value) {
@@ -33,7 +33,6 @@ public class Purchase {
 	public Long getPurchaseId() {
 		return this.purchaseId;
 	}
-	
 
 	private double commission;
 

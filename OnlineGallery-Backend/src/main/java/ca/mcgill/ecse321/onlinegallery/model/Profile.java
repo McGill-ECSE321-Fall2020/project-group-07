@@ -10,12 +10,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="profile")
+@Table(name = "profile")
 public class Profile {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name="id")
+	@Column(name = "id")
 	private Long profileId;
 
 	public void setProfileId(Long value) {

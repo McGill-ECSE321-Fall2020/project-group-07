@@ -17,13 +17,13 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.HashSet;
 
 @Entity
-@Table(name="shipment")
+@Table(name = "shipment")
 public class Shipment {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name="shipment_id")
+	@Column(name = "shipment_id")
 	private long shipmentId;
 
 	public void setShipmentId(long value) {

@@ -20,13 +20,13 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.HashSet;
 
 @Entity
-@Table(name="customer")
+@Table(name = "customer")
 public class Customer {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name="customer_id")
+	@Column(name = "customer_id")
 	private Long customerId;
 
 	public void setCustomerId(Long value) {
@@ -57,8 +57,8 @@ public class Customer {
 	public GalleryRegistration getGalleryRegistration() {
 		return this.galleryRegistration;
 	}
-	
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL,mappedBy = "viewers")
+
+	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "viewers")
 	private Set<Artwork> browsedArtwork;
 
 	public Set<Artwork> getBrowsedArtwork() {
@@ -68,8 +68,8 @@ public class Customer {
 		return this.browsedArtwork;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinColumn(name="customer_id")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "customer_id")
 	private Set<Purchase> purchase;
 
 	public Set<Purchase> getPurchase() {
@@ -79,9 +79,8 @@ public class Customer {
 		return this.purchase;
 	}
 
-
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinColumn(name="customer_id")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "customer_id")
 	private Set<Shipment> shipment;
 
 	public Set<Shipment> getShipment() {

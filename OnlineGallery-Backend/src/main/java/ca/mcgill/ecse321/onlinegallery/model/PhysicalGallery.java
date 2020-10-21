@@ -13,13 +13,13 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 @Entity
-@Table(name="physical_gallery")
+@Table(name = "physical_gallery")
 public class PhysicalGallery {
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name="id")
+	@Column(name = "id")
 	private Long galleryId;
 
 	public void setGalleryId(Long value) {
@@ -29,7 +29,6 @@ public class PhysicalGallery {
 	public Long getGalleryId() {
 		return this.galleryId;
 	}
-	
 
 	private String address;
 

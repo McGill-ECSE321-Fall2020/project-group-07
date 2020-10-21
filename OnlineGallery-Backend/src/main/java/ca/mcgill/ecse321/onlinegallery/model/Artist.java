@@ -19,12 +19,12 @@ import org.hibernate.annotations.GenericGenerator;
 import java.util.HashSet;
 
 @Entity
-@Table(name="artist")
+@Table(name = "artist")
 public class Artist {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name="id")
+	@Column(name = "id")
 	private Long artistId;
 
 	public void setArtistId(Long value) {
@@ -44,7 +44,7 @@ public class Artist {
 	public String getBankInfo() {
 		return this.bankInfo;
 	}
-	
+
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "artist")
 	private GalleryRegistration galleryRegistration;
 
@@ -55,7 +55,6 @@ public class Artist {
 	public GalleryRegistration getGalleryRegistration() {
 		return this.galleryRegistration;
 	}
-
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
 	private Profile profile;
@@ -68,8 +67,8 @@ public class Artist {
 		return this.profile;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL)
-	@JoinColumn(name="artist_id")
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@JoinColumn(name = "artist_id")
 	private Set<Artwork> artwork;
 
 	public Set<Artwork> getArtwork() {
