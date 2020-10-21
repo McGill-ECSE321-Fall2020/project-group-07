@@ -62,7 +62,7 @@ public class OnlineGallery {
 
 
 	
-	@OneToMany(cascade = CascadeType.ALL,orphanRemoval = true)
+	@OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.ALL,orphanRemoval = true)
 	@JoinColumn(name="online_gallery_id")
 	private Set<GalleryRegistration> allRegistrations;
 

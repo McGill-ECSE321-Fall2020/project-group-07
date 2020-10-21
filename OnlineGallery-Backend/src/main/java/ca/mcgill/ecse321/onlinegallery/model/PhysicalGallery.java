@@ -30,16 +30,6 @@ public class PhysicalGallery {
 		return this.galleryId;
 	}
 	
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "physicalGallery")
-	private OnlineGallery onlineGallery;
-
-	public void setOnlineGallery(OnlineGallery onlineGallery) {
-		this.onlineGallery = onlineGallery;
-	}
-
-	public OnlineGallery getOnlineGallery() {
-		return this.onlineGallery;
-	}
 
 	private String address;
 

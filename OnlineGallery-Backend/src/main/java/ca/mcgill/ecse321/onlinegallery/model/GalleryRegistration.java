@@ -95,45 +95,43 @@ public class GalleryRegistration {
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
 	private GalleryAdmin admin;
 
-	public void setAdmin(GalleryAdmin value) {
-		this.admin = value;
+	public void setAdmin(GalleryAdmin customer) {
+		this.admin = customer;
 	}
 
 	public GalleryAdmin getAdmin() {
 		return this.admin;
 	}
-//
-//	/**
-//	 * <pre>
-//	 *           1..1     0..1
-//	 * GalleryRegistration ------------------------- Artist
-//	 *           galleryRegistration        &gt;       artist
-//	 * </pre>
-//	 */
-//	private Artist artist;
-//
-//	public void setArtist(Artist value) {
-//		this.artist = value;
-//	}
-//
-//	public Artist getArtist() {
-//		return this.artist;
-//	}
-//
-//	/**
-//	 * <pre>
-//	 *           1..1     0..*
-//	 * GalleryRegistration ------------------------- Customer
-//	 *           galleryRegistration        &gt;       customer
-//	 * </pre>
-//	 */
-//	private Set<Customer> customer;
-//
-//	public Set<Customer> getCustomer() {
-//		if (this.customer == null) {
-//			this.customer = new HashSet<Customer>();
-//		}
-//		return this.customer;
-//	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, optional = true)
+	private Customer customer;
+	
+	public void setCustomer(Customer customer) {
+		this.customer=customer;
+	}
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
+	private Artist artist;
+
+	public void setArtist(Artist value) {
+		this.artist = value;
+	}
+
+	public Artist getArtist() {
+		return this.artist;
+	}
+
+
+	
+	@Override
+	public String toString() {
+		String info = this.getUserName()+"\n"+this.getFirstName()+"\n"+this.getLastName()+"\n"+this.getEmail()+"\n"+this.getPhoneNumber()+"\n"+this.getIsLoggedIn();
+		return info;
+	}
+	
+
 
 }
