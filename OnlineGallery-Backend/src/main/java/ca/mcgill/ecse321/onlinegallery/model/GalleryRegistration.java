@@ -2,11 +2,14 @@ package ca.mcgill.ecse321.onlinegallery.model;
 
 import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -89,22 +92,16 @@ public class GalleryRegistration {
 		return this.isLoggedIn;
 	}
 
-//	/**
-//	 * <pre>
-//	 *           1..1     0..1
-//	 * GalleryRegistration ------------------------- GalleryAdmin
-//	 *           galleryRegistration        &gt;       admin
-//	 * </pre>
-//	 */
-//	private GalleryAdmin admin;
-//
-//	public void setAdmin(GalleryAdmin value) {
-//		this.admin = value;
-//	}
-//
-//	public GalleryAdmin getAdmin() {
-//		return this.admin;
-//	}
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
+	private GalleryAdmin admin;
+
+	public void setAdmin(GalleryAdmin value) {
+		this.admin = value;
+	}
+
+	public GalleryAdmin getAdmin() {
+		return this.admin;
+	}
 //
 //	/**
 //	 * <pre>

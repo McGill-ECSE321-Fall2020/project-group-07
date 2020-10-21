@@ -23,46 +23,103 @@ import ca.mcgill.ecse321.onlinegallery.model.*;
 public class OnlineGalleryPersistenceTest {
 
 	@Autowired
-	private OnlineGalleryRepository onlineRepo;
+	private OnlineGalleryRepository ogRepo;
 
 	@Autowired
 	private PhysicalGalleryRepository pgRepo;
 	
 	@Autowired
 	private GalleryRegistrationRepository regRepo;
+	
+	@Autowired
+	private GalleryAdminRepository adminRepo;
 
-//	@AfterEach
-//	public void clearDatabase() {
-//		onlineRepo.deleteAll();
-//		pgRepo.deleteAll();
+	@AfterEach
+	public void clearDatabase() {
+		ogRepo.deleteAll();
+		pgRepo.deleteAll();
+		adminRepo.deleteAll();
+	}
+
+//	@Test
+//	public void testOnlineGalleryPhysicalGalleryGalleryRegistration() {
+//		OnlineGallery og = new OnlineGallery();
+//		og.setDaysUp(12);
+//		
+//		PhysicalGallery pg = new PhysicalGallery();
+//		pg.setAddress("100 arts drive");
+//		
+//		og.setPhysicalGallery(pg);
+//		
+//		GalleryRegistration reg = new GalleryRegistration();
+//		reg.setUserName("lisa");
+//		
+//		GalleryRegistration reg2 = new GalleryRegistration();
+//		reg2.setUserName("baby");
+//		
+//		
+//		og.getAllRegistrations().add(reg);
+//		og.getAllRegistrations().add(reg2);
+//		
+//		pgRepo.save(pg);
+//		onlineRepo.save(og);	
 //	}
-
-//
+	
 	@Test
-	public void testBasics() {
-		OnlineGallery og = new OnlineGallery();
-		og.setDaysUp(12);
+	public void testPhysicalGallery() {
+		String address="100 arts road";
+		int daysUp=12;
 		
 		PhysicalGallery pg = new PhysicalGallery();
-		pg.setAddress("100 arts drive");
+		pg.setAddress(address);
+		
+		OnlineGallery og = new OnlineGallery();
+		og.setDaysUp(daysUp);
 		
 		og.setPhysicalGallery(pg);
+		pg.setOnlineGallery(og);
 		
-		GalleryRegistration reg = new GalleryRegistration();
-		reg.setUserName("homer");
-		
-		GalleryRegistration reg2 = new GalleryRegistration();
-		reg2.setUserName("bart");
-		
-		
-		og.getAllRegistrations().add(reg);
-		og.getAllRegistrations().add(reg2);
-		
-//		regRepo.save(reg);
 		pgRepo.save(pg);
-		onlineRepo.save(og);		
-
 		
+		Long pgId = pg.getGalleryId();
+		Long ogId=og.getSystemId();
 		
+		pg=null;
+		og=null;
+		
+		pg=pgRepo.findPhysicalGalleryByGalleryId(pgId);
+		og=ogRepo.findOnlineGalleryBySystemId(ogId);
+		
+		assertEquals(pg.getAddress(),address);
+		assertEquals(pg.getGalleryId(),pgId);
+		
+		assertEquals(pg.getOnlineGallery().getDaysUp(),daysUp);
+		assertEquals(pg.getOnlineGallery().getSystemId(),ogId);
+		
+		assertEquals(og.getSystemId(),ogId);
+		assertEquals(og.getDaysUp(),daysUp);
+		
+		assertEquals(og.getPhysicalGallery().getAddress(),address);
+		assertEquals(og.getPhysicalGallery().getGalleryId(),pgId);
 	}
+	
+//	@Test
+//	public void testRegistrationAdmin() {
+//		GalleryRegistration reg = new GalleryRegistration();
+//		reg.setUserName("homer");
+//		
+//		GalleryAdmin admin = new GalleryAdmin();
+//		reg.setAdmin(admin);
+//		admin.setGalleryRegistration(reg);
+//		
+//		adminRepo.save(admin);
+//		
+//		Long adminId=admin.getAdminId();
+//		
+//		admin=null;
+//		
+//		admin=adminRepo.findGalleryAdminByAdminId(adminId);
+//		
+//		System.out.println(admin.getGalleryRegistration().getUserName());
+//	}
 }
