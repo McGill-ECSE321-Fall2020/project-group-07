@@ -98,7 +98,7 @@ public class GalleryRegistrationRestController {
 	
 	@DeleteMapping(value = { "/deleteRegistration/{username}", "/deleteRegistration/{username}/" })
 	public GalleryRegistrationDto deleteGalleryRegistration(@PathVariable("username") String username) throws IllegalArgumentException {
-		GalleryRegistration reg=service.deleteGalleryRegistrataionByUserName(username);
+		GalleryRegistration reg=service.deleteGalleryRegistrationByUserName(username);
 		GalleryRegistrationDto dto;
 		
 		try {

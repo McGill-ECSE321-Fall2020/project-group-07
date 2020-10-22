@@ -24,8 +24,21 @@ public class PurchaseRestController {
 	PurchaseService service;
 
 	
-//	@PutMapping(value={"/updateRegistration","/updateRegistration/"})
-//	public GalleryRegistrationDto updateRegistration(@RequestBody RegistrationUpdateForm form) throws IllegalArgumentException {
+	@GetMapping(value = { "/getPurchase","/getPurchase/"})
+	public PurchaseDto getPurchaseByUserNameAndArtId(@RequestBody PurchaseForm form) throws IllegalArgumentException {
+		Purchase purchase=service.getPurchaseByArtwork(form);
+		PurchaseDto dto;
+		
+		try {
+			dto=convertToDto(purchase);
+		}
+		catch(IllegalArgumentException e){
+			dto=null;
+		}
+		
+		return dto;
+	}
+
 
 	@PostMapping(value = { "/createPurchase","/createPurchase/"})
 	public PurchaseDto createPurchase(@RequestBody PurchaseForm form) throws IllegalArgumentException {

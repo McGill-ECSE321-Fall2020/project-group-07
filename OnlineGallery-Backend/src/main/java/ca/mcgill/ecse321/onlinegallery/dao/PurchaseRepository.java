@@ -5,6 +5,6 @@ import ca.mcgill.ecse321.onlinegallery.model.*;
 public interface PurchaseRepository extends CrudRepository<Purchase, Long> {
 	
 	Purchase findPurchaseByPurchaseId(Long purchaseId);
-	Purchase findByCustomerAndArtwork(Customer customer, Artwork artwork);
+	Purchase findByArtwork(Artwork artwork);
 
 }

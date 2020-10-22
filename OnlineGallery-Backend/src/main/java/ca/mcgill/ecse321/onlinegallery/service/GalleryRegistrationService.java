@@ -49,7 +49,7 @@ public class GalleryRegistrationService {
 	}
 
 	@Transactional
-	public GalleryRegistration deleteGalleryRegistrataionByUserName(String username) {
+	public GalleryRegistration deleteGalleryRegistrationByUserName(String username) {
 		if (!precondition(username)) {return null;}
 
 		OnlineGallery og = ogRepo.findAll().iterator().next();

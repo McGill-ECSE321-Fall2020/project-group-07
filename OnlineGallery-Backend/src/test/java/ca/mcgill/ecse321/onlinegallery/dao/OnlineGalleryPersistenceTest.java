@@ -314,6 +314,7 @@ public class OnlineGalleryPersistenceTest {
 		Artwork art = new Artwork();
 		
 		artist.getArtwork().add(art);
+		art.setArtist(artist);
 		
 		artistRepo.save(artist);
 		Long artistId=artist.getArtistId();
@@ -323,6 +324,7 @@ public class OnlineGalleryPersistenceTest {
 		artist=null;
 		reg=null;
 		p=null;
+		art=null;
 		artist=artistRepo.findArtistByArtistId(artistId);
 		
 		//checking artist attributes
@@ -338,6 +340,12 @@ public class OnlineGalleryPersistenceTest {
 		//checking associations to artist
 		reg=regRepo.findGalleryRegisrationByUserName(username);			//bidrectional persistence cascaded back to registration
 		artist=reg.getArtist();
+		assertNotNull(artist);
+		assertEquals(artist.getArtistId(),artistId);
+		assertEquals(artist.getBankInfo(),bankInfo);
+		
+		art=artRepo.findArtworkByArtworkId(artId);
+		artist=art.getArtist();
 		assertNotNull(artist);
 		assertEquals(artist.getArtistId(),artistId);
 		assertEquals(artist.getBankInfo(),bankInfo);
@@ -410,7 +418,10 @@ public class OnlineGalleryPersistenceTest {
 		artist.setGalleryRegistration(reg);
 		
 		Artwork art = new Artwork();
+		
 		artist.getArtwork().add(art);
+		art.setArtist(artist);
+		
 		
 		art.getViewers().add(customer);
 		customer.getBrowsedArtwork().add(art);
@@ -466,6 +477,9 @@ public class OnlineGalleryPersistenceTest {
 		//checking associations from art
 		customer=art.getViewers().iterator().next();
 		assertEquals(customer.getCustomerId(),customerId);
+		
+		artist=art.getArtist();
+		assertEquals(artist.getArtistId(),artistId);
 		
 		purchase=art.getPurchase();
 		assertEquals(purchase.getPurchaseId(),purchaseId);
@@ -527,6 +541,8 @@ public class OnlineGalleryPersistenceTest {
 		Shipment shipment = new Shipment();
 		
 		customer.getPurchase().add(purchase);
+		purchase.setCustomer(customer);
+		
 		customer.getShipment().add(shipment);
 		
 		customer.getBrowsedArtwork().add(art);
@@ -606,7 +622,7 @@ public class OnlineGalleryPersistenceTest {
 		customer.getPurchase().add(purchase);
 		customer.getShipment().add(shipment);
 		
-
+		purchase.setCustomer(customer);
 		purchase.setArtwork(art);
 		art.setPurchase(purchase);
 		
@@ -638,6 +654,7 @@ public class OnlineGalleryPersistenceTest {
 		//checking associations from purchase
 		assertEquals(purchase.getShipment().getShipmentId(),shipId);
 		assertEquals(purchase.getArtwork().getArtworkId(),artId);
+		assertEquals(purchase.getCustomer().getCustomerId(),customerId);
 		
 		//checking associations to purchase
 		shipment=shipRepo.findShipmentByShipmentId(shipId);
@@ -700,7 +717,7 @@ public class OnlineGalleryPersistenceTest {
 		customer.getPurchase().add(purchase);
 		customer.getShipment().add(shipment);
 
-
+		purchase.setCustomer(customer);
 		purchase.setShipment(shipment);
 		shipment.getPurchase().add(purchase);
 

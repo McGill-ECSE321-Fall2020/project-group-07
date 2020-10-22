@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -148,6 +149,18 @@ public class Artwork {
 
 	public Purchase getPurchase() {
 		return this.purchase;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "artist_id")
+	private Artist artist;
+
+	public Artist getArtist() {
+		return this.artist;
+	}
+
+	public void setArtist(Artist artist) {
+		this.artist = artist;
 	}
 
 }
