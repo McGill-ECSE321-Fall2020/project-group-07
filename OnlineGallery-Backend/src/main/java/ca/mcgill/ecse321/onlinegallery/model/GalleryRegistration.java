@@ -72,7 +72,7 @@ public class GalleryRegistration {
 		return this.phoneNumber;
 	}
 
-	private String passWord;
+	private String passWord="changeThisDefaultPassword";
 
 	public void setPassWord(String value) {
 		this.passWord = value;
@@ -82,7 +82,7 @@ public class GalleryRegistration {
 		return this.passWord;
 	}
 
-	private Boolean isLoggedIn;
+	private Boolean isLoggedIn=false;
 
 	public void setIsLoggedIn(Boolean value) {
 		this.isLoggedIn = value;

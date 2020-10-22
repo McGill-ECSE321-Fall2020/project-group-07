@@ -65,4 +65,5 @@ public class PhysicalGalleryRestController {
 		PhysicalGalleryDto pgDto=new PhysicalGalleryDto(pg.getAddress());
 		return pgDto;
 	}
+	
 }
