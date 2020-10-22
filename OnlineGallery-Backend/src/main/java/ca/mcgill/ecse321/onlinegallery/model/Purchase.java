@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.model;
 
 import java.sql.Date;
+import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -34,7 +35,7 @@ public class Purchase {
 		return this.purchaseId;
 	}
 
-	private double commission;
+	private double commission=0.15;
 
 	public void setCommission(double value) {
 		this.commission = value;
@@ -44,7 +45,7 @@ public class Purchase {
 		return this.commission;
 	}
 
-	private ShipmentType shipmentType;
+	private ShipmentType shipmentType=ShipmentType.OFFSITE_DELIVERY;
 
 	public void setShipmentType(ShipmentType value) {
 		this.shipmentType = value;
@@ -54,7 +55,7 @@ public class Purchase {
 		return this.shipmentType;
 	}
 
-	private PaymentMethod paymentMethod;
+	private PaymentMethod paymentMethod=PaymentMethod.NONE;
 
 	public void setPaymentMethod(PaymentMethod value) {
 		this.paymentMethod = value;
@@ -64,7 +65,7 @@ public class Purchase {
 		return this.paymentMethod;
 	}
 
-	private boolean paid;
+	private boolean paid=false;
 
 	public void setPaid(boolean value) {
 		this.paid = value;
@@ -74,7 +75,7 @@ public class Purchase {
 		return this.paid;
 	}
 
-	private Date date;
+	private Date date = Date.valueOf(LocalDate.now());
 
 	public void setDate(Date value) {
 		this.date = value;

@@ -67,7 +67,7 @@ public class Artwork {
 		return this.price;
 	}
 
-	private ArtworkStatus status;
+	private ArtworkStatus status=ArtworkStatus.AVAILABLE;
 
 	public void setStatus(ArtworkStatus value) {
 		this.status = value;
@@ -77,7 +77,7 @@ public class Artwork {
 		return this.status;
 	}
 
-	private boolean onSite;
+	private boolean onSite=false;
 
 	public void setOnSite(boolean value) {
 		this.onSite = value;
@@ -87,7 +87,7 @@ public class Artwork {
 		return this.onSite;
 	}
 
-	private int numViews;
+	private int numViews=0;
 
 	public void setNumViews(int value) {
 		this.numViews = value;
