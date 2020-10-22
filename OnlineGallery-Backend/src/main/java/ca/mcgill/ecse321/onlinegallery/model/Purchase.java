@@ -85,7 +85,7 @@ public class Purchase {
 		return this.date;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "purchase")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
 	private Artwork artwork;
 
 	public void setArtwork(Artwork value) {

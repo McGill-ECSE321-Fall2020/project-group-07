@@ -26,7 +26,7 @@ public class PurchaseRestController {
 	
 	@GetMapping(value = { "/getPurchase","/getPurchase/"})
 	public PurchaseDto getPurchaseByUserNameAndArtId(@RequestBody PurchaseForm form) throws IllegalArgumentException {
-		Purchase purchase=service.getPurchaseByArtwork(form);
+		Purchase purchase=service.getPurchaseByRegistrationAndArtwork(form);
 		PurchaseDto dto;
 		
 		try {

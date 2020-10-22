@@ -57,8 +57,8 @@ public class ArtworkService {
 		art.setShippingCost(form.getShippingcost());
 		
 		artist.getArtwork().add(art);
+		art.setArtist(artist);
 		
-//		regRepo.save(reg);
 		artRepo.save(art);
 		
 		return art;

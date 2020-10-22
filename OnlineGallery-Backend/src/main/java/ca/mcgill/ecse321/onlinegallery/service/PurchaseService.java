@@ -50,6 +50,7 @@ public class PurchaseService {
 		art.setPurchase(purchase);
 				
 		customer.getPurchase().add(purchase);
+		purchase.setCustomer(customer);
 		
 		custRepo.save(customer);
 		
@@ -57,10 +58,13 @@ public class PurchaseService {
 	}
 	
 	@Transactional
-	public Purchase getPurchaseByArtwork(PurchaseForm form) {
+	public Purchase getPurchaseByRegistrationAndArtwork(PurchaseForm form) {
 		
 		String username=form.getUserName();
 		Long artworkId=form.getArtworkId();
+		
+		System.out.println(username);
+		System.out.println(artworkId);
 		
 		if (!regRepo.existsByUserName(username)) {return null;}
 		if (!artworkRepo.existsByArtworkId(artworkId)) {return null;}
@@ -70,10 +74,14 @@ public class PurchaseService {
 		Customer customer = reg.getCustomer();
 		Artwork artwork = artworkRepo.findArtworkByArtworkId(artworkId);
 		
-		if (customer==null || customer==null) {return null;};
+		if (customer==null || artwork==null) {return null;};
 		
-		Purchase purchase = purchaseRepo.findByArtwork(artwork);
+		System.out.println(customer==null);
+		System.out.println(artwork==null);
 		
+		Purchase purchase = purchaseRepo.findByCustomerAndArtwork(customer,artwork);
+		
+		System.out.println(purchase==null);
 		return purchase;
 	}
 
