@@ -36,7 +36,7 @@ public class GalleryRegistrationRestController {
 	}
 	
 	@PutMapping(value={"/updateRegistration","/updateRegistration/"})
-	public GalleryRegistrationDto updateRegistration(@RequestBody RegistrationUpdateForm form) {
+	public GalleryRegistrationDto updateRegistration(@RequestBody RegistrationUpdateForm form) throws IllegalArgumentException {
 		GalleryRegistration reg=service.updateRegistrationInfo(form);
 		GalleryRegistrationDto dto;
 		
@@ -49,6 +49,37 @@ public class GalleryRegistrationRestController {
 		
 		return dto;
 	}
+	
+	@PutMapping(value={"/toggleLoggedIn/{username}","/toggleLoggedIn/{username}/"})
+	public GalleryRegistrationDto toggleLoggedIn(@PathVariable("username") String username) throws IllegalArgumentException {
+		GalleryRegistration reg=service.toggleLoggedInStatus(username);
+		GalleryRegistrationDto dto;
+		
+		try {
+			dto=convertToDto(reg);
+		}
+		catch(IllegalArgumentException e){
+			dto=null;
+		}
+		
+		return dto;
+	}
+	
+	@PutMapping(value={"/changePassword","/changePassword/"})
+	public GalleryRegistrationDto changePassowrd(@RequestBody PasswordUpdateForm form) throws IllegalArgumentException {
+		GalleryRegistration reg=service.changePassword(form);
+		GalleryRegistrationDto dto;
+		
+		try {
+			dto=convertToDto(reg);
+		}
+		catch(IllegalArgumentException e){
+			dto=null;
+		}
+		
+		return dto;
+	}
+	
 
 	@PostMapping(value = { "/createRegistration/{username}", "/createRegistration/{username}/" })
 	public GalleryRegistrationDto createGalleryRegistration(@PathVariable("username") String username) throws IllegalArgumentException {
