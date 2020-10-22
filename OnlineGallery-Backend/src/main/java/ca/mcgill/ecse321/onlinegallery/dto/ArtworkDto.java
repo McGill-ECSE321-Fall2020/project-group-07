@@ -16,7 +16,7 @@ public class ArtworkDto {
 	private int numViews;
 	private String dimension;
 	private double weight;
-	private double shippingCost;
+	private double shippingcost;
 
 	public ArtworkDto(String name,
 					  String description,
@@ -26,7 +26,7 @@ public class ArtworkDto {
 					  int numViews,
 					  String dimension,
 					  double weight,
-					  double shippingCost) {
+					  double shippingcost) {
 		
 		this.name=name;
 		this.description=description;
@@ -36,7 +36,7 @@ public class ArtworkDto {
 		this.numViews=numViews;
 		this.dimension=dimension;
 		this.weight=weight;
-		this.shippingCost=shippingCost;
+		this.shippingcost=shippingcost;
 
 	}
 
@@ -73,7 +73,7 @@ public class ArtworkDto {
 	}
 	
 	public double getShippingcost() {
-		return this.shippingCost;
+		return this.shippingcost;
 	}
 
 }

@@ -58,13 +58,11 @@ public class PurchaseService {
 	}
 	
 	@Transactional
-	public Purchase getPurchaseByRegistrationAndArtwork(PurchaseForm form) {
+	public Purchase getPurchaseByUserNameAndArtId(PurchaseForm form) {
 		
 		String username=form.getUserName();
 		Long artworkId=form.getArtworkId();
 		
-		System.out.println(username);
-		System.out.println(artworkId);
 		
 		if (!regRepo.existsByUserName(username)) {return null;}
 		if (!artworkRepo.existsByArtworkId(artworkId)) {return null;}
@@ -76,13 +74,65 @@ public class PurchaseService {
 		
 		if (customer==null || artwork==null) {return null;};
 		
-		System.out.println(customer==null);
-		System.out.println(artwork==null);
+		Purchase purchase = purchaseRepo.findByCustomerAndArtwork(customer,artwork);
+		return purchase;
+	}
+	
+	@Transactional
+	public Purchase updatePurchase(PurchaseUpdateForm form) {
+		
+		String username=form.getUserName();
+		Long artworkId=form.getArtworkId();
+		
+		
+		if (!regRepo.existsByUserName(username)) {return null;}
+		if (!artworkRepo.existsByArtworkId(artworkId)) {return null;}
+		
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		
+		Customer customer = reg.getCustomer();
+		Artwork artwork = artworkRepo.findArtworkByArtworkId(artworkId);
+		
+		if (customer==null || artwork==null) {return null;};
 		
 		Purchase purchase = purchaseRepo.findByCustomerAndArtwork(customer,artwork);
 		
-		System.out.println(purchase==null);
+		purchase.setCommission(form.getCommission());
+		purchase.setShipmentType(form.getShipmentType());
+		purchase.setPaymentMethod(form.getPaymentMethod());
+		purchase.setPaid(form.isPaid());
+		
 		return purchase;
+	}
+	
+	@Transactional
+	public Purchase deletePurchaseByUserNameAndArtId(PurchaseForm form) {
+		
+		String username=form.getUserName();
+		Long artworkId=form.getArtworkId();
+		
+		
+		if (!regRepo.existsByUserName(username)) {return null;}
+		if (!artworkRepo.existsByArtworkId(artworkId)) {return null;}
+		
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		
+		Customer customer = reg.getCustomer();
+		Artwork artwork = artworkRepo.findArtworkByArtworkId(artworkId);
+		
+		if (customer==null || artwork==null) {return null;};
+		
+		Purchase purchase = purchaseRepo.findByCustomerAndArtwork(customer,artwork);
+		
+		if (!(purchase==null)) {
+			customer.getPurchase().remove(purchase);
+			artwork.setPurchase(null);
+			
+			purchaseRepo.delete(purchase);
+		}
+		
+		return purchase;
+		
 	}
 
 }
