@@ -24,7 +24,7 @@ public class Artist {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name = "id")
+	@Column(name = "artist_id")
 	private Long artistId;
 
 	public void setArtistId(Long value) {
@@ -67,8 +67,7 @@ public class Artist {
 		return this.profile;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "artist_id")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "artist")
 	private Set<Artwork> artwork;
 
 	public Set<Artwork> getArtwork() {

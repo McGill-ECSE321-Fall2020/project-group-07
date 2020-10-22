@@ -107,5 +107,17 @@ public class Purchase {
 	public Shipment getShipment() {
 		return this.shipment;
 	}
+	
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "customer_id")
+	private Customer customer;
+
+	public Customer getCustomer() {
+		return this.customer;
+	}
+	
+	public void setCustomer(Customer customer) {
+		this.customer=customer;
+	}
 
 }

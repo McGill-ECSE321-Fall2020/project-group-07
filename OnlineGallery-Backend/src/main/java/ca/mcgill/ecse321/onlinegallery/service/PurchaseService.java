@@ -57,7 +57,11 @@ public class PurchaseService {
 	}
 	
 	@Transactional
-	public Purchase getPurchaseByUserNameAndArtworkId(String username, Long artworkId) {
+	public Purchase getPurchaseByArtwork(PurchaseForm form) {
+		
+		String username=form.getUserName();
+		Long artworkId=form.getArtworkId();
+		
 		if (!regRepo.existsByUserName(username)) {return null;}
 		if (!artworkRepo.existsByArtworkId(artworkId)) {return null;}
 		
@@ -68,7 +72,7 @@ public class PurchaseService {
 		
 		if (customer==null || customer==null) {return null;};
 		
-		Purchase purchase = purchaseRepo.findByCustomerAndArtwork(customer, artwork);
+		Purchase purchase = purchaseRepo.findByArtwork(artwork);
 		
 		return purchase;
 	}
