@@ -6,4 +6,5 @@ public interface ArtistRepository extends CrudRepository<Artist, Long> {
 	
 	// find object by ID
 	Artist findArtistByArtistId(Long artistId);
+	boolean existsByArtistId(Long artistId);
 }
