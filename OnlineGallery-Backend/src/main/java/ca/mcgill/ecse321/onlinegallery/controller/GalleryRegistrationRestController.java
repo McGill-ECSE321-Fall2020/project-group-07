@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.onlinegallery.dto.*;
@@ -31,6 +32,21 @@ public class GalleryRegistrationRestController {
 		catch(IllegalArgumentException e){
 			dto=null;
 		}
+		return dto;
+	}
+	
+	@PutMapping(value={"/updateRegistration","/updateRegistration/"})
+	public GalleryRegistrationDto updateRegistration(@RequestBody RegistrationUpdateForm form) {
+		GalleryRegistration reg=service.updateRegistrationInfo(form);
+		GalleryRegistrationDto dto;
+		
+		try {
+			dto=convertToDto(reg);
+		}
+		catch(IllegalArgumentException e){
+			dto=null;
+		}
+		
 		return dto;
 	}
 
@@ -81,5 +97,4 @@ public class GalleryRegistrationRestController {
 				reg.getLastName(), reg.getEmail(), reg.getPhoneNumber(), reg.getPassWord(), loginStatus);
 		return regDto;
 	}
-
 }

@@ -71,5 +71,31 @@ public class GalleryRegistrationService {
 		return reg;
 		
 	}
+	
+	@Transactional
+	public GalleryRegistration updateRegistrationInfo(RegistrationUpdateForm form) {
+		
+		String username=form.getUserName();
+		
+		if (!regRepo.existsByUserName(username)){
+			return null;
+		}
+		
+		if (ogRepo.count()==0) {
+			return null;
+		}
+		
+		OnlineGallery og=ogRepo.findAll().iterator().next();
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		
+		reg.setFirstName(form.getFirstName());
+		reg.setLastName(form.getLastName());
+		reg.setEmail(form.getEmail());
+		reg.setPhoneNumber(form.getPhoneNumber());
+				
+		regRepo.save(reg);
+		
+		return reg;
+	}
 
 }
