@@ -36,19 +36,39 @@ public class PurchaseService {
 		if (!artworkRepo.existsByArtworkId(artworkId)) {return null;}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		Artwork art = artworkRepo.findArtworkByArtworkId(artworkId);
 		
 		if (reg.getCustomer()==null) {
 			reg.setCustomer(new Customer());
-			
 		}
 		
 		Customer customer=reg.getCustomer();
 		
 		Purchase purchase=new Purchase();
+		
+		purchase.setArtwork(art);
+		art.setPurchase(purchase);
 				
 		customer.getPurchase().add(purchase);
 		
-		purchaseRepo.save(purchase);
+		custRepo.save(customer);
+		
+		return purchase;
+	}
+	
+	@Transactional
+	public Purchase getPurchaseByUserNameAndArtworkId(String username, Long artworkId) {
+		if (!regRepo.existsByUserName(username)) {return null;}
+		if (!artworkRepo.existsByArtworkId(artworkId)) {return null;}
+		
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		
+		Customer customer = reg.getCustomer();
+		Artwork artwork = artworkRepo.findArtworkByArtworkId(artworkId);
+		
+		if (customer==null || customer==null) {return null;};
+		
+		Purchase purchase = purchaseRepo.findByCustomerAndArtwork(customer, artwork);
 		
 		return purchase;
 	}
