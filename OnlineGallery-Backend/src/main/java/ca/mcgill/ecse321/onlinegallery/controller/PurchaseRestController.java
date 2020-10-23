@@ -26,16 +26,8 @@ public class PurchaseRestController {
 	
 	@GetMapping(value = { "/getPurchase","/getPurchase/"})
 	public PurchaseDto getPurchaseByUserNameAndArtId(@RequestBody PurchaseForm form) throws IllegalArgumentException {
-		Purchase purchase=service.getPurchaseByArtwork(form);
-		PurchaseDto dto;
-		
-		try {
-			dto=convertToDto(purchase);
-		}
-		catch(IllegalArgumentException e){
-			dto=null;
-		}
-		
+		Purchase purchase=service.getPurchaseByUserNameAndArtId(form);
+		PurchaseDto dto=this.postcondition(purchase);
 		return dto;
 	}
 
@@ -44,17 +36,24 @@ public class PurchaseRestController {
 	public PurchaseDto createPurchase(@RequestBody PurchaseForm form) throws IllegalArgumentException {
 		
 		Purchase purchase=service.createPurchase(form);
-		PurchaseDto dto;
-		
-		try {
-			dto=convertToDto(purchase);
-		}
-		catch(IllegalArgumentException e){
-			dto=null;
-		}
-		
+		PurchaseDto dto=this.postcondition(purchase);
 		return dto;
+	}
+	
+	@DeleteMapping(value = { "/deletePurchase","/deletePurchase/"})
+	public PurchaseDto deletePurchase(@RequestBody PurchaseForm form) throws IllegalArgumentException {
 		
+		Purchase purchase=service.deletePurchaseByUserNameAndArtId(form);
+		PurchaseDto dto=this.postcondition(purchase);
+		return dto;
+	}
+	
+	@PutMapping(value = { "/updatePurchase","/updatePurchase/"})
+	public PurchaseDto updatePurchase(@RequestBody PurchaseUpdateForm form) throws IllegalArgumentException {
+		
+		Purchase purchase=service.updatePurchase(form);
+		PurchaseDto dto=this.postcondition(purchase);
+		return dto;
 	}
 	
 
@@ -69,6 +68,19 @@ public class PurchaseRestController {
 										  purchase.isPaid(),
 										  purchase.getDate());
 				
+		return dto;
+	}
+	
+	private PurchaseDto postcondition(Purchase purchase) {
+		PurchaseDto dto;
+		
+		try {
+			dto=convertToDto(purchase);
+		}
+		catch(IllegalArgumentException e){
+			dto=null;
+		}
+		
 		return dto;
 	}
 }

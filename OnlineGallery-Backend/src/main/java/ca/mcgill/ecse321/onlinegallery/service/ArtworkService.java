@@ -32,9 +32,9 @@ public class ArtworkService {
 	public Artwork createArtworkInstance(ArtworkForm form) {
 		
 		String username=form.getUserName();
-		
+		System.out.println(form);
+
 		if (!regRepo.existsByUserName(username)) {
-			System.out.println("heyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
 			return null;
 			}
 		
@@ -56,9 +56,10 @@ public class ArtworkService {
 		art.setWeight(form.getWeight());
 		art.setShippingCost(form.getShippingcost());
 		
-		artist.getArtwork().add(art);
 		
-//		regRepo.save(reg);
+		artist.getArtwork().add(art);
+		art.setArtist(artist);
+		
 		artRepo.save(art);
 		
 		return art;

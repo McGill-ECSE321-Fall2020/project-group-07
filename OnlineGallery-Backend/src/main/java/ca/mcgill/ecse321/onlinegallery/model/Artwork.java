@@ -140,7 +140,7 @@ public class Artwork {
 		return this.viewers;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "artwork")
 	private Purchase purchase;
 
 	public void setPurchase(Purchase value) {

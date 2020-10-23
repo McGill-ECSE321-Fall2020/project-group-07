@@ -12,7 +12,7 @@ public class ArtworkForm {
 	private int numViews;
 	private String dimension;
 	private double weight;
-	private double shippingCost;
+	private double shippingcost;
 	
 	public String getUserName() {
 		return this.userName;
@@ -51,7 +51,15 @@ public class ArtworkForm {
 	}
 	
 	public double getShippingcost() {
-		return this.shippingCost;
+		return this.shippingcost;
+	}
+	
+	@Override
+	public String toString() {
+		String s = this.getUserName() + "\n" + this.getName() + "\n" + this.getDescription() + "\n" + this.getPrice()
+				+ "\n" + this.getStatus() + "\n" + this.isOnSite() + "\n" + this.getNumViews() + "\n"
+				+ this.getDimension() + "\n" + this.getWeight() + "\n" + this.getShippingcost();
+		return s;
 	}
 
 }
