@@ -33,6 +33,11 @@ public class OnlineGalleryService {
 	@Transactional
 	public OnlineGallery findOnlineGalleryBySystemId(Long systemId) {
 		
+		if(!exist(systemId)) {
+			
+			return null;
+		}
+		
 		return ogRepo.findOnlineGalleryBySystemId(systemId);
 	}
 	

@@ -31,17 +31,88 @@ public class ArtistService {
 		}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		
 		if (reg.getArtist()==null) {
 			
-			reg.setArtist(new Artist());;
+			reg.setArtist(new Artist());
 		}
 		
-		Artist artist = regRepo.findGalleryRegisrationByUserName(username).getArtist();
+		Artist artist = reg.getArtist();
 		
 		artist.setBankInfo(form.getBankInfo());
-		
+
 		artistRepo.save(artist);
 		
 		return artist;
 	}
+	
+	@Transactional
+	public Artist findArtistByUsername(ArtistForm form) {
+		
+		String username = form.getUserName();
+		
+		if (!regRepo.existsByUserName(username)) {
+			
+			return null;
+		}
+		
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		
+		if (reg.getArtist()==null) {
+			
+			return null;
+		}
+				
+		return reg.getArtist();
+	}
+	
+	@Transactional
+	public Artist updateBankInfo(ArtistForm form) {
+		
+		String username = form.getUserName();
+
+		if (!regRepo.existsByUserName(username)) {
+			
+			return null;
+		}
+		
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		Artist artist = reg.getArtist();
+		
+		if(artist == null) {
+			
+			return null;
+		}
+		
+		artist.setBankInfo(form.getBankInfo());
+
+		artistRepo.save(artist);
+		
+		return artist;
+	}
+	
+	@Transactional
+	public Artist deleteArtistByUserName(ArtistForm form) {
+		
+		String username = form.getUserName();
+
+		if (!regRepo.existsByUserName(username)) {
+			
+			return null;
+		}
+		
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		Artist artist = reg.getArtist();
+		
+		if(artist == null) {
+			
+			return null;
+		}
+		
+		reg.setArtist(null);
+		artistRepo.delete(artist);
+		
+		return artist;
+	}
+	
 }
