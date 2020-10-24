@@ -12,6 +12,7 @@ import ca.mcgill.ecse321.onlinegallery.dao.OnlineGalleryRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.PhysicalGalleryRepository;
 import ca.mcgill.ecse321.onlinegallery.model.OnlineGallery;
 import ca.mcgill.ecse321.onlinegallery.model.PhysicalGallery;
+import ca.mcgill.ecse321.onlinegallery.service.exception.PhysicalGalleryException;;
 
 @Service
 public class PhysicalGalleryService {
@@ -23,10 +24,10 @@ public class PhysicalGalleryService {
 	PhysicalGalleryRepository physicalRepo;
 
 	@Transactional
-	public PhysicalGallery createPhysicalGallery(String address) {
+	public PhysicalGallery createPhysicalGallery(String address) throws PhysicalGalleryException{
 		
 		if (physicalRepo.findAll().iterator().hasNext()) {
-			return physicalRepo.findAll().iterator().next();
+			throw new PhysicalGalleryException("a physical gallery already exists in system");
 		}
 		
 		OnlineGallery og;
@@ -48,10 +49,10 @@ public class PhysicalGalleryService {
 	}
 
 	@Transactional
-	public PhysicalGallery updateAddress(String newAddress) {
+	public PhysicalGallery updateAddress(String newAddress) throws PhysicalGalleryException{
 		
 		if (!physicalRepo.findAll().iterator().hasNext()) {
-			return null;
+			throw new PhysicalGalleryException("no physical gallery exists in system");
 		}
 		
 		OnlineGallery og;
@@ -66,16 +67,22 @@ public class PhysicalGalleryService {
 	}
 
 	@Transactional
-	public PhysicalGallery getPhysicalGallery() {
+	public PhysicalGallery getPhysicalGallery() throws PhysicalGalleryException{
+		
 		if (physicalRepo.findAll().iterator().hasNext()) {
 			return physicalRepo.findAll().iterator().next();
 		} else {
-			return null;
+			throw new PhysicalGalleryException("no physical gallery exists in system");
 		}
 	}
 	
 	@Transactional
-	public PhysicalGallery deletePhysicalGallery() {
+	public PhysicalGallery deletePhysicalGallery() throws PhysicalGalleryException{
+		
+		if (physicalRepo.count()==0) {
+			throw new PhysicalGalleryException("no physical gallery exists in system");
+		}
+		
 		OnlineGallery og;
 		
 		if (onlineRepo.findAll().iterator().hasNext()) {
