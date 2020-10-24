@@ -32,7 +32,6 @@ public class ArtworkService {
 	public Artwork createArtworkInstance(ArtworkForm form) {
 		
 		String username=form.getUserName();
-		System.out.println(form);
 
 		if (!regRepo.existsByUserName(username)) {
 			return null;

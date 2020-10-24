@@ -100,16 +100,8 @@ public class GalleryRegistrationRestController {
 
 	private GalleryRegistrationDto convertToDto(GalleryRegistration reg) {
 
-		boolean loginStatus;
 
-		if (reg.getIsLoggedIn() == null) {
-			loginStatus = false;
-		} else {
-			loginStatus = reg.getIsLoggedIn();
-		}
-
-		GalleryRegistrationDto regDto = new GalleryRegistrationDto(reg.getUserName(), reg.getFirstName(),
-				reg.getLastName(), reg.getEmail(), reg.getPhoneNumber(), reg.getPassWord(), loginStatus);
+		GalleryRegistrationDto regDto = new GalleryRegistrationDto(reg);
 		return regDto;
 	}
 }
