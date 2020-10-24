@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.onlinegallery.service;
 
 import javax.transaction.Transactional;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,7 +12,6 @@ import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.ArtistForm;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtistException;
-import ca.mcgill.ecse321.onlinegallery.service.exception.GalleryRegistrationException;
 
 @Service
 public class ArtistService {
@@ -49,33 +49,33 @@ public class ArtistService {
 	}
 	
 	@Transactional
-	public Artist findArtistByUsername(ArtistForm form) {
+	public Artist findArtistByUsername(ArtistForm form) throws ArtistException {
 		
 		String username = form.getUserName();
 		
 		if (!regRepo.existsByUserName(username)) {
 			
-			return null;
+			throw new ArtistException("No registration exists under the username ["+username+"]");
 		}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
 		
 		if (reg.getArtist()==null) {
 			
-			return null;
+			throw new ArtistException("No artist exists under the username ["+username+"]");
 		}
 				
 		return reg.getArtist();
 	}
 	
 	@Transactional
-	public Artist updateBankInfo(ArtistForm form) {
+	public Artist updateBankInfo(ArtistForm form) throws ArtistException {
 		
 		String username = form.getUserName();
 
 		if (!regRepo.existsByUserName(username)) {
 			
-			return null;
+			throw new ArtistException("No registration exists under the username ["+username+"]");
 		}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
@@ -83,7 +83,7 @@ public class ArtistService {
 		
 		if(artist == null) {
 			
-			return null;
+			throw new ArtistException("No artist exists under the username ["+username+"]");
 		}
 		
 		artist.setBankInfo(form.getBankInfo());
@@ -94,13 +94,13 @@ public class ArtistService {
 	}
 	
 	@Transactional
-	public Artist deleteArtistByUserName(ArtistForm form) {
+	public Artist deleteArtistByUserName(ArtistForm form) throws ArtistException {
 		
 		String username = form.getUserName();
 
 		if (!regRepo.existsByUserName(username)) {
 			
-			return null;
+			throw new ArtistException("No registration exists under the username ["+username+"]");
 		}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
@@ -108,7 +108,7 @@ public class ArtistService {
 		
 		if(artist == null) {
 			
-			return null;
+			throw new ArtistException("No artist exists under the username ["+username+"]");
 		}
 		
 		reg.setArtist(null);

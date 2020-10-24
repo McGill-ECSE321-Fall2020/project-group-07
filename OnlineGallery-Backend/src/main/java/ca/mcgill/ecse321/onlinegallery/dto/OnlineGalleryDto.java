@@ -1,19 +1,18 @@
 package ca.mcgill.ecse321.onlinegallery.dto;
 
+import ca.mcgill.ecse321.onlinegallery.model.OnlineGallery;
+
 public class OnlineGalleryDto {
 	
-	private int daysUp;
+	private OnlineGallery onlineGallery;
 	
-	public OnlineGalleryDto() {
+	public OnlineGalleryDto(OnlineGallery og) {
 		
-	}
-	public OnlineGalleryDto(int daysUp) {
-		
-		this.daysUp=daysUp;
+		this.onlineGallery = og;
 	}
 	
 	public int getDaysUp() {
 		
-		return this.daysUp;
+		return this.onlineGallery.getDaysUp();
 	}
 }

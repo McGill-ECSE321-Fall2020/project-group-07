@@ -1,13 +1,13 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.onlinegallery.dao.OnlineGalleryRepository;
 import ca.mcgill.ecse321.onlinegallery.model.OnlineGallery;
 import ca.mcgill.ecse321.onlinegallery.service.exception.OnlineGalleryException;
-import ca.mcgill.ecse321.onlinegallery.service.exception.PhysicalGalleryException;
 
 @Service
 public class OnlineGalleryService {
@@ -20,7 +20,7 @@ public class OnlineGalleryService {
 		
 		if(ogRepo.existsById(systemId)) {
 			
-			throw new OnlineGalleryException("an online gallery of ID ["+systemId+"] already exists in system");
+			throw new OnlineGalleryException("An online gallery of ID ["+systemId+"] already exists in system.");
 		}
 		
 		OnlineGallery og = new OnlineGallery();
@@ -33,22 +33,22 @@ public class OnlineGalleryService {
 	}
 	
 	@Transactional
-	public OnlineGallery findOnlineGalleryBySystemId(Long systemId) {
+	public OnlineGallery findOnlineGalleryBySystemId(Long systemId) throws OnlineGalleryException {
 		
 		if(!exist(systemId)) {
 			
-			return null;
+			throw new OnlineGalleryException("An online gallery of ID ["+systemId+"] does not exist.");
 		}
 		
 		return ogRepo.findOnlineGalleryBySystemId(systemId);
 	}
 	
 	@Transactional
-	public OnlineGallery deleteOnlineGalleryBySystemId(Long systemId) {
+	public OnlineGallery deleteOnlineGalleryBySystemId(Long systemId) throws OnlineGalleryException {
 		
 		if(!exist(systemId)) {
 			
-			return null;
+			throw new OnlineGalleryException("An online gallery of ID ["+systemId+"] does not exist.");
 		}
 			
 		OnlineGallery og = ogRepo.findOnlineGalleryBySystemId(systemId);
@@ -59,11 +59,11 @@ public class OnlineGalleryService {
 	}
 	
 	@Transactional
-	public OnlineGallery updateDaysUp(int daysUp) {
+	public OnlineGallery updateDaysUp(int daysUp) throws OnlineGalleryException {
 		
 		if(!ogRepo.findAll().iterator().hasNext()) {
 			
-			return null;
+			throw new OnlineGalleryException("No online gallery exists.");
 		}
 			
 		OnlineGallery og = ogRepo.findAll().iterator().next();
