@@ -11,10 +11,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 
 import ca.mcgill.ecse321.onlinegallery.dto.*;
 import ca.mcgill.ecse321.onlinegallery.model.*;
 import ca.mcgill.ecse321.onlinegallery.service.*;
+
+import ca.mcgill.ecse321.onlinegallery.service.exception.PurchaseException;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -25,62 +29,56 @@ public class PurchaseRestController {
 
 	
 	@GetMapping(value = { "/getPurchase","/getPurchase/"})
-	public PurchaseDto getPurchaseByUserNameAndArtId(@RequestBody PurchaseForm form) throws IllegalArgumentException {
-		Purchase purchase=service.getPurchaseByUserNameAndArtId(form);
-		PurchaseDto dto=this.postcondition(purchase);
-		return dto;
+	public ResponseEntity<?> getPurchaseByUserNameAndArtId(@RequestBody PurchaseForm form) throws PurchaseException {
+		try {
+			Purchase purchase=service.getPurchaseByUserNameAndArtId(form);
+			return new ResponseEntity<>(convertToDto(purchase),HttpStatus.OK);
+		}
+		catch (PurchaseException e){
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 	}
 
 
 	@PostMapping(value = { "/createPurchase","/createPurchase/"})
-	public PurchaseDto createPurchase(@RequestBody PurchaseForm form) throws IllegalArgumentException {
-		
-		Purchase purchase=service.createPurchase(form);
-		PurchaseDto dto=this.postcondition(purchase);
-		return dto;
+	public ResponseEntity<?> createPurchase(@RequestBody PurchaseForm form) throws PurchaseException {
+		try {
+			Purchase purchase=service.createPurchase(form);
+			return new ResponseEntity<>(convertToDto(purchase),HttpStatus.OK);
+		}
+		catch (PurchaseException e){
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@DeleteMapping(value = { "/deletePurchase","/deletePurchase/"})
-	public PurchaseDto deletePurchase(@RequestBody PurchaseForm form) throws IllegalArgumentException {
+	public ResponseEntity<?> deletePurchase(@RequestBody PurchaseForm form) throws PurchaseException {
 		
-		Purchase purchase=service.deletePurchaseByUserNameAndArtId(form);
-		PurchaseDto dto=this.postcondition(purchase);
-		return dto;
+		try {
+			Purchase purchase=service.deletePurchaseByUserNameAndArtId(form);
+			return new ResponseEntity<>(convertToDto(purchase),HttpStatus.OK);
+		}
+		catch (PurchaseException e){
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 	@PutMapping(value = { "/updatePurchase","/updatePurchase/"})
-	public PurchaseDto updatePurchase(@RequestBody PurchaseUpdateForm form) throws IllegalArgumentException {
-		
-		Purchase purchase=service.updatePurchase(form);
-		PurchaseDto dto=this.postcondition(purchase);
-		return dto;
+	public ResponseEntity<?> updatePurchase(@RequestBody PurchaseUpdateForm form) throws PurchaseException {
+		try {
+			Purchase purchase=service.updatePurchase(form);
+			return new ResponseEntity<>(convertToDto(purchase),HttpStatus.OK);
+		}
+		catch (PurchaseException e){
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
 	}
 	
 
 	private PurchaseDto convertToDto(Purchase purchase) {
-		if (purchase == null) {
-				throw new IllegalArgumentException("customer with this username doesn't exist");	
-		}
-
-		PurchaseDto dto = new PurchaseDto(purchase.getCommission(),
-										  purchase.getShipmentType(),
-										  purchase.getPaymentMethod(),
-										  purchase.isPaid(),
-										  purchase.getDate());
+		PurchaseDto dto = new PurchaseDto(purchase);
 				
 		return dto;
 	}
-	
-	private PurchaseDto postcondition(Purchase purchase) {
-		PurchaseDto dto;
-		
-		try {
-			dto=convertToDto(purchase);
-		}
-		catch(IllegalArgumentException e){
-			dto=null;
-		}
-		
-		return dto;
-	}
+
 }

@@ -3,48 +3,46 @@ package ca.mcgill.ecse321.onlinegallery.dto;
 import java.sql.Date;
 
 import ca.mcgill.ecse321.onlinegallery.model.PaymentMethod;
+import ca.mcgill.ecse321.onlinegallery.model.Purchase;
 import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
 
 public class PurchaseDto {
+	private Purchase p;
 
-	private double commission;
-	private ShipmentType shipmentType;
-	private PaymentMethod paymentMethod;
-	private boolean paid;
-	private Date purchasedDate;
-
-	public PurchaseDto(double commission, 
-					   ShipmentType shipmentType, 
-					   PaymentMethod paymentMethod, 
-					   boolean paid,
-					   Date purchasedDate) {
-		
-		this.commission=commission;
-		this.shipmentType=shipmentType;
-		this.paymentMethod=paymentMethod;
-		this.paid=paid;
-		this.purchasedDate=purchasedDate;
-
+	public PurchaseDto(Purchase purchase) {
+		this.p=purchase;
 	}
 
 	public double getCommission() {
-		return this.commission;
+		return this.p.getCommission();
 	}
 	
 	public ShipmentType getShipmentType() {
-		return this.shipmentType;
+		return this.p.getShipmentType();
 	}
 	
 	public PaymentMethod getPaymentMethod() {
-		return this.paymentMethod;
+		return this.p.getPaymentMethod();
 	}
 	
 	public boolean isPaid() {
-		return this.paid;
+		return this.p.isPaid();
 	}
 	
 	public Date getPurchaseDate() {
-		return this.purchasedDate;
+		return this.p.getDate();
+	}
+	
+	public String getArtName() {
+		return this.p.getArtwork().getName();
+	}
+	
+	public Long getCustomerId() {
+		return this.p.getCustomer().getCustomerId();
+	}
+	
+	public String getUsername() {
+		return this.p.getCustomer().getGalleryRegistration().getUserName();
 	}
 
 }

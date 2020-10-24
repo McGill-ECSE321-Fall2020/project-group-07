@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.onlinegallery.model.*;
 import ca.mcgill.ecse321.onlinegallery.dao.*;
+import ca.mcgill.ecse321.onlinegallery.service.exception.GalleryRegistrationException;
 
 @Service
 public class GalleryRegistrationService {
@@ -18,10 +19,10 @@ public class GalleryRegistrationService {
 	GalleryRegistrationRepository regRepo;
 
 	@Transactional
-	public GalleryRegistration createGalleryRegistration(String username) {
+	public GalleryRegistration createGalleryRegistration(String username) throws GalleryRegistrationException{
 
 		if (regRepo.existsByUserName(username)) {
-			return null;
+			throw new GalleryRegistrationException("The username ["+username+"] already exists, pick a new one");
 		}
 
 		OnlineGallery og;
@@ -44,16 +45,24 @@ public class GalleryRegistrationService {
 	}
 
 	@Transactional
-	public GalleryRegistration findGalleryRegistrationByUserName(String username) {
-		return regRepo.findGalleryRegisrationByUserName(username);
+	public GalleryRegistration findGalleryRegistrationByUserName(String username) throws GalleryRegistrationException{
+		
+		GalleryRegistration reg=regRepo.findGalleryRegisrationByUserName(username);
+		if (reg==null) {
+			throw new GalleryRegistrationException("There is no GalleryRegistration associated with the username ["+username+"]");
+		}
+		return reg;
 	}
 
 	@Transactional
-	public GalleryRegistration deleteGalleryRegistrationByUserName(String username) {
-		if (!precondition(username)) {return null;}
+	public GalleryRegistration deleteGalleryRegistrationByUserName(String username) throws GalleryRegistrationException{
+		if (!regRepo.existsByUserName(username)) {
+			throw new GalleryRegistrationException("There is no GalleryRegistration associated with the username ["+username+"]");
+		}
 
 		OnlineGallery og = ogRepo.findAll().iterator().next();
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		
 
 		og.getAllRegistrations().remove(reg);
 
@@ -65,13 +74,14 @@ public class GalleryRegistrationService {
 	}
 
 	@Transactional
-	public GalleryRegistration updateRegistrationInfo(RegistrationUpdateForm form) {
+	public GalleryRegistration updateRegistrationInfo(RegistrationUpdateForm form) throws GalleryRegistrationException{
 
 		String username = form.getUserName();
 
-		if (!precondition(username)) {return null;}
+		if (!regRepo.existsByUserName(username)) {
+			throw new GalleryRegistrationException("There is no GalleryRegistration associated with the username ["+username+"]");
+		}
 
-		OnlineGallery og = ogRepo.findAll().iterator().next();
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
 
 		reg.setFirstName(form.getFirstName());
@@ -85,13 +95,14 @@ public class GalleryRegistrationService {
 	}
 	
 	@Transactional
-	public GalleryRegistration changePassword(PasswordUpdateForm form) {
+	public GalleryRegistration changePassword(PasswordUpdateForm form) throws GalleryRegistrationException{
 		
 		String username = form.getUserName();
 
-		if (!precondition(username)) {return null;}
+		if (!regRepo.existsByUserName(username)) {
+			throw new GalleryRegistrationException("There is no GalleryRegistration associated with the username ["+username+"]");
+		}
 		
-		OnlineGallery og = ogRepo.findAll().iterator().next();
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
 
 		reg.setPassWord(form.getPassword());
@@ -102,11 +113,13 @@ public class GalleryRegistrationService {
 	}
 	
 	@Transactional
-	public GalleryRegistration toggleLoggedInStatus(String username) {
+	public GalleryRegistration toggleLoggedInStatus(String username) throws GalleryRegistrationException{
 		
-		if (!precondition(username)) {return null;}
+		if (!regRepo.existsByUserName(username)) {
+			throw new GalleryRegistrationException("There is no GalleryRegistration associated with the username ["+username+"]");
+		}
 		
-		OnlineGallery og = ogRepo.findAll().iterator().next();
+		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
 
 		reg.setIsLoggedIn(!reg.getIsLoggedIn());
@@ -116,19 +129,5 @@ public class GalleryRegistrationService {
 		return reg;
 	}
 	
-	
-	private boolean precondition(String username) {
-		
-		
-		if (!regRepo.existsByUserName(username)) {
-			return false;
-		}
-
-		if (ogRepo.count() == 0) {
-			return false;
-		}
-		
-		return true;
-	}
 
 }
