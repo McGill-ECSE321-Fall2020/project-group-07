@@ -11,5 +11,6 @@ public interface CustomerRepository extends CrudRepository<Customer, Long> {
 //	Customer findByPurchases (Purchase purchase);
 	
 	Customer findCustomerByCustomerId(Long customerId);
+	boolean existsByCustomerId(Long customerId);
 	
 }

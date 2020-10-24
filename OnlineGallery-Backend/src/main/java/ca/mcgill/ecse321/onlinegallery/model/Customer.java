@@ -68,8 +68,7 @@ public class Customer {
 		return this.browsedArtwork;
 	}
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name = "customer_id")
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
 	private Set<Purchase> purchase;
 
 	public Set<Purchase> getPurchase() {

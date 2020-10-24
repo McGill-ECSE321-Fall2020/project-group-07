@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -67,7 +68,7 @@ public class Artwork {
 		return this.price;
 	}
 
-	private ArtworkStatus status;
+	private ArtworkStatus status=ArtworkStatus.AVAILABLE;
 
 	public void setStatus(ArtworkStatus value) {
 		this.status = value;
@@ -77,7 +78,7 @@ public class Artwork {
 		return this.status;
 	}
 
-	private boolean onSite;
+	private boolean onSite=false;
 
 	public void setOnSite(boolean value) {
 		this.onSite = value;
@@ -87,7 +88,7 @@ public class Artwork {
 		return this.onSite;
 	}
 
-	private int numViews;
+	private int numViews=0;
 
 	public void setNumViews(int value) {
 		this.numViews = value;
@@ -139,7 +140,7 @@ public class Artwork {
 		return this.viewers;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "artwork")
 	private Purchase purchase;
 
 	public void setPurchase(Purchase value) {
@@ -148,6 +149,18 @@ public class Artwork {
 
 	public Purchase getPurchase() {
 		return this.purchase;
+	}
+	
+	@ManyToOne(fetch = FetchType.EAGER, optional = true)
+	@JoinColumn(name = "artist_id")
+	private Artist artist;
+
+	public Artist getArtist() {
+		return this.artist;
+	}
+
+	public void setArtist(Artist artist) {
+		this.artist = artist;
 	}
 
 }
