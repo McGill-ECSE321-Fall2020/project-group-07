@@ -16,20 +16,22 @@ public class OnlineGalleryService {
 	OnlineGalleryRepository ogRepo;
 	
 	@Transactional
-	public OnlineGallery createOnlineGallery(Long systemId) throws OnlineGalleryException{
+	public OnlineGallery createOnlineGallery() throws OnlineGalleryException{
 		
-		if(ogRepo.existsById(systemId)) {
+		if(ogRepo.findAll().iterator().hasNext()) {
 			
-			throw new OnlineGalleryException("An online gallery of ID ["+systemId+"] already exists in system.");
+			throw new OnlineGalleryException("An online gallery already exists in system.");
 		}
+		else {
 		
 		OnlineGallery og = new OnlineGallery();
 		og.setDaysUp(0);
-		og.setSystemId(systemId);
+		og.setSystemId((long) 1);
 		
 		ogRepo.save(og);
 		
 		return og;
+		}
 	}
 	
 	@Transactional
@@ -44,15 +46,15 @@ public class OnlineGalleryService {
 	}
 	
 	@Transactional
-	public OnlineGallery deleteOnlineGalleryBySystemId(Long systemId) throws OnlineGalleryException {
+	public OnlineGallery deleteOnlineGallery() throws OnlineGalleryException {
 		
-		if(!exist(systemId)) {
+		if(!ogRepo.findAll().iterator().hasNext()) {
 			
-			throw new OnlineGalleryException("An online gallery of ID ["+systemId+"] does not exist.");
+			throw new OnlineGalleryException("No online gallery exists.");
 		}
 			
-		OnlineGallery og = ogRepo.findOnlineGalleryBySystemId(systemId);
-		
+		OnlineGallery og = ogRepo.findAll().iterator().next();
+
 		ogRepo.delete(og);
 		
 		return og;

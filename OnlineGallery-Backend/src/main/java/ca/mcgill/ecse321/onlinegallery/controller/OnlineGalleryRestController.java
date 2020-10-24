@@ -20,10 +20,10 @@ public class OnlineGalleryRestController {
 	@Autowired
 	OnlineGalleryService service;
 	
-	@PostMapping(value = { "/createOnlineGallery/{systemId}", "/createOnlineGallery/{systemId}/" })
-	public ResponseEntity<?> createOnlineGallery(@PathVariable("systemId") Long systemId) throws  OnlineGalleryException{
+	@PostMapping(value = { "/createOnlineGallery", "/createOnlineGallery/" })
+	public ResponseEntity<?> createOnlineGallery() throws  OnlineGalleryException{
 		try {
-			OnlineGallery og = service.createOnlineGallery(systemId);
+			OnlineGallery og = service.createOnlineGallery();
 			return new ResponseEntity<>(convertToDto(og),HttpStatus.OK);
 		}
 		catch(OnlineGalleryException e){
@@ -53,10 +53,10 @@ public class OnlineGalleryRestController {
 		}
 	}
 	
-	@PostMapping(value = { "/deleteOnlineGallery/{systemId}", "/deleteOnlineGallery/{systemId}/" })
-	public ResponseEntity<?> deleteOnlineGalleryBySystemId(@PathVariable("systemId") Long systemId) throws  OnlineGalleryException{
+	@PostMapping(value = { "/deleteOnlineGallery", "/deleteOnlineGallery/" })
+	public ResponseEntity<?> deleteOnlineGallery() throws  OnlineGalleryException{
 		try {
-			OnlineGallery og = service.deleteOnlineGalleryBySystemId(systemId);
+			OnlineGallery og = service.deleteOnlineGallery();
 			return new ResponseEntity<>(convertToDto(og),HttpStatus.OK);
 		}
 		catch(OnlineGalleryException e){
