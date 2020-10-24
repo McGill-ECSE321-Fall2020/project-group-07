@@ -10,6 +10,8 @@ import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.ArtistForm;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
+import ca.mcgill.ecse321.onlinegallery.service.exception.ArtistException;
+import ca.mcgill.ecse321.onlinegallery.service.exception.GalleryRegistrationException;
 
 @Service
 public class ArtistService {
@@ -21,13 +23,13 @@ public class ArtistService {
 	GalleryRegistrationRepository regRepo;
 	
 	@Transactional
-	public Artist createArtist(ArtistForm form) {
+	public Artist createArtist(ArtistForm form) throws ArtistException {
 		
 		String username = form.getUserName();
 		
 		if (!regRepo.existsByUserName(username)) {
 			
-			return null;
+			throw new ArtistException("An artist is already associated to the username ["+username+"]");
 		}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);

@@ -6,6 +6,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import ca.mcgill.ecse321.onlinegallery.dao.OnlineGalleryRepository;
 import ca.mcgill.ecse321.onlinegallery.model.OnlineGallery;
+import ca.mcgill.ecse321.onlinegallery.service.exception.OnlineGalleryException;
+import ca.mcgill.ecse321.onlinegallery.service.exception.PhysicalGalleryException;
 
 @Service
 public class OnlineGalleryService {
@@ -14,11 +16,11 @@ public class OnlineGalleryService {
 	OnlineGalleryRepository ogRepo;
 	
 	@Transactional
-	public OnlineGallery createOnlineGallery(Long systemId) {
+	public OnlineGallery createOnlineGallery(Long systemId) throws OnlineGalleryException{
 		
 		if(ogRepo.existsById(systemId)) {
 			
-			return null;
+			throw new OnlineGalleryException("an online gallery of ID ["+systemId+"] already exists in system");
 		}
 		
 		OnlineGallery og = new OnlineGallery();
