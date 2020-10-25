@@ -1,46 +1,41 @@
-//package ca.mcgill.ecse321.onlinegallery.dto;
-//
-//import java.sql.Date;
-//
-//import ca.mcgill.ecse321.onlinegallery.model.PaymentMethod;
-//import ca.mcgill.ecse321.onlinegallery.model.Purchase;
-//import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
-//
-//public class PurchaseDto {
-//	private Purchase p;
-//
-//	public PurchaseDto(Purchase purchase) {
-//		this.p=purchase;
-//	}
-//
-//	public double getCommission() {
-//		return this.p.getCommission();
-//	}
-//	
-//	public ShipmentType getShipmentType() {
-//		return this.p.getShipmentType();
-//	}
-//	
-//
-//	
-//	public boolean isPaid() {
-//		return this.p.isPaid();
-//	}
-//	
-//	public Date getPurchaseDate() {
-//		return this.p.getDate();
-//	}
-//	
-//	public String getArtName() {
-//		return this.p.getArtwork().getName();
-//	}
-//	
-//	public Long getCustomerId() {
-//		return this.p.getCustomer().getCustomerId();
-//	}
-//	
-//	public String getUsername() {
-//		return this.p.getCustomer().getGalleryRegistration().getUserName();
-//	}
-//
-//}
+package ca.mcgill.ecse321.onlinegallery.dto;
+
+import java.sql.Date;
+
+import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
+
+
+public class PurchaseDto {
+	private Long purchaseId;
+	public void setPurchaseId(Long id) {
+		this.purchaseId=id;
+	}
+	public Long getPurcahseId() {
+		return this.purchaseId;
+	}
+	
+	private String username;
+	public void setUsername(String username) {
+		this.username=username;
+	}
+	public String getUsername() {
+		return this.username;
+	}
+	
+	private Long artworkId;
+	public void setArtworkId(Long id) {
+		this.artworkId=id;
+	}
+	public Long getArtworkId()
+	{
+		return this.artworkId;
+	}	
+	
+	private ShipmentType shipmentType;
+	public void setShipmentType(ShipmentType type) {
+		this.shipmentType=type;
+	}
+	public ShipmentType getShipmentType() {
+		return this.shipmentType;
+	}
+}

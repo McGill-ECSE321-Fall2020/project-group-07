@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service;
+package ca.mcgill.ecse321.onlinegallery.serviceAll;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -23,6 +23,7 @@ import org.mockito.stubbing.Answer;
 import ca.mcgill.ecse321.onlinegallery.dao.*;
 import ca.mcgill.ecse321.onlinegallery.dto.*;
 import ca.mcgill.ecse321.onlinegallery.model.*;
+import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -505,6 +506,28 @@ public class TestGalleryRegistrationServiceCreation {
 		assertEquals(error,"invalid email address");
 	}
 
+	@Test
+	public void createRegistrationEmptyEmail() {
+		GalleryRegistrationDto dto = new GalleryRegistrationDto();
+		dto.setUsername(VALID_USERNAME);
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName(VALID_LASTNAME);
+		dto.setEmail("");
+		dto.setPassword(VALID_PASSWORD);
+		
+		GalleryRegistration reg=null;
+		String error=null;
+		try {
+			reg = service.createGalleryRegistration(dto);
+		}
+		catch(GalleryRegistrationException e) {
+			error=e.getMessage();
+		}	
+		
+		assertNull(reg);
+		assertEquals(error,"email address cannot be empty");
+	}
+	
 	
 	@Test
 	public void createRegistrationInValidPasswordTooShort() {
@@ -658,6 +681,28 @@ public class TestGalleryRegistrationServiceCreation {
 		
 		assertNull(reg);
 		assertEquals(error,"password has to contain at least one number");
+	}
+	
+	@Test
+	public void createRegistrationInValidPasswordEmpty(){
+		GalleryRegistrationDto dto = new GalleryRegistrationDto();
+		dto.setUsername(VALID_USERNAME);
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName(VALID_LASTNAME);
+		dto.setEmail(VALID_EMAIL);
+		dto.setPassword("");
+		
+		GalleryRegistration reg=null;
+		String error=null;
+		try {
+			reg = service.createGalleryRegistration(dto);
+		}
+		catch(GalleryRegistrationException e) {
+			error=e.getMessage();
+		}	
+		
+		assertNull(reg);
+		assertEquals(error,"password cannot be empty");
 	}
 	
 }

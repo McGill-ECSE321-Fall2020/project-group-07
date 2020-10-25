@@ -22,6 +22,17 @@ public class GalleryRegistrationService {
 	@Autowired
 	GalleryAdminRepository adminRepo;
 	
+	
+	@Transactional
+	public GalleryRegistration getGalleryRegistration(String username) throws GalleryRegistrationException{
+		if (!regRepo.existsByUserName(username)) {
+			throw new GalleryRegistrationException("No GalleryRegistration with username ["+username+"] exists");
+		}
+		
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		return reg;
+	}
+	
 	@Transactional
 	public GalleryRegistration createGalleryRegistration(GalleryRegistrationDto dto) throws GalleryRegistrationException{
 		String username=dto.getUsername();
@@ -183,6 +194,21 @@ public class GalleryRegistrationService {
 	}
 	
 	@Transactional
+	public GalleryRegistration deleteGalleryRegistration(String username) throws GalleryRegistrationException{
+		if (!regRepo.existsByUserName(username)) {
+			throw new GalleryRegistrationException("No GalleryRegistration with username ["+username+"] exists");
+		}
+		
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		OnlineGallery og = ogRepo.findAll().iterator().next();
+		og.getAllRegistrations().remove(reg);
+		
+		regRepo.delete(reg);
+		return reg;
+		
+	}
+	
+	@Transactional
 	public GalleryRegistration setCustomer(String username) throws GalleryRegistrationException {
 		
 		// no username found
@@ -229,7 +255,6 @@ public class GalleryRegistrationService {
 	@Transactional
 	public GalleryRegistration setAdmin(String username) throws GalleryRegistrationException {
 		
-		System.out.println(adminRepo.count());
 
 		// no username found
 		if (!regRepo.existsByUserName(username)) {
@@ -382,118 +407,6 @@ public class GalleryRegistrationService {
 		if (lowerCount == 0) {
 			throw new IllegalArgumentException("password has to contain at least one lower character");
 		}
-	}
-	
-
-//	@Transactional
-//	public GalleryRegistration createGalleryRegistration(String username) throws GalleryRegistrationException{
-//
-//		if (regRepo.existsByUserName(username)) {
-//			throw new GalleryRegistrationException("The username ["+username+"] already exists, pick a new one");
-//		}
-//
-//		OnlineGallery og;
-//
-//		if (ogRepo.findAll().iterator().hasNext()) {
-//			og = ogRepo.findAll().iterator().next();
-//		} else {
-//			og = new OnlineGallery();
-//			og.setDaysUp(0);
-//		}
-//
-//		GalleryRegistration reg = new GalleryRegistration();
-//		reg.setUserName(username);
-//
-//		og.getAllRegistrations().add(reg);
-//
-//		ogRepo.save(og);
-//
-//		return reg;
-//	}
-//
-//	@Transactional
-//	public GalleryRegistration findGalleryRegistrationByUserName(String username) throws GalleryRegistrationException{
-//		
-//		GalleryRegistration reg=regRepo.findGalleryRegisrationByUserName(username);
-//		if (reg==null) {
-//			throw new GalleryRegistrationException("There is no GalleryRegistration associated with the username ["+username+"]");
-//		}
-//		return reg;
-//	}
-//
-//	@Transactional
-//	public GalleryRegistration deleteGalleryRegistrationByUserName(String username) throws GalleryRegistrationException{
-//		if (!regRepo.existsByUserName(username)) {
-//			throw new GalleryRegistrationException("There is no GalleryRegistration associated with the username ["+username+"]");
-//		}
-//
-//		OnlineGallery og = ogRepo.findAll().iterator().next();
-//		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-//		
-//
-//		og.getAllRegistrations().remove(reg);
-//
-//		regRepo.delete(reg);
-//		ogRepo.save(og);
-//
-//		return reg;
-//
-//	}
-//
-//	@Transactional
-//	public GalleryRegistration updateRegistrationInfo(RegistrationUpdateForm form) throws GalleryRegistrationException{
-//
-//		String username = form.getUserName();
-//
-//		if (!regRepo.existsByUserName(username)) {
-//			throw new GalleryRegistrationException("There is no GalleryRegistration associated with the username ["+username+"]");
-//		}
-//
-//		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-//
-//		reg.setFirstName(form.getFirstName());
-//		reg.setLastName(form.getLastName());
-//		reg.setEmail(form.getEmail());
-//
-//		regRepo.save(reg);
-//
-//		return reg;
-//	}
-//	
-//	@Transactional
-//	public GalleryRegistration changePassword(PasswordUpdateForm form) throws GalleryRegistrationException{
-//		
-//		String username = form.getUserName();
-//
-//		if (!regRepo.existsByUserName(username)) {
-//			throw new GalleryRegistrationException("There is no GalleryRegistration associated with the username ["+username+"]");
-//		}
-//		
-//		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-//
-//		reg.setPassWord(form.getPassword());
-//
-//		regRepo.save(reg);
-//
-//		return reg;
-//	}
-//	
-//	@Transactional
-//	public GalleryRegistration toggleLoggedInStatus(String username) throws GalleryRegistrationException{
-//		
-//		if (!regRepo.existsByUserName(username)) {
-//			throw new GalleryRegistrationException("There is no GalleryRegistration associated with the username ["+username+"]");
-//		}
-//		
-//		
-//		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-//
-//		reg.setIsLoggedIn(!reg.getIsLoggedIn());
-//
-//		regRepo.save(reg);
-//
-//		return reg;
-//	}
-	
+	}	
 
 }

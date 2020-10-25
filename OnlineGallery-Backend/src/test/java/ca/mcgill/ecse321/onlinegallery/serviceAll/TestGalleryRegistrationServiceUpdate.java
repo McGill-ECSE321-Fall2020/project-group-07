@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service;
+package ca.mcgill.ecse321.onlinegallery.serviceAll;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -21,6 +21,7 @@ import org.mockito.stubbing.Answer;
 import ca.mcgill.ecse321.onlinegallery.dao.*;
 import ca.mcgill.ecse321.onlinegallery.dto.*;
 import ca.mcgill.ecse321.onlinegallery.model.*;
+import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -198,7 +199,7 @@ public class TestGalleryRegistrationServiceUpdate {
 			reg = service.updatePassowrd(dto);
 		} catch (GalleryRegistrationException e) {
 			fail();
-		}
+		} 
 		assertNotNull(reg);
 		assertEquals(reg.getPassWord(), NEW_PASSWORD);
 	}
@@ -236,5 +237,24 @@ public class TestGalleryRegistrationServiceUpdate {
 		assertNull(reg);
 		assertEquals(error, "password has to contain at least one number");
 	}
+	
+
+	@Test
+	public void updatePasswordInvalidNonExistUserValidPassword() {
+		UpdatePasswordDto dto = new UpdatePasswordDto();
+		dto.setUsername(INVALID_USERNAMENONEXIST);
+		dto.setpassWord(NEW_PASSWORD);
+
+		GalleryRegistration reg = null;
+		String error=null;
+		try {
+			reg = service.updatePassowrd(dto);
+		} catch (GalleryRegistrationException e) {
+			error=e.getMessage();
+		} 
+		assertNull(reg);
+		assertEquals(error,"No GalleryRegistration with username [" + INVALID_USERNAMENONEXIST + "] found");
+	}
+
 
 }

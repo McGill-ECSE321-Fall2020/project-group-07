@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service;
+package ca.mcgill.ecse321.onlinegallery.service.Registration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -22,6 +22,7 @@ import org.mockito.stubbing.Answer;
 import ca.mcgill.ecse321.onlinegallery.dao.*;
 import ca.mcgill.ecse321.onlinegallery.dto.*;
 import ca.mcgill.ecse321.onlinegallery.model.*;
+import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -49,10 +50,7 @@ public class TestGalleryRegistrationServiceAssign {
 	@BeforeEach
 	public void setMockOutput() {
 		
-		Long adminCount1= (long) 0;
-		Long adminCount2= (long) 0;
-		Long adminCount3= (long) 0;
-		Long adminCount4= (long) 1;
+		Long adminCount= (long) 0;
 		
 		Answer<?> paramAsAnswer = (InvocationOnMock invocation) -> {
 			return invocation.getArgument(0);
@@ -66,7 +64,7 @@ public class TestGalleryRegistrationServiceAssign {
 			}
 		});
 		
-		lenient().when(adminRepo.count()).thenReturn(adminCount1, adminCount4);
+		lenient().when(adminRepo.count()).thenReturn(adminCount);
 
 		lenient().when(regRepo.findGalleryRegisrationByUserName(anyString()))
 				.thenAnswer((InvocationOnMock invocation) -> {
@@ -74,7 +72,7 @@ public class TestGalleryRegistrationServiceAssign {
 						GalleryRegistration reg = new GalleryRegistration();
 						reg.setUserName(VALID_USERNAME);
 						reg.setFirstName("john");
-						reg.setLastName("smith");
+						reg.setLastName("smith"); 
 						reg.setEmail("jhonsmo@gmail.com");
 						reg.setPassWord("Password0!");
 						reg.setIsLoggedIn(false);
@@ -127,11 +125,7 @@ public class TestGalleryRegistrationServiceAssign {
 		lenient().when(regRepo.save(any(GalleryRegistration.class))).thenAnswer(paramAsAnswer);
 
 	}
-//	
-//	6. assignAdmin(username)
-//	- exception: username not found
-//	- exception: Registrartion already assigned Admin
-//	- exception: an Admin already exists in sys
+
 
 	@Test
 	public void testAssignAdminValidUser() {
@@ -178,18 +172,94 @@ public class TestGalleryRegistrationServiceAssign {
 	}
 	
 	@Test
-	public void testAssignAdminSystemAlreadyHasAdmin() {
+	public void testAssignCustomerValidUser() {
+		GalleryRegistration reg=null;
+		try{
+			reg=service.setCustomer(VALID_USERNAME);
+		}
+		catch(GalleryRegistrationException e) {
+			fail();
+		}
+		
+		assertNotNull(reg);
+		assertNotNull(reg.getCustomer());
+	}
+	
+	@Test
+	public void testAssignCustomerInvalidUserNoExist() {
 		GalleryRegistration reg=null;
 		String error =null;
 		try{
-			reg=service.setAdmin(VALID_USERNAME);
+			reg=service.setCustomer(INVALID_USERNAMENONEXIST);
 		}
 		catch(GalleryRegistrationException e) {
 			error=e.getMessage();
 		}
 		
 		assertNull(reg);
-		assertEquals(error,"there is already an Admin in database");
+		assertEquals(error,"No GalleryRegistration with username [" + INVALID_USERNAMENONEXIST + "] found");
 	}
+	
+	@Test
+	public void testAssignCustomerInvalidUserAlreadyCustomer() {
+		GalleryRegistration reg=null;
+		String error =null;
+		try{
+			reg=service.setCustomer(INVALID_USERNAMEALREADYHASCUSTOMER);
+		}
+		catch(GalleryRegistrationException e) {
+			error=e.getMessage();
+		}
+		
+		assertNull(reg);
+		assertEquals(error,"GalleryRegistration with username [" + INVALID_USERNAMEALREADYHASCUSTOMER + "] already associated with a Customer");
+	}
+	
+	
+	
+	@Test
+	public void testAssignArtistValidUser() {
+		GalleryRegistration reg=null;
+		try{
+			reg=service.setArtist(VALID_USERNAME);
+		}
+		catch(GalleryRegistrationException e) {
+			fail();
+		}
+		
+		assertNotNull(reg);
+		assertNotNull(reg.getArtist());
+	}
+	
+	@Test
+	public void testAssignArtistInvalidUserNoExist() {
+		GalleryRegistration reg=null;
+		String error =null;
+		try{
+			reg=service.setArtist(INVALID_USERNAMENONEXIST);
+		}
+		catch(GalleryRegistrationException e) {
+			error=e.getMessage();
+		}
+		
+		assertNull(reg);
+		assertEquals(error,"No GalleryRegistration with username [" + INVALID_USERNAMENONEXIST + "] found");
+	}
+	
+	@Test
+	public void testAssignCustomerInvalidUserAlreadyArtist() {
+		GalleryRegistration reg=null;
+		String error =null;
+		try{
+			reg=service.setArtist(INVALID_USERNAMEALREADYHASARTIST);
+		}
+		catch(GalleryRegistrationException e) {
+			error=e.getMessage();
+		}
+		
+		assertNull(reg);
+		assertEquals(error,"GalleryRegistration with username [" + INVALID_USERNAMEALREADYHASARTIST + "] already associated with a Artist");
+	}
+
 
 }
