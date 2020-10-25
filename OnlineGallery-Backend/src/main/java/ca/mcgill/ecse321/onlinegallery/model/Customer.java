@@ -58,15 +58,6 @@ public class Customer {
 		return this.galleryRegistration;
 	}
 
-	@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "viewers")
-	private Set<Artwork> browsedArtwork;
-
-	public Set<Artwork> getBrowsedArtwork() {
-		if (this.browsedArtwork == null) {
-			this.browsedArtwork = new HashSet<Artwork>();
-		}
-		return this.browsedArtwork;
-	}
 
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "customer")
 	private Set<Purchase> purchase;

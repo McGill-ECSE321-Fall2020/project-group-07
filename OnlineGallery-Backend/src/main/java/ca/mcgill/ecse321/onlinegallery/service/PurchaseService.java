@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
+import java.sql.Date;
+import java.time.LocalDate;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.onlinegallery.model.*;
 import ca.mcgill.ecse321.onlinegallery.dao.*;
+import ca.mcgill.ecse321.onlinegallery.dto.PurchaseDto;
 import ca.mcgill.ecse321.onlinegallery.service.exception.PurchaseException;
 
 @Service
@@ -14,9 +18,6 @@ public class PurchaseService {
 	
 	@Autowired
 	GalleryRegistrationRepository regRepo;
-
-	@Autowired
-	ShipmentRepository shipRepo;
 
 	@Autowired
 	PurchaseRepository purchaseRepo;
@@ -28,14 +29,14 @@ public class PurchaseService {
 	ArtworkRepository artworkRepo;
 
 	@Transactional
-	public Purchase createPurchase(PurchaseForm form) throws PurchaseException{
+	public Purchase createPurchase(PurchaseDto dto) throws PurchaseException{
 		
-		String username=form.getUserName();
-		Long artworkId=form.getArtworkId();
+		String username=dto.getUsername();
+		Long artworkId=dto.getArtworkId();
 		Customer customer;
 		
 		if (!regRepo.existsByUserName(username)) {
-			throw new PurchaseException("no customer with the username ["+username+"] found in system");
+			throw new PurchaseException("no GalleryRegistration with the username ["+username+"] found in system");
 			}
 		if (!artworkRepo.existsByArtworkId(artworkId)) {
 			throw new PurchaseException("no artwork with id ["+artworkId+"] found in system");
@@ -50,41 +51,32 @@ public class PurchaseService {
 				
 		
 		if (reg.getCustomer()==null) {
-			customer=new Customer();
-			reg.setCustomer(customer);
-			customer.setGalleryRegistration(reg);
-
-		}
-		else {
-			customer=reg.getCustomer();
+			throw new PurchaseException("no Customer associated with the GalleryRegistratrion username ["+username+"]");
 		}
 		
-		
-		if (purchaseRepo.existsByCustomerAndArtwork(customer, art)) {
-			throw new PurchaseException("a Purchase between an Artwork with id [" + artworkId
-					+ "] and a Customer associated with a GalleryRegistration with username [" + username
-					+ "] already exists");
-		}
+		customer=reg.getCustomer();
 		
 		Purchase purchase=new Purchase();
 		
 		purchase.setArtwork(art);
 		art.setPurchase(purchase);
-		art.setStatus(ArtworkStatus.SOLD);
+		art.setStatus(ArtworkStatus.UNAVAILABLE);
 				
 		customer.getPurchase().add(purchase);
 		purchase.setCustomer(customer);
 		
-		custRepo.save(customer);
+		purchase.setDate(Date.valueOf(LocalDate.now()));
 		
-		return purchase;
+		return purchaseRepo.save(purchase);
+	
 	}
 	
+	 
 	@Transactional
-	public Purchase getPurchaseByUserNameAndArtId(PurchaseForm form) throws PurchaseException{
+	public Purchase getPurchase(PurchaseDto dto) throws PurchaseException{
 		
-		String username=form.getUserName();
-		Long artworkId=form.getArtworkId();
+		String username=dto.getUsername();
+		Long artworkId=dto.getArtworkId();
 		
 		
 		if (!regRepo.existsByUserName(username)) {
@@ -95,74 +87,9 @@ public class PurchaseService {
 		}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		
-		Customer customer = reg.getCustomer();
 		Artwork artwork = artworkRepo.findArtworkByArtworkId(artworkId);
 		
-		if (customer==null) {
-			throw new PurchaseException("GalleryRegistration with username ["+username+"] has no Customer associated");
-		}
-		
-		Purchase purchase = purchaseRepo.findByCustomerAndArtwork(customer,artwork);
-		return purchase;
-	}
-	
-	@Transactional
-	public Purchase updatePurchase(PurchaseUpdateForm form)  throws PurchaseException{
-		
-		String username=form.getUserName();
-		Long artworkId=form.getArtworkId();
-		
-		
-		if (!regRepo.existsByUserName(username)) {
-			throw new PurchaseException("no customer with the username ["+username+"] found in system");
-			}
-		if (!artworkRepo.existsByArtworkId(artworkId)) {
-			throw new PurchaseException("no artwork with id ["+artworkId+"] found in system");
-		}
-		
-		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		
 		Customer customer = reg.getCustomer();
-		Artwork artwork = artworkRepo.findArtworkByArtworkId(artworkId);
-		
-		if (customer==null) {
-			throw new PurchaseException("GalleryRegistration with username ["+username+"] has no Customer associated");
-		}
-		
-		Purchase purchase = purchaseRepo.findByCustomerAndArtwork(customer,artwork);
-		
-		if (purchase==null) {
-			throw new PurchaseException("no such Purchase between an Artwork with id [" + artworkId
-					+ "] and a Customer associated with a GalleryRegistration with username [" + username+"]");
-		}
-		
-		purchase.setCommission(form.getCommission());
-		purchase.setShipmentType(form.getShipmentType());
-		purchase.setPaymentMethod(form.getPaymentMethod());
-		purchase.setPaid(form.isPaid());
-		
-		return purchase;
-	}
-	
-	@Transactional
-	public Purchase deletePurchaseByUserNameAndArtId(PurchaseForm form) throws PurchaseException{
-		
-		String username=form.getUserName();
-		Long artworkId=form.getArtworkId();
-		
-		
-		if (!regRepo.existsByUserName(username)) {
-			throw new PurchaseException("no customer with the username ["+username+"] found in system");
-			}
-		if (!artworkRepo.existsByArtworkId(artworkId)) {
-			throw new PurchaseException("no artwork with id ["+artworkId+"] found in system");
-		}
-		
-		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		
-		Customer customer = reg.getCustomer();
-		Artwork artwork = artworkRepo.findArtworkByArtworkId(artworkId);
 		
 		if (customer==null) {
 			throw new PurchaseException("GalleryRegistration with username ["+username+"] has no Customer associated");
@@ -170,10 +97,33 @@ public class PurchaseService {
 		
 		Purchase purchase = purchaseRepo.findByCustomerAndArtwork(customer,artwork);
 		if (purchase==null) {
-			throw new PurchaseException("no such Purchase between an Artwork with id [" + artworkId
-					+ "] and a Customer associated with a GalleryRegistration with username [" + username+"]");
+			throw new PurchaseException("No purchase exist between an artwork with id [" + artworkId
+					+ "] and a Customer associated with username [" + username + "]");
 		}
+		return purchase;
+	}
+
+	@Transactional
+	public Purchase updatePurchaseShipment(PurchaseDto dto)  throws PurchaseException{
 		
+		Purchase purchase=this.getPurchase(dto);
+		purchase.setShipmentType(dto.getShipmentType());
+		
+		purchase=purchaseRepo.save(purchase);
+		
+		return purchase;
+	}
+	
+	
+	@Transactional
+	public Purchase deletePurchase(PurchaseDto dto) throws PurchaseException{
+		
+		String username=dto.getUsername();
+		Long artworkId=dto.getArtworkId();
+		
+		Purchase purchase=this.getPurchase(dto);
+		Customer customer=regRepo.findGalleryRegisrationByUserName(username).getCustomer();
+		Artwork artwork=artworkRepo.findArtworkByArtworkId(artworkId);
 		
 		customer.getPurchase().remove(purchase);
 		artwork.setPurchase(null);

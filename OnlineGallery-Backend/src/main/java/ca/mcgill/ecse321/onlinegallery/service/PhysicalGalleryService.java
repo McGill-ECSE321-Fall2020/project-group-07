@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -77,6 +78,11 @@ public class PhysicalGalleryService {
 	}
 	
 	@Transactional
+	public List<PhysicalGallery> getAllPhysicalGallery(){
+		return toList(physicalRepo.findAll());
+	}
+	
+	@Transactional
 	public PhysicalGallery deletePhysicalGallery() throws PhysicalGalleryException{
 		
 		if (physicalRepo.count()==0) {
@@ -98,6 +104,14 @@ public class PhysicalGalleryService {
 		physicalRepo.deleteAll();
 		
 		return pg;
+	}
+	
+	private <T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
 	}
 
 }

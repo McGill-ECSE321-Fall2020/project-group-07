@@ -1,43 +1,54 @@
 package ca.mcgill.ecse321.onlinegallery.dto;
 
-import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 
 public class GalleryRegistrationDto {
 
-	private GalleryRegistration reg;
-
-	public GalleryRegistrationDto(GalleryRegistration reg) {
-		
-		this.reg=reg;
+	private String username;
+	public String getUsername() {
+		return this.username;
+	}
+	public void setUsername(String username) {
+		this.username=username;
 	}
 	
-	public String getUserName() {
-		return this.reg.getUserName();
-	}
-	
+	private String firstname;
 	public String getFirstName() {
-		return this.reg.getFirstName();
+		return this.firstname;
+	}
+	public void setFirstName(String firstname) {
+		this.firstname=firstname;
 	}
 	
+	private String lastname;
 	public String getLastName() {
-		return this.reg.getLastName();
+		return this.lastname;
+	}
+	public void setLastName(String lastname) {
+		this.lastname=lastname;
 	}
 	
+	private String email;
 	public String getEmail() {
-		return this.reg.getEmail();
+		return this.email;
+	}
+	public void setEmail(String email) {
+		this.email=email;
 	}
 	
-	public String getPhoneNumber() {
-		return this.reg.getPhoneNumber();
-	}
-	
+	private String password;
 	public String getPassword() {
-		return this.reg.getPassWord();
+		return this.password;
+	}
+	public void setPassword(String password) {
+		this.password=password;
 	}
 	
-	public boolean getLogInStatus() {
-		
-		return this.reg.getIsLoggedIn();
+	private boolean loggedIn=false;
+	public boolean isLoggedIn() {
+		return this.loggedIn;
+	}
+	public void setLoggedIn(boolean status) {
+		this.loggedIn=status;
 	}
 	
 }

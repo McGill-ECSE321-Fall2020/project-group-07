@@ -58,7 +58,7 @@ public class Artwork {
 		return this.description;
 	}
 
-	private double price;
+	private double price=0;
 
 	public void setPrice(double value) {
 		this.price = value;
@@ -78,15 +78,6 @@ public class Artwork {
 		return this.status;
 	}
 
-	private boolean onSite=false;
-
-	public void setOnSite(boolean value) {
-		this.onSite = value;
-	}
-
-	public boolean isOnSite() {
-		return this.onSite;
-	}
 
 	private int numViews=0;
 
@@ -118,27 +109,16 @@ public class Artwork {
 		return this.weight;
 	}
 
-	private double shippingCost;
-
-	public void setShippingCost(double value) {
-		this.shippingCost = value;
+	private double commission;
+	
+	public void setCommission(double commission) {
+		this.commission=commission;
 	}
-
-	public double getShippingCost() {
-		return this.shippingCost;
+	
+	public double getComission() {
+		return this.commission;
 	}
-
-	@ManyToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
-	@JoinTable(name = "art_viewer", joinColumns = { @JoinColumn(name = "art_id") }, inverseJoinColumns = {
-			@JoinColumn(name = "customer_id") })
-	private Set<Customer> viewers;
-
-	public Set<Customer> getViewers() {
-		if (this.viewers == null) {
-			this.viewers = new HashSet<Customer>();
-		}
-		return this.viewers;
-	}
+	
 
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "artwork")
 	private Purchase purchase;
