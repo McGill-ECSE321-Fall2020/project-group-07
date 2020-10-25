@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
+import ca.mcgill.ecse321.onlinegallery.dto.ArtistDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.ArtistForm;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
@@ -94,9 +95,9 @@ public class ArtistService {
 	}
 	
 	@Transactional
-	public Artist deleteArtistByUserName(ArtistForm form) throws ArtistException {
+	public Artist deleteArtistByUserName(ArtistDto dto) throws ArtistException {
 		
-		String username = form.getUserName();
+		String username = dto.getUsername();
 
 		if (!regRepo.existsByUserName(username)) {
 			
