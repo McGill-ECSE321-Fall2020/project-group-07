@@ -20,9 +20,9 @@ public class GalleryRegistrationService {
 	GalleryRegistrationRepository regRepo;
 	
 	@Autowired
-	GalleryAdminRepository adminRepo;
+	GalleryAdminRepository adminRepo; 
 	
-	
+	 
 	@Transactional
 	public GalleryRegistration getGalleryRegistration(String username) throws GalleryRegistrationException{
 		if (!regRepo.existsByUserName(username)) {

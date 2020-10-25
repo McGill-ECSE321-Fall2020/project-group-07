@@ -47,7 +47,7 @@ public class PurchaseService {
 		
 		if (art.getStatus()!=ArtworkStatus.AVAILABLE) {
 			throw new PurchaseException("Artwork with id ["+artworkId+"] no longer available for sale");	
-		}
+		} 
 				
 		
 		if (reg.getCustomer()==null) {
@@ -104,7 +104,7 @@ public class PurchaseService {
 	}
 
 	@Transactional
-	public Purchase updatePurchaseShipment(PurchaseDto dto)  throws PurchaseException{
+	public Purchase updatePurchaseShipment(PurchaseDto dto)  throws PurchaseException{ 
 		
 		Purchase purchase=this.getPurchase(dto);
 		purchase.setShipmentType(dto.getShipmentType());
