@@ -182,7 +182,7 @@ public class TestPurchaseServiceDelete {
 				
 				p.setArtwork(art);
 				art.setPurchase(p);
-				
+			 
 				return p;
 			}
 			else {

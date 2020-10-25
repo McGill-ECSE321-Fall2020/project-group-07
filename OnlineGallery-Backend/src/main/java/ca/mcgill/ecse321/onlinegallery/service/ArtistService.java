@@ -105,8 +105,8 @@ public class ArtistService {
 		}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		Artist artist = reg.getArtist();
-		
+		Artist artist = artistRepo.findArtistByArtistId(dto.getArtistId());
+
 		if(artist == null) {
 			
 			throw new ArtistException("No artist exists under the username ["+username+"]");
