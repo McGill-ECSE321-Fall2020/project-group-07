@@ -53,6 +53,15 @@ public class Shipment {
 	public String getDestinationAddress() {
 		return this.destinationAddress;
 	}
+	
+	private double shippingCost;
+	public void setShippingCost(double cost) {
+		this.shippingCost=cost;
+	}
+	
+	public double getShippingCost() {
+		return this.shippingCost;
+	}
 
 	private double totalAmount;
 
@@ -62,16 +71,6 @@ public class Shipment {
 
 	public double getTotalAmount() {
 		return this.totalAmount;
-	}
-
-	private String shippingCompany;
-
-	public void setShippingCompany(String value) {
-		this.shippingCompany = value;
-	}
-
-	public String getShippingCompany() {
-		return this.shippingCompany;
 	}
 
 	private ShipmentStatus shipmentStatus;
@@ -94,6 +93,60 @@ public class Shipment {
 		return this.recipientName;
 	}
 
+	private String creditCardNumber;
+	public void setCreditCardNumber(String creditCardNumber) {
+		this.creditCardNumber=creditCardNumber;
+	}
+		
+	public String getCreditCardNumber() {
+		return this.creditCardNumber;
+	}
+	
+	private String creditCardHolderName;
+	public void setCreditCardHolderName(String creditCardHolderName) {
+		this.creditCardHolderName=creditCardHolderName;
+	}
+	
+	public String getCreditCardHolderName() {
+		return this.creditCardHolderName;
+	}
+	
+	private String creditCardCSV;
+	public void setCreditCardCSV(String creditCardCSV) {
+		this.creditCardCSV=creditCardCSV;
+	}
+	
+	public String getCreditCardCSV() {
+		return this.creditCardCSV;
+	}
+	
+	private String creditCardExp;
+	public void setCreditCardExp(String creditCardExp) {
+		this.creditCardExp=creditCardExp;
+	}
+	
+	public String getCreditCardExp() {
+		return this.creditCardExp;
+	}
+
+	private String creditCardPost;
+	public void setCreditCardPost(String creditCardPost) {
+		this.creditCardPost=creditCardPost;
+	}
+	
+	public String getCreditCardPost() {
+		return this.creditCardPost;
+	}
+	
+	private boolean paid;
+	public void setPaid(boolean val) {
+		this.paid=paid;
+	}
+	
+	public boolean isPaid() {
+		return this.paid;
+	}
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "shipment")
 	private Set<Purchase> purchase;
 

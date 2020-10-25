@@ -35,15 +35,6 @@ public class Purchase {
 		return this.purchaseId;
 	}
 
-	private double commission=0.15;
-
-	public void setCommission(double value) {
-		this.commission = value;
-	}
-
-	public double getCommission() {
-		return this.commission;
-	}
 
 	private ShipmentType shipmentType=ShipmentType.OFFSITE_DELIVERY;
 
@@ -54,26 +45,9 @@ public class Purchase {
 	public ShipmentType getShipmentType() {
 		return this.shipmentType;
 	}
+	
+	
 
-	private PaymentMethod paymentMethod=PaymentMethod.NONE;
-
-	public void setPaymentMethod(PaymentMethod value) {
-		this.paymentMethod = value;
-	}
-
-	public PaymentMethod getPaymentMethod() {
-		return this.paymentMethod;
-	}
-
-	private boolean paid=false;
-
-	public void setPaid(boolean value) {
-		this.paid = value;
-	}
-
-	public boolean isPaid() {
-		return this.paid;
-	}
 
 	private Date date = Date.valueOf(LocalDate.now());
 
@@ -95,6 +69,7 @@ public class Purchase {
 	public Artwork getArtwork() {
 		return this.artwork;
 	}
+	
 
 	@ManyToOne(fetch = FetchType.EAGER, optional = true)
 	@JoinColumn(name = "shipment_id")
