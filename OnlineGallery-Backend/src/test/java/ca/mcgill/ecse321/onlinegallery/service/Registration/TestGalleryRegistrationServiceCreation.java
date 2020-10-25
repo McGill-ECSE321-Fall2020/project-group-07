@@ -32,7 +32,7 @@ public class TestGalleryRegistrationServiceCreation {
 	@Mock
 	private GalleryRegistrationRepository regRepo;
 	
-	@Mock 
+	@Mock  
 	private OnlineGalleryRepository ogRepo;
 	
 	@InjectMocks
@@ -82,13 +82,14 @@ public class TestGalleryRegistrationServiceCreation {
 		};
 		
 		lenient().when(ogRepo.save(any(OnlineGallery.class))).thenAnswer(paramAsAnswer);
+		
 		lenient().when(regRepo.existsByUserName(anyString())).thenAnswer((InvocationOnMock invocation)->{
 			if (invocation.getArgument(0).equals(INVALID_USERNAMEDUPLICATE)) {
 				return true;
 			}
 			else {
 				return false;
-			}
+			} 
 		});
 	}
 	
@@ -97,7 +98,7 @@ public class TestGalleryRegistrationServiceCreation {
 		GalleryRegistrationDto dto = new GalleryRegistrationDto();
 		dto.setUsername(VALID_USERNAME);
 		dto.setFirstName(VALID_FIRSTNAME);
-		dto.setLastName(VALID_LASTNAME);
+		dto.setLastName(VALID_LASTNAME); 
 		dto.setEmail(VALID_EMAIL);
 		dto.setPassword(VALID_PASSWORD);
 		

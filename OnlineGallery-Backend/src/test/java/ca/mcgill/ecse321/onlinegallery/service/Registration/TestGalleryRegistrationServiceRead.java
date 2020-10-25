@@ -51,7 +51,7 @@ public class TestGalleryRegistrationServiceRead {
 
 		Answer<?> paramAsAnswer = (InvocationOnMock invocation) -> {
 			return invocation.getArgument(0);
-		};
+		}; 
 
 		lenient().when(regRepo.existsByUserName(anyString())).thenAnswer((InvocationOnMock invocation) -> {
 			if (invocation.getArgument(0).equals(INVALID_USERNAMENONEXIST)) {
@@ -75,7 +75,7 @@ public class TestGalleryRegistrationServiceRead {
 
 						return reg;
 					}
-
+ 
 					return null;
 				});
 
