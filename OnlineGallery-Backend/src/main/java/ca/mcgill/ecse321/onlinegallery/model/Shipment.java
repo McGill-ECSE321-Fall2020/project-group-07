@@ -41,7 +41,7 @@ public class Shipment {
 	}
 
 	public String getSourceAddress() {
-		return this.sourceAddress;
+		return this.sourceAddress; 
 	}
 
 	private String destinationAddress;
@@ -102,50 +102,22 @@ public class Shipment {
 		return this.creditCardNumber;
 	}
 	
-	private String creditCardHolderName;
-	public void setCreditCardHolderName(String creditCardHolderName) {
-		this.creditCardHolderName=creditCardHolderName;
+	private String creditCardFirstName;
+	public void setCreditCardFirstName(String firstname) {
+		this.creditCardFirstName=firstname;
+	}
+	public String getCreditCardFirstName() {
+		return this.creditCardFirstName;
+	}
+	private String creditCardLastName;
+	public void setCreditCardLastName(String lastname) {
+		this.creditCardLastName=lastname;
 	}
 	
-	public String getCreditCardHolderName() {
-		return this.creditCardHolderName;
+	public String getCreditCardLastName() {
+		return this.creditCardLastName;
 	}
 	
-	private String creditCardCSV;
-	public void setCreditCardCSV(String creditCardCSV) {
-		this.creditCardCSV=creditCardCSV;
-	}
-	
-	public String getCreditCardCSV() {
-		return this.creditCardCSV;
-	}
-	
-	private String creditCardExp;
-	public void setCreditCardExp(String creditCardExp) {
-		this.creditCardExp=creditCardExp;
-	}
-	
-	public String getCreditCardExp() {
-		return this.creditCardExp;
-	}
-
-	private String creditCardPost;
-	public void setCreditCardPost(String creditCardPost) {
-		this.creditCardPost=creditCardPost;
-	}
-	
-	public String getCreditCardPost() {
-		return this.creditCardPost;
-	}
-	
-	private boolean paid;
-	public void setPaid(boolean val) {
-		this.paid=paid;
-	}
-	
-	public boolean isPaid() {
-		return this.paid;
-	}
 	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "shipment")
 	private Set<Purchase> purchase;
