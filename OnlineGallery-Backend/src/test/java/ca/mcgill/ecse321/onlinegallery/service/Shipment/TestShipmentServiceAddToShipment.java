@@ -43,15 +43,18 @@ public class TestShipmentServiceAddToShipment {
 	private static final Long VALID_SHIPID_NOPURCHASE = (long) 2;
 	private static final Long INVALID_SHIPID_NONEXIST = (long) 3;
 
-	private static final Long VALID_PURCHASEID_DELIVERY = (long) 10;
-	private static final Long VALID_PURCHASEID_PICKUP = (long) 11;
-	private static final Long INVALID_PURCHASEID_NONEXIST = (long) 12;
+	private static final Long EXISTING_PURCHASEID_DELIVERY = (long) 10;
+	private static final Long EXISTING_PURCHASEID_PICKUP = (long) 11;
+	
+	private static final Long VALID_NEW_PURCHASEID_PICKUP = (long) 12;
+	private static final Long VALID_NEW_PURCHASEID_DELIVERY = (long) 13;
+	private static final Long INVALID_NEW_PURCHASEID_NONEXIST = (long) 14;
 
 	@BeforeEach
 	public void setMockOutput() {
 
 		lenient().when(purchaseRepo.existsById(anyLong())).thenAnswer((InvocationOnMock i) -> {
-			if (i.getArgument(0).equals(INVALID_PURCHASEID_NONEXIST)) {
+			if (i.getArgument(0).equals(INVALID_NEW_PURCHASEID_NONEXIST)) {
 				return false;
 			} else {
 				return true;
@@ -67,17 +70,31 @@ public class TestShipmentServiceAddToShipment {
 		});
 
 		lenient().when(purchaseRepo.findPurchaseByPurchaseId(anyLong())).thenAnswer((InvocationOnMock i) -> {
-			if (i.getArgument(0).equals(VALID_PURCHASEID_DELIVERY)) {
+			if (i.getArgument(0).equals(EXISTING_PURCHASEID_DELIVERY)) {
 				Purchase p = new Purchase();
-				p.setPurchaseId(VALID_PURCHASEID_DELIVERY);
+				p.setPurchaseId(EXISTING_PURCHASEID_DELIVERY);
 				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
 				return p;
 			}
 
-			if (i.getArgument(0).equals(VALID_PURCHASEID_PICKUP)) {
+			if (i.getArgument(0).equals(EXISTING_PURCHASEID_PICKUP)) {
 				Purchase p = new Purchase();
-				p.setPurchaseId(VALID_PURCHASEID_PICKUP);
+				p.setPurchaseId(EXISTING_PURCHASEID_PICKUP);
 				p.setShipmentType(ShipmentType.ONSITE_PICKUP);
+				return p;
+			}
+			
+			if (i.getArgument(0).equals(VALID_NEW_PURCHASEID_PICKUP)) {
+				Purchase p = new Purchase();
+				p.setPurchaseId(VALID_NEW_PURCHASEID_PICKUP);
+				p.setShipmentType(ShipmentType.ONSITE_PICKUP);
+				return p;
+			}
+
+			if (i.getArgument(0).equals(VALID_NEW_PURCHASEID_DELIVERY)) {
+				Purchase p = new Purchase();
+				p.setPurchaseId(VALID_NEW_PURCHASEID_DELIVERY);
+				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
 				return p;
 			}
 
@@ -88,6 +105,7 @@ public class TestShipmentServiceAddToShipment {
 			if (i.getArgument(0).equals(VALID_SHIPID_EXISTPURCHASE_DELIVERY)) {
 				Purchase p = new Purchase();
 				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
+				p.setPurchaseId(EXISTING_PURCHASEID_DELIVERY);
 
 				Shipment s = new Shipment();
 				s.getPurchase().add(p);
@@ -98,7 +116,8 @@ public class TestShipmentServiceAddToShipment {
 			if (i.getArgument(0).equals(VALID_SHIPID_EXISTPURCHASE_PICKUP)) {
 				Purchase p = new Purchase();
 				p.setShipmentType(ShipmentType.ONSITE_PICKUP);
-
+				p.setPurchaseId(EXISTING_PURCHASEID_PICKUP);
+				
 				Shipment s = new Shipment();
 				s.getPurchase().add(p);
 
@@ -118,6 +137,158 @@ public class TestShipmentServiceAddToShipment {
 			return i.getArgument(0);
 		});
 
+	}
+	
+	@Test
+	public void testAddToShipmentValidShipIdDeliveryValidPurchaseIdDelivery() {
+		Shipment s = null;
+		try {
+			s=service.addToShipment(VALID_SHIPID_EXISTPURCHASE_DELIVERY, VALID_NEW_PURCHASEID_DELIVERY);
+		}
+		catch(ShipmentException | PurchaseException e) {
+			fail();
+		}
+		
+		assertNotNull(s);
+		
+		boolean newPurchaseInShipment=false;
+		
+		for (Purchase p:s.getPurchase()) {
+			if (p.getPurchaseId().equals(VALID_NEW_PURCHASEID_DELIVERY)) {
+				newPurchaseInShipment=true;
+			}
+		}
+		
+		assertEquals(true,newPurchaseInShipment);
+	}
+	
+	@Test
+	public void testAddToShipmentValidShipIdPickupValidPurchaseIdPickup() {
+		Shipment s = null;
+		try {
+			s=service.addToShipment(VALID_SHIPID_EXISTPURCHASE_PICKUP, VALID_NEW_PURCHASEID_PICKUP);
+		}
+		catch(ShipmentException | PurchaseException e) {
+			fail();
+		}
+		
+		assertNotNull(s);
+		
+		boolean newPurchaseInShipment=false;
+		
+		for (Purchase p:s.getPurchase()) {
+			if (p.getPurchaseId().equals(VALID_NEW_PURCHASEID_PICKUP)) {
+				newPurchaseInShipment=true;
+			}
+		}
+		
+		assertEquals(true,newPurchaseInShipment);
+	}
+	
+	@Test
+	public void testAddToShipmentValidShipIdNoPurchaseValidPurchaseIdPickup() {
+		Shipment s = null;
+		try {
+			s=service.addToShipment(VALID_SHIPID_NOPURCHASE, VALID_NEW_PURCHASEID_PICKUP);
+		}
+		catch(ShipmentException | PurchaseException e) {
+			fail();
+		}
+		
+		assertNotNull(s);
+		
+		boolean newPurchaseInShipment=false;
+		
+		for (Purchase p:s.getPurchase()) {
+			if (p.getPurchaseId().equals(VALID_NEW_PURCHASEID_PICKUP)) {
+				newPurchaseInShipment=true;
+			}
+		}
+		
+		assertEquals(true,newPurchaseInShipment);
+	}
+	
+	@Test
+	public void testAddToShipmentValidShipIdNoPurchaseValidPurchaseIdDelivery() {
+		Shipment s = null;
+		try {
+			s=service.addToShipment(VALID_SHIPID_NOPURCHASE, VALID_NEW_PURCHASEID_DELIVERY);
+		}
+		catch(ShipmentException | PurchaseException e) {
+			fail();
+		}
+		
+		assertNotNull(s);
+		
+		boolean newPurchaseInShipment=false;
+		
+		for (Purchase p:s.getPurchase()) {
+			if (p.getPurchaseId().equals(VALID_NEW_PURCHASEID_DELIVERY)) {
+				newPurchaseInShipment=true;
+			}
+		}
+		
+		assertEquals(true,newPurchaseInShipment);
+	}
+	
+	@Test
+	public void testAddToShipmentInValidShipIdNonExist() {
+		Shipment s = null;
+		String error=null;
+		try {
+			s=service.addToShipment(INVALID_SHIPID_NONEXIST, VALID_NEW_PURCHASEID_PICKUP);
+		}
+		catch(ShipmentException | PurchaseException e) {
+			error=e.getMessage();
+		}
+		
+		assertNull(s);
+		assertEquals(error,"no Shipment with id ["+INVALID_SHIPID_NONEXIST+"] found");
+	}
+	
+	@Test
+	public void testAddToShipmentValidShipIdPickupInvalidPurchaseIdNonExist() {
+		Shipment s = null;
+		String error=null;
+		try {
+			s=service.addToShipment(VALID_SHIPID_EXISTPURCHASE_PICKUP, INVALID_NEW_PURCHASEID_NONEXIST);
+		}
+		catch(ShipmentException | PurchaseException e) {
+			error=e.getMessage();
+		}
+		
+		assertNull(s);
+		assertEquals(error,"no Purchase with id ["+INVALID_NEW_PURCHASEID_NONEXIST+"] found");
+	}
+
+	@Test
+	public void testAddToShipmentValidShipIdPickupValidPurchaseIdDelivery() {
+		Shipment s = null;
+		String error=null;
+		try {
+			s=service.addToShipment(VALID_SHIPID_EXISTPURCHASE_PICKUP, VALID_NEW_PURCHASEID_DELIVERY);
+		}
+		catch(ShipmentException | PurchaseException e) {
+			error=e.getMessage();
+		}
+		
+		assertNull(s);
+		assertEquals(error,"incompatible shipment types between existing Purchases in Shipment and Shipment to add");
+	}
+	
+	@Test
+	public void testAddToShipmentValidShipIdDeliveryValidPurchaseIdPIckup() {
+		Shipment s = null;
+		String error=null;
+		try {
+			s=service.addToShipment(VALID_SHIPID_EXISTPURCHASE_DELIVERY, VALID_NEW_PURCHASEID_PICKUP);
+		}
+		catch(ShipmentException | PurchaseException e) {
+			error=e.getMessage();
+		}
+		
+		assertNull(s);
+		assertEquals(error,"incompatible shipment types between existing Purchases in Shipment and Shipment to add");
 	}
 
 }

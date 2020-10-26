@@ -20,7 +20,8 @@ public class ShipmentService {
 	PurchaseRepository purchaseRepo;
 	
 
-	@Transactional Shipment addToShipment(Long shipmentId, Long purchaseId) throws ShipmentException, PurchaseException{
+	@Transactional
+	public Shipment addToShipment(Long shipmentId, Long purchaseId) throws ShipmentException, PurchaseException{
 		if (!shipRepo.existsById(shipmentId)) {
 			throw new ShipmentException("no Shipment with id ["+shipmentId+"] found");
 		}
@@ -35,14 +36,13 @@ public class ShipmentService {
 			ShipmentType existingType = shipment.getPurchase().iterator().next().getShipmentType();
 			ShipmentType newType = purchase.getShipmentType();
 			if (!(existingType.name().equals(newType.name()))) {
-				throw new ShipmentException("Shipment type of purchase with id [" + purchaseId + "] is [" + newType
-						+ "], which is incompatible with shipment types of existing purchases in Shipment with id ["
-						+ shipmentId + "], which is [" + existingType + "]");
+				throw new ShipmentException("incompatible shipment types between existing Purchases in Shipment and Shipment to add");
 			}
 		}
 		
 		shipment.getPurchase().add(purchase);
-		shipment=shipRepo.save(shipment);
+		purchase.setShipment(shipment);
+		shipRepo.save(shipment);
 		
 		return shipment;
 	}
