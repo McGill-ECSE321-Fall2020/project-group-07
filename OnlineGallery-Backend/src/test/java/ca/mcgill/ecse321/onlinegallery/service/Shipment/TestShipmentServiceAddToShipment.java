@@ -56,6 +56,8 @@ public class TestShipmentServiceAddToShipment {
 	private static final Long VALID_NEW_PURCHASEID_PICKUP = (long) 12;
 	private static final Long VALID_NEW_PURCHASEID_DELIVERY = (long) 13;
 	private static final Long INVALID_NEW_PURCHASEID_NONEXIST = (long) 14;
+	private static final Long INVALID_NEW_PURCHASEID_DIFFERENT_CUSTOMER = (long) 15;
+
 
 	@BeforeEach
 	public void setMockOutput() {
@@ -81,6 +83,11 @@ public class TestShipmentServiceAddToShipment {
 				Purchase p = new Purchase();
 				p.setPurchaseId(EXISTING_PURCHASEID_DELIVERY);
 				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
+				
+				Customer c = new Customer();
+				c.setCustomerId((long) 0);
+				p.setCustomer(c);
+				
 				return p;
 			}
 
@@ -88,6 +95,11 @@ public class TestShipmentServiceAddToShipment {
 				Purchase p = new Purchase();
 				p.setPurchaseId(EXISTING_PURCHASEID_PICKUP);
 				p.setShipmentType(ShipmentType.ONSITE_PICKUP);
+				
+				Customer c = new Customer();
+				c.setCustomerId((long) 0);
+				p.setCustomer(c);
+				
 				return p;
 			}
 			
@@ -95,6 +107,11 @@ public class TestShipmentServiceAddToShipment {
 				Purchase p = new Purchase();
 				p.setPurchaseId(VALID_NEW_PURCHASEID_PICKUP);
 				p.setShipmentType(ShipmentType.ONSITE_PICKUP);
+				
+				Customer c = new Customer();
+				c.setCustomerId((long) 0);
+				p.setCustomer(c);
+				
 				return p;
 			}
 
@@ -102,6 +119,23 @@ public class TestShipmentServiceAddToShipment {
 				Purchase p = new Purchase();
 				p.setPurchaseId(VALID_NEW_PURCHASEID_DELIVERY);
 				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
+				
+				Customer c = new Customer();
+				c.setCustomerId((long) 0);
+				p.setCustomer(c);
+				
+				return p;
+			}
+			
+			if (i.getArgument(0).equals(INVALID_NEW_PURCHASEID_DIFFERENT_CUSTOMER)) {
+				Purchase p = new Purchase();
+				p.setPurchaseId(VALID_NEW_PURCHASEID_DELIVERY);
+				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
+				
+				Customer c = new Customer();
+				c.setCustomerId((long) 3);
+				p.setCustomer(c);
+				
 				return p;
 			}
 
@@ -115,8 +149,14 @@ public class TestShipmentServiceAddToShipment {
 				p.setPurchaseId(EXISTING_PURCHASEID_DELIVERY);
 
 				Shipment s = new Shipment();
+				Customer c = new Customer();
+				c.setCustomerId((long) 0);
+				p.setCustomer(c);
+				c.getPurchase().add(p);
+				
 				s.getPurchase().add(p);
 
+				
 				return s;
 			}
 
@@ -126,6 +166,12 @@ public class TestShipmentServiceAddToShipment {
 				p.setPurchaseId(EXISTING_PURCHASEID_PICKUP);
 				
 				Shipment s = new Shipment();
+				
+				Customer c = new Customer();
+				c.setCustomerId((long) 0);
+				p.setCustomer(c);
+				c.getPurchase().add(p);
+
 				s.getPurchase().add(p);
 
 				return s;
@@ -236,6 +282,21 @@ public class TestShipmentServiceAddToShipment {
 		}
 		
 		assertEquals(true,newPurchaseInShipment);
+	}
+	
+	@Test
+	public void testAddToShipmentValidShipIdDeliveryInvalidPurchaseDifferentCustomer() {
+		Shipment s = null;
+		String error=null;
+		try {
+			s=service.addToShipment(VALID_SHIPID_EXISTPURCHASE_DELIVERY, INVALID_NEW_PURCHASEID_DIFFERENT_CUSTOMER);
+		}
+		catch(ShipmentException | PurchaseException e) {
+			error=e.getMessage();
+		}
+		
+		assertNull(s);
+		assertEquals(error,"cannot add a Purchase to a Shipment owned by another Customer");
 	}
 	
 	@Test

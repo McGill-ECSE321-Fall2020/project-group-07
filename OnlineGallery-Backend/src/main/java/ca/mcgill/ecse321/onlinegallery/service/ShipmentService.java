@@ -45,6 +45,16 @@ public class ShipmentService {
 			}
 		}
 		
+		if (shipment.getPurchase().iterator().hasNext()) {
+			Long existingCustomerId=shipment.getPurchase().iterator().next().getCustomer().getCustomerId();
+			Long newCustomerId=purchase.getCustomer().getCustomerId();
+			
+			if (!(newCustomerId.equals(existingCustomerId))) {
+				throw new ShipmentException("cannot add a Purchase to a Shipment owned by another Customer");
+			}
+		}
+				
+		
 		shipment.getPurchase().add(purchase);
 		purchase.setShipment(shipment);
 		shipRepo.save(shipment);
