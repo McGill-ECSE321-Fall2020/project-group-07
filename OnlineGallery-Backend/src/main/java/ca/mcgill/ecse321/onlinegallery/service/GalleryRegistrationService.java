@@ -15,8 +15,8 @@ public class GalleryRegistrationService {
 
 	@Autowired
 	OnlineGalleryRepository ogRepo;
-
-	@Autowired
+ 
+	@Autowired 
 	GalleryRegistrationRepository regRepo;
 	
 	@Autowired
