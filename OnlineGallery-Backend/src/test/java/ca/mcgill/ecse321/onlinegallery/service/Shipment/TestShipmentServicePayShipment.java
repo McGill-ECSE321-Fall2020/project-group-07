@@ -129,6 +129,7 @@ public class TestShipmentServicePayShipment {
 		
 		assertNotNull(s);
 		assertEquals(s.getShipmentStatus(),ShipmentStatus.PAID);
+		assertEquals(s.getCreditCardNumber(),VALID_CCNUM.substring(VALID_CCNUM.length()-4));
 	}
 	
 	@Test
