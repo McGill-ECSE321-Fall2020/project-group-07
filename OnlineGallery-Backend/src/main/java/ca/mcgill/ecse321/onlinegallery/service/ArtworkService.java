@@ -1,27 +1,22 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.OnlineGalleryRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.PhysicalGalleryRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dto.ArtworkDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.Artwork;
 import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
-import ca.mcgill.ecse321.onlinegallery.model.OnlineGallery;
-import ca.mcgill.ecse321.onlinegallery.model.PhysicalGallery;
+import ca.mcgill.ecse321.onlinegallery.service.exception.ArtistException;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtworkException;
 
 @Service
@@ -31,12 +26,50 @@ public class ArtworkService {
 	ArtworkRepository artworkRepo;
 	
 	@Autowired
-	ArtistRepository artRepo;
+	ArtistRepository artistRepo;
 	
 	@Autowired
 	GalleryRegistrationRepository regRepo;
 	
 
+	@Transactional
+	public Artwork createArtwork(Long artistId, ArtworkDto dto) throws ArtworkException, ArtistException {
+		
+		if(!artistRepo.existsById(artistId)) {
+			throw new ArtistException("No artist with ID ["+artistId+"] exists");
+		}
+		
+		String username=dto.getUsername();		
+		if (!regRepo.existsByUserName(username)) {
+			throw new ArtworkException("No GalleryRegistration with username ["+username+"] exists");
+		}
+		
+		GalleryRegistration reg=regRepo.findGalleryRegisrationByUserName(username);
+		if (reg.getArtist()==null) {
+			throw new ArtworkException("No artist associated with username ["+username+"]");
+		}
+		
+		Artist artist = reg.getArtist();
+		Artwork art = new Artwork();
+		
+		art.setName(dto.getName());
+		art.setDescription(dto.getDescription());
+		art.setPrice(dto.getPrice());
+		art.setStatus(dto.getStatus());
+		art.setNumViews(dto.getNumViews());
+		art.setDimension(dto.getDimension());
+		art.setWeight(dto.getWeight());
+		art.setCommission(dto.getCommission());
+		
+		
+		artist.getArtwork().add(art);
+		art.setArtist(artist);
+		
+		artworkRepo.save(art);
+		
+		return art;
+		
+	}
 	
 	@Transactional
 	public Artwork getAvailableArtworkDetail(Long artworkId) throws ArtworkException{
@@ -50,30 +83,4 @@ public class ArtworkService {
 		} 
 		return artwork;
 	}
-	
-	@Transactional 
-	public Set<Artwork> getAvailableArtworkByArtistId(Long artistId) throws ArtworkException{
-		if (!artRepo.existsByArtistId(artistId)) {
-			throw new  ArtworkException("No artist with artistId ["+artistId+"] exists");
-		} 
-		Artist artist = artRepo.findArtistByArtistId(artistId);
-		return artist.getArtwork();
-	}
-	
-//	Public  List<Artwork> retrieveRandomAvailableArtworks(int numToRetrieve) throws ArtworkException{
-//		
-//		ArrayList<Artwork> artworkList = new ArrayList<Artwork>();
-//	
-//		Iterator<Artwork> artworkIterable = (Iterator<Artwork>) artworkRepo.findAll().iterator();
-//        for (Iterator<Artwork> t : artworkIterable) 
-//        	artworkList.add((Artwork) t); 
-//  
-//
-//		return artworkList;
-//	
-//		
-//	}
-	
-
-
 }

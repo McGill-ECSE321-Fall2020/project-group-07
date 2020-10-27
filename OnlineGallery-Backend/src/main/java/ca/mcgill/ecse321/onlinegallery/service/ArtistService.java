@@ -10,7 +10,6 @@ import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
 import ca.mcgill.ecse321.onlinegallery.dto.ArtistDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
-import ca.mcgill.ecse321.onlinegallery.model.ArtistForm;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtistException;
 
@@ -95,7 +94,7 @@ public class ArtistService {
 	}
 	
 	@Transactional
-	public Artist deleteArtistByUserName(String username) throws ArtistException {
+	public Artist deleteArtistByUsername(String username) throws ArtistException {
 
 		if (!regRepo.existsByUserName(username)) {
 			
@@ -103,13 +102,13 @@ public class ArtistService {
 		}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		Long id = reg.getArtist().getArtistId();
-		Artist artist = artistRepo.findArtistByArtistId(id);
 
-		if(artist == null) {
+		if(reg.getArtist() == null) {
 			
-			throw new ArtistException("No artist exists under the username ["+username+"]");
+			throw new ArtistException("No artist exists under the id ["+username+"]");
 		}
+		
+		Artist artist = artistRepo.findArtistByArtistId(reg.getArtist().getArtistId());
 		
 		reg.setArtist(null);
 		artistRepo.delete(artist);

@@ -66,12 +66,12 @@ public class TestArtistServiceDelete {
 			return false;
 		});
 		
-		lenient().when(artistRepo.existsByArtistId(anyLong())).thenAnswer((InvocationOnMock invocation)->{
+		lenient().when(artistRepo.existsById(anyLong())).thenAnswer((InvocationOnMock invocation)->{
 			if (invocation.getArgument(0).equals(VALID_ARTISTID)) {
 				return true;
 			}
 			if (invocation.getArgument(0).equals(INVALID_ARTISTID)) {
-				return false;
+				return true;
 			}
 			else {
 				return false;
@@ -118,7 +118,7 @@ public class TestArtistServiceDelete {
 		
 		Artist a = null;
 		try {
-			a = service.deleteArtistByUserName(VALID_USERNAME);
+			a = service.deleteArtistByUsername(VALID_USERNAME);
 		}catch(ArtistException e) {
 			System.out.print(e);
 			fail();
