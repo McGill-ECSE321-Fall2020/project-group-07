@@ -25,7 +25,7 @@ import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestGalleryRegistrationServiceRead {
+public class TestGalleryRegistrationServiceGet {
 
 	@Mock
 	private GalleryRegistrationRepository regRepo;

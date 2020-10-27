@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,23 @@ public class GalleryRegistrationService {
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
 		return reg;
+	}
+	
+	@Transactional
+	public List<GalleryRegistration> getAllGalleryRegistrations() throws GalleryRegistrationException{
+		
+		List<GalleryRegistration> allReg = new ArrayList<GalleryRegistration>();
+		
+		if (regRepo.count()==0) {
+			throw new GalleryRegistrationException("no GalleryRegistrations found in system");
+		}
+		else {
+			for (GalleryRegistration reg:regRepo.findAll()) {
+				allReg.add(reg);
+			}
+		}
+		return allReg;
+		
 	}
 	
 	@Transactional
