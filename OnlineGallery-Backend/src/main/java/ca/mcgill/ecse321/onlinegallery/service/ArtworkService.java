@@ -15,6 +15,7 @@ import ca.mcgill.ecse321.onlinegallery.dao.PhysicalGalleryRepository;
 import ca.mcgill.ecse321.onlinegallery.dto.ArtworkDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.Artwork;
+import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.model.OnlineGallery;
 import ca.mcgill.ecse321.onlinegallery.model.PhysicalGallery;
@@ -28,6 +29,7 @@ public class ArtworkService {
 	
 	@Autowired
 	GalleryRegistrationRepository regRepo;
+	
 
 	@Transactional
 	public Artwork createArtwork(ArtworkDto dto) throws ArtworkException {
@@ -65,6 +67,20 @@ public class ArtworkService {
 		
 		
 	}
+	
+	@Transactional
+	public Artwork getAvailableArtworkDetail(Long artworkId) throws ArtworkException{
+		if (!artRepo.existsByArtworkId(artworkId)) {
+			throw new  ArtworkException("No Available Artwork with artworkID ["+artworkId+"] exists");
+		} 
+
+		Artwork artwork = artRepo.findArtworkByArtworkId(artworkId);
+		if (artwork.getStatus() == ArtworkStatus.UNAVAILABLE) {
+			throw new  ArtworkException("No AvailableArtwork with artworkID ["+artworkId+"] exists");
+		} 
+		return artwork;
+	}
+	
 
 
 }
