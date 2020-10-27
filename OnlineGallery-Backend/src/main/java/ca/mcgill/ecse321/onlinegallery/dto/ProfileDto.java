@@ -1,32 +1,45 @@
 package ca.mcgill.ecse321.onlinegallery.dto;
 
-import ca.mcgill.ecse321.onlinegallery.model.Profile;
-
 public class ProfileDto {
 
-	private Profile profile;
-	
-	public ProfileDto(Profile profile){
-		this.profile = profile;
+	private Long id;
+	public void setProfileId(Long id) {
+		this.id = id;
+	}
+	public Long getProfileId() {
+		return this.id;
 	}
 	
-	public long getProfileId() {
-		return profile.getProfileId();
+	private int numSold;
+	public void setNumSold(int numSold) {
+		this.numSold = numSold;
 	}
-	
 	public int getNumSold() {
-		return profile.getNumSold();
+		return this.numSold;
 	}
 	
+	private double totalEarnings;
+	public void setTotalEarnings(double totalEarnings) {
+		this.totalEarnings = totalEarnings;
+	}
 	public double getTotalEarnings() {
-		return profile.getTotalEarnings();
+		return this.totalEarnings;
 	}
 	
+	private String selfDescription;
+	public void setSelfDescription(String selfDescription) {
+		this.selfDescription = selfDescription;
+	}
 	public String getSelfDescription() {
-		return profile.getSelfDescription();
+		return this.selfDescription;
 	}
 	
-	public double getRating() {
-		return profile.getRating();
+	private double rating;
+	public void setRating(double rating) {
+		this.rating = rating;
 	}
+	public double getRating() {
+		return this.rating;
+	}
+	
 }
