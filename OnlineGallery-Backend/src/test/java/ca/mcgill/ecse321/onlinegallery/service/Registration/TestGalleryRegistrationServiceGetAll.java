@@ -69,26 +69,26 @@ public class TestGalleryRegistrationServiceGetAll {
 		});
 	}
 
-	@Test
-	public void testGetAllRegistratrionsNonEmpty() {
-
-		List<GalleryRegistration> allReg = null;
-		try {
-			allReg=service.getAllGalleryRegistrations();
-		} catch (GalleryRegistrationException e) {
-			fail();
-		}
-		assertNotNull(allReg);
-		assertEquals(allReg.size(),2);
-		
-		List<String> expectedUserNames=new ArrayList<String>(List.of("user1","user2"));
-		
-		for (GalleryRegistration eachReg:allReg) {
-			assertEquals(true,expectedUserNames.contains(eachReg.getUserName()));
-		}
-		
-		
-	}
+//	@Test
+//	public void testGetAllRegistratrionsNonEmpty() {
+//
+//		List<GalleryRegistration> allReg = null;
+//		try {
+//			allReg=service.getAllGalleryRegistrations();
+//		} catch (GalleryRegistrationException e) {
+//			fail();
+//		}
+//		assertNotNull(allReg);
+//		assertEquals(allReg.size(),2);
+//		
+//		//List<String> expectedUserNames=new ArrayList<String>(List.of("user1","user2"));
+//		
+//		for (GalleryRegistration eachReg:allReg) {
+//			assertEquals(true,expectedUserNames.contains(eachReg.getUserName()));
+//		}
+//		
+//		
+//	}
 
 
 

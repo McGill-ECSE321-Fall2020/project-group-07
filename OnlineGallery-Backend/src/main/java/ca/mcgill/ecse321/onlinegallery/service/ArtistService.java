@@ -23,75 +23,23 @@ public class ArtistService {
 	GalleryRegistrationRepository regRepo;
 	
 	@Transactional
-	public Artist createArtist(ArtistDto dto) throws ArtistException {
-		
-		String username = dto.getUsername();
-		
-		if (!regRepo.existsByUserName(username)) {
-			
-			throw new ArtistException("An artist is already associated to the username ["+username+"]");
-		}
-		
-		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		
-		if (reg.getArtist()==null) {
-			
-			reg.setArtist(new Artist());
-		}
-		
-		Artist artist = reg.getArtist();
-		
-		artist.setBankInfo(dto.getBankInfo());
-
-		artistRepo.save(artist);
-		
-		return artist;
-	}
-	
-	@Transactional
-	public Artist findArtistByUsername(ArtistDto dto) throws ArtistException {
-		
-		String username = dto.getUsername();
-		
-		if (!regRepo.existsByUserName(username)) {
-			
-			throw new ArtistException("No registration exists under the username ["+username+"]");
-		}
-		
-		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		
-		if (reg.getArtist()==null) {
-			
-			throw new ArtistException("No artist exists under the username ["+username+"]");
-		}
+	public Artist findArtistByUsername(String username) throws ArtistException {
 				
-		return reg.getArtist();
-	}
-	
-	@Transactional
-	public Artist updateBankInfo(ArtistDto dto) throws ArtistException {
-		
-		String username = dto.getUsername();
-
 		if (!regRepo.existsByUserName(username)) {
 			
 			throw new ArtistException("No registration exists under the username ["+username+"]");
 		}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		Artist artist = reg.getArtist();
 		
-		if(artist == null) {
+		if (reg.getArtist()==null) {
 			
 			throw new ArtistException("No artist exists under the username ["+username+"]");
 		}
-		
-		artist.setBankInfo(dto.getBankInfo());
-
-		artistRepo.save(artist);
-		
+		Artist artist = reg.getArtist();	
 		return artist;
 	}
+	
 	
 	@Transactional
 	public Artist deleteArtistByUsername(String username) throws ArtistException {
@@ -108,7 +56,7 @@ public class ArtistService {
 			throw new ArtistException("No artist exists under the id ["+username+"]");
 		}
 		
-		Artist artist = artistRepo.findArtistByArtistId(reg.getArtist().getArtistId());
+		Artist artist = reg.getArtist();
 		
 		reg.setArtist(null);
 		artistRepo.delete(artist);
