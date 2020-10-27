@@ -27,7 +27,7 @@ public class ApplicationService {
 	ArtworkRepository artworkRepo;
 	
 	@Transactional
-	private Map<Long, SoldArtworksSummaryEntry> generateSummary () throws ApplicationException{
+	public Map<Long, SoldArtworksSummaryEntry> generateSummary () throws ApplicationException{
 		if (toList(purchaseRepo.findAll()).size() == 0) {
 			throw new ApplicationException ("no purchase exist on the system");
 		}
