@@ -25,6 +25,7 @@ public class ArtworkService {
 	
 	@Autowired
 	GalleryRegistrationRepository regRepo;
+	
 
 	@Transactional
 	public Artwork createArtwork(ArtworkDto dto) throws ArtworkException {
@@ -61,4 +62,23 @@ public class ArtworkService {
 		return art;
 		
 	}
+<<<<<<< HEAD
+=======
+	
+	@Transactional
+	public Artwork getAvailableArtworkDetail(Long artworkId) throws ArtworkException{
+		if (!artRepo.existsByArtworkId(artworkId)) {
+			throw new  ArtworkException("No Available Artwork with artworkID ["+artworkId+"] exists");
+		} 
+
+		Artwork artwork = artRepo.findArtworkByArtworkId(artworkId);
+		if (artwork.getStatus() == ArtworkStatus.UNAVAILABLE) {
+			throw new  ArtworkException("No AvailableArtwork with artworkID ["+artworkId+"] exists");
+		} 
+		return artwork;
+	}
+	
+
+
+>>>>>>> origin/keon-rest
 }
