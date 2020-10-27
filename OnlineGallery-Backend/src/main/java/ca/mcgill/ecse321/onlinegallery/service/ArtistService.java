@@ -24,9 +24,9 @@ public class ArtistService {
 	GalleryRegistrationRepository regRepo;
 	
 	@Transactional
-	public Artist createArtist(ArtistForm form) throws ArtistException {
+	public Artist createArtist(ArtistDto dto) throws ArtistException {
 		
-		String username = form.getUserName();
+		String username = dto.getUsername();
 		
 		if (!regRepo.existsByUserName(username)) {
 			
@@ -42,7 +42,7 @@ public class ArtistService {
 		
 		Artist artist = reg.getArtist();
 		
-		artist.setBankInfo(form.getBankInfo());
+		artist.setBankInfo(dto.getBankInfo());
 
 		artistRepo.save(artist);
 		
@@ -50,9 +50,9 @@ public class ArtistService {
 	}
 	
 	@Transactional
-	public Artist findArtistByUsername(ArtistForm form) throws ArtistException {
+	public Artist findArtistByUsername(ArtistDto dto) throws ArtistException {
 		
-		String username = form.getUserName();
+		String username = dto.getUsername();
 		
 		if (!regRepo.existsByUserName(username)) {
 			
@@ -70,9 +70,9 @@ public class ArtistService {
 	}
 	
 	@Transactional
-	public Artist updateBankInfo(ArtistForm form) throws ArtistException {
+	public Artist updateBankInfo(ArtistDto dto) throws ArtistException {
 		
-		String username = form.getUserName();
+		String username = dto.getUsername();
 
 		if (!regRepo.existsByUserName(username)) {
 			
@@ -87,7 +87,7 @@ public class ArtistService {
 			throw new ArtistException("No artist exists under the username ["+username+"]");
 		}
 		
-		artist.setBankInfo(form.getBankInfo());
+		artist.setBankInfo(dto.getBankInfo());
 
 		artistRepo.save(artist);
 		
