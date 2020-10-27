@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service.Registration;
+package ca.mcgill.ecse321.onlinegallery.serviceAll;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -29,38 +29,36 @@ import ca.mcgill.ecse321.onlinegallery.dao.*;
 import ca.mcgill.ecse321.onlinegallery.dto.*;
 import ca.mcgill.ecse321.onlinegallery.model.*;
 import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
+import ca.mcgill.ecse321.onlinegallery.service.ShipmentService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestGalleryRegistrationServiceGetAllEmpty {
+public class TestShipmentServiceGetAllEmpty {
 
 	@Mock
-	private GalleryRegistrationRepository regRepo;
-
-	@Mock
-	private OnlineGalleryRepository ogRepo;
+	private ShipmentRepository shipRepo;
 
 	@InjectMocks
-	private GalleryRegistrationService service;
+	private ShipmentService service;
 
 	@BeforeEach
 	public void setMockOutput() {
 
-		lenient().when(regRepo.count()).thenReturn((long) 0);
+		lenient().when(shipRepo.count()).thenReturn((long) 0);
 	}
 
 	@Test
-	public void testGetAllRegistratrionsIsEmpty() {
+	public void testGetAllShipmentNonEmpty() {
 
-		List<GalleryRegistration> allReg = null;
-		String error = null; 
+		List<Shipment> allS = null;
+		String error = null;
 		try {
-			allReg = service.getAllGalleryRegistrations();
-		} catch (GalleryRegistrationException e) {
+			allS = service.getAllShipments();
+		} catch (ShipmentException e) {
 			error = e.getMessage();
 		}
-		assertNull(allReg);
-		assertEquals(error, "no GalleryRegistrations found in system");
+		assertNull(allS);
+		assertEquals(error, "no Shipments in system");
 
 	}
 

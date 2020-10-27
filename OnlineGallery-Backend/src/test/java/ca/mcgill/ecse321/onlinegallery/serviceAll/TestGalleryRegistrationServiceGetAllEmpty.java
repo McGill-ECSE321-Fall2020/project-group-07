@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service.Registration;
+package ca.mcgill.ecse321.onlinegallery.serviceAll;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -32,7 +32,7 @@ import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestGalleryRegistrationServiceGetAll {
+public class TestGalleryRegistrationServiceGetAllEmpty {
 
 	@Mock
 	private GalleryRegistrationRepository regRepo;
@@ -43,54 +43,25 @@ public class TestGalleryRegistrationServiceGetAll {
 	@InjectMocks
 	private GalleryRegistrationService service;
 
-
-
 	@BeforeEach
 	public void setMockOutput() {
 
-		Answer<?> paramAsAnswer = (InvocationOnMock invocation) -> {
-			return invocation.getArgument(0);
-		}; 
-
-		lenient().when(regRepo.count()).thenReturn((long) 2);
-		lenient().when(regRepo.findAll()).thenAnswer((InvocationOnMock invocation)->{
-			GalleryRegistration reg1 = new GalleryRegistration();
-			reg1.setUserName("user1");
-			
-			GalleryRegistration reg2 = new GalleryRegistration();
-			reg2.setUserName("user2");
-			
-			Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
-			
-			allReg.add(reg1);
-			allReg.add(reg2);
-			
-			return allReg;
-		});
+		lenient().when(regRepo.count()).thenReturn((long) 0);
 	}
 
-	@Test 
-	public void testGetAllRegistratrionsNonEmpty() {
+	@Test
+	public void testGetAllRegistratrionsIsEmpty() {
 
 		List<GalleryRegistration> allReg = null;
+		String error = null; 
 		try {
-			allReg=service.getAllGalleryRegistrations();
+			allReg = service.getAllGalleryRegistrations();
 		} catch (GalleryRegistrationException e) {
-			fail();
+			error = e.getMessage();
 		}
-		assertNotNull(allReg);
-		assertEquals(allReg.size(),2);
-		
-		List<String> expectedUserNames=new ArrayList<String>(List.of("user1","user2"));
-		
-		for (GalleryRegistration eachReg:allReg) {
-			assertEquals(true,expectedUserNames.contains(eachReg.getUserName()));
-		}
-		
-		
-	} 
+		assertNull(allReg);
+		assertEquals(error, "no GalleryRegistrations found in system");
 
-
-
+	}
 
 }

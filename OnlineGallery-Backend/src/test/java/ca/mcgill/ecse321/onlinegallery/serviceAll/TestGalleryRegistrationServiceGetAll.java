@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service.Registration;
+package ca.mcgill.ecse321.onlinegallery.serviceAll;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;

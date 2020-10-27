@@ -30,7 +30,7 @@ import ca.mcgill.ecse321.onlinegallery.service.*;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestPurchaseServiceDelete {
+public class TestPurchaseServiceDelete { 
 	
 	@Mock
 	private GalleryRegistrationRepository regRepo;

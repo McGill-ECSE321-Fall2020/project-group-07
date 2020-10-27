@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service.Registration;
+package ca.mcgill.ecse321.onlinegallery.serviceAll;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -29,65 +29,50 @@ import ca.mcgill.ecse321.onlinegallery.dao.*;
 import ca.mcgill.ecse321.onlinegallery.dto.*;
 import ca.mcgill.ecse321.onlinegallery.model.*;
 import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
+import ca.mcgill.ecse321.onlinegallery.service.PurchaseService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestGalleryRegistrationServiceGetAll {
+public class TestPurchaseServiceGetAllEmpty {
 
 	@Mock
 	private GalleryRegistrationRepository regRepo;
-
+	
 	@Mock
-	private OnlineGalleryRepository ogRepo;
-
+	private PurchaseRepository purchaseRepo;
+	
+	@Mock
+	private CustomerRepository custRepo;
+	
+	@Mock
+	private ArtworkRepository artRepo;
+	
 	@InjectMocks
-	private GalleryRegistrationService service;
+	private PurchaseService service;
 
+	private static final Long PID1= (long) 1;
+	private static final Long PID2= (long) 2;
 
-
+	
 	@BeforeEach
 	public void setMockOutput() {
-
-		Answer<?> paramAsAnswer = (InvocationOnMock invocation) -> {
-			return invocation.getArgument(0);
-		}; 
-
-		lenient().when(regRepo.count()).thenReturn((long) 2);
-		lenient().when(regRepo.findAll()).thenAnswer((InvocationOnMock invocation)->{
-			GalleryRegistration reg1 = new GalleryRegistration();
-			reg1.setUserName("user1");
-			
-			GalleryRegistration reg2 = new GalleryRegistration();
-			reg2.setUserName("user2");
-			
-			Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
-			
-			allReg.add(reg1);
-			allReg.add(reg2);
-			
-			return allReg;
-		});
+ 
+		lenient().when(purchaseRepo.count()).thenReturn((long) 0);
+	
 	}
 
-	@Test 
-	public void testGetAllRegistratrionsNonEmpty() {
+	@Test
+	public void testGetAllPurchasesNonEmpty() { 
 
-		List<GalleryRegistration> allReg = null;
+		List<Purchase> allP = null;
+		String error=null;
 		try {
-			allReg=service.getAllGalleryRegistrations();
-		} catch (GalleryRegistrationException e) {
-			fail();
+			allP=service.getAllPurchases();
+		} catch (PurchaseException e) {
+			error=e.getMessage();
 		}
-		assertNotNull(allReg);
-		assertEquals(allReg.size(),2);
-		
-		List<String> expectedUserNames=new ArrayList<String>(List.of("user1","user2"));
-		
-		for (GalleryRegistration eachReg:allReg) {
-			assertEquals(true,expectedUserNames.contains(eachReg.getUserName()));
-		}
-		
-		
+		assertNull(allP);
+		assertEquals(error,"no Purchase in system");
 	} 
 
 

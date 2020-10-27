@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service.Shipment;
+package ca.mcgill.ecse321.onlinegallery.serviceAll;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;

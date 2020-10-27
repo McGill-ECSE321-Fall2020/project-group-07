@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service.Registration;
+package ca.mcgill.ecse321.onlinegallery.service.Purchase;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -29,62 +29,68 @@ import ca.mcgill.ecse321.onlinegallery.dao.*;
 import ca.mcgill.ecse321.onlinegallery.dto.*;
 import ca.mcgill.ecse321.onlinegallery.model.*;
 import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
+import ca.mcgill.ecse321.onlinegallery.service.PurchaseService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestGalleryRegistrationServiceGetAll {
+public class TestPurchaseServiceGetAll {
 
 	@Mock
 	private GalleryRegistrationRepository regRepo;
-
+	
 	@Mock
-	private OnlineGalleryRepository ogRepo;
-
+	private PurchaseRepository purchaseRepo;
+	
+	@Mock
+	private CustomerRepository custRepo;
+	
+	@Mock
+	private ArtworkRepository artRepo;
+	
 	@InjectMocks
-	private GalleryRegistrationService service;
+	private PurchaseService service;
 
+	private static final Long PID1= (long) 1;
+	private static final Long PID2= (long) 2;
 
-
+	
 	@BeforeEach
 	public void setMockOutput() {
+ 
+		lenient().when(purchaseRepo.count()).thenReturn((long) 2);
+		lenient().when(purchaseRepo.findAll()).thenAnswer((InvocationOnMock invocation)->{
+			Purchase p1 = new Purchase();
+			p1.setPurchaseId(PID1);
+			
+			Purchase p2 = new Purchase();
+			p2.setPurchaseId(PID2);		
 
-		Answer<?> paramAsAnswer = (InvocationOnMock invocation) -> {
-			return invocation.getArgument(0);
-		}; 
-
-		lenient().when(regRepo.count()).thenReturn((long) 2);
-		lenient().when(regRepo.findAll()).thenAnswer((InvocationOnMock invocation)->{
-			GalleryRegistration reg1 = new GalleryRegistration();
-			reg1.setUserName("user1");
 			
-			GalleryRegistration reg2 = new GalleryRegistration();
-			reg2.setUserName("user2");
+			Set<Purchase> allP = new HashSet<Purchase>();
 			
-			Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
+			allP.add(p1);
+			allP.add(p2);
 			
-			allReg.add(reg1);
-			allReg.add(reg2);
-			
-			return allReg;
+			return allP;
 		});
 	}
 
-	@Test 
-	public void testGetAllRegistratrionsNonEmpty() {
+	@Test
+	public void testGetAllPurchasesNonEmpty() { 
 
-		List<GalleryRegistration> allReg = null;
+		List<Purchase> allP = null;
 		try {
-			allReg=service.getAllGalleryRegistrations();
-		} catch (GalleryRegistrationException e) {
+			allP=service.getAllPurchases();
+		} catch (PurchaseException e) {
 			fail();
 		}
-		assertNotNull(allReg);
-		assertEquals(allReg.size(),2);
+		assertNotNull(allP);
+		assertEquals(allP.size(),2);
 		
-		List<String> expectedUserNames=new ArrayList<String>(List.of("user1","user2"));
+		List<Long> expectedPIds=new ArrayList<Long>(List.of((long) 1, (long) 2));
 		
-		for (GalleryRegistration eachReg:allReg) {
-			assertEquals(true,expectedUserNames.contains(eachReg.getUserName()));
+		for (Purchase eachP:allP) {
+			assertEquals(true,expectedPIds.contains(eachP.getPurchaseId()));
 		}
 		
 		

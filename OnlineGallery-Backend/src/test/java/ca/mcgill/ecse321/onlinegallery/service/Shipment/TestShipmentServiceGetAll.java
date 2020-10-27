@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service.Registration;
+package ca.mcgill.ecse321.onlinegallery.service.Shipment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -29,62 +29,59 @@ import ca.mcgill.ecse321.onlinegallery.dao.*;
 import ca.mcgill.ecse321.onlinegallery.dto.*;
 import ca.mcgill.ecse321.onlinegallery.model.*;
 import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
+import ca.mcgill.ecse321.onlinegallery.service.ShipmentService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestGalleryRegistrationServiceGetAll {
+public class TestShipmentServiceGetAll {
 
 	@Mock
-	private GalleryRegistrationRepository regRepo;
+	private ShipmentRepository shipRepo;
 
-	@Mock
-	private OnlineGalleryRepository ogRepo;
 
 	@InjectMocks
-	private GalleryRegistrationService service;
+	private ShipmentService service;
 
 
 
 	@BeforeEach
 	public void setMockOutput() {
 
-		Answer<?> paramAsAnswer = (InvocationOnMock invocation) -> {
-			return invocation.getArgument(0);
-		}; 
 
-		lenient().when(regRepo.count()).thenReturn((long) 2);
-		lenient().when(regRepo.findAll()).thenAnswer((InvocationOnMock invocation)->{
-			GalleryRegistration reg1 = new GalleryRegistration();
-			reg1.setUserName("user1");
+
+		lenient().when(shipRepo.count()).thenReturn((long) 2);
+		lenient().when(shipRepo.findAll()).thenAnswer((InvocationOnMock invocation)->{
+			Shipment s1 = new Shipment();
+			s1.setShipmentId((long) 1);
 			
-			GalleryRegistration reg2 = new GalleryRegistration();
-			reg2.setUserName("user2");
+			Shipment s2 = new Shipment();
+			s2.setShipmentId((long) 2);
 			
-			Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
+			Set<Shipment> allS = new HashSet<Shipment>();
 			
-			allReg.add(reg1);
-			allReg.add(reg2);
+			allS.add(s1);
+			allS.add(s2);
 			
-			return allReg;
+			return allS;
 		});
 	}
 
-	@Test 
-	public void testGetAllRegistratrionsNonEmpty() {
+	@Test
+	public void testGetAllShipmentNonEmpty() {
 
-		List<GalleryRegistration> allReg = null;
+		List<Shipment> allS = null;
 		try {
-			allReg=service.getAllGalleryRegistrations();
-		} catch (GalleryRegistrationException e) {
+			allS=service.getAllShipments();
+		} catch (ShipmentException e) {
 			fail();
 		}
-		assertNotNull(allReg);
-		assertEquals(allReg.size(),2);
+		assertNotNull(allS);
+		assertEquals(allS.size(),2);
 		
-		List<String> expectedUserNames=new ArrayList<String>(List.of("user1","user2"));
+		List<Long> expectedIds=new ArrayList<Long>(List.of((long) 1, (long) 2));
 		
-		for (GalleryRegistration eachReg:allReg) {
-			assertEquals(true,expectedUserNames.contains(eachReg.getUserName()));
+		for (Shipment s:allS) {
+			assertEquals(true,expectedIds.contains(s.getShipmentId()));
 		}
 		
 		

@@ -25,7 +25,7 @@ import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestGalleryRegistrationServiceRead {
+public class TestGalleryRegistrationServiceGet {
 
 	@Mock
 	private GalleryRegistrationRepository regRepo;
@@ -51,7 +51,7 @@ public class TestGalleryRegistrationServiceRead {
 
 		Answer<?> paramAsAnswer = (InvocationOnMock invocation) -> {
 			return invocation.getArgument(0);
-		};
+		}; 
 
 		lenient().when(regRepo.existsByUserName(anyString())).thenAnswer((InvocationOnMock invocation) -> {
 			if (invocation.getArgument(0).equals(INVALID_USERNAMENONEXIST)) {
@@ -75,7 +75,7 @@ public class TestGalleryRegistrationServiceRead {
 
 						return reg;
 					}
-
+ 
 					return null;
 				});
 

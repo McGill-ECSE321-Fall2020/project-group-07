@@ -21,7 +21,7 @@ public class PurchaseDto {
 	public String getUsername() {
 		return this.username;
 	}
-	
+	 
 	private Long artworkId;
 	public void setArtworkId(Long id) {
 		this.artworkId=id;
