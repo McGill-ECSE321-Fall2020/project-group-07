@@ -86,7 +86,6 @@ public class OnlineGalleryPersistenceTest {
 		reg.setFirstName(firstName);
 		reg.setLastName(lastName);
 		reg.setEmail(email);
-		reg.setPhoneNumber(phone);
 		reg.setIsLoggedIn(loggedIn);
 		reg.setPassWord(password);
 		
@@ -121,7 +120,6 @@ public class OnlineGalleryPersistenceTest {
 		assertEquals(reg.getFirstName(),firstName);
 		assertEquals(reg.getLastName(),lastName);
 		assertEquals(reg.getEmail(),email);
-		assertEquals(reg.getPhoneNumber(),phone);
 		assertEquals(reg.getIsLoggedIn(),loggedIn);
 		assertEquals(reg.getPassWord(),password);
 		
@@ -182,7 +180,6 @@ public class OnlineGalleryPersistenceTest {
 		reg.setFirstName(firstName);
 		reg.setLastName(lastName);
 		reg.setEmail(email);
-		reg.setPhoneNumber(phone);
 		reg.setIsLoggedIn(loggedIn);
 		reg.setPassWord(password);
 		
@@ -223,7 +220,6 @@ public class OnlineGalleryPersistenceTest {
 		assertEquals(reg.getFirstName(),firstName);
 		assertEquals(reg.getLastName(),lastName);
 		assertEquals(reg.getEmail(),email);
-		assertEquals(reg.getPhoneNumber(),phone);
 		assertEquals(reg.getIsLoggedIn(),loggedIn);
 		assertEquals(reg.getPassWord(),password);
 		
@@ -423,9 +419,6 @@ public class OnlineGalleryPersistenceTest {
 		art.setArtist(artist);
 		
 		
-		art.getViewers().add(customer);
-		customer.getBrowsedArtwork().add(art);
-		
 		Purchase purchase = new Purchase();
 		art.setPurchase(purchase);
 		purchase.setArtwork(art);
@@ -435,26 +428,24 @@ public class OnlineGalleryPersistenceTest {
 		String description="no need";
 		double price=100.2;
 		ArtworkStatus status = ArtworkStatus.AVAILABLE;
-		boolean onsite=false;
 		int numViews=100;
 		String dimensions="11'x17'";
 		double weight=12.0;
-		double shippingCost=34.2;
+		double commission=0.2;
 		
 		art.setName(name);
 		art.setDescription(description);
 		art.setPrice(price);
 		art.setStatus(status);
-		art.setOnSite(onsite);
 		art.setNumViews(numViews);
 		art.setDimension(dimensions);
 		art.setWeight(weight);
-		art.setShippingCost(shippingCost);
+		art.setCommission(commission);
 		
+		artistRepo.save(artist);
 		artRepo.save(art);
 		
 		Long artId=art.getArtworkId();
-		Long customerId=customer.getCustomerId();
 		Long artistId=artist.getArtistId();
 		Long purchaseId=purchase.getPurchaseId();
 		
@@ -467,17 +458,14 @@ public class OnlineGalleryPersistenceTest {
 		assertNotNull(art);
 		assertEquals(art.getName(),name);
 		assertEquals(art.getDescription(),description);
+		assertEquals(art.getPrice(),price);
 		assertEquals(art.getStatus(),status);
-		assertEquals(art.isOnSite(),onsite);
 		assertEquals(art.getNumViews(),numViews);
 		assertEquals(art.getDimension(),dimensions);
 		assertEquals(art.getWeight(),weight);
-		assertEquals(art.getShippingCost(),shippingCost);
+		assertEquals(art.getComission(),commission);
 		
 		//checking associations from art
-		customer=art.getViewers().iterator().next();
-		assertEquals(customer.getCustomerId(),customerId);
-		
 		artist=art.getArtist();
 		assertEquals(artist.getArtistId(),artistId);
 		
@@ -485,41 +473,29 @@ public class OnlineGalleryPersistenceTest {
 		assertEquals(purchase.getPurchaseId(),purchaseId);
 		
 		//checking associations to art
-		customer=custRepo.findCustomerByCustomerId(customerId);
-		art=customer.getBrowsedArtwork().iterator().next();
-		assertNotNull(art);
-		assertEquals(art.getName(),name);
-		assertEquals(art.getDescription(),description);
-		assertEquals(art.getStatus(),status);
-		assertEquals(art.isOnSite(),onsite);
-		assertEquals(art.getNumViews(),numViews);
-		assertEquals(art.getDimension(),dimensions);
-		assertEquals(art.getWeight(),weight);
-		assertEquals(art.getShippingCost(),shippingCost);
-		
 		artist=artistRepo.findArtistByArtistId(artistId);
 		art=artist.getArtwork().iterator().next();
 		assertNotNull(art);
 		assertEquals(art.getName(),name);
 		assertEquals(art.getDescription(),description);
+		assertEquals(art.getPrice(),price);
 		assertEquals(art.getStatus(),status);
-		assertEquals(art.isOnSite(),onsite);
 		assertEquals(art.getNumViews(),numViews);
 		assertEquals(art.getDimension(),dimensions);
 		assertEquals(art.getWeight(),weight);
-		assertEquals(art.getShippingCost(),shippingCost);
+		assertEquals(art.getComission(),commission);
 		
 		purchase=purchaseRepo.findPurchaseByPurchaseId(purchaseId);
 		art=purchase.getArtwork();
 		assertNotNull(art);
 		assertEquals(art.getName(),name);
 		assertEquals(art.getDescription(),description);
+		assertEquals(art.getPrice(),price);
 		assertEquals(art.getStatus(),status);
-		assertEquals(art.isOnSite(),onsite);
 		assertEquals(art.getNumViews(),numViews);
 		assertEquals(art.getDimension(),dimensions);
 		assertEquals(art.getWeight(),weight);
-		assertEquals(art.getShippingCost(),shippingCost);
+		assertEquals(art.getComission(),commission);
 		
 	}
 	
@@ -544,9 +520,6 @@ public class OnlineGalleryPersistenceTest {
 		purchase.setCustomer(customer);
 		
 		customer.getShipment().add(shipment);
-		
-		customer.getBrowsedArtwork().add(art);
-		art.getViewers().add(customer);
 				
 		custRepo.save(customer);
 
@@ -568,8 +541,6 @@ public class OnlineGalleryPersistenceTest {
 		assertEquals(customer.getBankInfo(),bankInfo);
 		
 		//test associations from customer
-		art=customer.getBrowsedArtwork().iterator().next();
-		assertEquals(art.getArtworkId(),artId);
 
 		purchase=customer.getPurchase().iterator().next();
 		assertEquals(purchase.getPurchaseId(),purchaseId);
@@ -584,8 +555,8 @@ public class OnlineGalleryPersistenceTest {
 		assertNotNull(customer);
 		assertEquals(customer.getBankInfo(),bankInfo);
 		
-		art=artRepo.findArtworkByArtworkId(artId);
-		customer=art.getViewers().iterator().next();
+		purchase=purchaseRepo.findPurchaseByPurchaseId(purchaseId);
+		customer=purchase.getCustomer();
 		assertNotNull(customer);
 		assertEquals(customer.getBankInfo(),bankInfo);
 		
@@ -602,14 +573,10 @@ public class OnlineGalleryPersistenceTest {
 		
 		double commission=0.13;
 		ShipmentType shipType=ShipmentType.OFFSITE_DELIVERY;
-		PaymentMethod paymentMethod=PaymentMethod.CREDIT;
 		boolean paid=true;
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
 		
-		purchase.setCommission(commission);
 		purchase.setShipmentType(shipType);
-		purchase.setPaymentMethod(paymentMethod);
-		purchase.setPaid(paid);
 		purchase.setDate(date);
 		
 		
@@ -645,10 +612,7 @@ public class OnlineGalleryPersistenceTest {
 		//checking purchase attributes
 		purchase=purchaseRepo.findPurchaseByPurchaseId(purchaseId);
 		assertNotNull(purchase);
-		assertEquals(purchase.getCommission(),commission);
 		assertEquals(purchase.getShipmentType(),shipType);
-		assertEquals(purchase.getPaymentMethod(),paymentMethod);
-		assertEquals(purchase.isPaid(),paid);
 		assertEquals(purchase.getDate(),date);
 		
 		//checking associations from purchase
@@ -660,28 +624,19 @@ public class OnlineGalleryPersistenceTest {
 		shipment=shipRepo.findShipmentByShipmentId(shipId);
 		purchase=shipment.getPurchase().iterator().next();
 		assertNotNull(purchase);
-		assertEquals(purchase.getCommission(),commission);
 		assertEquals(purchase.getShipmentType(),shipType);
-		assertEquals(purchase.getPaymentMethod(),paymentMethod);
-		assertEquals(purchase.isPaid(),paid);
 		assertEquals(purchase.getDate(),date);
 		
 		art=artRepo.findArtworkByArtworkId(artId);
 		purchase=art.getPurchase();
 		assertNotNull(purchase);
-		assertEquals(purchase.getCommission(),commission);
 		assertEquals(purchase.getShipmentType(),shipType);
-		assertEquals(purchase.getPaymentMethod(),paymentMethod);
-		assertEquals(purchase.isPaid(),paid);
 		assertEquals(purchase.getDate(),date);
 		
 		customer=custRepo.findCustomerByCustomerId(customerId);
 		purchase=customer.getPurchase().iterator().next();
 		assertNotNull(purchase);
-		assertEquals(purchase.getCommission(),commission);
 		assertEquals(purchase.getShipmentType(),shipType);
-		assertEquals(purchase.getPaymentMethod(),paymentMethod);
-		assertEquals(purchase.isPaid(),paid);
 		assertEquals(purchase.getDate(),date);
 				
 	}
@@ -695,18 +650,28 @@ public class OnlineGalleryPersistenceTest {
 		
 		String sourceAddress="here";
 		String destAddress="there";
+		double shippingCost=34;
 		double totalAmount=24.9;
-		String shippingCompany="BigRed Trucking";
 		ShipmentStatus status=ShipmentStatus.CREATED;
 		String recipientName="nemo";
 		
+		String ccNumber="2344 1115 3335 6666";
+		String ccHolder="John Smith";
+		String ccCSV="569";
+		String ccExp="1126";
+		String ccPost="j4ek9w";
+		
+		boolean paid=false;
+		
 		shipment.setSourceAddress(sourceAddress);
 		shipment.setDestinationAddress(destAddress);
+		shipment.setShippingCost(shippingCost);
 		shipment.setTotalAmount(totalAmount);
-		shipment.setShippingCompany(shippingCompany);
 		shipment.setShipmentStatus(status);
 		shipment.setRecipientName(recipientName);
 		
+		shipment.setCreditCardNumber(ccNumber);
+
 		
 		String userName="bananaFartman15";		
 		reg.setUserName(userName);
@@ -738,10 +703,13 @@ public class OnlineGalleryPersistenceTest {
 		assertNotNull(shipment);
 		assertEquals(shipment.getSourceAddress(),sourceAddress);
 		assertEquals(shipment.getDestinationAddress(),destAddress);
+		assertEquals(shipment.getShippingCost(),shippingCost);
 		assertEquals(shipment.getTotalAmount(),totalAmount);
-		assertEquals(shipment.getShippingCompany(),shippingCompany);
 		assertEquals(shipment.getShipmentStatus(),status);
 		assertEquals(shipment.getRecipientName(),recipientName);
+		
+		assertEquals(shipment.getCreditCardNumber(),ccNumber);
+
 		
 		//checking assocations from shipment
 		assertEquals(shipment.getPurchase().iterator().next().getPurchaseId(),purchaseId);
@@ -752,20 +720,26 @@ public class OnlineGalleryPersistenceTest {
 		assertNotNull(shipment);
 		assertEquals(shipment.getSourceAddress(),sourceAddress);
 		assertEquals(shipment.getDestinationAddress(),destAddress);
+		assertEquals(shipment.getShippingCost(),shippingCost);
 		assertEquals(shipment.getTotalAmount(),totalAmount);
-		assertEquals(shipment.getShippingCompany(),shippingCompany);
 		assertEquals(shipment.getShipmentStatus(),status);
 		assertEquals(shipment.getRecipientName(),recipientName);
+		
+		assertEquals(shipment.getCreditCardNumber(),ccNumber);
+
 		
 		customer=custRepo.findCustomerByCustomerId(customerId);
 		shipment=customer.getShipment().iterator().next();
 		assertNotNull(shipment);
 		assertEquals(shipment.getSourceAddress(),sourceAddress);
 		assertEquals(shipment.getDestinationAddress(),destAddress);
+		assertEquals(shipment.getShippingCost(),shippingCost);
 		assertEquals(shipment.getTotalAmount(),totalAmount);
-		assertEquals(shipment.getShippingCompany(),shippingCompany);
 		assertEquals(shipment.getShipmentStatus(),status);
 		assertEquals(shipment.getRecipientName(),recipientName);
+		
+		assertEquals(shipment.getCreditCardNumber(),ccNumber);
+
 		
 				
 	}

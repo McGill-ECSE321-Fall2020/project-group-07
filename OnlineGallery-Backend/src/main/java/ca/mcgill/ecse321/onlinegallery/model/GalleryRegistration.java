@@ -61,17 +61,7 @@ public class GalleryRegistration {
 	public String getEmail() {
 		return this.email;
 	}
-
-	private String phoneNumber;
-
-	public void setPhoneNumber(String value) {
-		this.phoneNumber = value;
-	}
-
-	public String getPhoneNumber() {
-		return this.phoneNumber;
-	}
-
+	
 	private String passWord="changeThisDefaultPassword";
 
 	public void setPassWord(String value) {
@@ -128,7 +118,7 @@ public class GalleryRegistration {
 	@Override
 	public String toString() {
 		String info = this.getUserName() + "\n" + this.getFirstName() + "\n" + this.getLastName() + "\n"
-				+ this.getEmail() + "\n" + this.getPhoneNumber() + "\n" + this.getIsLoggedIn();
+				+ this.getEmail() + "\n" + this.getIsLoggedIn();
 		return info;
 	}
 

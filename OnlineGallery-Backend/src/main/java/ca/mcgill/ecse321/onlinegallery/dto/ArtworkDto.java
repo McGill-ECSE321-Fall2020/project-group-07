@@ -3,77 +3,72 @@ package ca.mcgill.ecse321.onlinegallery.dto;
 import java.sql.Date;
 
 import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
-import ca.mcgill.ecse321.onlinegallery.model.PaymentMethod;
-import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
 
 public class ArtworkDto {
 
+
 	private String name;
-	private String description;
-	private double price;
-	private ArtworkStatus status;
-	private boolean onSite;
-	private int numViews;
-	private String dimension;
-	private double weight;
-	private double shippingcost;
-
-	public ArtworkDto(String name,
-					  String description,
-					  double price,
-					  ArtworkStatus status,
-					  boolean onSite,
-					  int numViews,
-					  String dimension,
-					  double weight,
-					  double shippingcost) {
-		
-		this.name=name;
-		this.description=description;
-		this.price=price;
-		this.status=status;
-		this.onSite=onSite;
-		this.numViews=numViews;
-		this.dimension=dimension;
-		this.weight=weight;
-		this.shippingcost=shippingcost;
-
+	public void setName(String name) {
+		this.name = name;
 	}
-
 	public String getName() {
 		return this.name;
+	}
+	private String description;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	
 	public String getDescription() {
 		return this.description;
 	}
-	
+	private double price;
+	public void setPrice(double price) {
+		this.price = price;
+	}
 	public double getPrice() {
 		return this.price;
 	}
-	
+	private ArtworkStatus status;
+	public void setStatus(ArtworkStatus status) {
+		this.status = status;
+	}
 	public ArtworkStatus getStatus() {
 		return this.status;
 	}
-	
-	public boolean isOnSite() {
-		return this.onSite;
+	private int numViews;
+	public void setNumViews(int numViews) {
+		this.numViews = numViews;
 	}
-	
 	public int getNumViews() {
 		return this.numViews;
 	}
-	
+	private String dimension;
+	public void setDimension(String dimension) {
+		this.dimension = dimension;
+	}
 	public String getDimension() {
 		return this.dimension;
 	}
-	
+	private double weight;
+	public void setWeight(double weight) {
+		this.weight = weight;
+	}
 	public double getWeight() {
 		return this.weight;
 	}
-	
-	public double getShippingcost() {
-		return this.shippingcost;
+	private double commission;
+	public void setCommission(double commission) {
+		this.commission = commission;
 	}
-
+	public double getCommission() {
+		return this.commission;
+	}
+	private String username;
+	public void setUsername(String username) {
+		this.username=username;
+	}
+	public String getUsername() {
+		return this.username;
+	}
 }

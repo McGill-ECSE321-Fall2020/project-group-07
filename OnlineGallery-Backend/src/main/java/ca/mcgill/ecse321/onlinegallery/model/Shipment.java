@@ -41,7 +41,7 @@ public class Shipment {
 	}
 
 	public String getSourceAddress() {
-		return this.sourceAddress;
+		return this.sourceAddress; 
 	}
 
 	private String destinationAddress;
@@ -53,6 +53,15 @@ public class Shipment {
 	public String getDestinationAddress() {
 		return this.destinationAddress;
 	}
+	
+	private double shippingCost;
+	public void setShippingCost(double cost) {
+		this.shippingCost=cost;
+	}
+	
+	public double getShippingCost() {
+		return this.shippingCost;
+	}
 
 	private double totalAmount;
 
@@ -62,16 +71,6 @@ public class Shipment {
 
 	public double getTotalAmount() {
 		return this.totalAmount;
-	}
-
-	private String shippingCompany;
-
-	public void setShippingCompany(String value) {
-		this.shippingCompany = value;
-	}
-
-	public String getShippingCompany() {
-		return this.shippingCompany;
 	}
 
 	private ShipmentStatus shipmentStatus;
@@ -94,6 +93,32 @@ public class Shipment {
 		return this.recipientName;
 	}
 
+	private String creditCardNumber;
+	public void setCreditCardNumber(String creditCardNumber) {
+		this.creditCardNumber=creditCardNumber;
+	}
+		
+	public String getCreditCardNumber() {
+		return this.creditCardNumber;
+	}
+	
+	private String creditCardFirstName;
+	public void setCreditCardFirstName(String firstname) {
+		this.creditCardFirstName=firstname;
+	}
+	public String getCreditCardFirstName() {
+		return this.creditCardFirstName;
+	}
+	private String creditCardLastName;
+	public void setCreditCardLastName(String lastname) {
+		this.creditCardLastName=lastname;
+	}
+	
+	public String getCreditCardLastName() {
+		return this.creditCardLastName;
+	}
+	
+	
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "shipment")
 	private Set<Purchase> purchase;
 
