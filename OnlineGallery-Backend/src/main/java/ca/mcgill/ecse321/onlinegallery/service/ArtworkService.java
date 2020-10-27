@@ -10,21 +10,17 @@ import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.OnlineGalleryRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.PhysicalGalleryRepository;
 import ca.mcgill.ecse321.onlinegallery.dto.ArtworkDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.Artwork;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
-import ca.mcgill.ecse321.onlinegallery.model.OnlineGallery;
-import ca.mcgill.ecse321.onlinegallery.model.PhysicalGallery;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtworkException;
 
 @Service
 public class ArtworkService {
 
 	@Autowired
-	ArtworkRepository artRepo;
+	ArtworkRepository artworkRepo;
 	
 	@Autowired
 	GalleryRegistrationRepository regRepo;
@@ -35,13 +31,13 @@ public class ArtworkService {
 		String username=dto.getUsername();
 				
 		if (!regRepo.existsByUserName(username)) {
-			return null;
-			}
+			throw new ArtworkException("No GalleryRegistration with username ["+username+"] exists");
+		}
 		
 		GalleryRegistration reg=regRepo.findGalleryRegisrationByUserName(username);
 		if (reg.getArtist()==null) {
 			reg.setArtist(new Artist());;
-			}
+		}
 		
 		Artist artist = regRepo.findGalleryRegisrationByUserName(username).getArtist();
 		Artwork art = new Artwork();
@@ -53,18 +49,15 @@ public class ArtworkService {
 		art.setNumViews(dto.getNumViews());
 		art.setDimension(dto.getDimension());
 		art.setWeight(dto.getWeight());
-		art.setCommission(dto.getComission());
+		art.setCommission(dto.getCommission());
 		
 		
 		artist.getArtwork().add(art);
 		art.setArtist(artist);
 		
-		artRepo.save(art);
+		artworkRepo.save(art);
 		
 		return art;
 		
-		
 	}
-
-
 }
