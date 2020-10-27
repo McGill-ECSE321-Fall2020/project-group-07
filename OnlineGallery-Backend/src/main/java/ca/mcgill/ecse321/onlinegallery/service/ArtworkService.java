@@ -12,10 +12,9 @@ import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.OnlineGalleryRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.PhysicalGalleryRepository;
+import ca.mcgill.ecse321.onlinegallery.dto.ArtworkDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.Artwork;
-import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
-//import ca.mcgill.ecse321.onlinegallery.model.ArtworkForm;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.model.OnlineGallery;
 import ca.mcgill.ecse321.onlinegallery.model.PhysicalGallery;
@@ -31,15 +30,41 @@ public class ArtworkService {
 	GalleryRegistrationRepository regRepo;
 
 	@Transactional
-	public Artwork getAvailableArtworkDetail(Long artworkId) throws ArtworkException{
-		if (!artRepo.existsByArtworkId(artworkId)) {
-			throw new  ArtworkException("No Available Artwork with artworkID ["+artworkId+"] exists");
-		} 
-
-		Artwork artwork = artRepo.findArtworkByArtworkId(artworkId);
-		if (artwork.getStatus() == ArtworkStatus.UNAVAILABLE) {
-			throw new  ArtworkException("No AvailableArtwork with artworkID ["+artworkId+"] exists");
-		} 
-		return artwork;
+	public Artwork createArtwork(ArtworkDto dto) throws ArtworkException {
+		
+		String username=dto.getUsername();
+				
+		if (!regRepo.existsByUserName(username)) {
+			return null;
+			}
+		
+		GalleryRegistration reg=regRepo.findGalleryRegisrationByUserName(username);
+		if (reg.getArtist()==null) {
+			reg.setArtist(new Artist());;
+			}
+		
+		Artist artist = regRepo.findGalleryRegisrationByUserName(username).getArtist();
+		Artwork art = new Artwork();
+		
+		art.setName(dto.getName());
+		art.setDescription(dto.getDescription());
+		art.setPrice(dto.getPrice());
+		art.setStatus(dto.getStatus());
+		art.setNumViews(dto.getNumViews());
+		art.setDimension(dto.getDimension());
+		art.setWeight(dto.getWeight());
+		art.setCommission(dto.getComission());
+		
+		
+		artist.getArtwork().add(art);
+		art.setArtist(artist);
+		
+		artRepo.save(art);
+		
+		return art;
+		
+		
 	}
+
+
 }

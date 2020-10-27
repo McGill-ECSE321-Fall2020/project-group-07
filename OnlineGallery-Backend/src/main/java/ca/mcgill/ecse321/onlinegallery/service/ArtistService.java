@@ -95,9 +95,7 @@ public class ArtistService {
 	}
 	
 	@Transactional
-	public Artist deleteArtistByUserName(ArtistDto dto) throws ArtistException {
-		
-		String username = dto.getUsername();
+	public Artist deleteArtistByUserName(String username) throws ArtistException {
 
 		if (!regRepo.existsByUserName(username)) {
 			
@@ -105,7 +103,8 @@ public class ArtistService {
 		}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		Artist artist = artistRepo.findArtistByArtistId(dto.getArtistId());
+		Long id = reg.getArtist().getArtistId();
+		Artist artist = artistRepo.findArtistByArtistId(id);
 
 		if(artist == null) {
 			
