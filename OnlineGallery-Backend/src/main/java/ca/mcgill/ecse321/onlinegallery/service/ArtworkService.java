@@ -37,42 +37,6 @@ public class ArtworkService {
 	GalleryRegistrationRepository regRepo;
 	
 
-	@Transactional
-	public Artwork createArtwork(ArtworkDto dto) throws ArtworkException {
-		
-		String username=dto.getUsername();
-				
-		if (!regRepo.existsByUserName(username)) {
-			return null;
-			}
-		
-		GalleryRegistration reg=regRepo.findGalleryRegisrationByUserName(username);
-		if (reg.getArtist()==null) {
-			reg.setArtist(new Artist());;
-			}
-		
-		Artist artist = regRepo.findGalleryRegisrationByUserName(username).getArtist();
-		Artwork art = new Artwork();
-		
-		art.setName(dto.getName());
-		art.setDescription(dto.getDescription());
-		art.setPrice(dto.getPrice());
-		art.setStatus(dto.getStatus());
-		art.setNumViews(dto.getNumViews());
-		art.setDimension(dto.getDimension());
-		art.setWeight(dto.getWeight());
-		//art.setCommission(dto.getComission());
-		
-		
-		artist.getArtwork().add(art);
-		art.setArtist(artist);
-		
-		artworkRepo.save(art);
-		
-		return art;
-		
-		
-	}
 	
 	@Transactional
 	public Artwork getAvailableArtworkDetail(Long artworkId) throws ArtworkException{
