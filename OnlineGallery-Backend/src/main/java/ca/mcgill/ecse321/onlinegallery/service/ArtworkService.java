@@ -68,7 +68,6 @@ public class ArtworkService {
 		artworkRepo.save(art);
 		
 		return art;
-		
 	}
 	
 	@Transactional
