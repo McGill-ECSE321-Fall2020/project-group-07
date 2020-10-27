@@ -118,8 +118,9 @@ public class TestArtistServiceDelete {
 		
 		Artist a = null;
 		try {
-			a = service.deleteArtistByUserName(dto);
+			a = service.deleteArtistByUserName(VALID_USERNAME);
 		}catch(ArtistException e) {
+			System.out.print(e);
 			fail();
 		}
 		assertNotNull(a);

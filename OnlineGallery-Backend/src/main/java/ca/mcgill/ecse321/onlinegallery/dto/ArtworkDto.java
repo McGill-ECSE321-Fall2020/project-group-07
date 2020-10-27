@@ -3,8 +3,6 @@ package ca.mcgill.ecse321.onlinegallery.dto;
 import java.sql.Date;
 
 import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
-import ca.mcgill.ecse321.onlinegallery.model.PaymentMethod;
-import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
 
 public class ArtworkDto {
 
@@ -38,13 +36,6 @@ public class ArtworkDto {
 	public ArtworkStatus getStatus() {
 		return this.status;
 	}
-	private boolean onSite;
-	public void setOnSite(boolean onSite) {
-		this.onSite = onSite;
-	}
-	public boolean isOnSite() {
-		return this.onSite;
-	}
 	private int numViews;
 	public void setNumViews(int numViews) {
 		this.numViews = numViews;
@@ -66,12 +57,18 @@ public class ArtworkDto {
 	public double getWeight() {
 		return this.weight;
 	}
-	private double shippingcost;
-	public void setShippingCost(double shippingcost) {
-		this.shippingcost = shippingcost;
+	private double commission;
+	public void setCommission(double commission) {
+		this.commission = commission;
 	}
-	public double getShippingcost() {
-		return this.shippingcost;
+	public double getCommission() {
+		return this.commission;
 	}
-
+	private String username;
+	public void setUsername(String username) {
+		this.username=username;
+	}
+	public String getUsername() {
+		return this.username;
+	}
 }
