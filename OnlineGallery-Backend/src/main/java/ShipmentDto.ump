@@ -1,0 +1,12 @@
+namespace ca.mcgill.ecse321.onlinegallery.dto;
+
+class ShipmentDto {
+	String sourceAddress;
+	String destinationAddress;
+	Double shippingCost;
+	Double totalCost;
+	enum ShipmentStatus {ONSITE_PICKUP, OFFSITE_DELIVERY}
+	ShipmentStatus shipmentStatus;
+	String recipientName;
+	
+}
