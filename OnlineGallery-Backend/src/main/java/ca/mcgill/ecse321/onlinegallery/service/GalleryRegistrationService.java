@@ -15,8 +15,8 @@ public class GalleryRegistrationService {
 
 	@Autowired
 	OnlineGalleryRepository ogRepo;
-
-	@Autowired
+ 
+	@Autowired 
 	GalleryRegistrationRepository regRepo;
 	
 	@Autowired
@@ -27,7 +27,7 @@ public class GalleryRegistrationService {
 	public GalleryRegistration getGalleryRegistration(String username) throws GalleryRegistrationException{
 		if (!regRepo.existsByUserName(username)) {
 			throw new GalleryRegistrationException("No GalleryRegistration with username ["+username+"] exists");
-		}
+		} 
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
 		return reg;
