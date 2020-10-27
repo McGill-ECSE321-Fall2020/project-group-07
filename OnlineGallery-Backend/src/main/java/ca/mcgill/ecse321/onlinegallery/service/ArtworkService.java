@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -27,6 +28,7 @@ public class ArtworkService {
 	
 	@Autowired
 	ArtistRepository artistRepo;
+	
 	
 	@Autowired
 	GalleryRegistrationRepository regRepo;
@@ -71,6 +73,7 @@ public class ArtworkService {
 		
 	}
 	
+
 	@Transactional
 	public Artwork getAvailableArtworkDetail(Long artworkId) throws ArtworkException{
 		if (!artworkRepo.existsByArtworkId(artworkId)) {
@@ -83,4 +86,29 @@ public class ArtworkService {
 		} 
 		return artwork;
 	}
+	
+	@Transactional 
+	public Set<Artwork> getAvailableArtworkByArtistId(Long artistId) throws ArtworkException{
+		if (!artistRepo.existsById(artistId)) {
+			throw new  ArtworkException("No artist with artistId ["+artistId+"] exists");
+		} 
+		Artist artist = artistRepo.findArtistByArtistId(artistId);
+		return artist.getArtwork();
+	}
+	
+//	Public  List<Artwork> retrieveRandomAvailableArtworks(int numToRetrieve) throws ArtworkException{
+//		
+//		ArrayList<Artwork> artworkList = new ArrayList<Artwork>();
+//	
+//		Iterator<Artwork> artworkIterable = (Iterator<Artwork>) artworkRepo.findAll().iterator();
+//        for (Iterator<Artwork> t : artworkIterable) 
+//        	artworkList.add((Artwork) t); 
+//  
+//
+//		return artworkList;
+//	
+//		
+//	}
+	
+
 }
