@@ -37,6 +37,15 @@ public class TestGalleryRegistrationServiceDelete {
 
 	@Mock
 	private OnlineGalleryRepository ogRepo;
+	
+	@Mock
+	private GalleryAdminRepository adminRepo;
+	
+	@Mock
+	private CustomerRepository custRepo;
+	
+	@Mock
+	private ArtistRepository artistRepo;
 
 	@InjectMocks
 	private GalleryRegistrationService service;
