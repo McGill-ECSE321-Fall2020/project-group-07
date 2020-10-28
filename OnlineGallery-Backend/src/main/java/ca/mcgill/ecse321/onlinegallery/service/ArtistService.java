@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 
@@ -8,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
-import ca.mcgill.ecse321.onlinegallery.dto.ArtistDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtistException;
@@ -40,6 +42,18 @@ public class ArtistService {
 		return artist;
 	}
 	
+	@Transactional
+	public List<Artist> findAllArtist() throws ArtistException {
+				
+		if (toList(artistRepo.findAll()).size() == 0) {
+			
+			throw new ArtistException("No artists exists.");
+		}
+		
+		List<Artist> artistList = toList(artistRepo.findAll());
+		return artistList;
+	}
+	
 	
 	@Transactional
 	public Artist deleteArtistByUsername(String username) throws ArtistException {
@@ -62,6 +76,13 @@ public class ArtistService {
 		artistRepo.delete(artist);
 		
 		return artist;
+	}
+	private <T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
 	}
 	
 }
