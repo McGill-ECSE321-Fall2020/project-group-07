@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.onlinegallery.service.Artist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -26,7 +25,7 @@ import ca.mcgill.ecse321.onlinegallery.service.ArtistService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtistException;
 
 @ExtendWith(MockitoExtension.class)
-public class TestArtistServiceDelete {
+public class TestArtistServiceGet {
 
 	@Mock
 	private GalleryRegistrationRepository regRepo;
@@ -75,11 +74,11 @@ public class TestArtistServiceDelete {
 		lenient().doAnswer((i)->null).when(artistRepo).delete(any(Artist.class));
 	}
 	@Test
-	public void testValidArtistDelete() {
+	public void testValidArtistFind() {
 		
 		Artist a = null;
 		try {
-			a = service.deleteArtistByUsername(VALID_USERNAME);
+			a = service.findArtistByUsername(VALID_USERNAME);
 		}catch(ArtistException e) {
 			fail();
 		}
@@ -92,12 +91,12 @@ public class TestArtistServiceDelete {
 		Artist a = null;
 		String error = null;
 		try {
-			a = service.deleteArtistByUsername(INVALID_USERNAMEEXISTSNONARTIST);
+			a = service.findArtistByUsername(INVALID_USERNAMEEXISTSNONARTIST);
 		}catch(ArtistException e) {
 			error = e.getMessage();
 		}
 		assertNull(a);
-		assertEquals(error, "No artist exists under the id ["+INVALID_USERNAMEEXISTSNONARTIST+"]");
+		assertEquals(error, "No artist exists under the username ["+INVALID_USERNAMEEXISTSNONARTIST+"]");
 	}
 	@Test
 	public void testInvalidNonExistentUser() {
@@ -105,7 +104,7 @@ public class TestArtistServiceDelete {
 		Artist a = null;
 		String error = null;
 		try {
-			a = service.deleteArtistByUsername(INVALID_USERNAMENONEXIST);
+			a = service.findArtistByUsername(INVALID_USERNAMENONEXIST);
 		}catch(ArtistException e) {
 			error = e.getMessage();
 		}

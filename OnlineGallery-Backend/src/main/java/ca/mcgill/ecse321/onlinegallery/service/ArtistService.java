@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 
@@ -8,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
-import ca.mcgill.ecse321.onlinegallery.dto.ArtistDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtistException;
@@ -23,75 +25,47 @@ public class ArtistService {
 	GalleryRegistrationRepository regRepo;
 	
 	@Transactional
-	public Artist createArtist(ArtistDto dto) throws ArtistException {
-		
-		String username = dto.getUsername();
-		
-		if (!regRepo.existsByUserName(username)) {
-			
-			throw new ArtistException("An artist is already associated to the username ["+username+"]");
-		}
-		
-		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		
-		if (reg.getArtist()==null) {
-			
-			reg.setArtist(new Artist());
-		}
-		
-		Artist artist = reg.getArtist();
-		
-		artist.setBankInfo(dto.getBankInfo());
-
-		artistRepo.save(artist);
-		
-		return artist;
-	}
-	
-	@Transactional
-	public Artist findArtistByUsername(ArtistDto dto) throws ArtistException {
-		
-		String username = dto.getUsername();
-		
-		if (!regRepo.existsByUserName(username)) {
-			
-			throw new ArtistException("No registration exists under the username ["+username+"]");
-		}
-		
-		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		
-		if (reg.getArtist()==null) {
-			
-			throw new ArtistException("No artist exists under the username ["+username+"]");
-		}
+	public Artist findArtistByUsername(String username) throws ArtistException {
 				
-		return reg.getArtist();
-	}
-	
-	@Transactional
-	public Artist updateBankInfo(ArtistDto dto) throws ArtistException {
-		
-		String username = dto.getUsername();
-
 		if (!regRepo.existsByUserName(username)) {
 			
 			throw new ArtistException("No registration exists under the username ["+username+"]");
 		}
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
-		Artist artist = reg.getArtist();
 		
-		if(artist == null) {
+		if (reg.getArtist()==null) {
 			
 			throw new ArtistException("No artist exists under the username ["+username+"]");
 		}
-		
-		artist.setBankInfo(dto.getBankInfo());
-
-		artistRepo.save(artist);
-		
+		Artist artist = reg.getArtist();	
 		return artist;
 	}
+	
+	@Transactional
+	public Artist findArtistById(Long artistId) throws ArtistException {
+				
+		if (!artistRepo.existsById(artistId)) {
+			
+			throw new ArtistException("No artist exists under the username ["+artistId+"]");
+		}
+		
+		Artist artist = artistRepo.findArtistByArtistId(artistId);	
+		return artist;
+	}
+	
+	@Transactional
+	public List<Artist> findAllArtist() throws ArtistException {
+				
+		if (toList(artistRepo.findAll()).size() == 0) {
+			
+			throw new ArtistException("No artists exists.");
+		}
+		
+		List<Artist> artistList = toList(artistRepo.findAll());
+		return artistList;
+	}
+	
 	
 	@Transactional
 	public Artist deleteArtistByUsername(String username) throws ArtistException {
@@ -108,12 +82,19 @@ public class ArtistService {
 			throw new ArtistException("No artist exists under the id ["+username+"]");
 		}
 		
-		Artist artist = artistRepo.findArtistByArtistId(reg.getArtist().getArtistId());
+		Artist artist = reg.getArtist();
 		
 		reg.setArtist(null);
 		artistRepo.delete(artist);
 		
 		return artist;
+	}
+	private <T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
 	}
 	
 }
