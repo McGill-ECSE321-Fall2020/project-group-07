@@ -43,6 +43,18 @@ public class ArtistService {
 	}
 	
 	@Transactional
+	public Artist findArtistById(Long artistId) throws ArtistException {
+				
+		if (!artistRepo.existsById(artistId)) {
+			
+			throw new ArtistException("No artist exists under the username ["+artistId+"]");
+		}
+		
+		Artist artist = artistRepo.findArtistByArtistId(artistId);	
+		return artist;
+	}
+	
+	@Transactional
 	public List<Artist> findAllArtist() throws ArtistException {
 				
 		if (toList(artistRepo.findAll()).size() == 0) {
