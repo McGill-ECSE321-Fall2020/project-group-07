@@ -32,6 +32,7 @@ public class TestArtistServiceFindAll {
 	private static final Long ARTISTID = (long) 1;
 	private static final String BANKINFO = "moonnneyyyyyy";
 	private static final String VALID_USERNAME = "ValidUserName";
+	
 	@BeforeEach
 	public void setMockOutput() {		
 		lenient().when(artistRepo.findAll()).thenAnswer((InvocationOnMock invocation) -> {
@@ -46,7 +47,7 @@ public class TestArtistServiceFindAll {
 			a.setGalleryRegistration(reg);
 			list.add(a);
 			
-			return null;
+			return list;
 		});
 	}
 	@Test

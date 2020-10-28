@@ -38,7 +38,7 @@ public class TestArtistServiceFindAllNoArtist {
 			List<Artist> list = new ArrayList<Artist>();
 			
 			
-			return null;
+			return list;
 		});
 	}
 	@Test
