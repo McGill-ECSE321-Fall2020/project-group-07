@@ -96,19 +96,22 @@ public class ArtworkService {
 		return artist.getArtwork();
 	}
 	
-//	Public  List<Artwork> retrieveRandomAvailableArtworks(int numToRetrieve) throws ArtworkException{
-//		
-//		ArrayList<Artwork> artworkList = new ArrayList<Artwork>();
-//	
-//		Iterator<Artwork> artworkIterable = (Iterator<Artwork>) artworkRepo.findAll().iterator();
-//        for (Iterator<Artwork> t : artworkIterable) 
-//        	artworkList.add((Artwork) t); 
-//  
-//
-//		return artworkList;
-//	
-//		
-//	}
+	@Transactional 
+	public  List<Artwork> retrieveRandomAvailableArtworks(int numToRetrieve) throws ArtworkException{
+		
+		ArrayList<Artwork> artworkList = new ArrayList<Artwork>();
+	
+		Iterable<Artwork> artworkIterable = (Iterable<Artwork>) artworkRepo.findAll();
+       
+		for (Artwork artwork : artworkIterable) 
+        artworkList.add(artwork); 
+		
+  
+
+		return artworkList;
+	
+		
+	}
 	
 
 }
