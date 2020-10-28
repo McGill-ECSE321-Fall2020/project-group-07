@@ -10,18 +10,22 @@ import static org.mockito.Mockito.lenient;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ProfileRepository;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
+import ca.mcgill.ecse321.onlinegallery.model.Customer;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.model.Profile;
 import ca.mcgill.ecse321.onlinegallery.service.ArtistService;
 
+@ExtendWith(MockitoExtension.class)
 public class TestArtistServiceCreateProfile {
 
 	@Mock
@@ -64,6 +68,15 @@ public class TestArtistServiceCreateProfile {
 				
 				return gallReg;
 			}
+			else if(invocation.getArgument(0).equals(INVALID_USERNAME_NOT_AN_ASRTIST)) {
+				GalleryRegistration gallReg = new GalleryRegistration();
+				Customer customer = new Customer();
+				
+				gallReg.setUserName(INVALID_USERNAME_NOT_AN_ASRTIST);
+				gallReg.setCustomer(customer);
+				
+				return gallReg;
+			}
 			else {
 				return null;
 			}
@@ -86,7 +99,7 @@ public class TestArtistServiceCreateProfile {
 		});
 		
 	}
-	
+
 	@Test
 	public void createProfileValidUsername() {
 		
@@ -114,6 +127,7 @@ public class TestArtistServiceCreateProfile {
 		try {
 			profile = service.createProfile(INVALID_USERNAME_NOT_AN_ASRTIST, selfDescription);
 		} catch (Exception e){
+			System.out.println(e.getMessage());
 			error = e.getMessage();
 		}
 		
@@ -121,7 +135,7 @@ public class TestArtistServiceCreateProfile {
 		assertEquals(error,"No artist exists under the username ["+INVALID_USERNAME_NOT_AN_ASRTIST+"]");
 		
 	}
-	
+
 	@Test
 	public void createProfileInValidUsernameNonExistant() {
 		
@@ -139,5 +153,5 @@ public class TestArtistServiceCreateProfile {
 		assertEquals(error,"No registration exists under the username ["+INVALID_USERNAME_NONEXIST+"]");
 		
 	}
-	
+
 }
