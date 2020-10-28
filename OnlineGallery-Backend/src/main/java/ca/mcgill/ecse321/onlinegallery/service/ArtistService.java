@@ -10,6 +10,7 @@ import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ProfileRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.PurchaseRepository;
+import ca.mcgill.ecse321.onlinegallery.dto.ProfileDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.model.Profile;
@@ -85,13 +86,16 @@ public class ArtistService {
 		Artist artist = reg.getArtist();
 		Profile profile = new Profile();
 		profile.setSelfDescription(newDesc);
+		profile.setNumSold(0);
+		profile.setRating(0.0);
+		profile.setTotalEarnings(0.0);
 		artist.setProfile(profile);
 		
 		return profileRepo.save(profile);
 	}
 	
 	@Transactional
-	public Profile updateProfile(String username, String newDesc) throws ArtistException{
+	public Profile updateProfile(String username, ProfileDto profileDto) throws ArtistException{
 		
 		if(!regRepo.existsByUserName(username)) {
 			throw new ArtistException("No registration exists under the username ["+username+"]");
@@ -109,7 +113,10 @@ public class ArtistService {
 
 		Artist artist = reg.getArtist();
 		Profile profile = artist.getProfile();
-		profile.setSelfDescription(newDesc);
+		profile.setSelfDescription(profileDto.getSelfDescription());
+		profile.setNumSold(profileDto.getNumSold());
+		profile.setRating(profileDto.getRating());
+		profile.setTotalEarnings(profileDto.getTotalEarnings());
 		
 		return profileRepo.save(profile);
 	}
