@@ -69,6 +69,26 @@ public class ArtworkService {
 	}
 	
 	@Transactional
+	public List<Artwork> getAllAvailableArtwork() throws ArtworkException{
+		
+		if(toList(artworkRepo.findAll()).size() == 0) {
+			throw new  ArtworkException("No artwork exists");
+		} 
+
+		List<Artwork> artworkList = toList(artworkRepo.findAll());
+		List<Artwork> availableArtwork = new ArrayList<Artwork>();
+		for(Artwork a: artworkList) {
+			if (a.getStatus() == ArtworkStatus.AVAILABLE) {
+				availableArtwork.add(a);
+			} 
+		}
+		if(availableArtwork.size()==0) {
+			throw new ArtworkException("No available artwork exists");
+		}
+		return availableArtwork;
+	}
+	
+	@Transactional
 	public Artwork getAvailableArtworkDetail(Long artworkId) throws ArtworkException{
 		if (!artworkRepo.existsByArtworkId(artworkId)) {
 			throw new  ArtworkException("No Available Artwork with artworkID ["+artworkId+"] exists");
@@ -79,5 +99,12 @@ public class ArtworkService {
 			throw new  ArtworkException("No AvailableArtwork with artworkID ["+artworkId+"] exists");
 		} 
 		return artwork;
+	}
+	private <T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
 	}
 }
