@@ -118,6 +118,21 @@ public class ArtworkService {
 	
 		
 	}
+	@Transactional 
+	public  List<Artwork> getAllArtworks() throws ArtworkException{
+		
+		List<Artwork> artworkList = new ArrayList<Artwork>();
+		artworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
+
+		if (artworkList.size() == 0) {
+			throw new  ArtworkException("there is no artworks");
+		} 
+		
+
+		return artworkList;
+	
+		
+	}
 	
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();
