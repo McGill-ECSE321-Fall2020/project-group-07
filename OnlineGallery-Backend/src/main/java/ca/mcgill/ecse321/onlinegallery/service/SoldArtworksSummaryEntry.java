@@ -27,4 +27,23 @@ public class SoldArtworksSummaryEntry {
 		
 		
 	}
+
+
+	public Map<String, String> getNameMap() {
+		return nameMap;
+	}
+
+
+	public Map<String, Double> getPriceMap() {
+		return priceMap;
+	}
+
+	public Map<String, Double> getCommisionMap() {
+		return commisionMap;
+	}
+
+	public Map<String, Date> getDateMap() {
+		return dateMap;
+	}
+
 }

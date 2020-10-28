@@ -28,21 +28,24 @@ public class ApplicationService {
 	
 	@Transactional
 	public Map<Long, SoldArtworksSummaryEntry> generateSummary () throws ApplicationException{
-		if (toList(purchaseRepo.findAll()).size() == 0) {
-			throw new ApplicationException ("no purchase exist on the system");
+		Map<Long, SoldArtworksSummaryEntry> summaryList = new HashMap <Long, SoldArtworksSummaryEntry> ();
+		if (purchaseRepo.count() == 0) {
+			throw new ApplicationException ("no Purchase found in system");
+		}
+		else {
+			for (Purchase p : toList(purchaseRepo.findAll())) {
+				long artworkId = p.getArtwork().getArtworkId();
+				String name = p.getArtwork().getName();
+				double price = p.getArtwork().getPrice();
+				double commission = p.getArtwork().getComission();
+				Date purshaseDate = p.getDate();
+
+				SoldArtworksSummaryEntry aSummary = new SoldArtworksSummaryEntry(name, price, commission, purshaseDate);
+				summaryList.put(artworkId, aSummary);
+			
+			}
 		}
 		
-		Map<Long, SoldArtworksSummaryEntry> summaryList = new HashMap <Long, SoldArtworksSummaryEntry> ();
-		for (Purchase p : toList(purchaseRepo.findAll())) {
-			long artworkId = p.getArtwork().getArtworkId();
-			String name = p.getArtwork().getName();
-			double price = p.getArtwork().getPrice();
-			double commission = p.getArtwork().getComission();
-			Date purshaseDate = p.getDate();
-			SoldArtworksSummaryEntry aSummary = new SoldArtworksSummaryEntry(name, price, commission, purshaseDate);
-			summaryList.put(artworkId, aSummary);
-			
-		}
 		return summaryList;
 	}
 	

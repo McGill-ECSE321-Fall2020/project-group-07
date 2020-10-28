@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.onlinegallery.service.Application;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.lenient;
@@ -11,9 +14,11 @@ import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
+import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
@@ -23,6 +28,7 @@ import ca.mcgill.ecse321.onlinegallery.service.SoldArtworksSummaryEntry;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ApplicationException;
 import ca.mcgill.ecse321.onlinegallery.model.*;
 
+@ExtendWith(MockitoExtension.class)
 public class TestApplicationServiceGenerateSummary {
 	
 	@Mock
@@ -47,6 +53,7 @@ public class TestApplicationServiceGenerateSummary {
 	
 	@BeforeEach
 	public void setMockOutput() {
+		lenient().when(purchaseRepo.count()).thenReturn((long) 1);
 		lenient().when(purchaseRepo.findAll()).thenAnswer((InvocationOnMock i) -> {
 			Set<Purchase> purchaseSet = new HashSet<Purchase>();
 			Artwork art = new Artwork();
@@ -63,19 +70,29 @@ public class TestApplicationServiceGenerateSummary {
 			p.setArtwork(art);
 			purchaseSet.add(p);
 			
-			return null;
+			return purchaseSet;
 		});
 	}
 	
 	@Test
 	public void testGenerateSummarySuccessfully() {
 		Map<Long, SoldArtworksSummaryEntry> summaryList = null;
+		
 		try {
 			summaryList = service.generateSummary();
 		}
 		catch (ApplicationException e) {
-			fail ();
+			fail();
 		}
+		
+		assertNotNull(summaryList);
+		assertEquals(1, summaryList.size());
+		assertTrue(summaryList.containsKey(VALID_ARTWORK_ID));
+		assertEquals(VALID_ARTWORK_NAME, summaryList.get(VALID_ARTWORK_ID).getNameMap().get("name"));
+		assertEquals(VALID_ARTWORK_PRICE, summaryList.get(VALID_ARTWORK_ID).getPriceMap().get("price"));
+		assertEquals(VALID_ARTWORK_COMMISSION, summaryList.get(VALID_ARTWORK_ID).getCommisionMap().get("commission"));
+		assertEquals(VALID_PURCHASE_DATE, summaryList.get(VALID_ARTWORK_ID).getDateMap().get("datePurchased"));
+		
 	}
 
 }

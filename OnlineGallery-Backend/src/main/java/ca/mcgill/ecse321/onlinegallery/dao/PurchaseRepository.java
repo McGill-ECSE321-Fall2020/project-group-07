@@ -10,5 +10,7 @@ public interface PurchaseRepository extends CrudRepository<Purchase, Long> {
 	Purchase findByCustomerAndArtwork(Customer customer,Artwork artwork);
 	
 	boolean existsByCustomerAndArtwork(Customer customer,Artwork artwork);
+	
+	boolean existsByPurchaseId(Long purchaseId);
 
 }
