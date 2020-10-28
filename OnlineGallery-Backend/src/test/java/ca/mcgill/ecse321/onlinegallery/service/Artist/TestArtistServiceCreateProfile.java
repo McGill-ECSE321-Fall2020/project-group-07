@@ -39,7 +39,7 @@ public class TestArtistServiceCreateProfile {
 	
 	private static final String VALID_USERNAME="validUsername";
 	private static final String INVALID_USERNAME_NONEXIST="nonexistUsername";
-	private static final String INVALID_USERNAME_NOT_AN_ASRTIST="userNotArtist";
+	private static final String INVALID_USERNAME_NOT_AN_ARTIST="userNotArtist";
 
 	@BeforeEach
 	public void setMockOutput() {
@@ -50,7 +50,7 @@ public class TestArtistServiceCreateProfile {
 			if (invocation.getArgument(0).equals(VALID_USERNAME)) {
 				return true;
 			}
-			else if (invocation.getArgument(0).equals(INVALID_USERNAME_NOT_AN_ASRTIST)) {
+			else if (invocation.getArgument(0).equals(INVALID_USERNAME_NOT_AN_ARTIST)) {
 				return true;
 			}
 			else {
@@ -65,15 +65,17 @@ public class TestArtistServiceCreateProfile {
 				
 				gallReg.setUserName(VALID_USERNAME);
 				gallReg.setArtist(artist);
+				artist.setGalleryRegistration(gallReg);
 				
 				return gallReg;
 			}
-			else if(invocation.getArgument(0).equals(INVALID_USERNAME_NOT_AN_ASRTIST)) {
+			else if(invocation.getArgument(0).equals(INVALID_USERNAME_NOT_AN_ARTIST)) {
 				GalleryRegistration gallReg = new GalleryRegistration();
 				Customer customer = new Customer();
 				
-				gallReg.setUserName(INVALID_USERNAME_NOT_AN_ASRTIST);
+				gallReg.setUserName(INVALID_USERNAME_NOT_AN_ARTIST);
 				gallReg.setCustomer(customer);
+				customer.setGalleryRegistration(gallReg);
 				
 				return gallReg;
 			}
@@ -131,14 +133,14 @@ public class TestArtistServiceCreateProfile {
 		String error = null;
 		
 		try {
-			profile = service.createProfile(INVALID_USERNAME_NOT_AN_ASRTIST, selfDescription);
+			profile = service.createProfile(INVALID_USERNAME_NOT_AN_ARTIST, selfDescription);
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 			error = e.getMessage();
 		}
 		
 		assertNull(profile);
-		assertEquals(error,"No artist exists under the username ["+INVALID_USERNAME_NOT_AN_ASRTIST+"]");
+		assertEquals(error,"No artist exists under the username ["+INVALID_USERNAME_NOT_AN_ARTIST+"]");
 		
 	}
 

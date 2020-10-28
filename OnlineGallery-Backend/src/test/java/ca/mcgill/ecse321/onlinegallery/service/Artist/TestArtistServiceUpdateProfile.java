@@ -72,6 +72,7 @@ public class TestArtistServiceUpdateProfile {
 				artist.setProfile(profile);
 				gallReg.setUserName(VALID_USERNAME);
 				gallReg.setArtist(artist);
+				artist.setGalleryRegistration(gallReg);
 				
 				return gallReg;
 			}
@@ -81,6 +82,7 @@ public class TestArtistServiceUpdateProfile {
 			
 				gallReg.setUserName(INVALID_USERNAME_NO_PROFILE);
 				gallReg.setArtist(artist);
+				artist.setGalleryRegistration(gallReg);
 				
 				return gallReg;
 			}
@@ -90,6 +92,7 @@ public class TestArtistServiceUpdateProfile {
 				
 				gallReg.setUserName(INVALID_USERNAME_NOT_AN_ASRTIST);
 				gallReg.setCustomer(customer);
+				customer.setGalleryRegistration(gallReg);
 				
 				return gallReg;
 			}
