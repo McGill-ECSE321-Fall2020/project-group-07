@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Set;
 
 import javax.transaction.Transactional;
@@ -100,11 +101,20 @@ public class ArtworkService {
 	public  List<Artwork> retrieveRandomAvailableArtworks(int numToRetrieve) throws ArtworkException{
 		
 		List<Artwork> artworkList = new ArrayList<Artwork>();
-	
 		artworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
-        
-
-		return artworkList;
+		List<Artwork> randomList = new ArrayList<Artwork>();
+		Random rand = new Random();
+		
+		if (numToRetrieve > artworkList.size()) {
+			throw new  ArtworkException("there is less than ["+numToRetrieve+"] artworks");
+		} 
+		
+		for (int i = 0; i < numToRetrieve; i++) {
+	        int randomIndex = rand.nextInt(artworkList.size());
+	        randomList.add(artworkList.get(randomIndex));
+	        artworkList.remove(randomIndex);
+	    }
+		return randomList;
 	
 		
 	}
