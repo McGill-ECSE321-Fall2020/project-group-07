@@ -99,18 +99,22 @@ public class ArtworkService {
 	@Transactional 
 	public  List<Artwork> retrieveRandomAvailableArtworks(int numToRetrieve) throws ArtworkException{
 		
-		ArrayList<Artwork> artworkList = new ArrayList<Artwork>();
+		List<Artwork> artworkList = new ArrayList<Artwork>();
 	
-		Iterable<Artwork> artworkIterable = (Iterable<Artwork>) artworkRepo.findAll();
-       
-		for (Artwork artwork : artworkIterable) 
-        artworkList.add(artwork); 
-		
-  
+		artworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
+        
 
 		return artworkList;
 	
 		
+	}
+	
+	private <T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
 	}
 	
 
