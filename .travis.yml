@@ -13,41 +13,41 @@ matrix:
       script:
         - ./gradlew build
 
-    # start backend
-       - language: java
+    # # start backend
+    #    - language: java
 
-      branches:
-        only:
-          - master
+    #   branches:
+    #     only:
+    #       - master
 
-      before_install:
-        - chmod +x gradlew
-      script:
-        - ./gradlew bootRun
+    #   before_install:
+    #     - chmod +x gradlew
+    #   script:
+    #     - ./gradlew bootRun
 
-    # Postman integration tests
-    - language: node_js
-      node_js:
-          - "10.15"
+    # # Postman integration tests
+    # - language: node_js
+    #   node_js:
+    #       - "10.15"
 
-      install:
-          - npm install -g newman
-          # - sudo apt-get update
-          # - sudo apt-get install -y tmux
+    #   install:
+    #       - npm install -g newman
+    #       # - sudo apt-get update
+    #       # - sudo apt-get install -y tmux
 
-      before_script:
-          - node --version
-          - npm --version
-          - node_modules/.bin/newman --version
-          # - chmod +x ./parallelrun.sh
+    #   before_script:
+    #       - node --version
+    #       - npm --version
+    #       - node_modules/.bin/newman --version
+    #       # - chmod +x ./parallelrun.sh
 
 
-      script:
-          # - fuser 8080/tcp
-          # - ./parallelrun.sh
-          # - tmux ls
-          # - sleep 45
-          # - fuser 8080/tcp
-          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
-          # - tmux kill-winodw
-          # - tmux ls
+    #   script:
+    #       # - fuser 8080/tcp
+    #       # - ./parallelrun.sh
+    #       # - tmux ls
+    #       # - sleep 45
+    #       # - fuser 8080/tcp
+    #       - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
+    #       # - tmux kill-winodw
+    #       # - tmux ls
