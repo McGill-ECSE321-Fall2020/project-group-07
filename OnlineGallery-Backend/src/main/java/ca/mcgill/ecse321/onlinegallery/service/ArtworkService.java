@@ -1,7 +1,10 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -27,6 +30,7 @@ public class ArtworkService {
 	
 	@Autowired
 	ArtistRepository artistRepo;
+	
 	
 	@Autowired
 	GalleryRegistrationRepository regRepo;
@@ -99,6 +103,53 @@ public class ArtworkService {
 		} 
 		return artwork;
 	}
+
+	
+	@Transactional 
+	public Set<Artwork> getAvailableArtworkByArtistId(Long artistId) throws ArtworkException{
+		if (!artistRepo.existsById(artistId)) {
+			throw new  ArtworkException("No artist with artistId ["+artistId+"] exists");
+		} 
+		Artist artist = artistRepo.findArtistByArtistId(artistId);
+		return artist.getArtwork();
+	}
+	
+	@Transactional 
+	public  List<Artwork> retrieveRandomAvailableArtworks(int numToRetrieve) throws ArtworkException{
+		
+		List<Artwork> artworkList = new ArrayList<Artwork>();
+		artworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
+		List<Artwork> randomList = new ArrayList<Artwork>();
+		Random rand = new Random();
+		
+		if (numToRetrieve > artworkList.size()) {
+			throw new  ArtworkException("there is less than ["+numToRetrieve+"] artworks");
+		} 
+		
+		for (int i = 0; i < numToRetrieve; i++) {
+	        int randomIndex = rand.nextInt(artworkList.size());
+	        randomList.add(artworkList.get(randomIndex));
+	        artworkList.remove(randomIndex);
+	    }
+		return randomList;
+	
+		
+	}
+	@Transactional 
+	public  List<Artwork> getAllArtworks() throws ArtworkException{
+		
+		List<Artwork> artworkList = new ArrayList<Artwork>();
+		artworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
+
+		if (artworkList.size() == 0) {
+			throw new  ArtworkException("there is no artworks");
+		} 
+		
+
+		return artworkList;
+	
+		
+	}
 	
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();
@@ -107,4 +158,6 @@ public class ArtworkService {
 		}
 		return resultList;
 	}
+	
+
 }
