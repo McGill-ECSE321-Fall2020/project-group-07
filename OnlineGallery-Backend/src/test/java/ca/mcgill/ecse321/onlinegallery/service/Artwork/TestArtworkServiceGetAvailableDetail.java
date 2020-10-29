@@ -152,4 +152,8 @@ public class TestArtworkServiceGetAvailableDetail {
 		
 	}
 
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> origin/mass-rest

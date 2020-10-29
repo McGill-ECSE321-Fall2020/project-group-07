@@ -30,7 +30,10 @@ import ca.mcgill.ecse321.onlinegallery.service.ArtworkService;
 import ca.mcgill.ecse321.onlinegallery.service.ArtistService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtworkException;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/mass-rest
 @ExtendWith(MockitoExtension.class)
 public class TestArtworkServiceRetrieveRandom {
 	@Mock
@@ -131,5 +134,8 @@ public class TestArtworkServiceRetrieveRandom {
 	}
 
 }
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> origin/mass-rest
