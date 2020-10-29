@@ -1,14 +1,12 @@
 
+branches:
+  only:
+  - master  
   
 matrix:
-  
-  branches:
-    only:
-    - master
-
   include:
 
-    Backend tests
+    # Backend tests
     - language: java
 
       before_install:
