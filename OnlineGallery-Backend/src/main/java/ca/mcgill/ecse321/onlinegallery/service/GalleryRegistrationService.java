@@ -149,7 +149,6 @@ public class GalleryRegistrationService {
 		} else {
 			og = new OnlineGallery();
 			og.setDaysUp(0);
-			og.setTotalEarnings(0);
 		}
 		
 		og.getAllRegistrations().add(reg);
@@ -229,7 +228,7 @@ public class GalleryRegistrationService {
 		
 		for (GalleryRegistration reg:regRepo.findAll()) {
 			deletedRegs.add(reg);
-			this.deleteGalleryRegistration(reg.getUserName());
+			this.deleteGalleryRegistration(reg.getUserName()); 
 		}
 		
 		return deletedRegs;
