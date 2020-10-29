@@ -1,5 +1,8 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.transaction.Transactional;
 
 
@@ -46,6 +49,29 @@ public class ArtistService {
 		return artist;
 	}
 	
+	@Transactional
+	public Artist findArtistById(Long artistId) throws ArtistException {
+				
+		if (!artistRepo.existsById(artistId)) {
+			
+			throw new ArtistException("No artist exists under the username ["+artistId+"]");
+		}
+		
+		Artist artist = artistRepo.findArtistByArtistId(artistId);	
+		return artist;
+	}
+	
+	@Transactional
+	public List<Artist> findAllArtist() throws ArtistException {
+				
+		if (toList(artistRepo.findAll()).size() == 0) {
+			
+			throw new ArtistException("No artists exists.");
+		}
+		
+		List<Artist> artistList = toList(artistRepo.findAll());
+		return artistList;
+	}
 	
 	@Transactional
 	public Artist deleteArtistByUsername(String username) throws ArtistException {
@@ -119,6 +145,14 @@ public class ArtistService {
 		profile.setTotalEarnings(profileDto.getTotalEarnings());
 		
 		return profileRepo.save(profile);
+	}
+	
+	private <T> List<T> toList(Iterable<T> iterable){
+		List<T> resultList = new ArrayList<T>();
+		for (T t : iterable) {
+			resultList.add(t);
+		}
+		return resultList;
 	}
 	
 }
