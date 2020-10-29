@@ -144,9 +144,4 @@ public class TestArtworkServiceGetAvailableDetail {
 		assertEquals(error, "Artwork with artworkID ["+VALIDARTWORKTID_UNAVAILABLE+"] is unavailable");
 		
 	}
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/mass-rest

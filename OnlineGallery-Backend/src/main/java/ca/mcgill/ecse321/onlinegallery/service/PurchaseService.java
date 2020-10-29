@@ -118,20 +118,6 @@ public class PurchaseService {
 		}
 		return allP;
 	}
-
-	@Transactional
-	public List<Purchase> getAllPurchases() throws PurchaseException{
-		if (purchaseRepo.count()==0) {
-			throw new PurchaseException("no Purchase in system");
-		}
-		
-		List<Purchase> allP = new ArrayList<Purchase>();
-		
-		for (Purchase p:purchaseRepo.findAll()) {
-			allP.add(p);
-		}
-		return allP;
-	}
 	
 	@Transactional
 	public Purchase updatePurchaseShipment(PurchaseDto dto)  throws PurchaseException{ 

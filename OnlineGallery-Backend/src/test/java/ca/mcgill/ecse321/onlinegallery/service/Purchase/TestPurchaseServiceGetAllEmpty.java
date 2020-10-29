@@ -75,11 +75,4 @@ public class TestPurchaseServiceGetAllEmpty {
 		assertEquals(error,"no Purchase in system");
 	} 
 
-<<<<<<< HEAD
-
-
-
 }
-=======
-}
->>>>>>> origin/mass-rest

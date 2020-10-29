@@ -77,9 +77,4 @@ public class TestArtworkServiceGetAll {
 		}
 		assertNotNull(list);
 	}
-
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> origin/mass-rest

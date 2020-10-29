@@ -86,11 +86,7 @@ public class TestGalleryRegistrationServiceGetAll {
 		for (GalleryRegistration eachReg:allReg) {
 			assertEquals(true,expectedUserNames.contains(eachReg.getUserName()));
 		}
-		
-		
+	
 	} 
-
-
-
 
 }
