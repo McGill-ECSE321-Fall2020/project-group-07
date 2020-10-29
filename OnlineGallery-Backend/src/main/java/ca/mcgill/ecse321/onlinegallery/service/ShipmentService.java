@@ -131,6 +131,20 @@ public class ShipmentService {
 		return shipment;
 	}
 	
+	public List<Shipment> getAllShipments() throws ShipmentException{
+		if (shipRepo.count()==0) {
+			throw new ShipmentException("no Shipments in system");
+		}
+		
+		List<Shipment> slist= new ArrayList<Shipment>();
+		
+		for (Shipment s:shipRepo.findAll()) {
+			slist.add(s);
+		}
+		
+		return slist;
+	}
+	
 	public void validateExp(String exp) throws CreditCardException{
 
 		
