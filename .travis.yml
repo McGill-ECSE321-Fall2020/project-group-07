@@ -29,9 +29,11 @@ matrix:
 
 
       script:
+          - fuser 8080/tcp
           - ./parallelrun.sh
           - tmux ls
           - sleep 45
-          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
-          - tmux kill-winodw
-          - tmux ls
+          - fuser 8080/tcp
+          # - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
+          # - tmux kill-winodw
+          # - tmux ls
