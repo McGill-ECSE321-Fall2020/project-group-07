@@ -39,14 +39,13 @@ matrix:
           - node --version
           - npm --version
           - node_modules/.bin/newman --version
-          - chmod +x ./parallelrun.sh
+          - chmod +x ./OnlineGallery-Backend/parallelrun.sh
 
 
       script:
-          - ./parallelrun.sh
-          - tmux ls
+          - ./OnlineGallery-Backend/parallelrun.sh
           - sleep 20
-          - netstat -tlnp
+          - sudo netstat -tlnp
           # - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
           # - tmux kill-winodw
           # - tmux ls
