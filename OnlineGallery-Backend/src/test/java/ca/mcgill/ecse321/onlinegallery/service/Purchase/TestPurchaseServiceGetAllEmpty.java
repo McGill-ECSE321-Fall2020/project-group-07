@@ -75,7 +75,4 @@ public class TestPurchaseServiceGetAllEmpty {
 		assertEquals(error,"no Purchase in system");
 	} 
 
-
-
-
 }

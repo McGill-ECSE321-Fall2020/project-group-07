@@ -79,7 +79,7 @@ public class PurchaseService {
 		
 		String username=dto.getUsername();
 		Long artworkId=dto.getArtworkId();
-		
+
 		
 		if (!regRepo.existsByUserName(username)) {
 			throw new PurchaseException("no customer with the username ["+username+"] found in system");
@@ -118,7 +118,7 @@ public class PurchaseService {
 		}
 		return allP;
 	}
-
+	
 	@Transactional
 	public Purchase updatePurchaseShipment(PurchaseDto dto)  throws PurchaseException{ 
 		
