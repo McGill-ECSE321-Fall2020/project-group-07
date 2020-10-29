@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -28,6 +30,7 @@ public class ArtworkService {
 	@Autowired
 	ArtistRepository artistRepo;
 	
+	
 	@Autowired
 	GalleryRegistrationRepository regRepo;
 	
@@ -46,7 +49,7 @@ public class ArtworkService {
 		
 		if(dto.getName() == null || dto.getDescription() == null || 
 				dto.getPrice() <= 0 || dto.getDimension() == null || dto.getNumViews() != 0 ||
-						dto.getStatus() == null || dto.getWeight() <= 0 || dto.getCommission() == 0){
+						dto.getStatus() == null || dto.getWeight() <= 0){
 			throw new ArtworkException("Invalid artwork attributes");	
 						}
 		
@@ -59,6 +62,7 @@ public class ArtworkService {
 		art.setWeight(dto.getWeight());
 		art.setCommission(dto.getCommission());
 		
+		
 		artist.getArtwork().add(art);
 		art.setArtist(artist);
 		
@@ -67,37 +71,64 @@ public class ArtworkService {
 		return art;
 	}
 	
-	@Transactional
-	public List<Artwork> getAllAvailableArtwork() throws ArtworkException{
-		
-		if(toList(artworkRepo.findAll()).size() == 0) {
-			throw new  ArtworkException("No artwork exists");
-		} 
 
-		List<Artwork> artworkList = toList(artworkRepo.findAll());
-		List<Artwork> availableArtwork = new ArrayList<Artwork>();
-		for(Artwork a: artworkList) {
-			if (a.getStatus() == ArtworkStatus.AVAILABLE) {
-				availableArtwork.add(a);
-			} 
-		}
-		if(availableArtwork.size()==0) {
-			throw new ArtworkException("No available artwork exists");
-		}
-		return availableArtwork;
-	}
-	
 	@Transactional
 	public Artwork getAvailableArtworkDetail(Long artworkId) throws ArtworkException{
 		if (!artworkRepo.existsByArtworkId(artworkId)) {
-			throw new  ArtworkException("No Available Artwork with artworkID ["+artworkId+"] exists");
+			throw new  ArtworkException("No artwork with artworkID ["+artworkId+"] exists");
 		} 
 
 		Artwork artwork = artworkRepo.findArtworkByArtworkId(artworkId);
 		if (artwork.getStatus() == ArtworkStatus.UNAVAILABLE) {
-			throw new  ArtworkException("No AvailableArtwork with artworkID ["+artworkId+"] exists");
+			throw new  ArtworkException("Artwork with artworkID ["+artworkId+"] is unavailable");
 		} 
 		return artwork;
+	}
+	
+	@Transactional 
+	public Set<Artwork> getAvailableArtworkByArtistId(Long artistId) throws ArtworkException{
+		if (!artistRepo.existsById(artistId)) {
+			throw new  ArtworkException("No artist with artistId ["+artistId+"] exists");
+		} 
+		Artist artist = artistRepo.findArtistByArtistId(artistId);
+		return artist.getArtwork();
+	}
+	
+	@Transactional 
+	public  List<Artwork> retrieveRandomAvailableArtworks(int numToRetrieve) throws ArtworkException{
+		
+		List<Artwork> artworkList = new ArrayList<Artwork>();
+		artworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
+		List<Artwork> randomList = new ArrayList<Artwork>();
+		Random rand = new Random();
+		
+		if (numToRetrieve > artworkList.size()) {
+			throw new  ArtworkException("there is less than ["+numToRetrieve+"] artworks");
+		} 
+		
+		for (int i = 0; i < numToRetrieve; i++) {
+	        int randomIndex = rand.nextInt(artworkList.size());
+	        randomList.add(artworkList.get(randomIndex));
+	        artworkList.remove(randomIndex);
+	    }
+		return randomList;
+	
+		
+	}
+	@Transactional 
+	public  List<Artwork> getAllArtworks() throws ArtworkException{
+		
+		List<Artwork> artworkList = new ArrayList<Artwork>();
+		artworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
+
+		if (artworkList.size() == 0) {
+			throw new  ArtworkException("there is no artworks");
+		} 
+		
+
+		return artworkList;
+	
+		
 	}
 	
 	private <T> List<T> toList(Iterable<T> iterable){
@@ -107,4 +138,6 @@ public class ArtworkService {
 		}
 		return resultList;
 	}
+	
+
 }
