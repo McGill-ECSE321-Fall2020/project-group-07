@@ -39,7 +39,7 @@ public class ArtworkService {
 	@Transactional
 	public Artwork createArtwork(Long artistId, ArtworkDto dto) throws ArtworkException, ArtistException {
 		
-		if(!artistRepo.existsById(artistId)) {
+		if(!artistRepo.existsById(artistId)) { 
 			throw new ArtistException("No artist with ID ["+artistId+"] exists");
 		}
 		
@@ -103,7 +103,7 @@ public class ArtworkService {
 		} 
 		return artwork;
 	}
-
+ 
 	
 	@Transactional 
 	public Set<Artwork> getAvailableArtworkByArtistId(Long artistId) throws ArtworkException{
