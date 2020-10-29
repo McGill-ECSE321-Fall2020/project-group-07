@@ -19,20 +19,21 @@ matrix:
           - "10.15"
 
       install:
+          - cd ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/
           - npm install newman
 
       before_script:
           - node --version
           - npm --version
           - node_modules/.bin/newman --version
-          - chmod +x ./parallelrun.sh
+          # - chmod +x ./parallelrun.sh
 
 
 
       script:
-          - ./parallelrun.sh
-          - tmux ls
-          - sleep 45
+          # - ./parallelrun.sh
+          # - tmux ls
+          # - sleep 45
           - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
-          - tmux kill-winodw
-          - tmux ls
+          # - tmux kill-winodw
+          # - tmux ls
