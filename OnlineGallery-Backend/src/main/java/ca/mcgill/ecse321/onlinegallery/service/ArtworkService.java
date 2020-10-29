@@ -40,18 +40,16 @@ public class ArtworkService {
 			throw new ArtistException("No artist with ID ["+artistId+"] exists");
 		}
 		
-		String username=dto.getUsername();		
-		if (!regRepo.existsByUserName(username)) {
-			throw new ArtworkException("No GalleryRegistration with username ["+username+"] exists");
-		}
+		Artist artist = artistRepo.findArtistByArtistId(artistId);
+		GalleryRegistration reg= artist.getGalleryRegistration();
 		
-		GalleryRegistration reg=regRepo.findGalleryRegisrationByUserName(username);
-		if (reg.getArtist()==null) {
-			throw new ArtworkException("No artist associated with username ["+username+"]");
-		}
-		
-		Artist artist = reg.getArtist();
 		Artwork art = new Artwork();
+		
+		if(dto.getName() == null || dto.getDescription() == null || 
+				dto.getPrice() <= 0 || dto.getDimension() == null || dto.getNumViews() != 0 ||
+						dto.getStatus() == null || dto.getWeight() <= 0 || dto.getCommission() == 0){
+			throw new ArtworkException("Invalid artwork attributes");	
+						}
 		
 		art.setName(dto.getName());
 		art.setDescription(dto.getDescription());
@@ -61,7 +59,6 @@ public class ArtworkService {
 		art.setDimension(dto.getDimension());
 		art.setWeight(dto.getWeight());
 		art.setCommission(dto.getCommission());
-		
 		
 		artist.getArtwork().add(art);
 		art.setArtist(artist);

@@ -93,10 +93,15 @@ public class TestPurchaseServiceGetAll {
 			assertEquals(true,expectedPIds.contains(eachP.getPurchaseId()));
 		}
 		
+<<<<<<< HEAD
 		
 	} 
 
 
 
 
+=======
+	} 
+
+>>>>>>> origin/mass-rest
 }

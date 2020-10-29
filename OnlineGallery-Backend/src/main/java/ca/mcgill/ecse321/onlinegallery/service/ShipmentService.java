@@ -53,7 +53,7 @@ public class ShipmentService {
 				throw new ShipmentException("cannot add a Purchase to a Shipment owned by another Customer");
 			}
 		}
-				 
+				
 		
 		shipment.getPurchase().add(purchase);
 		purchase.setShipment(shipment);
@@ -145,7 +145,7 @@ public class ShipmentService {
 		return slist;
 	}
 	
-	private void validateExp(String exp) throws CreditCardException{
+	public void validateExp(String exp) throws CreditCardException{
 
 		
 		int length=exp.length();
@@ -158,7 +158,7 @@ public class ShipmentService {
 		
 		for (char c:allowedChars.toCharArray()) {
 			charList.add(c);
-		} 
+		}
 		
 		for (char c:exp.toCharArray()) {
 			if (!(charList.contains(c))) {
