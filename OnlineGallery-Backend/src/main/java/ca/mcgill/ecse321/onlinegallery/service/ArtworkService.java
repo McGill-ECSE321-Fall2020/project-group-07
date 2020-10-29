@@ -46,7 +46,7 @@ public class ArtworkService {
 		
 		if(dto.getName() == null || dto.getDescription() == null || 
 				dto.getPrice() <= 0 || dto.getDimension() == null || dto.getNumViews() != 0 ||
-						dto.getStatus() == null || dto.getWeight() <= 0){
+						dto.getStatus() == null || dto.getWeight() <= 0 || dto.getCommission() == 0){
 			throw new ArtworkException("Invalid artwork attributes");	
 						}
 		
@@ -58,7 +58,6 @@ public class ArtworkService {
 		art.setDimension(dto.getDimension());
 		art.setWeight(dto.getWeight());
 		art.setCommission(dto.getCommission());
-		
 		
 		artist.getArtwork().add(art);
 		art.setArtist(artist);
