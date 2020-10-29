@@ -16,7 +16,7 @@ matrix:
     #Postman integration tests
     - language: node_js
       node_js:
-          -"8.2.1"
+          -"10.15"
 
       install:
           - npm install newman
