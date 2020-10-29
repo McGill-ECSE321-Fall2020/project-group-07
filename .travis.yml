@@ -45,7 +45,7 @@ matrix:
       script:
           - ./OnlineGallery-Backend/parallelrun.sh
           - sleep 20
-          - sudo netstat -tlnp
+          - netstat -tlnp
           # - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
           # - tmux kill-winodw
           # - tmux ls

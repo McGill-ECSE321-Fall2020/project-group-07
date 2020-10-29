@@ -1,3 +1,3 @@
 #! /bin/bash
 
-sudo tmux new-session -d -s app_session "./gradlew bootRun"
+tmux new-session -d -s app_session "SERVER_PORT=8080 ./gradlew bootRun"
