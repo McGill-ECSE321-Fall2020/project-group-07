@@ -16,7 +16,6 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
-import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.Artwork;

@@ -7,9 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.lenient;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -19,17 +16,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.Artwork;
 import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
-import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.service.ArtworkService;
-import ca.mcgill.ecse321.onlinegallery.service.ArtistService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtworkException;
 
 @ExtendWith(MockitoExtension.class)

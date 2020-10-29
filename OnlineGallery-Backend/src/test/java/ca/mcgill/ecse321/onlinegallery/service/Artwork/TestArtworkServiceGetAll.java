@@ -3,7 +3,6 @@ package ca.mcgill.ecse321.onlinegallery.service.Artwork;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
 import java.util.ArrayList;
@@ -16,29 +15,17 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
-import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
-import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.Artwork;
 import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
-import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.service.ArtworkService;
-import ca.mcgill.ecse321.onlinegallery.service.ArtistService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtworkException;
 
 
 @ExtendWith(MockitoExtension.class)
 public class TestArtworkServiceGetAll {
-	
-//	@Mock
-//	private GalleryRegistrationRepository regRepo;
-//	
-//	@Mock
-//	private ArtistRepository artistRepo;
-	
+
 	@Mock
 	private ArtworkRepository artworkRepo;
 	
