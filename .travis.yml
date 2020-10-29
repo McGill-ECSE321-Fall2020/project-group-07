@@ -16,9 +16,9 @@ matrix:
     # # start backend
     #    - language: java
 
-    #   branches:
-    #     only:
-    #       - master
+      branches:
+        only:
+          - travis-exp
 
     #   before_install:
     #     - chmod +x gradlew
@@ -41,7 +41,7 @@ matrix:
 
       script:
           - ./gradlew bootRun &
-          - sleep 20
+          - sleep 60
           - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
           # - tmux kill-winodw
           # - tmux ls
