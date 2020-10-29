@@ -128,12 +128,6 @@ public class Shipment {
 		}
 		return this.purchase;
 	}
-	
-	public void addPurchase(Purchase p) {
-		if (this.purchase == null) {
-			this.purchase = new HashSet<Purchase>();
-		}
-		purchase.add(p);
-	}
+
 
 }

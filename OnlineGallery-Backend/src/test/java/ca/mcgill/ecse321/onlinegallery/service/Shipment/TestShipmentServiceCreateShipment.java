@@ -1,16 +1,13 @@
 package ca.mcgill.ecse321.onlinegallery.service.Shipment;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
-import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
@@ -30,7 +26,6 @@ import ca.mcgill.ecse321.onlinegallery.dto.ShipmentDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artwork;
 import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
 import ca.mcgill.ecse321.onlinegallery.model.Customer;
-import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.model.Purchase;
 import ca.mcgill.ecse321.onlinegallery.model.Shipment;
 import ca.mcgill.ecse321.onlinegallery.model.ShipmentStatus;
@@ -38,7 +33,6 @@ import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
 import ca.mcgill.ecse321.onlinegallery.service.ShipmentService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.PurchaseException;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ShipmentException;
-import javassist.bytecode.Descriptor.Iterator;
 
 
 
@@ -80,11 +74,8 @@ public class TestShipmentServiceCreateShipment {
 	private static final long VALID_PURCHASE_ID1 = (long)3;
 	private static final long VALID_PURCHASE_ID2 = (long)33;
 	private static final long INVALID_PURCHASE_ID_NONEXISTENT = (long)55;
-	private static final Long EXISTING_PURCHASEID_DELIVERY = (long) 19;
-	private static final Long EXISTING_PURCHASEID_PICKUP = (long) 11;
 	
 	private static final long VALID_CUSTOMER_ID = (long)66;
-	private static final long INVALID_CUSTOMER_ID =(long)99;
 	private static final String INVALID_USER_NAME_DIFFERENT_CLIENT = "juano1623";
 	
 	

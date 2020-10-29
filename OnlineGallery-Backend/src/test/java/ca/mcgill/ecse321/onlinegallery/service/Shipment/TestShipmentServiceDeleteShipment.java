@@ -16,20 +16,15 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import ca.mcgill.ecse321.onlinegallery.dao.PurchaseRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ShipmentRepository;
 import ca.mcgill.ecse321.onlinegallery.dto.PurchaseDto;
 import ca.mcgill.ecse321.onlinegallery.dto.ShipmentDto;
-import ca.mcgill.ecse321.onlinegallery.model.Artwork;
-import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
 import ca.mcgill.ecse321.onlinegallery.model.Purchase;
 import ca.mcgill.ecse321.onlinegallery.model.Shipment;
 import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
-import ca.mcgill.ecse321.onlinegallery.service.PurchaseService;
 import ca.mcgill.ecse321.onlinegallery.service.ShipmentService;
-import ca.mcgill.ecse321.onlinegallery.service.exception.PurchaseException;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ShipmentException;
 
 @ExtendWith(MockitoExtension.class)

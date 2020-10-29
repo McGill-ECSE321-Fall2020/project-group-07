@@ -13,7 +13,6 @@ import org.springframework.stereotype.Service;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.PurchaseRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.ShipmentRepository;
 import ca.mcgill.ecse321.onlinegallery.model.Purchase;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ApplicationException;
 

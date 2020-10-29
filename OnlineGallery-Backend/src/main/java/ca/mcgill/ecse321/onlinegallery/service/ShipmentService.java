@@ -34,13 +34,7 @@ public class ShipmentService {
 	
 	@Transactional 
 	public Shipment createShipment (ShipmentDto dto) throws ShipmentException, PurchaseException{
-		//exception: not all purchases are PICKUP
-		//exception: not all purchases are DELIVERY
-		//exception: no recipient name
-		//exception: invalid srcAddress
-		//exception: invalid destAddress
-		//side effect: shipment.setStatus(CREATED)
-		//return Shipment
+		
 		Shipment shipment = null;
 		List<PurchaseDto> purchases = dto.getPurchases();
 		
@@ -66,8 +60,6 @@ public class ShipmentService {
 			}
 		}
 		for (PurchaseDto p3 : purchases) {
-			//System.out.println("purchases size is " + purchases.size());
-			//System.out.println("purchase " + p3.getPurchaseId() + " has artwork" + p3.getArtworkId());
 			Artwork art = artworkRepo.findArtworkByArtworkId(p3.getArtworkId());
 			if (art.getStatus() == ArtworkStatus.AVAILABLE) {
 				throw new ShipmentException("artwork is still avaiable and can not be shipped");
@@ -102,7 +94,7 @@ public class ShipmentService {
 			Double artPrice = artworkRepo.findArtworkByArtworkId(purchases.get(0).getArtworkId()).getPrice();
 			totalPrice += artPrice;
 			Purchase p = purchaseRepo.findPurchaseByPurchaseId(p3.getPurchaseId());
-			shipment.addPurchase(p);
+			shipment.getPurchase().add(p);
 		}
 		Double shippingCost = dto.getShippingCost();
 		totalPrice += shippingCost;
