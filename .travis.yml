@@ -32,20 +32,16 @@ matrix:
 
       install:
           - npm install -g newman
-          - sudo apt-get update
-          - sudo apt-get install -y tmux
 
       before_script:
           - node --version
           - npm --version
           - node_modules/.bin/newman --version
-          - chmod +x ./OnlineGallery-Backend/parallelrun.sh
 
 
       script:
-          - ./OnlineGallery-Backend/parallelrun.sh
+          - ./gradlew bootRun &
           - sleep 20
-          - netstat -tlnp
-          # - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
           # - tmux kill-winodw
           # - tmux ls

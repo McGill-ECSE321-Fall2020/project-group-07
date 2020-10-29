@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.controller;
+ package ca.mcgill.ecse321.onlinegallery.controller;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -146,18 +146,6 @@ public class GalleryRegistrationRestController {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 		}
 	}
-//	
-//	@PutMapping(value={"/toggleLoggedIn/{username}","/toggleLoggedIn/{username}/"})
-//	public ResponseEntity<?> toggleLoggedIn(@PathVariable("username") String username) throws GalleryRegistrationException {
-//		try {
-//			GalleryRegistration reg=service.toggleLoggedInStatus(username);
-//			return new ResponseEntity<>(convertToDto(reg), HttpStatus.OK);
-//		}
-//		catch(GalleryRegistrationException e) {
-//			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
-//			
-//		}
-//	}
 	
 
 	private GalleryRegistrationDto convertToDto(GalleryRegistration reg) {

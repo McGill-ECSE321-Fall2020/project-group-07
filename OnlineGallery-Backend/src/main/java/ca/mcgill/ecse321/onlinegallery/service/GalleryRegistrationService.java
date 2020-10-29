@@ -21,7 +21,7 @@ public class GalleryRegistrationService {
  
 	@Autowired 
 	GalleryRegistrationRepository regRepo;
-	
+	 
 	@Autowired
 	GalleryAdminRepository adminRepo; 
 	

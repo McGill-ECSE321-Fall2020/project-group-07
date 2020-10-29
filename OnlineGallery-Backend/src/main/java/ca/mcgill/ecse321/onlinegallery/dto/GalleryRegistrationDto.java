@@ -48,7 +48,7 @@ public class GalleryRegistrationDto {
 		return this.loggedIn;
 	}
 	public void setLoggedIn(boolean status) {
-		this.loggedIn=status;
+		this.loggedIn=status; 
 	}
 	
 	private Long customerId;
