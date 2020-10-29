@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.service.Artist;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.Mockito.lenient;
 

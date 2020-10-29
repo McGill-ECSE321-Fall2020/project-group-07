@@ -1,11 +1,12 @@
 package ca.mcgill.ecse321.onlinegallery.service.Artist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.ArgumentMatchers.anyLong;
 
@@ -19,9 +20,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
-import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.service.ArtistService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtistException;
 
@@ -36,8 +35,6 @@ public class TestArtistServiceFindById {
 	
 	private static final Long VALIDARTISTID = (long) 1;
 	private static final Long INVALIDARTISTID = (long) 2;
-	private static final String BANKINFO = "moonnneyyyyyy";
-	private static final String VALID_USERNAME = "ValidUserName";
 	
 	@BeforeEach
 	public void setMockOutput() {
@@ -47,21 +44,24 @@ public class TestArtistServiceFindById {
 		lenient().when(artistRepo.existsById(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
 			if (invocation.getArgument(0).equals(VALIDARTISTID)) {
 				
-				GalleryRegistration reg = new GalleryRegistration();
-				reg.setUserName(VALID_USERNAME);
-				Artist a = new Artist();
-				a.setArtistId(VALIDARTISTID);
-				a.setBankInfo(BANKINFO);
-				reg.setArtist(a);
-				a.setGalleryRegistration(reg);
+				return true;
 			}
 			if (invocation.getArgument(0).equals(INVALIDARTISTID)) {
-				Artist a = new Artist();
-				return a;
+				
+				return false;
 			}
-			return true;
+			return false;
 		});
 
+		lenient().when(artistRepo.findArtistByArtistId(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
+			if (invocation.getArgument(0).equals(VALIDARTISTID)) {
+				
+				Artist a = new Artist();
+				a.setArtistId(VALIDARTISTID);
+				return a;
+			}
+			return null;
+		});
 		lenient().doAnswer((i)->null).when(artistRepo).delete(any(Artist.class));
 	}
 	@Test
