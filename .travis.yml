@@ -1,34 +1,30 @@
 matrix:
   include:
 
-    # Backend tests
-    # - language: java
+    Backend tests
+    - language: java
 
-    #   branches:
-    #     only:
-    #       - master
+      branches:
+        only:
+          - travis-exp
 
-    #   before_install:
-    #     - chmod +x gradlew
-    #   script:
-    #     - ./gradlew build
+      before_install:
+        - chmod +x ./gradlew
+      script:
+        - ./gradlew build
 
-    # # start backend
-    #    - language: java
-
-    #   branches:
-    #     only:
-    #       - master
-
-    #   before_install:
-    #     - chmod +x gradlew
-    #   script:
-    #     - ./gradlew bootRun
 
     # Postman integration tests
     - language: node_js
       node_js:
           - "10.15"
+
+      branches:
+        only:
+          - travis-exp
+
+      before_install:
+        - chmod +x ./gradlew
 
       install:
           - npm install -g newman
@@ -40,8 +36,13 @@ matrix:
 
 
       script:
+
+          # run Spring app in background
           - ./gradlew bootRun &
-          - sleep 20
+
+          # give time for app to startup
+          - sleep 60        
+
+          # run test suites geenrated from Postman
           - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
-          # - tmux kill-winodw
-          # - tmux ls
+
