@@ -29,14 +29,12 @@ import ca.mcgill.ecse321.onlinegallery.model.Artwork;
 import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.service.ArtworkService;
-import ca.mcgill.ecse321.onlinegallery.service.ArtistService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtworkException;
+import ca.mcgill.ecse321.onlinegallery.service.ArtistService;
 
 @ExtendWith(MockitoExtension.class)
-public class TestArtworkServiceGetAvailableArtworkByArtistId {
+public class TestArtworkServiceGetAvailableDetail {
 	
-	@Mock
-	private ArtistRepository artistRepo;
 	
 	@Mock
 	private ArtworkRepository artworkRepo;
@@ -44,23 +42,25 @@ public class TestArtworkServiceGetAvailableArtworkByArtistId {
 	@InjectMocks
 	private ArtworkService service;
 	
-	private static final Long VALIDARTISTID = (long) 1;
-	private static final Long INVALIDARTISTID = (long) 0;
-	private static final Long ARTWORKTID = (long) 1;
+
+	private static final Long VALIDARTWORKTID_AVAILABLE = (long) 1;
+	private static final Long VALIDARTWORKTID_UNAVAILABLE = (long) 2;
+	private static final Long INVALIDARTWORKTID = (long) 3;
 	private static final Double COMMISION = (double) 0.5;
 	private static final String DESCRIPTION = "extreme beauty";
 	private static final String DIMENSION = "12X12";
 	private static final String NAME = "Masterpiece";
 	private static final int NUMVIEWS = (int) 10;
 	private static final Double PRICE = (double) 999.99;
-	private static final ArtworkStatus ARTWORKSTATUS = ArtworkStatus.AVAILABLE;
+	private static final ArtworkStatus ARTWORKSTATUS_AVAILABLE = ArtworkStatus.AVAILABLE;
+	private static final ArtworkStatus ARTWORKSTATUS_UNAVAILABLE = ArtworkStatus.UNAVAILABLE;
 	private static final Double WEIGHT = (double) 15;
 	
 	@BeforeEach
 	public void setMockOutput() {		
-		lenient().when(artistRepo.existsById(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
+		lenient().when(artworkRepo.existsByArtworkId(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
 			
-			if (invocation.getArgument(0).equals(VALIDARTISTID)) {
+			if (invocation.getArgument(0).equals(VALIDARTWORKTID_AVAILABLE) || invocation.getArgument(0).equals(VALIDARTWORKTID_UNAVAILABLE)) {
 					
 			return true;
 
@@ -68,27 +68,40 @@ public class TestArtworkServiceGetAvailableArtworkByArtistId {
 			
 			else return false;
 		});
-		lenient().when(artistRepo.findArtistByArtistId(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
+		lenient().when(artworkRepo.findArtworkByArtworkId(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
 			
-			if (invocation.getArgument(0).equals(VALIDARTISTID)) {
+			if (invocation.getArgument(0).equals(VALIDARTWORKTID_AVAILABLE)) {
 					
 			Artwork artwork = new Artwork();
-			artwork.setArtworkId(ARTWORKTID);
+			artwork.setArtworkId(VALIDARTWORKTID_AVAILABLE);
 			artwork.setCommission(COMMISION);
 			artwork.setDescription(DESCRIPTION);
 			artwork.setDimension(DIMENSION);
 			artwork.setName(NAME);
 			artwork.setNumViews(NUMVIEWS);
 			artwork.setPrice(PRICE);
-			artwork.setStatus(ARTWORKSTATUS);
+			artwork.setStatus(ARTWORKSTATUS_AVAILABLE);
 			artwork.setWeight(WEIGHT);
+		
 			
-			Artist artist = new Artist();
-			artist.setArtistId(VALIDARTISTID);
-			artist.addArtwork(artwork);
-			artwork.setArtist(artist);
+			return artwork;
+
+			}
+			else if (invocation.getArgument(0).equals(VALIDARTWORKTID_UNAVAILABLE)) {
+				
+			Artwork artwork = new Artwork();
+			artwork.setArtworkId(VALIDARTWORKTID_UNAVAILABLE);
+			artwork.setCommission(COMMISION);
+			artwork.setDescription(DESCRIPTION);
+			artwork.setDimension(DIMENSION);
+			artwork.setName(NAME);
+			artwork.setNumViews(NUMVIEWS);
+			artwork.setPrice(PRICE);
+			artwork.setStatus(ARTWORKSTATUS_UNAVAILABLE);
+			artwork.setWeight(WEIGHT);
+		
 			
-			return artist;
+			return artwork;
 
 			}
 			
@@ -97,30 +110,45 @@ public class TestArtworkServiceGetAvailableArtworkByArtistId {
 	}
 	
 	@Test
-	public void testValidGetAvailableArtworkByArtistId() {
+	public void testValidGetAvailableDetail() {
 		
-		Set<Artwork> set = null;
+		Artwork artwork = null;
 		try {
-			set = service.getAvailableArtworkByArtistId(VALIDARTISTID);
+			artwork = service.getAvailableArtworkDetail(VALIDARTWORKTID_AVAILABLE);
 		}catch(ArtworkException e) {
 			fail();
 		}
-		assertNotNull(set);
+		assertNotNull(artwork);
 
 	}
 	
 	@Test
-	public void testInvalidRetrieveRandomAvailableArtworks() {
+	public void testInvalidGetAvailableDetail() {
 		
-		Set<Artwork> set = null;
+		Artwork artwork = null;
 		String error = null;
 		try {
-			set = service.getAvailableArtworkByArtistId(INVALIDARTISTID);
+			artwork = service.getAvailableArtworkDetail(INVALIDARTWORKTID);
 		}catch(ArtworkException e) {
 			error = e.getMessage();
 		}
-		assertNull(set);
-		assertEquals(error, "No artist with artistId ["+INVALIDARTISTID+"] exists");
+		assertNull(artwork);
+		assertEquals(error, "No artwork with artworkID ["+INVALIDARTWORKTID+"] exists");
+		
+	}
+	
+	@Test
+	public void testUnavailableGetAvailableDetail() {
+		
+		Artwork artwork = null;
+		String error = null;
+		try {
+			artwork = service.getAvailableArtworkDetail(VALIDARTWORKTID_UNAVAILABLE);
+		}catch(ArtworkException e) {
+			error = e.getMessage();
+		}
+		assertNull(artwork);
+		assertEquals(error, "Artwork with artworkID ["+VALIDARTWORKTID_UNAVAILABLE+"] is unavailable");
 		
 	}
 
