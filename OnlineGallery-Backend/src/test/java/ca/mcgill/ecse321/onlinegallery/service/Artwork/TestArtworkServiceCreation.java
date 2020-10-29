@@ -50,8 +50,6 @@ public class TestArtworkServiceCreation {
 	private static final Long VALID_ARTISTID=new Long(1);
 	@SuppressWarnings("deprecation")
 	private static final Long INVALID_ARTISTID=new Long(2);
-	@SuppressWarnings("deprecation")
-	private static final Long INVALID_ARTWORKIDNOTAVAILABLE=new Long (3);
 	
 	private static final Long ARTWORK_ID=new Long(4);
 	private static final String NAME = "pretty";
