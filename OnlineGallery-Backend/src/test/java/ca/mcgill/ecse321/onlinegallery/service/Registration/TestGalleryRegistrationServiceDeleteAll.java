@@ -11,6 +11,7 @@ import static org.mockito.Mockito.lenient;
 
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -30,118 +31,105 @@ import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestGalleryRegistrationServiceDelete {
+public class TestGalleryRegistrationServiceDeleteAll {
 
 	@Mock
 	private GalleryRegistrationRepository regRepo;
 
 	@Mock
 	private OnlineGalleryRepository ogRepo;
-	
+
 	@Mock
 	private GalleryAdminRepository adminRepo;
-	
+
 	@Mock
 	private CustomerRepository custRepo;
-	
+
 	@Mock
 	private ArtistRepository artistRepo;
 
 	@InjectMocks
 	private GalleryRegistrationService service;
 
-	private static final String VALID_USERNAME = "ValidUserName";
-	private static final String INVALID_USERNAMENONEXIST = "nonexistentUser";
-
-	private static final String VALID_FIRSTNAME = "John";
-	private static final String VALID_LASTNAME = "smith";
-
-	private static final String VALID_PASSWORD = "ecsE321!GRp7";
-	private static final String VALID_EMAIL = "johnsmith@gmail.com";
-
+	private static final String VALID_USERNAME1 = "ValidUserName1";
+	private static final String VALID_USERNAME2 = "ValidUserName2";
 
 	@BeforeEach
 	public void setMockOutput() {
-
-		Answer<?> paramAsAnswer = (InvocationOnMock invocation) -> {
-			return invocation.getArgument(0);
-		};
-
+		
 		lenient().when(regRepo.existsByUserName(anyString())).thenAnswer((InvocationOnMock invocation) -> {
-			if (invocation.getArgument(0).equals(INVALID_USERNAMENONEXIST)) {
-				return false;
-			} else if (invocation.getArgument(0).equals(VALID_USERNAME)) {
+			if (invocation.getArgument(0).equals(VALID_USERNAME1)) {
 				return true;
-			}
-			return false; 
+			} else if (invocation.getArgument(0).equals(VALID_USERNAME2)) {
+				return true;
+			} 
+			return false;
 		});
- 
+		
+		lenient().when(regRepo.count()).thenReturn((long) 2);
+		lenient().when(regRepo.findAll()).thenAnswer((InvocationOnMock invocation) -> {
+			GalleryRegistration reg1 = new GalleryRegistration();
+			reg1.setUserName(VALID_USERNAME1);
+
+			GalleryRegistration reg2 = new GalleryRegistration();
+			reg2.setUserName(VALID_USERNAME2);
+
+			Set<GalleryRegistration> allReg = new HashSet<GalleryRegistration>();
+
+			allReg.add(reg1);
+			allReg.add(reg2);
+
+			return allReg;
+		});
+
 		lenient().when(regRepo.findGalleryRegisrationByUserName(anyString()))
 				.thenAnswer((InvocationOnMock invocation) -> {
-					if (invocation.getArgument(0).equals(VALID_USERNAME)) {
+					if (invocation.getArgument(0).equals(VALID_USERNAME1)) {
 						GalleryRegistration reg = new GalleryRegistration();
-						reg.setUserName(VALID_USERNAME);
-						reg.setFirstName(VALID_FIRSTNAME);
-						reg.setLastName(VALID_LASTNAME);
-						reg.setEmail(VALID_EMAIL);
-						reg.setPassWord(VALID_PASSWORD);
-						reg.setIsLoggedIn(false);
-
+						reg.setUserName(VALID_USERNAME1);
+						return reg;
+					}
+					else if (invocation.getArgument(0).equals(VALID_USERNAME2)) {
+						GalleryRegistration reg = new GalleryRegistration();
+						reg.setUserName(VALID_USERNAME2);
 						return reg;
 					}
 
 					return null;
 				});
-		
-		lenient().when(ogRepo.findAll()).thenAnswer((i)->{
+
+		lenient().when(ogRepo.findAll()).thenAnswer((i) -> {
 			Set<OnlineGallery> ogSet = new HashSet<OnlineGallery>();
-			
+
 			OnlineGallery og = new OnlineGallery();
-			GalleryRegistration reg = new GalleryRegistration();
-			
-			reg.setUserName(VALID_USERNAME);
-			reg.setFirstName(VALID_FIRSTNAME);
-			reg.setLastName(VALID_LASTNAME);
-			reg.setEmail(VALID_EMAIL);
-			reg.setPassWord(VALID_PASSWORD);
-			reg.setIsLoggedIn(false);
-			
-			og.getAllRegistrations().add(reg);	
+			GalleryRegistration reg1 = new GalleryRegistration();
+			GalleryRegistration reg2 = new GalleryRegistration();
+
+			reg1.setUserName(VALID_USERNAME1);
+			reg2.setUserName(VALID_USERNAME2);
+
+
+			og.getAllRegistrations().add(reg1);
+			og.getAllRegistrations().add(reg2);
+
 			ogSet.add(og);
 
 			return ogSet;
 		});
 
-		lenient().doAnswer((i)->null).when(regRepo).delete(any(GalleryRegistration.class));
+		lenient().doAnswer((i) -> null).when(regRepo).delete(any(GalleryRegistration.class));
+
 	}
 
 	@Test
-	public void deleteExistingUsername() {
+	public void testDeleteAllTwoExists() {
 
-		GalleryRegistration reg = null;
+		List<GalleryRegistration> allReg = null;
 		try {
-			reg = service.deleteGalleryRegistration(VALID_USERNAME);
+			allReg = service.deleteAllGalleryRegistration();
 		} catch (GalleryRegistrationException e) {
 			fail();
 		}
-		assertNotNull(reg);
-		assertEquals(reg.getUserName(),VALID_USERNAME);
+		assertNotNull(allReg);
 	}
-	
-	@Test
-	public void deleteNonExistingUsername() {
-
-		GalleryRegistration reg = null;
-		String error = null;
-		try {
-			reg = service.deleteGalleryRegistration(INVALID_USERNAMENONEXIST);
-		} catch (GalleryRegistrationException e) {
-			error=e.getMessage();
-		}
-		assertNull(reg);
-		assertEquals(error,"No GalleryRegistration with username ["+INVALID_USERNAMENONEXIST+"] exists");
-	}
-
-
-
 }

@@ -1,0 +1,51 @@
+matrix:
+  include:
+
+    # Backend tests
+    # - language: java
+
+    #   branches:
+    #     only:
+    #       - master
+
+    #   before_install:
+    #     - chmod +x gradlew
+    #   script:
+    #     - ./gradlew build
+
+    # # start backend
+    #    - language: java
+
+    #   branches:
+    #     only:
+    #       - master
+
+    #   before_install:
+    #     - chmod +x gradlew
+    #   script:
+    #     - ./gradlew bootRun
+
+    # Postman integration tests
+    - language: node_js
+      node_js:
+          - "10.15"
+
+      install:
+          - npm install -g newman
+          - sudo apt-get update
+          - sudo apt-get install -y tmux
+
+      before_script:
+          - node --version
+          - npm --version
+          - node_modules/.bin/newman --version
+          - chmod +x ./OnlineGallery-Backend/parallelrun.sh
+
+
+      script:
+          - ./OnlineGallery-Backend/parallelrun.sh
+          - sleep 20
+          - netstat -tlnp
+          # - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
+          # - tmux kill-winodw
+          # - tmux ls
