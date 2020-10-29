@@ -3,3 +3,5 @@ scripts/
 bin/
 .gradle
 build
+node_modules
+package-lock*
