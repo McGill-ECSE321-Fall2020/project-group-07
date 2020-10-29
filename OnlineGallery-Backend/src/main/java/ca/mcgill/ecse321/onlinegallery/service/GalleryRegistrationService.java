@@ -34,10 +34,10 @@ public class GalleryRegistrationService {
 	 
 	@Transactional
 	public GalleryRegistration getGalleryRegistration(String username) throws GalleryRegistrationException{
-//		if (!regRepo.existsByUserName(username)) {
-//			throw new GalleryRegistrationException("No GalleryRegistration with username ["+username+"] exists");
-//		} 
-//		
+		if (!regRepo.existsByUserName(username)) {
+			throw new GalleryRegistrationException("No GalleryRegistration with username ["+username+"] exists");
+		} 
+		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
 		return reg;
 	}
