@@ -100,6 +100,7 @@ public class ArtworkService {
 		} 
 		return artwork;
 	}
+	
 	private <T> List<T> toList(Iterable<T> iterable){
 		List<T> resultList = new ArrayList<T>();
 		for (T t : iterable) {
