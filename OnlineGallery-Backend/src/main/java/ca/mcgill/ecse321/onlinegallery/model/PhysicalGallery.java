@@ -19,23 +19,8 @@ public class PhysicalGallery {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
-	@Column(name = "physical_id")
+	@Column(name = "id")
 	private Long galleryId;
-	private String address;
-
-	public PhysicalGallery() {
-	}
-
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "physicalGallery")
-	private OnlineGallery onlineGallery;
-
-	public OnlineGallery getOnlineGallery() {
-		return this.onlineGallery;
-	}
-
-	public void setOnlineGallery(OnlineGallery onlineGallery) {
-		this.onlineGallery = onlineGallery;
-	}
 
 	public void setGalleryId(Long value) {
 		this.galleryId = value;
@@ -44,6 +29,8 @@ public class PhysicalGallery {
 	public Long getGalleryId() {
 		return this.galleryId;
 	}
+
+	private String address;
 
 	public void setAddress(String value) {
 		this.address = value;

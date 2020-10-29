@@ -5,5 +5,5 @@ import ca.mcgill.ecse321.onlinegallery.model.*;
 public interface GalleryRegistrationRepository extends CrudRepository<GalleryRegistration, String> {
 	
 	GalleryRegistration findGalleryRegisrationByUserName(String userName);
-
+	boolean existsByUserName(String userName);
 }

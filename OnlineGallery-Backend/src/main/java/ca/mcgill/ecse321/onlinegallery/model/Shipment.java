@@ -1,22 +1,20 @@
 package ca.mcgill.ecse321.onlinegallery.model;
 
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.Enumerated;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-
-import java.util.Set;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.ManyToOne;
+import java.util.HashSet;
 
 @Entity
 @Table(name = "shipment")
@@ -26,68 +24,27 @@ public class Shipment {
 	@GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
 	@GenericGenerator(name = "native", strategy = "native")
 	@Column(name = "shipment_id")
-	private Long shipmentId;
+	private long shipmentId;
 
-	@Column(name = "source")
-	private String sourceAddress;
-
-	@Column(name = "destination")
-	private String destinationAddress;
-
-	@Column(name = "total")
-	private double totalAmount;
-
-	@Column(name = "shipper")
-	private String shippingCompany;
-
-	@Column(name = "shipping_status")
-	@Enumerated
-	private ShipmentStatus status;
-
-	@Column(name = "recepient_name")
-	private String receipientName;
-
-	public Shipment() {
-	}
-
-	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "shipment")
-	private Set<Purchase> purchases;
-
-	public Set<Purchase> getPurchases() {
-		return this.purchases;
-	}
-
-	public void setPurchases(Set<Purchase> purchasess) {
-		this.purchases = purchasess;
-	}
-
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name = "system_id", nullable = false)
-	private OnlineGallery onlineGallery;
-
-	public OnlineGallery getOnlineGallery() {
-		return this.onlineGallery;
-	}
-
-	public void setOnlineGallery(OnlineGallery onlineGallery) {
-		this.onlineGallery = onlineGallery;
-	}
-
-	public void setShipmentId(Long value) {
+	public void setShipmentId(long value) {
 		this.shipmentId = value;
 	}
 
-	public Long getShipmentId() {
+	public long getShipmentId() {
 		return this.shipmentId;
 	}
+
+	private String sourceAddress;
 
 	public void setSourceAddress(String value) {
 		this.sourceAddress = value;
 	}
 
 	public String getSourceAddress() {
-		return this.sourceAddress;
+		return this.sourceAddress; 
 	}
+
+	private String destinationAddress;
 
 	public void setDestinationAddress(String value) {
 		this.destinationAddress = value;
@@ -96,6 +53,17 @@ public class Shipment {
 	public String getDestinationAddress() {
 		return this.destinationAddress;
 	}
+	
+	private double shippingCost;
+	public void setShippingCost(double cost) {
+		this.shippingCost=cost;
+	}
+	
+	public double getShippingCost() {
+		return this.shippingCost;
+	}
+
+	private double totalAmount;
 
 	public void setTotalAmount(double value) {
 		this.totalAmount = value;
@@ -105,28 +73,60 @@ public class Shipment {
 		return this.totalAmount;
 	}
 
-	public void setShippingCompany(String value) {
-		this.shippingCompany = value;
+	private ShipmentStatus shipmentStatus;
+
+	public void setShipmentStatus(ShipmentStatus value) {
+		this.shipmentStatus = value;
 	}
 
-	public String getShippingCompany() {
-		return this.shippingCompany;
+	public ShipmentStatus getShipmentStatus() {
+		return this.shipmentStatus;
 	}
 
-	public void setStatus(ShipmentStatus value) {
-		this.status = value;
+	private String recipientName;
+
+	public void setRecipientName(String value) {
+		this.recipientName = value;
 	}
 
-	public ShipmentStatus getStatus() {
-		return this.status;
+	public String getRecipientName() {
+		return this.recipientName;
 	}
 
-	public void setReceipientName(String value) {
-		this.receipientName = value;
+	private String creditCardNumber;
+	public void setCreditCardNumber(String creditCardNumber) {
+		this.creditCardNumber=creditCardNumber;
 	}
+		
+	public String getCreditCardNumber() {
+		return this.creditCardNumber;
+	}
+	
+	private String creditCardFirstName;
+	public void setCreditCardFirstName(String firstname) {
+		this.creditCardFirstName=firstname;
+	}
+	public String getCreditCardFirstName() {
+		return this.creditCardFirstName;
+	}
+	private String creditCardLastName;
+	public void setCreditCardLastName(String lastname) {
+		this.creditCardLastName=lastname;
+	}
+	
+	public String getCreditCardLastName() {
+		return this.creditCardLastName;
+	}
+	
+	
+	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "shipment")
+	private Set<Purchase> purchase;
 
-	public String getReceipientName() {
-		return this.receipientName;
+	public Set<Purchase> getPurchase() {
+		if (this.purchase == null) {
+			this.purchase = new HashSet<Purchase>();
+		}
+		return this.purchase;
 	}
 
 }

@@ -1,17 +1,20 @@
 package ca.mcgill.ecse321.onlinegallery.model;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import java.util.Set;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import java.util.Set;
-import javax.persistence.OneToMany;
+import org.hibernate.annotations.GenericGenerator;
+
+import java.util.HashSet;
 
 @Entity
 @Table(name = "registrations")
@@ -21,79 +24,15 @@ public class GalleryRegistration {
 	@Column(name = "username")
 	private String userName;
 
-	@Column(name = "firstname")
-	private String firstName;
-
-	@Column(name = "lastname")
-	private String lastName;
-
-	@Column(name = "email")
-	private String email;
-
-	@Column(name = "number")
-	private String phoneNumber;
-
-	@Column(name = "password")
-	private String password;
-
-	@Column(name = "loggedin")
-	private Boolean isLoggedIn;
-
-	public GalleryRegistration() {
+	public void setUserName(String value) {
+		this.userName = value;
 	}
 
 	public String getUserName() {
 		return this.userName;
 	}
 
-	public void setUserName(String value) {
-		this.userName = value;
-	}
-
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
-	private GalleryAdmin galleryAdmin;
-
-	public GalleryAdmin getGalleryAdmin() {
-		return this.galleryAdmin;
-	}
-
-	public void setGalleryAdmin(GalleryAdmin galleryAdmin) {
-		this.galleryAdmin = galleryAdmin;
-	}
-
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
-	private Customer galleryCustomer;
-
-	public Customer getGalleryCustomer() {
-		return this.galleryCustomer;
-	}
-
-	public void setGalleryCustomer(Customer galleryCustomer) {
-		this.galleryCustomer = galleryCustomer;
-	}
-
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
-	private Artist galleryArtist;
-
-	public Artist getGalleryArtist() {
-		return this.galleryArtist;
-	}
-
-	public void setGalleryArtist(Artist galleryArtist) {
-		this.galleryArtist = galleryArtist;
-	}
-
-	@ManyToOne(fetch = FetchType.EAGER, optional = false)
-	@JoinColumn(name = "system_id", nullable = false)
-	private OnlineGallery onlineGallery;
-
-	public OnlineGallery getOnlineGallery() {
-		return this.onlineGallery;
-	}
-
-	public void setOnlineGallery(OnlineGallery onlineGallery) {
-		this.onlineGallery = onlineGallery;
-	}
+	private String firstName;
 
 	public void setFirstName(String value) {
 		this.firstName = value;
@@ -103,6 +42,8 @@ public class GalleryRegistration {
 		return this.firstName;
 	}
 
+	private String lastName;
+
 	public void setLastName(String value) {
 		this.lastName = value;
 	}
@@ -111,6 +52,8 @@ public class GalleryRegistration {
 		return this.lastName;
 	}
 
+	private String email;
+
 	public void setEmail(String value) {
 		this.email = value;
 	}
@@ -118,22 +61,18 @@ public class GalleryRegistration {
 	public String getEmail() {
 		return this.email;
 	}
+	
+	private String passWord="changeThisDefaultPassword";
 
-	public void setPhoneNumber(String value) {
-		this.phoneNumber = value;
+	public void setPassWord(String value) {
+		this.passWord = value;
 	}
 
-	public String getPhoneNumber() {
-		return this.phoneNumber;
+	public String getPassWord() {
+		return this.passWord;
 	}
 
-	public void setPassword(String value) {
-		this.password = value;
-	}
-
-	public String getPassword() {
-		return this.password;
-	}
+	private Boolean isLoggedIn=false;
 
 	public void setIsLoggedIn(Boolean value) {
 		this.isLoggedIn = value;
@@ -141,6 +80,46 @@ public class GalleryRegistration {
 
 	public Boolean getIsLoggedIn() {
 		return this.isLoggedIn;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
+	private GalleryAdmin admin;
+
+	public void setAdmin(GalleryAdmin customer) {
+		this.admin = customer;
+	}
+
+	public GalleryAdmin getAdmin() {
+		return this.admin;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST, optional = true)
+	private Customer customer;
+
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	public Customer getCustomer() {
+		return this.customer;
+	}
+
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
+	private Artist artist;
+
+	public void setArtist(Artist value) {
+		this.artist = value;
+	}
+
+	public Artist getArtist() {
+		return this.artist;
+	}
+
+	@Override
+	public String toString() {
+		String info = this.getUserName() + "\n" + this.getFirstName() + "\n" + this.getLastName() + "\n"
+				+ this.getEmail() + "\n" + this.getIsLoggedIn();
+		return info;
 	}
 
 }
