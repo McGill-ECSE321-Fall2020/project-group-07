@@ -20,6 +20,8 @@ matrix:
 
       install:
           - npm install -g newman
+          - sudo apt-get update
+          - sudo apt-get install -y tmux
 
       before_script:
           - node --version
