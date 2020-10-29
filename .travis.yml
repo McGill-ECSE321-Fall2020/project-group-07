@@ -25,9 +25,9 @@ matrix:
           - node --version
           - npm --version
           - node_modules/.bin/newman --version
-          
-      script:
           - ./gradlew bootRun &
           - sleep 45
+
+      script:
           - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
 
