@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -30,13 +31,15 @@ public class ArtworkService {
 	@Autowired
 	ArtistRepository artistRepo;
 	
+	
 	@Autowired
 	GalleryRegistrationRepository regRepo;
 	
+
 	@Transactional
 	public Artwork createArtwork(Long artistId, ArtworkDto dto) throws ArtworkException, ArtistException {
 		
-		if(!artistRepo.existsById(artistId)) {
+		if(!artistRepo.existsById(artistId)) { 
 			throw new ArtistException("No artist with ID ["+artistId+"] exists");
 		}
 		
@@ -100,6 +103,7 @@ public class ArtworkService {
 		} 
 		return artwork;
 	}
+ 
 	
 	@Transactional 
 	public Set<Artwork> getAvailableArtworkByArtistId(Long artistId) throws ArtworkException{
@@ -129,6 +133,7 @@ public class ArtworkService {
 	    }
 		return randomList;
 	
+		
 	}
 	@Transactional 
 	public  List<Artwork> getAllArtworks() throws ArtworkException{
@@ -139,9 +144,11 @@ public class ArtworkService {
 		if (artworkList.size() == 0) {
 			throw new  ArtworkException("there is no artworks");
 		} 
+		
 
 		return artworkList;
 	
+		
 	}
 	
 	private <T> List<T> toList(Iterable<T> iterable){
@@ -151,4 +158,6 @@ public class ArtworkService {
 		}
 		return resultList;
 	}
+	
+
 }
