@@ -31,11 +31,11 @@ public class PurchaseService {
 	ArtworkRepository artworkRepo;
 
 	@Transactional
-	public Purchase createPurchase(PurchaseDto dto) throws PurchaseException{
+	public Purchase createPurchase(PurchaseDto dto) throws PurchaseException{ 
 		
 		String username=dto.getUsername();
 		Long artworkId=dto.getArtworkId();
-		Customer customer;
+		Customer customer; 
 		
 		if (!regRepo.existsByUserName(username)) {
 			throw new PurchaseException("no GalleryRegistration with the username ["+username+"] found in system");
@@ -104,7 +104,7 @@ public class PurchaseService {
 		}
 		return purchase;
 	}
-
+	
 	@Transactional
 	public List<Purchase> getAllPurchases() throws PurchaseException{
 		if (purchaseRepo.count()==0) {

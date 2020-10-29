@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service.Purchase;
+package ca.mcgill.ecse321.onlinegallery.service.Registration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -9,18 +9,17 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.assertj.core.util.Arrays;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
@@ -29,50 +28,48 @@ import ca.mcgill.ecse321.onlinegallery.dao.*;
 import ca.mcgill.ecse321.onlinegallery.dto.*;
 import ca.mcgill.ecse321.onlinegallery.model.*;
 import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
-import ca.mcgill.ecse321.onlinegallery.service.PurchaseService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestPurchaseServiceGetAllEmpty {
+public class TestGalleryRegistrationServiceDeleteAllEmpty {
 
 	@Mock
 	private GalleryRegistrationRepository regRepo;
-	
+
 	@Mock
-	private PurchaseRepository purchaseRepo;
-	
+	private OnlineGalleryRepository ogRepo;
+
+	@Mock
+	private GalleryAdminRepository adminRepo;
+
 	@Mock
 	private CustomerRepository custRepo;
-	
+
 	@Mock
-	private ArtworkRepository artRepo;
-	
+	private ArtistRepository artistRepo;
+
 	@InjectMocks
-	private PurchaseService service;
+	private GalleryRegistrationService service;
 
-	private static final Long PID1= (long) 1;
-	private static final Long PID2= (long) 2;
 
-	
 	@BeforeEach
 	public void setMockOutput() {
- 
-		lenient().when(purchaseRepo.count()).thenReturn((long) 0);
-	
+
+		lenient().when(regRepo.count()).thenReturn((long) 0);
 	}
 
 	@Test
-	public void testGetAllPurchasesNonEmpty() { 
+	public void testGetAllRegistratrionsIsEmpty() {
 
-		List<Purchase> allP = null;
-		String error=null;
+		List<GalleryRegistration> allReg = null;
+		String error = null; 
 		try {
-			allP=service.getAllPurchases();
-		} catch (PurchaseException e) {
-			error=e.getMessage();
+			allReg = service.deleteAllGalleryRegistration();
+		} catch (GalleryRegistrationException e) {
+			error = e.getMessage();
 		}
-		assertNull(allP);
-		assertEquals(error,"no Purchase in system");
-	} 
+		assertNull(allReg);
+		assertEquals(error, "no GalleryRegistrations in system"); 
 
+	}
 }

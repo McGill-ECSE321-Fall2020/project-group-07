@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.service.Artist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -111,5 +112,4 @@ public class TestArtistServiceGet {
 		assertNull(a);
 		assertEquals(error, "No registration exists under the username ["+INVALID_USERNAMENONEXIST+"]");
 	}
-	
 }

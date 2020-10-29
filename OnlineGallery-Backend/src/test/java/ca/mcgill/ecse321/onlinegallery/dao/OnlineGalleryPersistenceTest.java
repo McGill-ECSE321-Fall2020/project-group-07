@@ -656,12 +656,9 @@ public class OnlineGalleryPersistenceTest {
 		String recipientName="nemo";
 		
 		String ccNumber="2344 1115 3335 6666";
-		String ccHolder="John Smith";
-		String ccCSV="569";
-		String ccExp="1126";
-		String ccPost="j4ek9w";
+		String ccFirstname="John";
+		String ccLastname="Smith";
 		
-		boolean paid=false;
 		
 		shipment.setSourceAddress(sourceAddress);
 		shipment.setDestinationAddress(destAddress);
@@ -671,7 +668,8 @@ public class OnlineGalleryPersistenceTest {
 		shipment.setRecipientName(recipientName);
 		
 		shipment.setCreditCardNumber(ccNumber);
-
+		shipment.setCreditCardFirstName(ccFirstname);
+		shipment.setCreditCardLastName(ccLastname);
 		
 		String userName="bananaFartman15";		
 		reg.setUserName(userName);
@@ -709,6 +707,8 @@ public class OnlineGalleryPersistenceTest {
 		assertEquals(shipment.getRecipientName(),recipientName);
 		
 		assertEquals(shipment.getCreditCardNumber(),ccNumber);
+		assertEquals(shipment.getCreditCardFirstName(),ccFirstname);
+		assertEquals(shipment.getCreditCardLastName(),ccLastname);
 
 		
 		//checking assocations from shipment
@@ -726,6 +726,8 @@ public class OnlineGalleryPersistenceTest {
 		assertEquals(shipment.getRecipientName(),recipientName);
 		
 		assertEquals(shipment.getCreditCardNumber(),ccNumber);
+		assertEquals(shipment.getCreditCardFirstName(),ccFirstname);
+		assertEquals(shipment.getCreditCardLastName(),ccLastname);
 
 		
 		customer=custRepo.findCustomerByCustomerId(customerId);
@@ -739,8 +741,9 @@ public class OnlineGalleryPersistenceTest {
 		assertEquals(shipment.getRecipientName(),recipientName);
 		
 		assertEquals(shipment.getCreditCardNumber(),ccNumber);
+		assertEquals(shipment.getCreditCardFirstName(),ccFirstname);
+		assertEquals(shipment.getCreditCardLastName(),ccLastname);
 
-		
 				
 	}
 	

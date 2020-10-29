@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.onlinegallery.dto;
 
-import java.sql.Date;
-
 import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
 
 public class ArtworkDto {
@@ -63,12 +61,5 @@ public class ArtworkDto {
 	}
 	public double getCommission() {
 		return this.commission;
-	}
-	private String username;
-	public void setUsername(String username) {
-		this.username=username;
-	}
-	public String getUsername() {
-		return this.username;
 	}
 }

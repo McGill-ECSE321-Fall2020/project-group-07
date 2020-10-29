@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.service.Purchase;
+package ca.mcgill.ecse321.onlinegallery.service.Shipment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
@@ -29,50 +29,37 @@ import ca.mcgill.ecse321.onlinegallery.dao.*;
 import ca.mcgill.ecse321.onlinegallery.dto.*;
 import ca.mcgill.ecse321.onlinegallery.model.*;
 import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
-import ca.mcgill.ecse321.onlinegallery.service.PurchaseService;
+import ca.mcgill.ecse321.onlinegallery.service.ShipmentService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;
 
 @ExtendWith(MockitoExtension.class)
-public class TestPurchaseServiceGetAllEmpty {
+public class TestShipmentServiceGetAllEmpty {
 
 	@Mock
-	private GalleryRegistrationRepository regRepo;
-	
-	@Mock
-	private PurchaseRepository purchaseRepo;
-	
-	@Mock
-	private CustomerRepository custRepo;
-	
-	@Mock
-	private ArtworkRepository artRepo;
-	
+	private ShipmentRepository shipRepo;
+
 	@InjectMocks
-	private PurchaseService service;
+	private ShipmentService service;
 
-	private static final Long PID1= (long) 1;
-	private static final Long PID2= (long) 2;
-
-	
 	@BeforeEach
 	public void setMockOutput() {
- 
-		lenient().when(purchaseRepo.count()).thenReturn((long) 0);
-	
+
+		lenient().when(shipRepo.count()).thenReturn((long) 0);
 	}
 
 	@Test
-	public void testGetAllPurchasesNonEmpty() { 
+	public void testGetAllShipmentNonEmpty() {
 
-		List<Purchase> allP = null;
-		String error=null;
+		List<Shipment> allS = null;
+		String error = null;
 		try {
-			allP=service.getAllPurchases();
-		} catch (PurchaseException e) {
-			error=e.getMessage();
+			allS = service.getAllShipments();
+		} catch (ShipmentException e) {
+			error = e.getMessage();
 		}
-		assertNull(allP);
-		assertEquals(error,"no Purchase in system");
-	} 
+		assertNull(allS);
+		assertEquals(error, "no Shipments in system");
+
+	}
 
 }

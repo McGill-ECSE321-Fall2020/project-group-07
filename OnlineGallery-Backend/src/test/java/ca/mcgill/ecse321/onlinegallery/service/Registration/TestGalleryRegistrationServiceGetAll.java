@@ -69,7 +69,7 @@ public class TestGalleryRegistrationServiceGetAll {
 		});
 	}
 
-	@Test
+	@Test 
 	public void testGetAllRegistratrionsNonEmpty() {
 
 		List<GalleryRegistration> allReg = null;
@@ -86,11 +86,7 @@ public class TestGalleryRegistrationServiceGetAll {
 		for (GalleryRegistration eachReg:allReg) {
 			assertEquals(true,expectedUserNames.contains(eachReg.getUserName()));
 		}
-		
-		
-	}
-
-
-
+	
+	} 
 
 }
