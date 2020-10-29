@@ -76,5 +76,13 @@ public class Artist {
 		}
 		return this.artwork;
 	}
+	
+	public Set<Artwork> addArtwork(Artwork artwork) {
+		if (this.artwork == null) {
+			this.artwork = new HashSet<Artwork>();
+		}
+		this.artwork.add(artwork);
+		return this.artwork;
+	}
 
 }

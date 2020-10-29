@@ -75,12 +75,12 @@ public class ArtworkService {
 	@Transactional
 	public Artwork getAvailableArtworkDetail(Long artworkId) throws ArtworkException{
 		if (!artworkRepo.existsByArtworkId(artworkId)) {
-			throw new  ArtworkException("No Available Artwork with artworkID ["+artworkId+"] exists");
+			throw new  ArtworkException("No artwork with artworkID ["+artworkId+"] exists");
 		} 
 
 		Artwork artwork = artworkRepo.findArtworkByArtworkId(artworkId);
 		if (artwork.getStatus() == ArtworkStatus.UNAVAILABLE) {
-			throw new  ArtworkException("No AvailableArtwork with artworkID ["+artworkId+"] exists");
+			throw new  ArtworkException("Artwork with artworkID ["+artworkId+"] is unavailable");
 		} 
 		return artwork;
 	}
