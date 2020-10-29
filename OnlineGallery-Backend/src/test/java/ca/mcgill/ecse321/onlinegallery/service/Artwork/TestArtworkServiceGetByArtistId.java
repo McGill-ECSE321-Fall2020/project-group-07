@@ -85,7 +85,8 @@ public class TestArtworkServiceGetByArtistId {
 			
 			Artist artist = new Artist();
 			artist.setArtistId(VALIDARTISTID);
-			artist.addArtwork(artwork);
+			Set<Artwork> set = artist.getArtwork();
+			set.add(artwork);
 			artwork.setArtist(artist);
 			
 			return artist;

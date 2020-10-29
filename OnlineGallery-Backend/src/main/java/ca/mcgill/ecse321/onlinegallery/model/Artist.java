@@ -70,19 +70,12 @@ public class Artist {
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "artist")
 	private Set<Artwork> artwork;
 
-	public Set<Artwork> getArtwork() {
+	public Set<Artwork> getArtwork() { 
 		if (this.artwork == null) {
 			this.artwork = new HashSet<Artwork>();
 		}
 		return this.artwork;
 	}
-	
-	public Set<Artwork> addArtwork(Artwork artwork) {
-		if (this.artwork == null) {
-			this.artwork = new HashSet<Artwork>();
-		}
-		this.artwork.add(artwork);
-		return this.artwork;
-	}
+
 
 }
