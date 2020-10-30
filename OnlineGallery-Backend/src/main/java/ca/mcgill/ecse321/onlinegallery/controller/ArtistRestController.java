@@ -30,7 +30,7 @@ public class ArtistRestController {
 	@Autowired
 	ArtistService service;
 
-	@GetMapping(value = { "/getArtistByUsername", "/getArtistByUsername/" })
+	@GetMapping(value = { "/getArtistByUsername/{username}", "/getArtistByUsername/{username}/" })
 	public ResponseEntity<?> findArtistByUsername(@PathVariable("username") String username) throws ArtistException {
 		try {
 			Artist artist=service.findArtistByUsername(username);
@@ -41,7 +41,7 @@ public class ArtistRestController {
 			
 		}
 	}
-	@GetMapping(value = { "/getArtistById", "/getArtistById/" })
+	@GetMapping(value = { "/getArtistById/{id}", "/getArtistById/{id}/" })
 	public ResponseEntity<?> findArtistById(@PathVariable("id") Long id) throws ArtistException {
 		try {
 			Artist artist=service.findArtistById(id);
@@ -67,7 +67,7 @@ public class ArtistRestController {
 		}
 	}
 	
-	@PostMapping(value = { "/createProfile", "/createProfile/" })
+	@PostMapping(value = { "/createProfile/{username}", "/createProfile/{username}/" })
 	public ResponseEntity<?> createProfile(@PathVariable("username") String username, @PathVariable("newDesc") String newDesc) throws ArtistException {
 		try {
 			Profile profile=service.createProfile(username, newDesc);
@@ -78,7 +78,7 @@ public class ArtistRestController {
 			
 		}
 	}
-	@PutMapping(value = { "/updateProfile", "/updateProfile/" })
+	@PutMapping(value = { "/updateProfile/{username}", "/updateProfile/{username}/" })
 	public ResponseEntity<?> updateProfile(@PathVariable("username") String username, @RequestBody ProfileDto dto) throws ArtistException {
 		try {
 			Profile profile=service.updateProfile(username, dto);
@@ -90,7 +90,7 @@ public class ArtistRestController {
 		}
 	}
 	
-	@DeleteMapping(value = { "/deleteArtistByUsername", "/deleteArtistByUsername/" })
+	@DeleteMapping(value = { "/deleteArtistByUsername/{username}", "/deleteArtistByUsername/{username}/" })
 	public ResponseEntity<?> deleteArtistByUsername(@PathVariable("username") String username) throws ArtistException {
 		try {
 			Artist artist=service.deleteArtistByUsername(username);
