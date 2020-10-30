@@ -76,7 +76,38 @@ public class ArtworkRestController {
 	
 	}
 	
-	@GetMapping(value = { "/retrieveRandomAvailableArtworks", "/retrieveRandomAvailableArtworks/" })
+	@GetMapping(value = { "/getAvailableArtworkByArtistId", "/getAvailableArtworkByArtistId/" })
+	public ResponseEntity<?> getAvailableArtworkByArtistId(@PathVariable("artistId") Long artistId) throws ArtworkException {
+		
+		List<ArtworkDto> artworkDto = new ArrayList<ArtworkDto>();
+		
+		try {
+			for (Artwork a:service.getAvailableArtworkByArtistId(artistId)) {
+				artworkDto.add(convertToDto(a));
+			}
+			return new ResponseEntity<>(artworkDto,HttpStatus.OK);
+		}
+		catch(ArtworkException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+			
+		}
+	}
+	
+	@PostMapping(value = { "/getAvailableArtworkDetail", "/getAvailableArtworkDetail/" })
+	public ResponseEntity<?> getAvailableArtworkDetail(@PathVariable("artworkId") Long artworkId) throws ArtworkException, ArtistException {
+		try {
+			Artwork artwork = service.getAvailableArtworkDetail(artworkId);
+			return new ResponseEntity<>(convertToDto(artwork), HttpStatus.OK);
+		}
+		catch(ArtworkException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+			
+		}
+	
+	}
+	
+	
+	@GetMapping(value = { "/retrieveRandomAvailableArtworks", "/retrieveRandomAvailableArtworks/"})
 	public ResponseEntity<?> retrieveRandomAvailableArtworks(@PathVariable("numToGet") int numToGet) throws ArtworkException {
 		
 		List<ArtworkDto> artworkDto = new ArrayList<ArtworkDto>();
