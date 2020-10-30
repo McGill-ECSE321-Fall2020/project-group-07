@@ -129,5 +129,4 @@ public class Shipment {
 		return this.purchase;
 	}
 
-
 }

@@ -38,35 +38,4 @@ public class PurchaseDto {
 	public ShipmentType getShipmentType() {
 		return this.shipmentType;
 	}
-	private ShipmentDto shipment;
-	public ShipmentDto getShipment()
-	 {
-	    return shipment;
-	 }
-	public boolean setShipment(ShipmentDto aShipment)
-	  {
-	    boolean wasSet = false;
-	    ShipmentDto existingShipment = shipment;
-	    shipment = aShipment;
-	    if (existingShipment != null && !existingShipment.equals(aShipment))
-	    {
-	      existingShipment.removePurchase(this);
-	    }
-	    if (aShipment != null)
-	    {
-	      aShipment.addPurchase(this);
-	    }
-	    wasSet = true;
-	    return wasSet;
-	  }
-
-	  public void delete()
-	  {
-	    if (shipment != null)
-	    {
-	      ShipmentDto placeholderShipment = shipment;
-	      this.shipment = null;
-	      placeholderShipment.removePurchase(this);
-	    }
-	  }
 }
