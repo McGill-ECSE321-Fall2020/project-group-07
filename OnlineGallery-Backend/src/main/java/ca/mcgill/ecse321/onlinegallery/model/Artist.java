@@ -73,7 +73,7 @@ public class Artist {
 	public Set<Artwork> getArtwork() { 
 		if (this.artwork == null) {
 			this.artwork = new HashSet<Artwork>();
-		}
+		} 
 		return this.artwork;
 	}
 

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.transaction.Transactional;
 
@@ -24,6 +25,93 @@ public class ShipmentService {
 	@Autowired
 	PurchaseRepository purchaseRepo;
 	
+	@Autowired
+	GalleryRegistrationRepository regRepo;
+	
+	@Autowired
+	ArtworkRepository artworkRepo;
+
+	
+	@Transactional 
+	public Shipment createShipment (ShipmentDto dto) throws ShipmentException, PurchaseException{
+		
+		Shipment shipment = null;
+		List<PurchaseDto> purchases = dto.getPurchases();
+		
+		for (PurchaseDto p : purchases) {
+			if (!purchaseRepo.existsByPurchaseId(p.getPurcahseId())) {
+				
+				throw new PurchaseException("no purchase with id ["+p.getPurcahseId()+"] found in system");
+			}
+		}
+		
+		ShipmentType type = purchases.get(0).getShipmentType();
+		for (PurchaseDto p1 : purchases) {
+			if (!p1.getShipmentType().equals(type)) {
+				throw new ShipmentException("not all purchases are of the same type");
+			}
+			
+		}
+		
+		String username = purchases.get(0).getUsername();
+		for (PurchaseDto p2 : purchases) {
+			if (!p2.getUsername().equals(username)) {
+				throw new ShipmentException("not all purchases are from the same client");
+			}
+		}
+		for (PurchaseDto p3 : purchases) {
+			Artwork art = artworkRepo.findArtworkByArtworkId(p3.getArtworkId());
+			if (art.getStatus() == ArtworkStatus.AVAILABLE) {
+				throw new ShipmentException("artwork is still avaiable and can not be shipped");
+			}
+		}
+		
+	
+		String regExp = "\\d{1,6}\\s(?:[A-Za-z0-9#]+\\s){0,7}(?:[A-Za-z0-9#]+,)\\s*(?:[A-Za-z]+\\s){0,3}(?:[A-Za-z]+,)\\s*[A-Z]{2}\\s*";
+		
+		String sourceAddress = dto.getSourceAddress();
+		if (!Pattern.matches(regExp, sourceAddress)){
+			throw new ShipmentException("invalid source address. Address must be in format 1111 StreetName, Montreal, QC" );
+		}
+		
+		String destinationAddress = dto.getDestinationAddress();
+		if (!Pattern.matches(regExp, destinationAddress)){
+			throw new ShipmentException("invalid destination address. Address must be in format 1111 StreetName, Montreal, QC" );
+		}
+		String recipientName = dto.getRecipientName();
+		
+		if (recipientName == null ) {
+			throw new ShipmentException("Recipient name missing" );
+		}
+		else if (recipientName.length() == 0) {
+			throw new ShipmentException("Recipient name missing" );
+		}
+		
+		//validation passed
+		shipment = new Shipment();
+		Double totalPrice = 0.0;
+		for (PurchaseDto p3 : purchases) {
+			Double artPrice = artworkRepo.findArtworkByArtworkId(purchases.get(0).getArtworkId()).getPrice();
+			totalPrice += artPrice;
+			Purchase p = purchaseRepo.findPurchaseByPurchaseId(p3.getPurcahseId());
+			shipment.getPurchase().add(p);
+		}
+		Double shippingCost = dto.getShippingCost();
+		totalPrice += shippingCost;
+		ShipmentStatus shipmentStatus = dto.getShipmentStatus();
+		
+		
+		shipment.setShipmentId(dto.getShipmentId());
+		shipment.setSourceAddress(sourceAddress);
+		shipment.setDestinationAddress(destinationAddress);
+		shipment.setShippingCost(shippingCost);
+		shipment.setShipmentStatus(shipmentStatus);
+		shipment.setRecipientName(recipientName);
+		shipment.setTotalAmount(totalPrice);
+		
+		return shipRepo.save(shipment);
+		
+	}
 
 	@Transactional
 	public Shipment addToShipment(Long shipmentId, Long purchaseId) throws ShipmentException, PurchaseException{
@@ -131,6 +219,7 @@ public class ShipmentService {
 		return shipment;
 	}
 	
+
 	public List<Shipment> getAllShipments() throws ShipmentException{
 		if (shipRepo.count()==0) {
 			throw new ShipmentException("no Shipments in system");
@@ -145,6 +234,29 @@ public class ShipmentService {
 		return slist;
 	}
 	
+
+	@Transactional
+	public Shipment deleteShipment(ShipmentDto dto) throws ShipmentException {
+		Shipment s = this.getShipment(dto.getShipmentId());
+		List<PurchaseDto> purchases = dto.getPurchases();
+		for (PurchaseDto p : purchases) {
+			Purchase purchase = purchaseRepo.findPurchaseByPurchaseId(p.getPurcahseId());
+			purchase.setShipment(null);
+		}
+		shipRepo.delete(s);
+		
+		return s;
+	}
+	
+	public Shipment getShipment (long shipmentId) throws ShipmentException {
+		
+		Shipment s = shipRepo.findShipmentByShipmentId(shipmentId);
+		if (s == null) {
+			throw new ShipmentException("No shipment exists with id " + shipmentId);
+		}
+		return s;
+	}
+
 	public void validateExp(String exp) throws CreditCardException{
 
 		
@@ -323,5 +435,7 @@ public class ShipmentService {
 			throw new CreditCardException("first or last name cannot contain special characters");
 		}
 	}
+	
+	
 
 }
