@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.controller;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,14 +17,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.onlinegallery.dto.ArtistDto;
-import ca.mcgill.ecse321.onlinegallery.dto.GalleryRegistrationDto;
 import ca.mcgill.ecse321.onlinegallery.dto.ProfileDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
-import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.model.Profile;
 import ca.mcgill.ecse321.onlinegallery.service.ArtistService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtistException;
-import ca.mcgill.ecse321.onlinegallery.service.exception.GalleryRegistrationException;
 
 @CrossOrigin(origins="*")
 @RestController
@@ -70,7 +68,7 @@ public class ArtistRestController {
 	}
 	
 	@PostMapping(value = { "/createProfile", "/createProfile/" })
-	public ResponseEntity<?> createProfile(@PathVariable("id") String username, @PathVariable("id") String newDesc) throws ArtistException {
+	public ResponseEntity<?> createProfile(@PathVariable("username") String username, @PathVariable("newDesc") String newDesc) throws ArtistException {
 		try {
 			Profile profile=service.createProfile(username, newDesc);
 			return new ResponseEntity<>(convertToDto(profile), HttpStatus.OK);
@@ -81,7 +79,7 @@ public class ArtistRestController {
 		}
 	}
 	@PutMapping(value = { "/updateProfile", "/updateProfile/" })
-	public ResponseEntity<?> updateProfile(@PathVariable("id") String username, @RequestBody ProfileDto dto) throws ArtistException {
+	public ResponseEntity<?> updateProfile(@PathVariable("username") String username, @RequestBody ProfileDto dto) throws ArtistException {
 		try {
 			Profile profile=service.updateProfile(username, dto);
 			return new ResponseEntity<>(convertToDto(profile), HttpStatus.OK);
@@ -103,7 +101,6 @@ public class ArtistRestController {
 			
 		}
 	}
-	
 	
 	private ArtistDto convertToDto(Artist artist) {
 
