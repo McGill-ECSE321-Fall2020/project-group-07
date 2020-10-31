@@ -67,22 +67,22 @@ public class ArtistRestController {
 		}
 	}
 	
-	@PostMapping(value = { "/createProfile/{username}", "/createProfile/{username}/" })
-	public ResponseEntity<?> createProfile(@PathVariable("username") String username, @PathVariable("newDesc") String newDesc) throws ArtistException {
+	@PostMapping(value = { "/createProfile", "/createProfile/" })
+	public ResponseEntity<?> createProfile(@RequestBody ProfileDto dto) throws ArtistException {
 		try {
-			Profile profile=service.createProfile(username, newDesc);
-			return new ResponseEntity<>(convertToDto(profile), HttpStatus.OK);
+			Artist artist=service.createProfile(dto);
+			return new ResponseEntity<>(convertToDto(artist), HttpStatus.OK);
 		}
 		catch(ArtistException e) {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
 			
 		}
 	}
-	@PutMapping(value = { "/updateProfile/{username}", "/updateProfile/{username}/" })
-	public ResponseEntity<?> updateProfile(@PathVariable("username") String username, @RequestBody ProfileDto dto) throws ArtistException {
+	@PutMapping(value = { "/updateProfile", "/updateProfile/" })
+	public ResponseEntity<?> updateProfile(@RequestBody ProfileDto dto) throws ArtistException {
 		try {
-			Profile profile=service.updateProfile(username, dto);
-			return new ResponseEntity<>(convertToDto(profile), HttpStatus.OK);
+			Artist artist=service.updateProfile(dto);
+			return new ResponseEntity<>(convertToDto(artist), HttpStatus.OK);
 		}
 		catch(ArtistException e) {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -107,19 +107,8 @@ public class ArtistRestController {
 		ArtistDto artistDto = new ArtistDto();
 		artistDto.setArtistId(artist.getArtistId());
 		artistDto.setBankInfo(artist.getBankInfo());
-		
+		artistDto.setUsername(artist.getGalleryRegistration().getUserName());
 		return artistDto;
 	}
-	
-	private ProfileDto convertToDto(Profile profile) {
 
-		ProfileDto profileDto = new ProfileDto();
-		profileDto.setNumSold(profile.getNumSold());
-		profileDto.setProfileId(profile.getProfileId());
-		profileDto.setRating(profile.getRating());
-		profileDto.setSelfDescription(profile.getSelfDescription());
-		profileDto.setTotalEarnings(profile.getTotalEarnings());
-		
-		return profileDto;
-	}
 }

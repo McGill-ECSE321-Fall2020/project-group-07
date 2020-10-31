@@ -97,14 +97,14 @@ public class ArtistService {
 	}
 	
 	@Transactional
-	public Profile createProfile(ProfileDto profileDto) throws ArtistException{
+	public Artist createProfile(ProfileDto profileDto) throws ArtistException{
 		
 		String username = profileDto.getUsername();
 		
 		if(!regRepo.existsByUserName(username)) {
 			throw new ArtistException("No registration exists under the username ["+username+"]");
 		}
-		
+	
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
 	
 		if (reg.getArtist()==null) {
@@ -121,13 +121,14 @@ public class ArtistService {
 		profile.setNumSold(0);
 		profile.setRating(0.0);
 		profile.setTotalEarnings(0.0);
-		artist.setProfile(profile);
-		
-		return profileRepo.save(profile);
+		artist.setProfile(profile);	
+	
+		artist = artistRepo.save(artist);
+		return artist;
 	}
 	
 	@Transactional
-	public Profile updateProfile(ProfileDto profileDto) throws ArtistException{
+	public Artist updateProfile(ProfileDto profileDto) throws ArtistException{
 		
 		String username = profileDto.getUsername();
 		
@@ -151,8 +152,9 @@ public class ArtistService {
 		profile.setNumSold(profileDto.getNumSold());
 		profile.setRating(profileDto.getRating());
 		profile.setTotalEarnings(profileDto.getTotalEarnings());
+		artistRepo.save(artist);
 		
-		return profileRepo.save(profile);
+		return artist;
 	}
 	
 	private <T> List<T> toList(Iterable<T> iterable){
