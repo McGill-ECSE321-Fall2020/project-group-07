@@ -67,10 +67,10 @@ public class ArtistRestController {
 		}
 	}
 	
-	@PostMapping(value = { "/createProfile/{username}", "/createProfile/{username}/" })
-	public ResponseEntity<?> createProfile(@PathVariable("username") String username, @PathVariable("newDesc") String newDesc) throws ArtistException {
+	@PostMapping(value = { "/createProfile", "/createProfile/" })
+	public ResponseEntity<?> createProfile(@RequestBody ProfileDto dto) throws ArtistException {
 		try {
-			Profile profile=service.createProfile(username, newDesc);
+			Profile profile=service.createProfile(dto);
 			return new ResponseEntity<>(convertToDto(profile), HttpStatus.OK);
 		}
 		catch(ArtistException e) {
@@ -78,10 +78,10 @@ public class ArtistRestController {
 			
 		}
 	}
-	@PutMapping(value = { "/updateProfile/{username}", "/updateProfile/{username}/" })
-	public ResponseEntity<?> updateProfile(@PathVariable("username") String username, @RequestBody ProfileDto dto) throws ArtistException {
+	@PutMapping(value = { "/updateProfile", "/updateProfile/" })
+	public ResponseEntity<?> updateProfile(@RequestBody ProfileDto dto) throws ArtistException {
 		try {
-			Profile profile=service.updateProfile(username, dto);
+			Profile profile=service.updateProfile(dto);
 			return new ResponseEntity<>(convertToDto(profile), HttpStatus.OK);
 		}
 		catch(ArtistException e) {
@@ -107,7 +107,7 @@ public class ArtistRestController {
 		ArtistDto artistDto = new ArtistDto();
 		artistDto.setArtistId(artist.getArtistId());
 		artistDto.setBankInfo(artist.getBankInfo());
-		
+		artistDto.setUsername(artist.getGalleryRegistration().getUserName());
 		return artistDto;
 	}
 	private ProfileDto convertToDto(Profile profile) {
