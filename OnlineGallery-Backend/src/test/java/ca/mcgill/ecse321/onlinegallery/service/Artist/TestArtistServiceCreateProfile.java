@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.onlinegallery.service.Artist;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -106,7 +105,6 @@ public class TestArtistServiceCreateProfile {
 		});
 		
 		lenient().when(artistRepo.save(any(Artist.class))).thenAnswer((InvocationOnMock invocation) -> {
-			
 			GalleryRegistration reg = new GalleryRegistration();			
 			Artist artist = new Artist();
 			Profile profile = new Profile();
@@ -116,9 +114,10 @@ public class TestArtistServiceCreateProfile {
 			artist.setGalleryRegistration(reg);
 			reg.setArtist(artist);
 			
-			profile.setSelfDescription(((Profile)invocation.getArgument(0)).getSelfDescription());
-			profile.setProfileId(id);
 			artist.setProfile(profile);
+			
+			profile.setSelfDescription(((Artist)invocation.getArgument(0)).getProfile().getSelfDescription());
+			profile.setProfileId(id);
 
 			return artist;
 		});
@@ -129,11 +128,11 @@ public class TestArtistServiceCreateProfile {
 	public void createProfileValidUsername() {
 		
 		Profile profile = null;
+		Artist artist = null;
 		String selfDescription = "Reddit User LULW";
 		double totalEarnings = 0.0;
 		double rating = 0.0;
 		int numSold = 0;
-		Artist artist = null;
 		
 		ProfileDto dto = new ProfileDto();
 		dto.setNumSold(numSold);
@@ -144,12 +143,13 @@ public class TestArtistServiceCreateProfile {
 	
 		try {
 			artist = service.createProfile(dto);
-			profile = artist.getProfile();
 		} catch(Exception e){
 			fail();
 		}
 		
 		assertNotNull(artist);
+		profile = artist.getProfile();
+		
 		assertNotNull(profile);
 		assertEquals(profile.getSelfDescription(),selfDescription);
 		assertEquals(profile.getNumSold(),numSold);
@@ -159,80 +159,70 @@ public class TestArtistServiceCreateProfile {
 		
 	}
 	
-//	@Test
-//	public void createProfileInValidUsernameNotAnArtist() {
-//		
-//		Profile profile = null;
-//		String selfDescription = "4Chan User PepeLaugh";
-//		String error = null;
-//		Artist artist = null;
-//
-//		
-//		ProfileDto dto = new ProfileDto();
-//		dto.setSelfDescription(selfDescription);
-//		dto.setUsername(INVALID_USERNAME_NOT_AN_ARTIST);
-//		
-//		try {
-//			artist = service.createProfile(dto);
-//			profile = artist.getProfile();
-//		} catch (Exception e){
-//			System.out.println(e.getMessage());
-//			error = e.getMessage();
-//		}
-//		assertNull(artist);
-//		assertNull(profile);
-//		assertEquals(error,"No artist exists under the username ["+INVALID_USERNAME_NOT_AN_ARTIST+"]");
-//		
-//	}
+	@Test
+	public void createProfileInValidUsernameNotAnArtist() {
+		
+		Artist artist = null;
+		String selfDescription = "4Chan User PepeLaugh";
+		String error = null;
+		
+		ProfileDto dto = new ProfileDto();
+		dto.setSelfDescription(selfDescription);
+		dto.setUsername(INVALID_USERNAME_NOT_AN_ARTIST);
+		
+		try {
+			artist = service.createProfile(dto);
+		} catch (Exception e){
+			error = e.getMessage();
+		}
+		
+		assertNull(artist);
+		assertEquals(error,"No artist exists under the username ["+INVALID_USERNAME_NOT_AN_ARTIST+"]");
+		
+	}
 	
-//	@Test
-//	public void createProfileInValidArtistWithProfile() {
-//		
-//		Profile profile = null;
-//		String selfDescription = "I love Profiles";
-//		String error = null;
-//		Artist artist = null;
-//
-//		ProfileDto dto = new ProfileDto();
-//		dto.setSelfDescription(selfDescription);
-//		dto.setUsername(INVALID_USERNAME_HAS_PROFILE);
-//		
-//		try {
-//			artist = service.createProfile(dto);
-//			profile = artist.getProfile();
-//		} catch (Exception e){
-//			System.out.println(e.getMessage());
-//			error = e.getMessage();
-//		}
-//		assertNull(artist);
-//		assertNull(profile);
-//		assertEquals(error,"This artist already has a profile");
-//		
-//	}
+	@Test
+	public void createProfileInValidArtistWithProfile() {
+		
+		Artist artist = null;
+		String selfDescription = "I love Profiles";
+		String error = null;
+		
+		ProfileDto dto = new ProfileDto();
+		dto.setSelfDescription(selfDescription);
+		dto.setUsername(INVALID_USERNAME_HAS_PROFILE);
+		
+		try {
+			artist = service.createProfile(dto);
+		} catch (Exception e){
+			error = e.getMessage();
+		}
+		
+		assertNull(artist);
+		assertEquals(error,"This artist already has a profile");
+		
+	}
 
-//	@Test
-//	public void createProfileInValidUsernameNonExistant() {
-//		
-//		Profile profile = null;
-//		String selfDescription = "StackOverFlow User Poggers";
-//		String error = null;
-//		Artist artist = null;
-//
-//		ProfileDto dto = new ProfileDto();
-//		dto.setSelfDescription(selfDescription);
-//		dto.setUsername(INVALID_USERNAME_NONEXIST);
-//		
-//		try {
-//			artist = service.createProfile(dto);
-//			profile = artist.getProfile();
-//		} catch (Exception e){
-//			error = e.getMessage();
-//		}
-//		
-//		assertNull(artist);
-//		assertNull(profile);
-//		assertEquals(error,"No registration exists under the username ["+INVALID_USERNAME_NONEXIST+"]");
-//		
-//	}
+	@Test
+	public void createProfileInValidUsernameNonExistant() {
+		
+		Artist artist = null;
+		String selfDescription = "StackOverFlow User Poggers";
+		String error = null;
+		
+		ProfileDto dto = new ProfileDto();
+		dto.setSelfDescription(selfDescription);
+		dto.setUsername(INVALID_USERNAME_NONEXIST);
+		
+		try {
+			artist = service.createProfile(dto);
+		} catch (Exception e){
+			error = e.getMessage();
+		}
+		
+		assertNull(artist);
+		assertEquals(error,"No registration exists under the username ["+INVALID_USERNAME_NONEXIST+"]");
+		
+	}
 
 }

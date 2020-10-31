@@ -17,8 +17,8 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
+import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.ProfileRepository;
 import ca.mcgill.ecse321.onlinegallery.dto.ProfileDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.Customer;
@@ -33,7 +33,7 @@ public class TestArtistServiceUpdateProfile {
 	private GalleryRegistrationRepository regRepo;
 
 	@Mock
-	private ProfileRepository profileRepo;
+	private ArtistRepository artistRepo;
 	
 	@InjectMocks
 	private ArtistService service;
@@ -100,8 +100,8 @@ public class TestArtistServiceUpdateProfile {
 				return null;
 			}
 		});
-		
-		lenient().when(profileRepo.save(any(Profile.class))).thenAnswer((InvocationOnMock invocation) -> {
+	
+		lenient().when(artistRepo.save(any(Artist.class))).thenAnswer((InvocationOnMock invocation) -> {
 			GalleryRegistration reg = new GalleryRegistration();			
 			Artist artist = new Artist();
 			Profile profile = new Profile();
@@ -111,13 +111,14 @@ public class TestArtistServiceUpdateProfile {
 			artist.setGalleryRegistration(reg);
 			reg.setArtist(artist);
 			
-			profile.setSelfDescription(((Profile)invocation.getArgument(0)).getSelfDescription());
-			profile.setNumSold(((Profile)invocation.getArgument(0)).getNumSold());
-			profile.setRating(((Profile)invocation.getArgument(0)).getRating());
-			profile.setTotalEarnings(((Profile)invocation.getArgument(0)).getTotalEarnings());
 			artist.setProfile(profile);
-
-			return profile;
+			
+			profile.setSelfDescription(((Artist)invocation.getArgument(0)).getProfile().getSelfDescription());
+			profile.setNumSold(((Artist)invocation.getArgument(0)).getProfile().getNumSold());
+			profile.setRating(((Artist)invocation.getArgument(0)).getProfile().getRating());
+			profile.setTotalEarnings(((Artist)invocation.getArgument(0)).getProfile().getTotalEarnings());
+			
+			return artist;
 		});
 		
 	}
@@ -126,11 +127,11 @@ public class TestArtistServiceUpdateProfile {
 	public void updateProfileValidUsername() {
 		
 		Profile profile = null;
+		Artist artist = null;
 		String selfDescription = "Hey, I love Art";
 		double totalEarnings = -1000000.0;
 		double rating = 01101001.0;
 		int numSold = 69;
-		Artist artist = null;
 		
 		ProfileDto profileDto = new ProfileDto();
 		profileDto.setNumSold(numSold);
@@ -141,12 +142,13 @@ public class TestArtistServiceUpdateProfile {
 		
 		try {
 			artist = service.updateProfile(profileDto);
-			profile = artist.getProfile();
 		} catch(Exception e){
 			fail();
 		}
 		
 		assertNotNull(artist);
+		profile = artist.getProfile();
+		
 		assertNotNull(profile);
 		assertEquals(profile.getSelfDescription(),selfDescription);
 		assertEquals(profile.getNumSold(),numSold);
@@ -158,13 +160,12 @@ public class TestArtistServiceUpdateProfile {
 	@Test
 	public void updateProfileInValidUsernameNoProfile() {
 		
-		Profile profile = null;
+		Artist artist = null;
 		String selfDescription = "Sup, I love Art";
 		double totalEarnings = -1000000.0;
 		double rating = 01101001.0;
 		int numSold = 69;
-		Artist artist = null;
-
+		
 		String error = null;
 		
 		ProfileDto profileDto = new ProfileDto();
@@ -176,14 +177,12 @@ public class TestArtistServiceUpdateProfile {
 		
 		try {
 			artist = service.updateProfile(profileDto);
-			profile = artist.getProfile();
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 			error = e.getMessage();
 		}
 		
 		assertNull(artist);
-		assertNull(profile);
 		assertEquals(error,"No profile exists for this artist ["+INVALID_USERNAME_NO_PROFILE+"]");
 		
 	}
@@ -191,13 +190,12 @@ public class TestArtistServiceUpdateProfile {
 	@Test
 	public void updateProfileInValidUsernameNotAnArtist() {
 		
-		Profile profile = null;
+		Artist artist = null;
 		String selfDescription = "Sup, I hate Art";
 		double totalEarnings = -1000000.0;
 		double rating = 01101001.0;
 		int numSold = 69;
-		Artist artist = null;
-
+		
 		String error = null;
 		
 		ProfileDto profileDto = new ProfileDto();
@@ -209,14 +207,12 @@ public class TestArtistServiceUpdateProfile {
 		
 		try {
 			artist = service.updateProfile(profileDto);
-			profile = artist.getProfile();
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 			error = e.getMessage();
 		}
 		
 		assertNull(artist);
-		assertNull(profile);
 		assertEquals(error,"No artist exists under the username ["+INVALID_USERNAME_NOT_AN_ASRTIST+"]");
 		
 	}
@@ -224,13 +220,12 @@ public class TestArtistServiceUpdateProfile {
 	@Test
 	public void updateProfileInValidUsernameNonExistant() {
 		
-		Profile profile = null;
+		Artist artist = null;
 		String selfDescription = "Hey, I hate Art";
 		double totalEarnings = -1000000.0;
 		double rating = 01101001.0;
 		int numSold = 69;
-		Artist artist = null;
-
+		
 		String error = null;
 		
 		ProfileDto profileDto = new ProfileDto();
@@ -242,12 +237,11 @@ public class TestArtistServiceUpdateProfile {
 		
 		try {
 			artist = service.updateProfile(profileDto);
-			profile = artist.getProfile();
 		} catch (Exception e){
 			error = e.getMessage();
 		}
+		
 		assertNull(artist);
-		assertNull(profile);
 		assertEquals(error,"No registration exists under the username ["+INVALID_USERNAME_NONEXIST+"]");
 		
 	}
