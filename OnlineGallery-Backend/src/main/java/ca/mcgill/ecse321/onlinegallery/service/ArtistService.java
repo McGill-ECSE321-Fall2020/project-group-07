@@ -91,7 +91,9 @@ public class ArtistService {
 		Artist artist = reg.getArtist();
 		
 		reg.setArtist(null);
+		artist.setGalleryRegistration(null);
 		artistRepo.delete(artist);
+		
 		return artist;
 	}
 	
@@ -103,27 +105,26 @@ public class ArtistService {
 		if(!regRepo.existsByUserName(username)) {
 			throw new ArtistException("No registration exists under the username ["+username+"]");
 		}
-		
+		System.out.println("1");
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
 	
 		if (reg.getArtist()==null) {
 			throw new ArtistException("No artist exists under the username ["+username+"]");
 		}
-		
+		System.out.println("2");
 		if (reg.getArtist().getProfile()!=null) {
 			throw new ArtistException("This artist already has a profile");
 		}
-
+		System.out.println("3");
 		Artist artist = reg.getArtist();
 		Profile profile = new Profile();
 		profile.setSelfDescription(profileDto.getSelfDescription());
 		profile.setNumSold(0);
 		profile.setRating(0.0);
 		profile.setTotalEarnings(0.0);
-		
+		System.out.println("4");
 		artist.setProfile(profile);	
-		profileRepo.save(profile);
-		
+		System.out.println("5");
 		return artistRepo.save(artist);
 	}
 	
@@ -152,7 +153,7 @@ public class ArtistService {
 		profile.setNumSold(profileDto.getNumSold());
 		profile.setRating(profileDto.getRating());
 		profile.setTotalEarnings(profileDto.getTotalEarnings());
-		profileRepo.save(profile);
+		artistRepo.save(artist);
 		
 		return artist;
 	}
