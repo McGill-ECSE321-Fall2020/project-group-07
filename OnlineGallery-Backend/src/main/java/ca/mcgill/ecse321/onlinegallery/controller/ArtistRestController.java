@@ -110,6 +110,7 @@ public class ArtistRestController {
 		
 		return artistDto;
 	}
+	
 	private ProfileDto convertToDto(Profile profile) {
 
 		ProfileDto profileDto = new ProfileDto();

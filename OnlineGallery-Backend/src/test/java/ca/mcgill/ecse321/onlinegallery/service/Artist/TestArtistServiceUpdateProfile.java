@@ -136,9 +136,10 @@ public class TestArtistServiceUpdateProfile {
 		profileDto.setRating(rating);
 		profileDto.setSelfDescription(selfDescription);
 		profileDto.setTotalEarnings(totalEarnings);
+		profileDto.setUsername(VALID_USERNAME);
 		
 		try {
-			profile = service.updateProfile(VALID_USERNAME, profileDto);
+			profile = service.updateProfile(profileDto);
 		} catch(Exception e){
 			fail();
 		}
@@ -167,9 +168,10 @@ public class TestArtistServiceUpdateProfile {
 		profileDto.setRating(rating);
 		profileDto.setSelfDescription(selfDescription);
 		profileDto.setTotalEarnings(totalEarnings);
+		profileDto.setUsername(INVALID_USERNAME_NO_PROFILE);
 		
 		try {
-			profile = service.updateProfile(INVALID_USERNAME_NO_PROFILE, profileDto);
+			profile = service.updateProfile(profileDto);
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 			error = e.getMessage();
@@ -196,9 +198,10 @@ public class TestArtistServiceUpdateProfile {
 		profileDto.setRating(rating);
 		profileDto.setSelfDescription(selfDescription);
 		profileDto.setTotalEarnings(totalEarnings);
+		profileDto.setUsername(INVALID_USERNAME_NOT_AN_ASRTIST);
 		
 		try {
-			profile = service.updateProfile(INVALID_USERNAME_NOT_AN_ASRTIST, profileDto);
+			profile = service.updateProfile(profileDto);
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 			error = e.getMessage();
@@ -225,9 +228,10 @@ public class TestArtistServiceUpdateProfile {
 		profileDto.setRating(rating);
 		profileDto.setSelfDescription(selfDescription);
 		profileDto.setTotalEarnings(totalEarnings);
+		profileDto.setUsername(INVALID_USERNAME_NONEXIST);
 		
 		try {
-			profile = service.updateProfile(INVALID_USERNAME_NONEXIST, profileDto);
+			profile = service.updateProfile(profileDto);
 		} catch (Exception e){
 			error = e.getMessage();
 		}

@@ -97,7 +97,9 @@ public class ArtistService {
 	}
 	
 	@Transactional
-	public Profile createProfile(String username, String newDesc) throws ArtistException{
+	public Profile createProfile(ProfileDto profileDto) throws ArtistException{
+		
+		String username = profileDto.getUsername();
 		
 		if(!regRepo.existsByUserName(username)) {
 			throw new ArtistException("No registration exists under the username ["+username+"]");
@@ -108,10 +110,14 @@ public class ArtistService {
 		if (reg.getArtist()==null) {
 			throw new ArtistException("No artist exists under the username ["+username+"]");
 		}
+		
+		if (reg.getArtist().getProfile()!=null) {
+			throw new ArtistException("This artist already has a profile");
+		}
 
 		Artist artist = reg.getArtist();
 		Profile profile = new Profile();
-		profile.setSelfDescription(newDesc);
+		profile.setSelfDescription(profileDto.getSelfDescription());
 		profile.setNumSold(0);
 		profile.setRating(0.0);
 		profile.setTotalEarnings(0.0);
@@ -121,7 +127,9 @@ public class ArtistService {
 	}
 	
 	@Transactional
-	public Profile updateProfile(String username, ProfileDto profileDto) throws ArtistException{
+	public Profile updateProfile(ProfileDto profileDto) throws ArtistException{
+		
+		String username = profileDto.getUsername();
 		
 		if(!regRepo.existsByUserName(username)) {
 			throw new ArtistException("No registration exists under the username ["+username+"]");
