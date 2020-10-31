@@ -105,20 +105,17 @@ public class ArtistRestController {
 	private ArtistDto convertToDto(Artist artist) {
 
 		ArtistDto artistDto = new ArtistDto();
+
 		artistDto.setArtistId(artist.getArtistId());
 		artistDto.setBankInfo(artist.getBankInfo());
 		artistDto.setUsername(artist.getGalleryRegistration().getUserName());
-		return artistDto;
-	}
-	private ProfileDto convertToDto(Profile profile) {
-
-		ProfileDto profileDto = new ProfileDto();
-		profileDto.setNumSold(profile.getNumSold());
-		profileDto.setProfileId(profile.getProfileId());
-		profileDto.setRating(profile.getRating());
-		profileDto.setSelfDescription(profile.getSelfDescription());
-		profileDto.setTotalEarnings(profile.getTotalEarnings());
+	
+		artistDto.setNumSold(artist.getProfile().getNumSold());
+		artistDto.setProfileId(artist.getProfile().getProfileId());
+		artistDto.setRating(artist.getProfile().getRating());
+		artistDto.setSelfDescription(artist.getProfile().getSelfDescription());
+		artistDto.setTotalEarnings(artist.getProfile().getTotalEarnings());
 		
-		return profileDto;
+		return artistDto;
 	}
 }
