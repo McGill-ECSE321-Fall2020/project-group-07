@@ -39,9 +39,8 @@ public class ArtworkService {
 	@Transactional
 	public Artwork createArtwork(ArtworkDto dto) throws ArtworkException, ArtistException {
 		
-		String artistUserName = dto.getArtistUsername();
-		
-		if(!regRepo.existsByUserName(dto.getArtistUsername())){ 
+		String artistUserName = dto.getUsername();
+		if(!regRepo.existsByUserName(dto.getUsername())){ 
 			throw new ArtistException("User does not exist"); 
 		}
 		
@@ -55,12 +54,14 @@ public class ArtworkService {
 		
 		Artwork art = new Artwork();
 		
+;
+		
 		if(dto.getName() == null || dto.getDescription() == null || 
 				dto.getPrice() <= 0 || dto.getDimension() == null || dto.getNumViews() != 0 ||
 						dto.getStatus() == null || dto.getWeight() <= 0 || dto.getCommission() == 0){
 			throw new ArtworkException("Invalid artwork attributes");	
 						}
-		
+
 		art.setName(dto.getName());
 		art.setDescription(dto.getDescription());
 		art.setPrice(dto.getPrice());
@@ -69,13 +70,12 @@ public class ArtworkService {
 		art.setDimension(dto.getDimension());
 		art.setWeight(dto.getWeight());
 		art.setCommission(dto.getCommission()); 
-		
+
 		artist.getArtwork().add(art);
 		art.setArtist(artist);
-		
+
 		artworkRepo.save(art);
-		System.out.print("we reched here");
-		
+
 		return art;
 	}
 	

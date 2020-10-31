@@ -128,6 +128,7 @@ public class ArtworkRestController {
 	private ArtworkDto convertToDto(Artwork artwork) {
 
 		ArtworkDto artworkDto = new ArtworkDto();
+		artworkDto.setUsername(artwork.getArtist().getGalleryRegistration().getUserName());
 		artworkDto.setCommission(artwork.getComission());
 		artworkDto.setDescription(artwork.getDescription());
 		artworkDto.setDimension(artwork.getName());
