@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyString;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -44,7 +45,9 @@ public class TestArtworkServiceCreation {
 	@InjectMocks
 	private ArtworkService service;
 
-	private static final String VALID_USERNAME="validUsername";
+	private static final String VALID_USERNAME_ARTIST="lisaSimp";
+	private static final String VALID_USERNAME_NOTARTIST="bartSimp";
+	private static final String INVALID_USERNAME = "nedFlanders";
 
 	@SuppressWarnings("deprecation")
 	private static final Long VALID_ARTISTID=new Long(1);
@@ -67,32 +70,44 @@ public class TestArtworkServiceCreation {
 		Answer<?> paramAsAnswer = (InvocationOnMock invocation)->{
 			return invocation.getArgument(0);
 		};
+
 		
-		lenient().when(artistRepo.existsById(anyLong())).thenAnswer((InvocationOnMock invocation)->{
-			if (invocation.getArgument(0).equals(VALID_ARTISTID)) {
+		lenient().when(regRepo.existsByUserName(anyString())).thenAnswer((InvocationOnMock invocation)->{
+			if (invocation.getArgument(0).equals(VALID_USERNAME_ARTIST)|| invocation.getArgument(0).equals(VALID_USERNAME_NOTARTIST)) {
 				return true;
 			}
 			else {
 				return false;
 			}
 		});
-		lenient().when(artistRepo.findArtistByArtistId(anyLong())).thenAnswer((InvocationOnMock invocation)->{
-			if (invocation.getArgument(0).equals(VALID_ARTISTID)) {
-				Artist a = new Artist();
-				a.setArtistId(VALID_ARTISTID);
-				return a;
+
+		lenient().when(regRepo.findGalleryRegisrationByUserName(anyString())).thenAnswer((InvocationOnMock invocation)->{
+			if (invocation.getArgument(0).equals(VALID_USERNAME_ARTIST)) {
+				GalleryRegistration reg = new GalleryRegistration();
+				Artist artist = new Artist();
+				reg.setUserName(VALID_USERNAME_ARTIST);
+				reg.setArtist(artist);
+				artist.setGalleryRegistration(reg);
+				artist.setArtistId(VALID_ARTISTID);
+				return reg;
 			}
-			else {
-				return null;
+			else if (invocation.getArgument(0).equals(VALID_USERNAME_NOTARTIST)) {
+				GalleryRegistration reg = new GalleryRegistration();
+				reg.setUserName(VALID_USERNAME_NOTARTIST);
+				return reg;
 			}
+			else return null;
+			
 		});
+		
+
 		lenient().when(artworkRepo.save(any(Artwork.class))).thenAnswer((InvocationOnMock invocation)->{
 			GalleryRegistration reg = new GalleryRegistration();			
 			Artist a = new Artist();
 			Artwork art = new Artwork();
 			a.setArtistId(VALID_ARTISTID);
 			
-			reg.setUserName(VALID_USERNAME);
+			reg.setUserName(VALID_USERNAME_ARTIST);
 			art.setArtworkId(ARTWORK_ID);
 			art.setStatus(ArtworkStatus.AVAILABLE);
 			
@@ -109,6 +124,7 @@ public class TestArtworkServiceCreation {
 	public void testValidArtworkCreation() {
 		
 		ArtworkDto dto = new ArtworkDto();
+		dto.setArtistUsername(VALID_USERNAME_ARTIST);
 		dto.setCommission(COMMISSION);
 		dto.setDescription(DESCRIPTION);
 		dto.setDimension(DIMENSION);
@@ -119,7 +135,7 @@ public class TestArtworkServiceCreation {
 		dto.setWeight(WEIGHT);
 		Artwork a = null;
 		try {
-			a = service.createArtwork(VALID_ARTISTID, dto);
+			a = service.createArtwork(dto);
 		}catch(ArtworkException e) {
 			e.getMessage();
 		}catch(ArtistException e) {
@@ -129,9 +145,10 @@ public class TestArtworkServiceCreation {
 		assertEquals(a.getArtist().getArtistId(),VALID_ARTISTID);
 	}
 	@Test
-	public void testInvalidArtistIdArtworkCreation() {
+	public void testNotArtistdArtworkCreation() {
 		
 		ArtworkDto dto = new ArtworkDto();
+		dto.setArtistUsername(VALID_USERNAME_NOTARTIST);
 		dto.setCommission(COMMISSION);
 		dto.setDescription(DESCRIPTION);
 		dto.setDimension(DIMENSION);
@@ -143,19 +160,20 @@ public class TestArtworkServiceCreation {
 		Artwork a = null;
 		String error = null;
 		try {
-			a = service.createArtwork(INVALID_ARTISTID, dto);
+			a = service.createArtwork(dto);
 		}catch(ArtworkException e) {
 			error = e.getMessage();
 		}catch(ArtistException e) {
 			error = e.getMessage();
 		}
 		assertNull(a);
-		assertEquals(error,"No artist with ID ["+INVALID_ARTISTID+"] exists");
+		assertEquals(error,"User is not an artist");
 	}
 	@Test
-	public void testInvalidAttributesArtworkCreation() {
+	public void testInvalidAttributeArtworkCreation() {
 		
 		ArtworkDto dto = new ArtworkDto();
+		dto.setArtistUsername(VALID_USERNAME_ARTIST);
 		dto.setCommission(COMMISSION);
 		dto.setDescription(DESCRIPTION);
 		dto.setDimension(DIMENSION);
@@ -167,13 +185,38 @@ public class TestArtworkServiceCreation {
 		Artwork a = null;
 		String error = null;
 		try {
-			a = service.createArtwork(VALID_ARTISTID, dto);
+			a = service.createArtwork(dto);
 		}catch(ArtworkException e) {
 			error = e.getMessage();
 		}catch(ArtistException e) {
 			error = e.getMessage();
 		}
 		assertNull(a);
-		assertEquals(error,"Invalid artwork attributes");
+		assertEquals(error,"Invalid artwork attributes"); 
+	}
+	@Test
+	public void testInvalidUserNameArtworkCreation() {
+		
+		ArtworkDto dto = new ArtworkDto();
+		dto.setArtistUsername(INVALID_USERNAME);
+		dto.setCommission(COMMISSION);
+		dto.setDescription(DESCRIPTION);
+		dto.setDimension(DIMENSION);
+		dto.setName(NAME);
+		dto.setNumViews(VALIDVIEWS);
+		dto.setPrice(PRICE);
+		dto.setStatus(STATUS);
+		dto.setWeight(WEIGHT);
+		Artwork a = null;
+		String error = null;
+		try {
+			a = service.createArtwork(dto);
+		}catch(ArtworkException e) {
+			error = e.getMessage();
+		}catch(ArtistException e) {
+			error = e.getMessage();
+		}
+		assertNull(a);
+		assertEquals(error,"User does not exist"); 
 	}
 }

@@ -29,9 +29,10 @@ public class ArtworkRestController {
 	ArtworkService service;
 	
 	@PostMapping(value = { "/createArtwork", "/createArtwork/" })
-	public ResponseEntity<?> createArtwork(@PathVariable("artistId") Long artistId, @RequestBody ArtworkDto dto) throws ArtworkException, ArtistException {
+	public ResponseEntity<?> createArtwork(@RequestBody ArtworkDto dto) throws ArtworkException, ArtistException {
+		
 		try {
-			Artwork artwork = service.createArtwork(artistId, dto);
+			Artwork artwork = service.createArtwork(dto);
 			return new ResponseEntity<>(convertToDto(artwork), HttpStatus.OK);
 		}
 		catch(ArtworkException e) {
@@ -93,7 +94,7 @@ public class ArtworkRestController {
 		}
 	}
 	
-	@PostMapping(value = { "/getAvailableArtworkDetail", "/getAvailableArtworkDetail/" })
+	@GetMapping(value = { "/getAvailableArtworkDetail", "/getAvailableArtworkDetail/" })
 	public ResponseEntity<?> getAvailableArtworkDetail(@PathVariable("artworkId") Long artworkId) throws ArtworkException, ArtistException {
 		try {
 			Artwork artwork = service.getAvailableArtworkDetail(artworkId);

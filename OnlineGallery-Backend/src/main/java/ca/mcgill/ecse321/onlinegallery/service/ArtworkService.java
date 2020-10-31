@@ -37,14 +37,21 @@ public class ArtworkService {
 	
 
 	@Transactional
-	public Artwork createArtwork(Long artistId, ArtworkDto dto) throws ArtworkException, ArtistException {
+	public Artwork createArtwork(ArtworkDto dto) throws ArtworkException, ArtistException {
 		
-		if(!artistRepo.existsById(artistId)) { 
-			throw new ArtistException("No artist with ID ["+artistId+"] exists");
+		String artistUserName = dto.getArtistUsername();
+		
+		if(!regRepo.existsByUserName(dto.getArtistUsername())){ 
+			throw new ArtistException("User does not exist"); 
 		}
 		
-		Artist artist = artistRepo.findArtistByArtistId(artistId);
-		GalleryRegistration reg= artist.getGalleryRegistration();
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(artistUserName);
+		
+		if(reg.getArtist() == null) {
+			throw new ArtistException("User is not an artist");
+		}
+		
+		Artist artist = reg.getArtist();
 		
 		Artwork art = new Artwork();
 		
@@ -61,12 +68,13 @@ public class ArtworkService {
 		art.setNumViews(dto.getNumViews());
 		art.setDimension(dto.getDimension());
 		art.setWeight(dto.getWeight());
-		art.setCommission(dto.getCommission());
+		art.setCommission(dto.getCommission()); 
 		
 		artist.getArtwork().add(art);
 		art.setArtist(artist);
 		
 		artworkRepo.save(art);
+		System.out.print("we reched here");
 		
 		return art;
 	}
