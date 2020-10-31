@@ -1,0 +1,127 @@
+{
+	"info": {
+		"_postman_id": "88f218b9-5d3c-42a7-bd62-65f7fdb4c34b",
+		"name": "AdminAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e56ab5d1-11a6-4c6d-af2f-0b5a90d44a6f",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"JB007\",\n\t\"firstName\":\"James\",\n\t\"lastName\":\"Bond\",\n\t\"email\":\"jb007@gmail.com\",\n    \"password\":\"GoldenEye1#\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setAdminRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ed763d45-1bbd-41df-8636-2f9d17778631",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setAdmin/JB007",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setAdmin",
+						"JB007"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAdmin",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a0f4649a-50e7-4b6f-8f7a-26a15955d42b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"username match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.username).to.eql(\"JB007\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getAdmin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAdmin"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
