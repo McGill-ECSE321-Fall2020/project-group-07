@@ -47,14 +47,6 @@ public class OnlineGallery {
 		return this.daysUp;
 	}
 	
-	private double totalEarnings;
-	public void setTotalEarnings(double earnings) {
-		this.totalEarnings=earnings;
-	}
-	public double getTotalEarnings() {
-		return this.totalEarnings;
-	}
-	
 	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, optional = true)
 	private PhysicalGallery physicalGallery;
 

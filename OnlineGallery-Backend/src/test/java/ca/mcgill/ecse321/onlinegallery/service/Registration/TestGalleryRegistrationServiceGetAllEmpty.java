@@ -53,7 +53,7 @@ public class TestGalleryRegistrationServiceGetAllEmpty {
 	public void testGetAllRegistratrionsIsEmpty() {
 
 		List<GalleryRegistration> allReg = null;
-		String error = null;
+		String error = null; 
 		try {
 			allReg = service.getAllGalleryRegistrations();
 		} catch (GalleryRegistrationException e) {

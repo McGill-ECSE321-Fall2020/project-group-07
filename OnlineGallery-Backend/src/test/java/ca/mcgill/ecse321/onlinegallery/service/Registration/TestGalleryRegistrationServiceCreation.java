@@ -82,7 +82,7 @@ public class TestGalleryRegistrationServiceCreation {
 		};
 		
 		lenient().when(ogRepo.save(any(OnlineGallery.class))).thenAnswer(paramAsAnswer);
-		
+		lenient().when(regRepo.save(any(GalleryRegistration.class))).thenAnswer(paramAsAnswer);
 		lenient().when(regRepo.existsByUserName(anyString())).thenAnswer((InvocationOnMock invocation)->{
 			if (invocation.getArgument(0).equals(INVALID_USERNAMEDUPLICATE)) {
 				return true;

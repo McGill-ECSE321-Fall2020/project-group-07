@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.sql.Date;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -29,11 +31,11 @@ public class PurchaseService {
 	ArtworkRepository artworkRepo;
 
 	@Transactional
-	public Purchase createPurchase(PurchaseDto dto) throws PurchaseException{
+	public Purchase createPurchase(PurchaseDto dto) throws PurchaseException{ 
 		
 		String username=dto.getUsername();
 		Long artworkId=dto.getArtworkId();
-		Customer customer;
+		Customer customer; 
 		
 		if (!regRepo.existsByUserName(username)) {
 			throw new PurchaseException("no GalleryRegistration with the username ["+username+"] found in system");
@@ -77,7 +79,7 @@ public class PurchaseService {
 		
 		String username=dto.getUsername();
 		Long artworkId=dto.getArtworkId();
-		
+
 		
 		if (!regRepo.existsByUserName(username)) {
 			throw new PurchaseException("no customer with the username ["+username+"] found in system");
@@ -102,7 +104,21 @@ public class PurchaseService {
 		}
 		return purchase;
 	}
-
+	
+	@Transactional
+	public List<Purchase> getAllPurchases() throws PurchaseException{
+		if (purchaseRepo.count()==0) {
+			throw new PurchaseException("no Purchase in system");
+		}
+		
+		List<Purchase> allP = new ArrayList<Purchase>();
+		
+		for (Purchase p:purchaseRepo.findAll()) {
+			allP.add(p);
+		}
+		return allP;
+	}
+	
 	@Transactional
 	public Purchase updatePurchaseShipment(PurchaseDto dto)  throws PurchaseException{ 
 		

@@ -37,6 +37,15 @@ public class TestGalleryRegistrationServiceDelete {
 
 	@Mock
 	private OnlineGalleryRepository ogRepo;
+	
+	@Mock
+	private GalleryAdminRepository adminRepo;
+	
+	@Mock
+	private CustomerRepository custRepo;
+	
+	@Mock
+	private ArtistRepository artistRepo;
 
 	@InjectMocks
 	private GalleryRegistrationService service;
@@ -64,7 +73,7 @@ public class TestGalleryRegistrationServiceDelete {
 			} else if (invocation.getArgument(0).equals(VALID_USERNAME)) {
 				return true;
 			}
-			return false;
+			return false; 
 		});
  
 		lenient().when(regRepo.findGalleryRegisrationByUserName(anyString()))

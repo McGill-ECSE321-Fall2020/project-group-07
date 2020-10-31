@@ -21,9 +21,15 @@ public class GalleryRegistrationService {
  
 	@Autowired 
 	GalleryRegistrationRepository regRepo;
-	
+	 
 	@Autowired
 	GalleryAdminRepository adminRepo; 
+	
+	@Autowired
+	CustomerRepository custRepo;
+	
+	@Autowired
+	ArtistRepository artistRepo;
 	
 	 
 	@Transactional
@@ -143,11 +149,11 @@ public class GalleryRegistrationService {
 		} else {
 			og = new OnlineGallery();
 			og.setDaysUp(0);
-			og.setTotalEarnings(0);
 		}
 		
 		og.getAllRegistrations().add(reg);
 		ogRepo.save(og);
+		reg=regRepo.save(reg);
 		
 		return reg;
 	}
@@ -214,6 +220,21 @@ public class GalleryRegistrationService {
 	}
 	
 	@Transactional
+	public List<GalleryRegistration> deleteAllGalleryRegistration() throws GalleryRegistrationException{
+		List<GalleryRegistration> deletedRegs = new ArrayList<GalleryRegistration>();
+		if (regRepo.count()==0) {
+			throw new GalleryRegistrationException("no GalleryRegistrations in system");
+		}
+		
+		for (GalleryRegistration reg:regRepo.findAll()) {
+			deletedRegs.add(reg);
+			this.deleteGalleryRegistration(reg.getUserName()); 
+		}
+		
+		return deletedRegs;
+	}
+	
+	@Transactional
 	public GalleryRegistration deleteGalleryRegistration(String username) throws GalleryRegistrationException{
 		if (!regRepo.existsByUserName(username)) {
 			throw new GalleryRegistrationException("No GalleryRegistration with username ["+username+"] exists");
@@ -221,6 +242,26 @@ public class GalleryRegistrationService {
 		
 		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
 		OnlineGallery og = ogRepo.findAll().iterator().next();
+		
+		
+		if (reg.getCustomer()!=null) {
+			Customer cust = reg.getCustomer();
+			reg.setCustomer(null);
+			custRepo.delete(cust);
+		}
+		
+		if (reg.getArtist()!=null) {
+			Artist artist = reg.getArtist();
+			reg.setArtist(null);
+			artistRepo.delete(artist);
+		}
+		
+		if (reg.getAdmin()!=null) {
+			GalleryAdmin admin = reg.getAdmin();
+			reg.setAdmin(null);
+			adminRepo.delete(admin);
+		}
+		
 		og.getAllRegistrations().remove(reg);
 		
 		regRepo.delete(reg);

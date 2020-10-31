@@ -36,31 +36,37 @@ public class ShipmentService {
 	public Shipment createShipment (ShipmentDto dto) throws ShipmentException, PurchaseException{
 		
 		Shipment shipment = null;
-		List<PurchaseDto> purchases = dto.getPurchases();
+		List<Long> purchases = dto.getPurchases();
 		
-		for (PurchaseDto p : purchases) {
-			if (!purchaseRepo.existsByPurchaseId(p.getPurchaseId())) {
-				
-				throw new PurchaseException("no purchase with id ["+p.getPurchaseId()+"] found in system");
+		for (Long p : purchases) {
+			if (!purchaseRepo.existsByPurchaseId(p)) {
+				throw new PurchaseException("no purchase with id ["+p+"] found in system");
 			}
 		}
 		
-		ShipmentType type = purchases.get(0).getShipmentType();
-		for (PurchaseDto p1 : purchases) {
-			if (!p1.getShipmentType().equals(type)) {
+		Purchase first = purchaseRepo.findPurchaseByPurchaseId(purchases.get(0));
+		
+		ShipmentType type = first.getShipmentType();
+		for (Long p1 : purchases) {
+			Purchase aPurchase = purchaseRepo.findPurchaseByPurchaseId(p1);
+			if (!aPurchase.getShipmentType().equals(type)) {
 				throw new ShipmentException("not all purchases are of the same type");
 			}
 			
 		}
 		
-		String username = purchases.get(0).getUsername();
-		for (PurchaseDto p2 : purchases) {
-			if (!p2.getUsername().equals(username)) {
+		Long customerId = first.getCustomer().getCustomerId();
+		
+		
+		for (Long p2 : purchases) {
+			Purchase aPurchase = purchaseRepo.findPurchaseByPurchaseId(p2);
+			if (!aPurchase.getCustomer().getCustomerId().equals(customerId)) {
 				throw new ShipmentException("not all purchases are from the same client");
 			}
 		}
-		for (PurchaseDto p3 : purchases) {
-			Artwork art = artworkRepo.findArtworkByArtworkId(p3.getArtworkId());
+		for (Long p3 : purchases) {
+			Purchase aPurchase = purchaseRepo.findPurchaseByPurchaseId(p3);
+			Artwork art = artworkRepo.findArtworkByArtworkId(aPurchase.getArtwork().getArtworkId());
 			if (art.getStatus() == ArtworkStatus.AVAILABLE) {
 				throw new ShipmentException("artwork is still avaiable and can not be shipped");
 			}
@@ -90,11 +96,11 @@ public class ShipmentService {
 		//validation passed
 		shipment = new Shipment();
 		Double totalPrice = 0.0;
-		for (PurchaseDto p3 : purchases) {
-			Double artPrice = artworkRepo.findArtworkByArtworkId(purchases.get(0).getArtworkId()).getPrice();
+		for (Long p3 : purchases) {
+			Purchase aPurchase = purchaseRepo.findPurchaseByPurchaseId(p3);
+			Double artPrice = artworkRepo.findArtworkByArtworkId(aPurchase.getArtwork().getArtworkId()).getPrice();
 			totalPrice += artPrice;
-			Purchase p = purchaseRepo.findPurchaseByPurchaseId(p3.getPurchaseId());
-			shipment.getPurchase().add(p);
+			shipment.getPurchase().add(aPurchase);
 		}
 		Double shippingCost = dto.getShippingCost();
 		totalPrice += shippingCost;
@@ -219,11 +225,27 @@ public class ShipmentService {
 		return shipment;
 	}
 	
+
+	public List<Shipment> getAllShipments() throws ShipmentException{
+		if (shipRepo.count()==0) {
+			throw new ShipmentException("no Shipments in system");
+		}
+		
+		List<Shipment> slist= new ArrayList<Shipment>();
+		
+		for (Shipment s:shipRepo.findAll()) {
+			slist.add(s);
+		}
+		
+		return slist;
+	}
+	
+
 	@Transactional
-	public Shipment deleteShipment(ShipmentDto dto) throws ShipmentException {
-		Shipment s = this.getShipment(dto.getShipmentId());
-		List<PurchaseDto> purchases = dto.getPurchases();
-		for (PurchaseDto p : purchases) {
+	public Shipment deleteShipment(Long shipmentId) throws ShipmentException {
+		Shipment s = this.getShipment(shipmentId);
+		
+		for (Purchase p : s.getPurchase()) {
 			Purchase purchase = purchaseRepo.findPurchaseByPurchaseId(p.getPurchaseId());
 			purchase.setShipment(null);
 		}
@@ -232,6 +254,7 @@ public class ShipmentService {
 		return s;
 	}
 	
+	@Transactional
 	public Shipment getShipment (long shipmentId) throws ShipmentException {
 		
 		Shipment s = shipRepo.findShipmentByShipmentId(shipmentId);
@@ -240,6 +263,21 @@ public class ShipmentService {
 		}
 		return s;
 	}
+	
+	@Transactional
+	public List<Shipment> deleteAllShipments () throws ShipmentException{
+		List<Shipment> deletedShipments = new ArrayList <Shipment>();
+		if (shipRepo.count() == 0) {
+			throw new ShipmentException("no Shipments in system");
+		}
+		
+		for (Shipment s : shipRepo.findAll()) {
+			deletedShipments.add(s);
+			this.deleteShipment(s.getShipmentId());
+		}
+		return deletedShipments;
+	}
+
 	public void validateExp(String exp) throws CreditCardException{
 
 		
