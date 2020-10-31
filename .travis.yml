@@ -1,7 +1,7 @@
 
 branches:
   only:
-  - master  
+  - s2  
   
 matrix:
   include:
