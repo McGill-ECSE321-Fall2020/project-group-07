@@ -70,8 +70,8 @@ public class ArtistRestController {
 	@PostMapping(value = { "/createProfile", "/createProfile/" })
 	public ResponseEntity<?> createProfile(@RequestBody ProfileDto dto) throws ArtistException {
 		try {
-			Profile profile=service.createProfile(dto);
-			return new ResponseEntity<>(convertToDto(profile), HttpStatus.OK);
+			Artist artist=service.createProfile(dto);
+			return new ResponseEntity<>(convertToDto(artist), HttpStatus.OK);
 		}
 		catch(ArtistException e) {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -81,8 +81,8 @@ public class ArtistRestController {
 	@PutMapping(value = { "/updateProfile", "/updateProfile/" })
 	public ResponseEntity<?> updateProfile(@RequestBody ProfileDto dto) throws ArtistException {
 		try {
-			Profile profile=service.updateProfile(dto);
-			return new ResponseEntity<>(convertToDto(profile), HttpStatus.OK);
+			Artist artist=service.updateProfile(dto);
+			return new ResponseEntity<>(convertToDto(artist), HttpStatus.OK);
 		}
 		catch(ArtistException e) {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);

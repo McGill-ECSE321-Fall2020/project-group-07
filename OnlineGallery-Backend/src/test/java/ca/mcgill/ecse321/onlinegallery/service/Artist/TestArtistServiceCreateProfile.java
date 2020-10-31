@@ -17,6 +17,7 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
+import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ProfileRepository;
 import ca.mcgill.ecse321.onlinegallery.dto.ProfileDto;
@@ -34,6 +35,9 @@ public class TestArtistServiceCreateProfile {
 
 	@Mock
 	private ProfileRepository profileRepo;
+	
+	@Mock
+	private ArtistRepository artistRepo;
 	
 	@InjectMocks
 	private ArtistService service;
@@ -121,6 +125,24 @@ public class TestArtistServiceCreateProfile {
 			return profile;
 		});
 		
+		lenient().when(artistRepo.save(any(Artist.class))).thenAnswer((InvocationOnMock invocation) -> {
+			
+			GalleryRegistration reg = new GalleryRegistration();			
+			Artist artist = new Artist();
+			Profile profile = new Profile();
+			
+			reg.setUserName(VALID_USERNAME);
+			
+			artist.setGalleryRegistration(reg);
+			reg.setArtist(artist);
+			
+			profile.setSelfDescription(((Profile)invocation.getArgument(0)).getSelfDescription());
+			profile.setProfileId(id);
+			artist.setProfile(profile);
+
+			return artist;
+		});
+		
 	}
 
 	@Test
@@ -131,6 +153,7 @@ public class TestArtistServiceCreateProfile {
 		double totalEarnings = 0.0;
 		double rating = 0.0;
 		int numSold = 0;
+		Artist artist = null;
 		
 		ProfileDto dto = new ProfileDto();
 		dto.setNumSold(numSold);
@@ -140,11 +163,13 @@ public class TestArtistServiceCreateProfile {
 		dto.setUsername(VALID_USERNAME);
 	
 		try {
-			profile = service.createProfile(dto);
+			artist = service.createProfile(dto);
+			profile = artist.getProfile();
 		} catch(Exception e){
 			fail();
 		}
 		
+		assertNotNull(artist);
 		assertNotNull(profile);
 		assertEquals(profile.getSelfDescription(),selfDescription);
 		assertEquals(profile.getNumSold(),numSold);
@@ -160,18 +185,21 @@ public class TestArtistServiceCreateProfile {
 		Profile profile = null;
 		String selfDescription = "4Chan User PepeLaugh";
 		String error = null;
+		Artist artist = null;
+
 		
 		ProfileDto dto = new ProfileDto();
 		dto.setSelfDescription(selfDescription);
 		dto.setUsername(INVALID_USERNAME_NOT_AN_ARTIST);
 		
 		try {
-			profile = service.createProfile(dto);
+			artist = service.createProfile(dto);
+			profile = artist.getProfile();
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 			error = e.getMessage();
 		}
-		
+		assertNull(artist);
 		assertNull(profile);
 		assertEquals(error,"No artist exists under the username ["+INVALID_USERNAME_NOT_AN_ARTIST+"]");
 		
@@ -183,18 +211,20 @@ public class TestArtistServiceCreateProfile {
 		Profile profile = null;
 		String selfDescription = "I love Profiles";
 		String error = null;
-		
+		Artist artist = null;
+
 		ProfileDto dto = new ProfileDto();
 		dto.setSelfDescription(selfDescription);
 		dto.setUsername(INVALID_USERNAME_HAS_PROFILE);
 		
 		try {
-			profile = service.createProfile(dto);
+			artist = service.createProfile(dto);
+			profile = artist.getProfile();
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 			error = e.getMessage();
 		}
-		
+		assertNull(artist);
 		assertNull(profile);
 		assertEquals(error,"This artist already has a profile");
 		
@@ -206,17 +236,20 @@ public class TestArtistServiceCreateProfile {
 		Profile profile = null;
 		String selfDescription = "StackOverFlow User Poggers";
 		String error = null;
-		
+		Artist artist = null;
+
 		ProfileDto dto = new ProfileDto();
 		dto.setSelfDescription(selfDescription);
 		dto.setUsername(INVALID_USERNAME_NONEXIST);
 		
 		try {
-			profile = service.createProfile(dto);
+			artist = service.createProfile(dto);
+			profile = artist.getProfile();
 		} catch (Exception e){
 			error = e.getMessage();
 		}
 		
+		assertNull(artist);
 		assertNull(profile);
 		assertEquals(error,"No registration exists under the username ["+INVALID_USERNAME_NONEXIST+"]");
 		

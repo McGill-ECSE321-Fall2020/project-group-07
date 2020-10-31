@@ -130,6 +130,7 @@ public class TestArtistServiceUpdateProfile {
 		double totalEarnings = -1000000.0;
 		double rating = 01101001.0;
 		int numSold = 69;
+		Artist artist = null;
 		
 		ProfileDto profileDto = new ProfileDto();
 		profileDto.setNumSold(numSold);
@@ -139,11 +140,13 @@ public class TestArtistServiceUpdateProfile {
 		profileDto.setUsername(VALID_USERNAME);
 		
 		try {
-			profile = service.updateProfile(profileDto);
+			artist = service.updateProfile(profileDto);
+			profile = artist.getProfile();
 		} catch(Exception e){
 			fail();
 		}
 		
+		assertNotNull(artist);
 		assertNotNull(profile);
 		assertEquals(profile.getSelfDescription(),selfDescription);
 		assertEquals(profile.getNumSold(),numSold);
@@ -160,7 +163,8 @@ public class TestArtistServiceUpdateProfile {
 		double totalEarnings = -1000000.0;
 		double rating = 01101001.0;
 		int numSold = 69;
-		
+		Artist artist = null;
+
 		String error = null;
 		
 		ProfileDto profileDto = new ProfileDto();
@@ -171,12 +175,14 @@ public class TestArtistServiceUpdateProfile {
 		profileDto.setUsername(INVALID_USERNAME_NO_PROFILE);
 		
 		try {
-			profile = service.updateProfile(profileDto);
+			artist = service.updateProfile(profileDto);
+			profile = artist.getProfile();
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 			error = e.getMessage();
 		}
 		
+		assertNull(artist);
 		assertNull(profile);
 		assertEquals(error,"No profile exists for this artist ["+INVALID_USERNAME_NO_PROFILE+"]");
 		
@@ -190,7 +196,8 @@ public class TestArtistServiceUpdateProfile {
 		double totalEarnings = -1000000.0;
 		double rating = 01101001.0;
 		int numSold = 69;
-		
+		Artist artist = null;
+
 		String error = null;
 		
 		ProfileDto profileDto = new ProfileDto();
@@ -201,12 +208,14 @@ public class TestArtistServiceUpdateProfile {
 		profileDto.setUsername(INVALID_USERNAME_NOT_AN_ASRTIST);
 		
 		try {
-			profile = service.updateProfile(profileDto);
+			artist = service.updateProfile(profileDto);
+			profile = artist.getProfile();
 		} catch (Exception e){
 			System.out.println(e.getMessage());
 			error = e.getMessage();
 		}
 		
+		assertNull(artist);
 		assertNull(profile);
 		assertEquals(error,"No artist exists under the username ["+INVALID_USERNAME_NOT_AN_ASRTIST+"]");
 		
@@ -220,7 +229,8 @@ public class TestArtistServiceUpdateProfile {
 		double totalEarnings = -1000000.0;
 		double rating = 01101001.0;
 		int numSold = 69;
-		
+		Artist artist = null;
+
 		String error = null;
 		
 		ProfileDto profileDto = new ProfileDto();
@@ -231,11 +241,12 @@ public class TestArtistServiceUpdateProfile {
 		profileDto.setUsername(INVALID_USERNAME_NONEXIST);
 		
 		try {
-			profile = service.updateProfile(profileDto);
+			artist = service.updateProfile(profileDto);
+			profile = artist.getProfile();
 		} catch (Exception e){
 			error = e.getMessage();
 		}
-		
+		assertNull(artist);
 		assertNull(profile);
 		assertEquals(error,"No registration exists under the username ["+INVALID_USERNAME_NONEXIST+"]");
 		
