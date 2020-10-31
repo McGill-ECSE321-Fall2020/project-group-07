@@ -24,7 +24,6 @@ public class ShipmentService {
 	@Autowired
 	PurchaseRepository purchaseRepo;
 	
-
 	@Transactional
 	public Shipment addToShipment(Long shipmentId, Long purchaseId) throws ShipmentException, PurchaseException{
 		if (!shipRepo.existsById(shipmentId)) {
