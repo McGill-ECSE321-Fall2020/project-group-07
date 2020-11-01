@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.service.Shipment;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -21,7 +22,6 @@ import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.PurchaseRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ShipmentRepository;
-import ca.mcgill.ecse321.onlinegallery.dto.PurchaseDto;
 import ca.mcgill.ecse321.onlinegallery.dto.ShipmentDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artwork;
 import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;

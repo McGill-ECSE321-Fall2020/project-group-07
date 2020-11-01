@@ -2,12 +2,10 @@ package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;

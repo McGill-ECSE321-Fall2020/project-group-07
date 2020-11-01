@@ -2,11 +2,11 @@ package ca.mcgill.ecse321.onlinegallery.service.Artwork;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -52,7 +52,6 @@ public class TestArtworkServiceCreation {
 	@SuppressWarnings("deprecation")
 	private static final Long VALID_ARTISTID=new Long(1);
 	@SuppressWarnings("deprecation")
-	private static final Long INVALID_ARTISTID=new Long(2);
 	
 	private static final Long ARTWORK_ID=new Long(4);
 	private static final String NAME = "pretty";

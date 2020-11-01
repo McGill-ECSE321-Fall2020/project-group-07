@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.service.Shipment;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.Mockito.lenient;
 
@@ -15,10 +16,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import ca.mcgill.ecse321.onlinegallery.dao.PurchaseRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ShipmentRepository;
-import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.model.Shipment;
 import ca.mcgill.ecse321.onlinegallery.service.ShipmentService;
-import ca.mcgill.ecse321.onlinegallery.service.exception.GalleryRegistrationException;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ShipmentException;
 
 @ExtendWith(MockitoExtension.class)

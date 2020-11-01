@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.onlinegallery.controller;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,6 @@ import org.springframework.web.bind.annotation.RestController;
 import ca.mcgill.ecse321.onlinegallery.dto.ArtistDto;
 import ca.mcgill.ecse321.onlinegallery.dto.ProfileDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
-import ca.mcgill.ecse321.onlinegallery.model.Profile;
 import ca.mcgill.ecse321.onlinegallery.service.ArtistService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ArtistException;
 

@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.junit.jupiter.api.Assertions.fail;
 import static org.mockito.ArgumentMatchers.anyLong;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -20,12 +19,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import ca.mcgill.ecse321.onlinegallery.dao.PurchaseRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ShipmentRepository;
-import ca.mcgill.ecse321.onlinegallery.dto.PurchaseDto;
-import ca.mcgill.ecse321.onlinegallery.dto.ShipmentDto;
-import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.model.Purchase;
 import ca.mcgill.ecse321.onlinegallery.model.Shipment;
-import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
 import ca.mcgill.ecse321.onlinegallery.service.ShipmentService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ShipmentException;
 

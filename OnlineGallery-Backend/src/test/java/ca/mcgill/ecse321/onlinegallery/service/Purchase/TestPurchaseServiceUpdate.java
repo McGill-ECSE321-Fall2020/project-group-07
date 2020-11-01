@@ -1,8 +1,6 @@
 package ca.mcgill.ecse321.onlinegallery.service.Purchase;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import static org.junit.jupiter.api.Assertions.fail;
@@ -10,9 +8,6 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
-
-import java.sql.Date;
-import java.time.LocalDate;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -49,15 +44,10 @@ public class TestPurchaseServiceUpdate {
 	
 	private static final String VALID_USERNAME="validUsername";
 	private static final String VALID_USERNAME_BUTNOPURCHASE="validNoPurchase";
-	private static final String INVALID_USERNAMENONEXIST="nonexistUsername";
 	private static final String INVALID_USERNAMENOTACUSTOMER="userNotCustomer";
-	private static final ShipmentType VALID_SHIPMENTYPE1=ShipmentType.OFFSITE_DELIVERY;
-	private static final ShipmentType VALID_SHIPMENTYPE2=ShipmentType.ONSITE_PICKUP;
 
 	@SuppressWarnings("deprecation")
 	private static final Long VALID_ARTWORKID= new Long(1);
-	@SuppressWarnings("deprecation")
-	private static final Long INVALID_ARTWORKIDNONEXIST= new Long(2);
 	@SuppressWarnings("deprecation")
 	private static final Long INVALID_ARTWORKIDNOTAVAILABLE=new Long (3);
 	

@@ -1,10 +1,9 @@
 package ca.mcgill.ecse321.onlinegallery.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-import java.util.HashSet;
-import java.util.Set;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.Month;
@@ -78,7 +77,6 @@ public class OnlineGalleryPersistenceTest {
 		String firstName="Bart";
 		String lastName="simpson";
 		String email="bsimpson@gmail.com";
-		String phone="123-456-7899";
 		Boolean loggedIn= false;
 		String password="password";
 		
@@ -172,7 +170,6 @@ public class OnlineGalleryPersistenceTest {
 		String firstName="Bart";
 		String lastName="simpson";
 		String email="bsimpson@gmail.com";
-		String phone="123-456-7899";
 		Boolean loggedIn= false;
 		String password="password";
 		
@@ -524,7 +521,6 @@ public class OnlineGalleryPersistenceTest {
 		custRepo.save(customer);
 
 		Long custId=customer.getCustomerId();
-		Long artId=art.getArtworkId();
 		Long purchaseId=purchase.getPurchaseId();
 		Long shipmentId=shipment.getShipmentId();
 		
@@ -571,9 +567,7 @@ public class OnlineGalleryPersistenceTest {
 		Shipment shipment = new Shipment();
 		Purchase purchase = new Purchase();
 		
-		double commission=0.13;
 		ShipmentType shipType=ShipmentType.OFFSITE_DELIVERY;
-		boolean paid=true;
 		Date date = java.sql.Date.valueOf(LocalDate.of(2020, Month.JANUARY, 31));
 		
 		purchase.setShipmentType(shipType);
