@@ -77,7 +77,7 @@ public class ArtworkRestController {
 	
 	}
 	
-	@GetMapping(value = { "/getAvailableArtworkByArtistId", "/getAvailableArtworkByArtistId/" })
+	@GetMapping(value = { "/getAvailableArtworkByArtistId/{artistId}", "/getAvailableArtworkByArtistId/{artistId}/" })
 	public ResponseEntity<?> getAvailableArtworkByArtistId(@PathVariable("artistId") Long artistId) throws ArtworkException {
 		
 		List<ArtworkDto> artworkDto = new ArrayList<ArtworkDto>();
@@ -94,7 +94,7 @@ public class ArtworkRestController {
 		}
 	}
 	
-	@GetMapping(value = { "/getAvailableArtworkDetail", "/getAvailableArtworkDetail/" })
+	@GetMapping(value = { "/getAvailableArtworkDetail/{artworkId}", "/getAvailableArtworkDetail/{artworkId}/" })
 	public ResponseEntity<?> getAvailableArtworkDetail(@PathVariable("artworkId") Long artworkId) throws ArtworkException, ArtistException {
 		try {
 			Artwork artwork = service.getAvailableArtworkDetail(artworkId);
@@ -108,7 +108,7 @@ public class ArtworkRestController {
 	}
 	
 	
-	@GetMapping(value = { "/retrieveRandomAvailableArtworks", "/retrieveRandomAvailableArtworks/"})
+	@GetMapping(value = { "/retrieveRandomAvailableArtworks/{numToGet}", "/retrieveRandomAvailableArtworks/{numToGet}/"})
 	public ResponseEntity<?> retrieveRandomAvailableArtworks(@PathVariable("numToGet") int numToGet) throws ArtworkException {
 		
 		List<ArtworkDto> artworkDto = new ArrayList<ArtworkDto>();
@@ -131,7 +131,7 @@ public class ArtworkRestController {
 		artworkDto.setUsername(artwork.getArtist().getGalleryRegistration().getUserName());
 		artworkDto.setCommission(artwork.getComission());
 		artworkDto.setDescription(artwork.getDescription());
-		artworkDto.setDimension(artwork.getName());
+		artworkDto.setDimension(artwork.getDimension());
 		artworkDto.setName(artwork.getName());
 		artworkDto.setNumViews(artwork.getNumViews());
 		artworkDto.setPrice(artwork.getPrice());

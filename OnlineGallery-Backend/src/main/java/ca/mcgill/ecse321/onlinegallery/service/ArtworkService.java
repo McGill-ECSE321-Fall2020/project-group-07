@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import javax.transaction.Transactional;
 
@@ -127,6 +129,8 @@ public class ArtworkService {
 		
 		List<Artwork> artworkList = new ArrayList<Artwork>();
 		artworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
+		
+		
 		List<Artwork> randomList = new ArrayList<Artwork>();
 		Random rand = new Random();
 		
@@ -134,10 +138,15 @@ public class ArtworkService {
 			throw new  ArtworkException("there is less than ["+numToRetrieve+"] artworks");
 		} 
 		
+		List<Integer> usedIdx = new ArrayList<Integer>(); 
+		
 		for (int i = 0; i < numToRetrieve; i++) {
 	        int randomIndex = rand.nextInt(artworkList.size());
-	        randomList.add(artworkList.get(randomIndex));
-	        artworkList.remove(randomIndex);
+	        if (!usedIdx.contains(randomIndex)) {
+	        	randomList.add(artworkList.get(randomIndex));
+	        	usedIdx.add(randomIndex);
+	        }
+	        
 	    }
 		return randomList;
 	
