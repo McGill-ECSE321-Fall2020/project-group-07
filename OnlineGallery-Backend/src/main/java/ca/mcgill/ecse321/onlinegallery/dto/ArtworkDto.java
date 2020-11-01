@@ -4,7 +4,13 @@ import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
 
 public class ArtworkDto {
 
-
+	private String username;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getUsername() {
+		return this.username;
+	}
 	private String name;
 	public void setName(String name) {
 		this.name = name;

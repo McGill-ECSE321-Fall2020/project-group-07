@@ -34,23 +34,31 @@ public class ArtworkService {
 	GalleryRegistrationRepository regRepo;
 	
 	@Transactional
-	public Artwork createArtwork(Long artistId, ArtworkDto dto) throws ArtworkException, ArtistException {
+	public Artwork createArtwork(ArtworkDto dto) throws ArtworkException, ArtistException {
 		
-		if(!artistRepo.existsById(artistId)) {
-			throw new ArtistException("No artist with ID ["+artistId+"] exists");
+		String artistUserName = dto.getUsername();
+		if(!regRepo.existsByUserName(dto.getUsername())){ 
+			throw new ArtistException("User does not exist"); 
 		}
 		
-		Artist artist = artistRepo.findArtistByArtistId(artistId);
-		GalleryRegistration reg= artist.getGalleryRegistration();
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(artistUserName);
+		
+		if(reg.getArtist() == null) {
+			throw new ArtistException("User is not an artist");
+		}
+		
+		Artist artist = reg.getArtist();
 		
 		Artwork art = new Artwork();
+		
+;
 		
 		if(dto.getName() == null || dto.getDescription() == null || 
 				dto.getPrice() <= 0 || dto.getDimension() == null || dto.getNumViews() != 0 ||
 						dto.getStatus() == null || dto.getWeight() <= 0 || dto.getCommission() == 0){
 			throw new ArtworkException("Invalid artwork attributes");	
 						}
-		
+
 		art.setName(dto.getName());
 		art.setDescription(dto.getDescription());
 		art.setPrice(dto.getPrice());
@@ -58,13 +66,13 @@ public class ArtworkService {
 		art.setNumViews(dto.getNumViews());
 		art.setDimension(dto.getDimension());
 		art.setWeight(dto.getWeight());
-		art.setCommission(dto.getCommission());
-		
+		art.setCommission(dto.getCommission()); 
+
 		artist.getArtwork().add(art);
 		art.setArtist(artist);
-		
+
 		artworkRepo.save(art);
-		
+
 		return art;
 	}
 	
@@ -100,6 +108,7 @@ public class ArtworkService {
 		} 
 		return artwork;
 	}
+
 	
 	@Transactional 
 	public Set<Artwork> getAvailableArtworkByArtistId(Long artistId) throws ArtworkException{
