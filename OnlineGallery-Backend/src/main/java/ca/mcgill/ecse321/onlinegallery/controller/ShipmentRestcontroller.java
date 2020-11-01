@@ -99,7 +99,7 @@ public class ShipmentRestcontroller {
 	}
 	
 	@DeleteMapping(value = { "/deleteShipment/{shipmentId}", "/deleteShipment/{shipmentId}/" })
-	public ResponseEntity<?> deleteShipment(@RequestBody Long shipmentId) throws ShipmentException  {
+	public ResponseEntity<?> deleteShipment(@PathVariable ("shipmentId") Long shipmentId) throws ShipmentException  {
 		try {
 			Shipment ship=service.deleteShipment(shipmentId);
 			return new ResponseEntity<>(convertToShipmentDto(ship), HttpStatus.OK);
