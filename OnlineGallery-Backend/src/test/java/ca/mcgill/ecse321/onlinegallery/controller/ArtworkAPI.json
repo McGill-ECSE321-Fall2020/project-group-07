@@ -1,0 +1,694 @@
+{
+	"info": {
+		"_postman_id": "e512fbba-f9ed-45db-b904-65397166464b",
+		"name": "Artwork-Rest",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1f9c85d0-7511-4d5a-9a10-70c67e91ac03",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"lisaSimpson\");",
+							"})",
+							"",
+							"pm.test(\"firstname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.firstName).to.eql(\"Lisa\");",
+							"})",
+							"",
+							"pm.test(\"lastname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.lastName).to.eql(\"Simpson\");",
+							"})",
+							"",
+							"pm.test(\"email match\",function(){",
+							"    pm.expect(pm.response.json().email).to.eql(\"lsimpson@yahoo.com\");",
+							"})",
+							"",
+							"pm.test(\"password match\",function(){",
+							"    pm.expect(pm.response.json().password).to.eql(\"ay2Caramba!\");",
+							"})",
+							"",
+							"pm.test(\"not logged in\",function(){",
+							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"lisaSimpson\",\n\t\"firstName\":\"Lisa\",\n\t\"lastName\":\"Simpson\",\n\t\"email\":\"lsimpson@yahoo.com\",\n    \"password\":\"ay2Caramba!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setArtistRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3ea703ea-6285-433e-8455-ce62dbd8ef53",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"lisaSimpson\");",
+							"})",
+							"",
+							"pm.test(\"firstname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.firstName).to.eql(\"Lisa\");",
+							"})",
+							"",
+							"pm.test(\"lastname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.lastName).to.eql(\"Simpson\");",
+							"})",
+							"",
+							"pm.test(\"email match\",function(){",
+							"    pm.expect(pm.response.json().email).to.eql(\"lsimpson@yahoo.com\");",
+							"})",
+							"",
+							"pm.test(\"password match\",function(){",
+							"    pm.expect(pm.response.json().password).to.eql(\"ay2Caramba!\");",
+							"})",
+							"",
+							"pm.test(\"not logged in\",function(){",
+							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
+							"})",
+							"",
+							"pm.test(\"artist id not null\",function(){",
+							"    pm.expect(pm.response.json().artistId).to.not.be.undefined;  ",
+							"})",
+							"",
+							"pm.globals.set(\"lisaArtistId\",pm.response.json().artistId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setArtist/lisaSimpson",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setArtist",
+						"lisaSimpson"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "24cdf012-1d18-4066-860b-cabebd3901b6",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"lisaSimpson\");",
+							"})",
+							"",
+							"pm.test(\"name match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.name).to.eql(\"masterpiece\");",
+							"})",
+							"",
+							"pm.test(\"description match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.description).to.eql(\"extreme beauty\");",
+							"})",
+							"",
+							"pm.test(\"status match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.status).to.eql('AVAILABLE');",
+							"})",
+							"",
+							"pm.test(\"dimension match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.dimension).to.eql(\"yuge\");",
+							"})",
+							"",
+							"pm.test(\"weight\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.weight).to.eql(19);",
+							"})",
+							"",
+							"pm.test(\"commission\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.commission).to.eql(0.5);",
+							"})",
+							"",
+							"pm.test(\"numViews\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.numViews).to.eql(0);",
+							"})",
+							"",
+							"pm.globals.set(\"lisaArtworkId\",pm.response.json().artworkId);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"lisaSimpson\",\n    \"name\": \"masterpiece\",\n    \"description\": \"extreme beauty\",\n    \"price\": 45.12,\n    \"status\": 1,\n    \"dimension\": \"yuge\",\n    \"weight\": 19,\n    \"commission\":0.5,\n    \"numViews\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f14fb600-586c-421f-91e6-9083999c2dd3",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"lisaSimpson\");",
+							"})",
+							"",
+							"pm.test(\"name match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.name).to.eql(\"masterpiece2\");",
+							"})",
+							"",
+							"pm.test(\"description match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.description).to.eql(\"super extreme beauty\");",
+							"})",
+							"",
+							"pm.test(\"status match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.status).to.eql('AVAILABLE');",
+							"})",
+							"",
+							"pm.test(\"dimension match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.dimension).to.eql(\"super yuge\");",
+							"})",
+							"",
+							"pm.test(\"weight\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.weight).to.eql(19);",
+							"})",
+							"",
+							"pm.test(\"commission\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.commission).to.eql(0.5);",
+							"})",
+							"",
+							"pm.test(\"numViews\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.numViews).to.eql(0);",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"lisaSimpson\",\n    \"name\": \"masterpiece2\",\n    \"description\": \"super extreme beauty\",\n    \"price\": 45.12,\n    \"status\": 1,\n    \"dimension\": \"super yuge\",\n    \"weight\": 19,\n    \"commission\":0.5,\n    \"numViews\": 0\n\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2617080d-151c-438f-a2a2-97233e69a62f",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"lisaSimpson\");",
+							"})",
+							"",
+							"pm.test(\"name match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.name).to.eql(\"masterpiece3\");",
+							"})",
+							"",
+							"pm.test(\"description match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.description).to.eql(\"super extreme beauty\");",
+							"})",
+							"",
+							"pm.test(\"status match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.status).to.eql('AVAILABLE');",
+							"})",
+							"",
+							"pm.test(\"dimension match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.dimension).to.eql(\"very yuge\");",
+							"})",
+							"",
+							"pm.test(\"weight\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.weight).to.eql(19);",
+							"})",
+							"",
+							"pm.test(\"commission\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.commission).to.eql(0.5);",
+							"})",
+							"",
+							"pm.test(\"numViews\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.numViews).to.eql(0);",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"lisaSimpson\",\n    \"name\": \"masterpiece3\",\n    \"description\": \"super extreme beauty\",\n    \"price\": 45.12,\n    \"status\": 1,\n    \"dimension\": \"very yuge\",\n    \"weight\": 19,\n    \"commission\":0.5,\n    \"numViews\": 0\n\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllAvailableArtwork",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e2f5ec61-6b3e-4e7c-ac41-1f04fa8c6945",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"3 Artworks returned\",function(){",
+							"    pm.expect(pm.response.json()).length==3;",
+							"})",
+							"",
+							"pm.test(\"3 artworks that are available\",function(){",
+							"    pm.expect(pm.response.json()[0].status).is.eql('AVAILABLE');",
+							"    pm.expect(pm.response.json()[1].status).is.eql('AVAILABLE');",
+							"    pm.expect(pm.response.json()[2].status).is.eql('AVAILABLE');",
+							"})",
+							"",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getAllAvailableArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllAvailableArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllArtworks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "24cb9d8a-c7e5-4795-b836-cc5111ebe167",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"3 Artworks returned\",function(){",
+							"    pm.expect(pm.response.json()).length==3;",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getAllArtworks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllArtworks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "retreiveRandomArtworks",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "79e4e7fc-60bc-41a8-9c84-51c4e90164d4",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"2 Artworks returned\",function(){",
+							"    pm.expect(pm.response.json()).length==2;",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/retrieveRandomAvailableArtworks/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"retrieveRandomAvailableArtworks",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAvailableArtworkByArtistId",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4c0c403d-eaec-46a7-a132-5ae1c8a7084c",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"3 Artworks returned\",function(){",
+							"    pm.expect(pm.response.json()).length==3;",
+							"})",
+							"",
+							"pm.test(\"3 artworks with same artist username\",function(){",
+							"    pm.expect(pm.response.json()[0].username).is.eql(\"lisaSimpson\");",
+							"    pm.expect(pm.response.json()[1].username).is.eql(\"lisaSimpson\");",
+							"    pm.expect(pm.response.json()[2].username).is.eql(\"lisaSimpson\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080//getAvailableArtworkByArtistId/{{lisaArtistId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"",
+						"getAvailableArtworkByArtistId",
+						"{{lisaArtistId}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAvailableArtworkDetail",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "091c9630-a39d-4b1e-89f5-0973b4907e21",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.eql(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"lisaSimpson\");",
+							"})",
+							"",
+							"pm.test(\"name match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.name).to.eql(\"masterpiece\");",
+							"})",
+							"",
+							"pm.test(\"description match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.description).to.eql(\"extreme beauty\");",
+							"})",
+							"",
+							"pm.test(\"status match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.status).to.eql('AVAILABLE');",
+							"})",
+							"",
+							"pm.test(\"dimension match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.dimension).to.eql(\"yuge\");",
+							"})",
+							"",
+							"pm.test(\"weight\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.weight).to.eql(19);",
+							"})",
+							"",
+							"pm.test(\"commission\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.commission).to.eql(0.5);",
+							"})",
+							"",
+							"pm.test(\"numViews\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.numViews).to.eql(0);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080///getAvailableArtworkDetail/{{lisaArtworkId}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"",
+						"",
+						"getAvailableArtworkDetail",
+						"{{lisaArtworkId}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

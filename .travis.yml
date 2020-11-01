@@ -17,35 +17,37 @@ matrix:
         - ./gradlew build
 
 
-    # # Postman integration tests
-    # - language: node_js
-    #   node_js:
-    #       - "10.15"
+    # Postman integration tests
+    - language: node_js
+      node_js:
+          - "10.15"
 
-    #   before_install:
-    #     - chmod +x ./gradlew
+      before_install:
+        - chmod +x ./gradlew
 
-    #   install:
-    #       - npm install -g newman
+      install:
+          - npm install -g newman
 
-    #   before_script:
-    #       - node --version
-    #       - npm --version
-    #       - node_modules/.bin/newman --version
-    #       - psql postgresql://mkcpnwwitfdhwg:4c33a4a1a2174440fb72e647bfa5f2e21a601005bcde7a746951aa7b85624e22@ec2-54-160-18-230.compute-1.amazonaws.com:5432/de1quki1fi6ccr
-    #       - DROP SCHEMA IF EXISTS public CASCADE;
-    #       - CREATE SCHEMA public;
-    #       - QUIT;
+      before_script:
+          - node --version
+          - npm --version
+          - node_modules/.bin/newman --version
+          - chmod +x ./resetdb.sh
 
+      script:
 
-    #   script:
+          - ./resetdb.sh
+            
+          # run Spring app in background
+          - ./gradlew bootRun &
 
-    #       # run Spring app in background
-    #       - ./gradlew bootRun &
+          # give time for app to startup
+          - sleep 60        
 
-    #       # give time for app to startup
-    #       - sleep 60        
-
-    #       # run test suites geenrated from Postman
-    #       - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
+          # run test suites geenrated from Postman
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/AdminAPI.json \
+          ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtistAPI.json \
+          ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtworkAPI.json \
+          ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/CustomerAPI.json \
+          ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.json
 
