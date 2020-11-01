@@ -46,24 +46,25 @@ public class PaymentDto {
 	
 	
 	
-	private String ccFirstName;
+	private String firstname;
 	
-	public void setCcFirstname(String name) {
-		this.ccFirstName=name;
+	public void setFirstName(String name) {
+		this.firstname=name;
 	}
-	public String getCcFirstname() {
-		return this.ccFirstName;
+	public String getFirstName() {
+		return this.firstname;
 	}
+	
 	
 	
 
-	private String ccLastName;
+	private String lastname;
 	
-	public void setCcLastname(String name) {
-		this.ccLastName=name;
+	public void setLastName(String name) {
+		this.lastname=name;
 	}
-	public String getccLastname() {
-		return this.ccLastName;
+	public String getLastName() {
+		return this.lastname;
 	}
 	
 	

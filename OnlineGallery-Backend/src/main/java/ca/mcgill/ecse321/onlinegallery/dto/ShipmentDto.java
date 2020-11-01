@@ -22,31 +22,14 @@ public class ShipmentDto
   private double totalCost;
   private ShipmentStatus shipmentStatus;
   private String recipientName;
-  private String userName;
+  private Long customerId;
 
-  //ShipmentDto Associations
-  private List<PurchaseDto> purchases;
+ 
+  private List<Long> purchases;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
-
-  public ShipmentDto(Long aShipmentId, String aSourceAddress, String aDestinationAddress, double aShippingCost, double aTotalCost, String aRecipientName, String aUserName)
-  {
-    shipmentId = aShipmentId;
-    sourceAddress = aSourceAddress;
-    destinationAddress = aDestinationAddress;
-    shippingCost = aShippingCost;
-    totalCost = aTotalCost;
-    shipmentStatus = ShipmentStatus.CREATED;
-    recipientName = aRecipientName;
-    userName = aUserName;
-    purchases = new ArrayList<PurchaseDto>();
+  public ShipmentDto () {
+	  purchases = new ArrayList<Long>();
   }
-
-  //------------------------
-  // INTERFACE
-  //------------------------
 
   public boolean setShipmentId(Long aShipmentId)
   {
@@ -104,10 +87,10 @@ public class ShipmentDto
     return wasSet;
   }
 
-  public boolean setUserName(String aUserName)
+  public boolean setCustomerId(Long acustomerId)
   {
     boolean wasSet = false;
-    userName = aUserName;
+    customerId = acustomerId;
     wasSet = true;
     return wasSet;
   }
@@ -147,119 +130,59 @@ public class ShipmentDto
     return recipientName;
   }
 
-  public String getUserName()
+  public Long getCustomerId()
   {
-    return userName;
+    return customerId;
   }
   /* Code from template association_GetMany */
-  public PurchaseDto getPurchase(int index)
+  public Long getPurchase(int index)
   {
-    PurchaseDto aPurchase = purchases.get(index);
+    Long aPurchase = purchases.get(index);
     return aPurchase;
   }
 
-  public List<PurchaseDto> getPurchases()
+  public List<Long> getPurchases()
   {
-    List<PurchaseDto> newPurchases = Collections.unmodifiableList(purchases);
-    return newPurchases;
+	  
+	  return this.purchases;
+  }
+  
+  public void setPurchases(List<Long> aListOfPurchases)
+  {
+	 this.purchases.clear();
+	 purchases.addAll(aListOfPurchases);
+    
+    for (Long id : purchases) {
+    	System.out.println(" after transfering: " + id);
+    }
   }
 
-  public int numberOfPurchases()
-  {
-    int number = purchases.size();
-    return number;
-  }
-
-  public boolean hasPurchases()
-  {
-    boolean has = purchases.size() > 0;
-    return has;
-  }
 
   public int indexOfPurchase(PurchaseDto aPurchase)
   {
     int index = purchases.indexOf(aPurchase);
     return index;
   }
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfPurchases()
+ 
+  public void addPurchase(Long aPurchase)
   {
-    return 0;
-  }
-  /* Code from template association_AddManyToOptionalOne */
-  public boolean addPurchase(PurchaseDto aPurchase)
-  {
-    boolean wasAdded = false;
-    if (purchases.contains(aPurchase)) { return false; }
-    ShipmentDto existingShipment = aPurchase.getShipment();
-    if (existingShipment == null)
-    {
-      aPurchase.setShipment(this);
-    }
-    else if (!this.equals(existingShipment))
-    {
-      existingShipment.removePurchase(aPurchase);
-      addPurchase(aPurchase);
-    }
-    else
-    {
-      purchases.add(aPurchase);
-    }
-    wasAdded = true;
-    return wasAdded;
+	  if (purchases == null) {
+		  purchases = new ArrayList<Long>();
+	  }
+	  purchases.add(aPurchase);
   }
 
-  public boolean removePurchase(PurchaseDto aPurchase)
+  public boolean removePurchase(Long aPurchase)
   {
     boolean wasRemoved = false;
     if (purchases.contains(aPurchase))
     {
       purchases.remove(aPurchase);
-      aPurchase.setShipment(null);
       wasRemoved = true;
     }
     return wasRemoved;
   }
-  /* Code from template association_AddIndexControlFunctions */
-  public boolean addPurchaseAt(PurchaseDto aPurchase, int index)
-  {  
-    boolean wasAdded = false;
-    if(addPurchase(aPurchase))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfPurchases()) { index = numberOfPurchases() - 1; }
-      purchases.remove(aPurchase);
-      purchases.add(index, aPurchase);
-      wasAdded = true;
-    }
-    return wasAdded;
-  }
-
-  public boolean addOrMovePurchaseAt(PurchaseDto aPurchase, int index)
-  {
-    boolean wasAdded = false;
-    if(purchases.contains(aPurchase))
-    {
-      if(index < 0 ) { index = 0; }
-      if(index > numberOfPurchases()) { index = numberOfPurchases() - 1; }
-      purchases.remove(aPurchase);
-      purchases.add(index, aPurchase);
-      wasAdded = true;
-    } 
-    else 
-    {
-      wasAdded = addPurchaseAt(aPurchase, index);
-    }
-    return wasAdded;
-  }
-
-  public void delete()
-  {
-    while( !purchases.isEmpty() )
-    {
-      purchases.get(0).setShipment(null);
-    }
-  }
+  
 
 
   public String toString()
@@ -271,7 +194,7 @@ public class ShipmentDto
             "shippingCost" + ":" + getShippingCost()+ "," +
             "totalCost" + ":" + getTotalCost()+ "," +
             "recipientName" + ":" + getRecipientName()+ "," +
-            "userName" + ":" + getUserName()+ "]" + System.getProperties().getProperty("line.separator") +
+            "userName" + ":" + getCustomerId()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "shipmentStatus" + "=" + (getShipmentStatus() != null ? !getShipmentStatus().equals(this)  ? getShipmentStatus().toString().replaceAll("  ","    ") : "this" : "null");
   }
 }

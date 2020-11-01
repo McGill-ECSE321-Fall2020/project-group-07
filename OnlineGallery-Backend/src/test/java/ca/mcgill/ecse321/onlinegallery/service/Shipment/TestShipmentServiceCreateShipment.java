@@ -61,7 +61,7 @@ public class TestShipmentServiceCreateShipment {
 	private static final double VALID_SHIPPING_COST = 34.5;
 	private static final double VALID_TOTAL_COST = 1034.9;
 	private static final String VALID_RECIPIENT_STRING = "Natalia Tabet";
-	private static final String VALID_USER_NAME = "natis5005";
+	private static final long VALID_CUSTOMER_ID = (long)80;
 	private static final String INVALID_SOURCE_ADDRESS = "3415 girouard, montreal";
 	private static final String INVALID_DESTINATION_ADDRESS = "1000 sherbrooke, ON";
 
@@ -74,9 +74,14 @@ public class TestShipmentServiceCreateShipment {
 	private static final long VALID_PURCHASE_ID1 = (long)3;
 	private static final long VALID_PURCHASE_ID2 = (long)33;
 	private static final long INVALID_PURCHASE_ID_NONEXISTENT = (long)55;
+	private static final long INVALID_PURCHASE_ID_OFFSITE = (long)56;
+	private static final long INVALID_PURCHASE_ID_ONSITE = (long)57;
+	private static final long INVALID_PURCHASE_ID_CUSTOMER_A = (long)58;
+	private static final long INVALID_PURCHASE_ID_CUSTOMER_B = (long)59;
+	private static final long INVALID_PURCHASE_ID_ARTWORK_STILL_AVAILABLE = (long)60;
 	
-	private static final long VALID_CUSTOMER_ID = (long)66;
-	private static final String INVALID_USER_NAME_DIFFERENT_CLIENT = "juano1623";
+	
+	private static final long INVALID_CUSTOMER_ID = (long)66;
 	
 	
 	
@@ -84,20 +89,6 @@ public class TestShipmentServiceCreateShipment {
 	
 	@BeforeEach
 	public void setMockOutput() {
-		lenient().when(artworkRepo.existsByArtworkId(anyLong())).thenAnswer((InvocationOnMock invocation)->{
-			if (invocation.getArgument(0).equals(VALID_ARTWORK_ID1)) {
-				return true;
-			}
-			if (invocation.getArgument(0).equals(VALID_ARTWORK_ID2)) {
-				return true;
-			}
-			if (invocation.getArgument(0).equals(INVALID_ARTWORK_ID_STILLAVAILABLE)) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		});
 		
 		lenient().when(purchaseRepo.existsByPurchaseId(anyLong())).thenAnswer((InvocationOnMock invocation)->{
 			if (invocation.getArgument(0).equals(VALID_PURCHASE_ID1)) {
@@ -106,17 +97,148 @@ public class TestShipmentServiceCreateShipment {
 			if (invocation.getArgument(0).equals(VALID_PURCHASE_ID2)) {
 				return true;
 			}
+			if (invocation.getArgument(0).equals(INVALID_PURCHASE_ID_OFFSITE)) {
+				return true;
+			}
+			if (invocation.getArgument(0).equals(INVALID_PURCHASE_ID_ONSITE)) {
+				return true;
+			}
+			if (invocation.getArgument(0).equals(INVALID_PURCHASE_ID_CUSTOMER_A)) {
+				return true;
+			}
+			if (invocation.getArgument(0).equals(INVALID_PURCHASE_ID_CUSTOMER_B)) {
+				return true;
+			}
+			if (invocation.getArgument(0).equals(INVALID_PURCHASE_ID_ARTWORK_STILL_AVAILABLE)) {
+				return true;
+			}
+			
 			else {
 				return false;
 			}
 		});
 		
+		
+		
+		lenient().when(purchaseRepo.findPurchaseByPurchaseId(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
+
+			if (invocation.getArgument(0).equals(VALID_PURCHASE_ID1)) {
+				Purchase p = new Purchase();
+				p.setPurchaseId(VALID_PURCHASE_ID1);
+				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
+				
+				Customer c = new Customer();
+				c.setCustomerId(VALID_CUSTOMER_ID);
+				p.setCustomer(c);
+				
+				Artwork a = new Artwork();
+				a.setArtworkId(VALID_ARTWORK_ID1);
+				a.setStatus(ArtworkStatus.UNAVAILABLE);
+				a.setPrice(VALID_ARTWORK_PRICE);
+				p.setArtwork(a);
+				
+				return p;
+			}
+
+			if (invocation.getArgument(0).equals(VALID_PURCHASE_ID2)) {
+				Purchase p = new Purchase();
+				p.setPurchaseId(VALID_PURCHASE_ID2);
+				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
+				
+				Customer c = new Customer();
+				c.setCustomerId(VALID_CUSTOMER_ID);
+				p.setCustomer(c);
+				
+				Artwork a = new Artwork();
+				a.setArtworkId(VALID_ARTWORK_ID2);
+				a.setStatus(ArtworkStatus.UNAVAILABLE);
+				a.setPrice(VALID_ARTWORK_PRICE);
+				p.setArtwork(a);
+				
+				return p;
+			}
+			if (invocation.getArgument(0).equals(INVALID_PURCHASE_ID_OFFSITE)) {
+				Purchase p = new Purchase();
+				p.setPurchaseId(INVALID_PURCHASE_ID_OFFSITE);
+				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
+				
+				Customer c = new Customer();
+				c.setCustomerId(VALID_CUSTOMER_ID);
+				p.setCustomer(c);
+				
+				Artwork a = new Artwork();
+				a.setArtworkId(VALID_ARTWORK_ID2);
+				a.setStatus(ArtworkStatus.UNAVAILABLE);
+				a.setPrice(VALID_ARTWORK_PRICE);
+				p.setArtwork(a);
+				
+				return p;
+			}
+			if (invocation.getArgument(0).equals(INVALID_PURCHASE_ID_ONSITE)) {
+				Purchase p = new Purchase();
+				p.setPurchaseId(INVALID_PURCHASE_ID_ONSITE);
+				p.setShipmentType(ShipmentType.ONSITE_PICKUP);
+				
+				Customer c = new Customer();
+				c.setCustomerId(VALID_CUSTOMER_ID);
+				p.setCustomer(c);
+				
+				Artwork a = new Artwork();
+				a.setArtworkId(VALID_ARTWORK_ID2);
+				a.setStatus(ArtworkStatus.UNAVAILABLE);
+				a.setPrice(VALID_ARTWORK_PRICE);
+				p.setArtwork(a);
+				
+				return p;
+			}
+			if (invocation.getArgument(0).equals(INVALID_PURCHASE_ID_CUSTOMER_A)) {
+				Purchase p = new Purchase();
+				p.setPurchaseId(INVALID_PURCHASE_ID_CUSTOMER_A);
+				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
+				
+				Customer c = new Customer();
+				c.setCustomerId(INVALID_CUSTOMER_ID);
+				p.setCustomer(c);
+				
+				Artwork a = new Artwork();
+				a.setArtworkId(VALID_ARTWORK_ID2);
+				a.setStatus(ArtworkStatus.UNAVAILABLE);
+				a.setPrice(VALID_ARTWORK_PRICE);
+				p.setArtwork(a);
+				return p;
+			}
+			if (invocation.getArgument(0).equals(INVALID_PURCHASE_ID_ARTWORK_STILL_AVAILABLE)) {
+				Purchase p = new Purchase();
+				p.setPurchaseId(INVALID_PURCHASE_ID_ARTWORK_STILL_AVAILABLE);
+				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
+				
+				Customer c = new Customer();
+				c.setCustomerId(VALID_CUSTOMER_ID);
+				p.setCustomer(c);
+				
+				Artwork a = new Artwork();
+				a.setArtworkId(INVALID_ARTWORK_ID_STILLAVAILABLE);
+				a.setStatus(ArtworkStatus.AVAILABLE);
+				a.setPrice(VALID_ARTWORK_PRICE);
+				p.setArtwork(a);
+					
+				
+				return p;
+			}
+			
+			
+			return null;
+		});
+		
 		lenient().when(artworkRepo.findArtworkByArtworkId(anyLong())).thenAnswer((InvocationOnMock invocation)->{
+
+			
 			if (invocation.getArgument(0).equals(VALID_ARTWORK_ID1)) {
 				Artwork art = new Artwork();
 				art.setArtworkId(VALID_ARTWORK_ID1);
 				art.setStatus(ArtworkStatus.UNAVAILABLE);
 				art.setPrice(VALID_ARTWORK_PRICE);
+			
 				return art;
 			}
 			if (invocation.getArgument(0).equals(VALID_ARTWORK_ID2)) {
@@ -139,33 +261,6 @@ public class TestShipmentServiceCreateShipment {
 			}
 		});
 		
-		lenient().when(purchaseRepo.findPurchaseByPurchaseId(anyLong())).thenAnswer((InvocationOnMock invocation) -> {
-			if (invocation.getArgument(0).equals(VALID_PURCHASE_ID1)) {
-				Purchase p = new Purchase();
-				p.setPurchaseId(VALID_PURCHASE_ID1);
-				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-				
-				Customer c = new Customer();
-				c.setCustomerId(VALID_CUSTOMER_ID);
-				p.setCustomer(c);
-				
-				return p;
-			}
-
-			if (invocation.getArgument(0).equals(VALID_PURCHASE_ID2)) {
-				Purchase p = new Purchase();
-				p.setPurchaseId(VALID_PURCHASE_ID2);
-				p.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-				
-				Customer c = new Customer();
-				c.setCustomerId(VALID_CUSTOMER_ID);
-				p.setCustomer(c);
-				
-				return p;
-			}
-			return invocation;
-		});
-		
 		lenient().when(shipRepo.save(any(Shipment.class))).thenAnswer((InvocationOnMock i) -> {
 
 			return i.getArgument(0);
@@ -176,27 +271,21 @@ public class TestShipmentServiceCreateShipment {
 	
 	@Test
 	public void testCreateShipmentValidParametersOffsite() {
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_USER_NAME);
-
+		ShipmentDto sTO = new ShipmentDto();
 		
-		PurchaseDto pTO1 = new PurchaseDto();
-		PurchaseDto pTO2 = new PurchaseDto();
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
 		
-		pTO1.setPurchaseId(VALID_PURCHASE_ID1);
-		pTO2.setPurchaseId(VALID_PURCHASE_ID2);
 		
-		pTO1.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		pTO2.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
+		sTO.addPurchase(VALID_PURCHASE_ID1);
+		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
-		pTO1.setUsername(VALID_USER_NAME);
-		pTO2.setUsername(VALID_USER_NAME);
-		
-		pTO1.setArtworkId(VALID_ARTWORK_ID1);
-		pTO2.setArtworkId(VALID_ARTWORK_ID2);
-		
-		sTO.addPurchase(pTO1);
-		sTO.addPurchase(pTO2);
-
 		Shipment s = null ;
 		
 		try {
@@ -234,27 +323,19 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithInvalidPurchaeId() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_USER_NAME);
-
+		ShipmentDto sTO = new ShipmentDto();
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
 		
-		PurchaseDto pTO1 = new PurchaseDto();
-		PurchaseDto pTO2 = new PurchaseDto();
+		sTO.addPurchase(INVALID_PURCHASE_ID_NONEXISTENT);
+		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
-		pTO1.setPurchaseId(INVALID_PURCHASE_ID_NONEXISTENT);
-		pTO2.setPurchaseId(VALID_PURCHASE_ID2);
-		
-		pTO1.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		pTO2.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		
-		pTO1.setUsername(VALID_USER_NAME);
-		pTO2.setUsername(VALID_USER_NAME);
-		
-		pTO1.setArtworkId(VALID_ARTWORK_ID1);
-		pTO2.setArtworkId(VALID_ARTWORK_ID2);
-		
-		sTO.addPurchase(pTO1);
-		sTO.addPurchase(pTO2);
-
 		try {
 			s = service.createShipment(sTO);
 		}
@@ -273,27 +354,20 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithPurchasesOfDifferentTypes() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_USER_NAME);
-
+		ShipmentDto sTO = new ShipmentDto();
 		
-		PurchaseDto pTO1 = new PurchaseDto();
-		PurchaseDto pTO2 = new PurchaseDto();
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
 		
-		pTO1.setPurchaseId(VALID_PURCHASE_ID1);
-		pTO2.setPurchaseId(VALID_PURCHASE_ID2);
+		sTO.addPurchase(INVALID_PURCHASE_ID_OFFSITE);
+		sTO.addPurchase(INVALID_PURCHASE_ID_ONSITE);
 		
-		pTO1.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		pTO2.setShipmentType(ShipmentType.ONSITE_PICKUP);
-		
-		pTO1.setUsername(VALID_USER_NAME);
-		pTO2.setUsername(VALID_USER_NAME);
-		
-		pTO1.setArtworkId(VALID_ARTWORK_ID1);
-		pTO2.setArtworkId(VALID_ARTWORK_ID2);
-		
-		sTO.addPurchase(pTO1);
-		sTO.addPurchase(pTO2);
-
 		try {
 			s = service.createShipment(sTO);
 		}
@@ -311,26 +385,19 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithPurchasesFromDifferentCustomers() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_USER_NAME);
-
+		ShipmentDto sTO = new ShipmentDto();
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
 		
-		PurchaseDto pTO1 = new PurchaseDto();
-		PurchaseDto pTO2 = new PurchaseDto();
+		sTO.addPurchase(INVALID_PURCHASE_ID_CUSTOMER_A);
+		sTO.addPurchase(VALID_PURCHASE_ID1);
 		
-		pTO1.setPurchaseId(VALID_PURCHASE_ID1);
-		pTO2.setPurchaseId(VALID_PURCHASE_ID2);
-		
-		pTO1.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		pTO2.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		
-		pTO1.setUsername(VALID_USER_NAME);
-		pTO2.setUsername(INVALID_USER_NAME_DIFFERENT_CLIENT);
-		
-		pTO1.setArtworkId(VALID_ARTWORK_ID1);
-		pTO2.setArtworkId(VALID_ARTWORK_ID2);
-		
-		sTO.addPurchase(pTO1);
-		sTO.addPurchase(pTO2);
 
 		try {
 			s = service.createShipment(sTO);
@@ -349,27 +416,20 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithInvalidSourceAddress() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, INVALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_USER_NAME);
-
+		ShipmentDto sTO = new ShipmentDto();
 		
-		PurchaseDto pTO1 = new PurchaseDto();
-		PurchaseDto pTO2 = new PurchaseDto();
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(INVALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
 		
-		pTO1.setPurchaseId(VALID_PURCHASE_ID1);
-		pTO2.setPurchaseId(VALID_PURCHASE_ID2);
+		sTO.addPurchase(VALID_PURCHASE_ID1);
+		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
-		pTO1.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		pTO2.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		
-		pTO1.setUsername(VALID_USER_NAME);
-		pTO2.setUsername(VALID_USER_NAME);
-		
-		pTO1.setArtworkId(VALID_ARTWORK_ID1);
-		pTO2.setArtworkId(VALID_ARTWORK_ID2);
-		
-		sTO.addPurchase(pTO1);
-		sTO.addPurchase(pTO2);
-
 		try {
 			s = service.createShipment(sTO);
 		}
@@ -387,27 +447,20 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithInvaliddestinationAddress() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, INVALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_USER_NAME);
-
+		ShipmentDto sTO = new ShipmentDto();
 		
-		PurchaseDto pTO1 = new PurchaseDto();
-		PurchaseDto pTO2 = new PurchaseDto();
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(INVALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
 		
-		pTO1.setPurchaseId(VALID_PURCHASE_ID1);
-		pTO2.setPurchaseId(VALID_PURCHASE_ID2);
+		sTO.addPurchase(VALID_PURCHASE_ID1);
+		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
-		pTO1.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		pTO2.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		
-		pTO1.setUsername(VALID_USER_NAME);
-		pTO2.setUsername(VALID_USER_NAME);
-		
-		pTO1.setArtworkId(VALID_ARTWORK_ID1);
-		pTO2.setArtworkId(VALID_ARTWORK_ID2);
-		
-		sTO.addPurchase(pTO1);
-		sTO.addPurchase(pTO2);
-
 		try {
 			s = service.createShipment(sTO);
 		}
@@ -425,26 +478,20 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithMissingrecipientNameNull() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, null, VALID_USER_NAME);
-
+		ShipmentDto sTO = new ShipmentDto();
 		
-		PurchaseDto pTO1 = new PurchaseDto();
-		PurchaseDto pTO2 = new PurchaseDto();
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(null);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
 		
-		pTO1.setPurchaseId(VALID_PURCHASE_ID1);
-		pTO2.setPurchaseId(VALID_PURCHASE_ID2);
+		sTO.addPurchase(VALID_PURCHASE_ID1);
+		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
-		pTO1.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		pTO2.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		
-		pTO1.setUsername(VALID_USER_NAME);
-		pTO2.setUsername(VALID_USER_NAME);
-		
-		pTO1.setArtworkId(VALID_ARTWORK_ID1);
-		pTO2.setArtworkId(VALID_ARTWORK_ID2);
-		
-		sTO.addPurchase(pTO1);
-		sTO.addPurchase(pTO2);
 
 		try {
 			s = service.createShipment(sTO);
@@ -463,27 +510,20 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithMissingrecipientNameEmpty() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, "", VALID_USER_NAME);
-
+		ShipmentDto sTO = new ShipmentDto();
+		//(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, "", VALID_CUSTOMER_ID);
 		
-		PurchaseDto pTO1 = new PurchaseDto();
-		PurchaseDto pTO2 = new PurchaseDto();
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName("");
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
+		sTO.addPurchase(VALID_PURCHASE_ID1);
+		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
-		pTO1.setPurchaseId(VALID_PURCHASE_ID1);
-		pTO2.setPurchaseId(VALID_PURCHASE_ID2);
-		
-		pTO1.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		pTO2.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		
-		pTO1.setUsername(VALID_USER_NAME);
-		pTO2.setUsername(VALID_USER_NAME);
-		
-		pTO1.setArtworkId(VALID_ARTWORK_ID1);
-		pTO2.setArtworkId(VALID_ARTWORK_ID2);
-		
-		sTO.addPurchase(pTO1);
-		sTO.addPurchase(pTO2);
-
 		try {
 			s = service.createShipment(sTO);
 		}
@@ -501,27 +541,22 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithArtworkStillAvailable() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_USER_NAME);
-
+		ShipmentDto sTO = new ShipmentDto();
 		
-		PurchaseDto pTO1 = new PurchaseDto();
-		PurchaseDto pTO2 = new PurchaseDto();
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
+		sTO.addPurchase(VALID_PURCHASE_ID1);
+		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
-		pTO1.setPurchaseId(VALID_PURCHASE_ID1);
-		pTO2.setPurchaseId(VALID_PURCHASE_ID2);
+		sTO.addPurchase(INVALID_PURCHASE_ID_ARTWORK_STILL_AVAILABLE);
+		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
-		pTO1.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		pTO2.setShipmentType(ShipmentType.OFFSITE_DELIVERY);
-		
-		pTO1.setUsername(VALID_USER_NAME);
-		pTO2.setUsername(VALID_USER_NAME);
-		
-		pTO1.setArtworkId(INVALID_ARTWORK_ID_STILLAVAILABLE);
-		pTO2.setArtworkId(VALID_ARTWORK_ID2);
-		
-		sTO.addPurchase(pTO1);
-		sTO.addPurchase(pTO2);
-
 		try {
 			s = service.createShipment(sTO);
 		}
