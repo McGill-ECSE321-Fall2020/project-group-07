@@ -1,0 +1,1900 @@
+{
+	"info": {
+		"_postman_id": "b016032d-a7a0-457c-8dff-6a8ab54c1c94",
+		"name": "Shipment-REST",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "deleteAllShipments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "35e2bf17-a9f7-4a8b-9eb2-fa37a9053a1a",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"no Shipments in system\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/deleteAllShipments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteAllShipments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createRegistration1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "41008394-b6cb-44e4-ab95-643616cc8787",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"CaptainUnderpants\",\n\t\"firstName\":\"Cap\",\n\t\"lastName\":\"Under\",\n\t\"email\":\"underpants@yahoo.com\",\n    \"password\":\"ay2Caramba!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setArtistRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "3882552a-f432-4375-8214-834f0cd8eefe",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setArtist/CaptainUnderpants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setArtist",
+						"CaptainUnderpants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createRegistration2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5713fe51-8f9b-4ee7-8594-b26a061b41ac",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"Astronaut\",\n\t\"firstName\":\"Rick\",\n\t\"lastName\":\"Morty\",\n\t\"email\":\"weAreCOOL@gmail.com\",\n    \"password\":\"hay2Caramba!!!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setCustomerRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "ff82174e-1ded-40b2-9536-90fde2bd0b30",
+						"exec": [
+							"pm.globals.set(\"NatcustomerId1\",pm.response.json().customerId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setCustomer/Astronaut",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setCustomer",
+						"Astronaut"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "a1bf1860-e572-4d6f-a7b6-f69066a3c246",
+						"exec": [
+							"pm.globals.set(\"NatartworkId1\",pm.response.json().artworkId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"CaptainUnderpants\",\n    \"name\": \"MonaLisa\",\n    \"description\": \"extreme beauty\",\n    \"price\": 4569.12,\n    \"status\": 1,\n    \"dimension\": \"HUUUUUUGE\",\n    \"weight\": 190,\n    \"commission\":0.75,\n    \"numViews\": 0\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2200e83c-7ce2-475b-b3b8-b30f256e973f",
+						"exec": [
+							"pm.globals.set(\"NatartworkId2\",pm.response.json().artworkId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"CaptainUnderpants\",\n    \"name\": \"StarryNight\",\n    \"description\": \"Kinda okay\",\n    \"price\": 10.69,\n    \"status\": 1,\n    \"dimension\": \"SMOL\",\n    \"weight\": 4,\n    \"commission\":0.23,\n    \"numViews\": 0\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPurchase1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "93df943d-1fd8-47a4-a87a-b622911e14b3",
+						"exec": [
+							"\r",
+							"pm.globals.set(\"NatpurchaseId1\",pm.response.json().purchaseId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Astronaut\",\r\n    \"artworkId\": {{NatartworkId1}},\r\n    \"shipmentType\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPurchase2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4698bbba-894e-4159-9ba9-08bc1b2bc094",
+						"exec": [
+							"pm.globals.set(\"NatpurchaseId2\",pm.response.json().purchaseId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Astronaut\",\r\n    \"artworkId\": {{NatartworkId2}},\r\n    \"shipmentType\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createShipment1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cb256627-f979-4fd1-b93c-65501df598fa",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"source address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.sourceAddress).to.eql(\"3415 girouard, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"destination address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.destinationAddress).to.eql(\"1000 sherbrooke, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipping cost match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shippingCost).to.eql(25.6);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"total cost match\",function(){\r",
+							"    pm.expect(pm.response.json().totalCost).to.eql(4605.41);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment status match\",function(){\r",
+							"    pm.expect(pm.response.json().shipmentStatus).to.eql(\"CREATED\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"recipient name match\",function(){\r",
+							"    pm.expect(pm.response.json().recipientName).to.eql(\"natalia\");\r",
+							"})\r",
+							"pm.test(\"customer id match\",function(){\r",
+							"    pm.expect(pm.response.json().customerId).to.eql(pm.globals.get(\"customerId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"purchaseId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"purchaseId2\"));\r",
+							"\r",
+							"})\r",
+							"\r",
+							"pm.globals.set(\"NatshipmentId1\",pm.response.json().shipmentId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"shipmentId\" : 5005,\r\n    \"sourceAddress\" : \"3415 girouard, montreal, QC\", \r\n    \"destinationAddress\" : \"1000 sherbrooke, montreal, QC\",\r\n    \"recipientName\" : \"natalia\",\r\n    \"shippingCost\" : 25.6, \r\n    \"totalCost\" : 70.72,\r\n    \"customerId\" :{{NatcustomerId1}},\r\n    \"shipmentStatus\" : 0, \r\n    \"purchases\" : [{{NatpurchaseId1}},{{NatpurchaseId2}}]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createShipment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createShipment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findShipment1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "272dbb10-3070-4c34-afff-86fc3f88f230",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"source address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.sourceAddress).to.eql(\"3415 girouard, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"destination address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.destinationAddress).to.eql(\"1000 sherbrooke, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipping cost match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shippingCost).to.eql(25.6);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"total cost match\",function(){\r",
+							"    pm.expect(pm.response.json().totalCost).to.eql(4605.41);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment status match\",function(){\r",
+							"    pm.expect(pm.response.json().shipmentStatus).to.eql(\"CREATED\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"recipient name match\",function(){\r",
+							"    pm.expect(pm.response.json().recipientName).to.eql(\"natalia\");\r",
+							"})\r",
+							"pm.test(\"customer id match\",function(){\r",
+							"    pm.expect(pm.response.json().customerId).to.eql(pm.globals.get(\"customerId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"purchaseId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"purchaseId2\"));\r",
+							"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getShipment/{{NatshipmentId1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getShipment",
+						"{{NatshipmentId1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bc402622-4909-4537-9e76-65528a94af20",
+						"exec": [
+							"pm.globals.set(\"NatartworkId3\",pm.response.json().artworkId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"CaptainUnderpants\",\n    \"name\": \"Guernica\",\n    \"description\": \"Violent\",\n    \"price\": 8888.5,\n    \"status\": 1,\n    \"dimension\": \"big\",\n    \"weight\": 44,\n    \"commission\":0.3,\n    \"numViews\": 0\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPurchase3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f69cd651-86d8-411c-b586-5be18d2fb10b",
+						"exec": [
+							"pm.globals.set(\"NatpurchaseId3\",pm.response.json().purchaseId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Astronaut\",\r\n    \"artworkId\": {{NatartworkId3}},\r\n    \"shipmentType\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "addToShipment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "28908fa5-75cf-4d7d-a1c6-1460fdd2d09b",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"source address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.sourceAddress).to.eql(\"3415 girouard, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"destination address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.destinationAddress).to.eql(\"1000 sherbrooke, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipping cost match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shippingCost).to.eql(25.6);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"total cost match\",function(){\r",
+							"    pm.expect(pm.response.json().totalCost).to.eql(4605.41);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment status match\",function(){\r",
+							"    pm.expect(pm.response.json().shipmentStatus).to.eql(\"CREATED\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"recipient name match\",function(){\r",
+							"    pm.expect(pm.response.json().recipientName).to.eql(\"natalia\");\r",
+							"})\r",
+							"pm.test(\"customer id match\",function(){\r",
+							"    pm.expect(pm.response.json().customerId).to.eql(pm.globals.get(\"NatcustomerId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId2\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId3\"));\r",
+							"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/addToShipment/{{NatshipmentId1}}/{{NatpurchaseId3}}/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"addToShipment",
+						"{{NatshipmentId1}}",
+						"{{NatpurchaseId3}}",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "payShipment",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5c08ce61-ec91-4fcc-a08c-8d1e069fe0ce",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"source address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.sourceAddress).to.eql(\"3415 girouard, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"destination address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.destinationAddress).to.eql(\"1000 sherbrooke, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipping cost match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shippingCost).to.eql(25.6);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"total cost match\",function(){\r",
+							"    pm.expect(pm.response.json().totalCost).to.eql(4605.41);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment status match\",function(){\r",
+							"    pm.expect(pm.response.json().shipmentStatus).to.eql(\"PAID\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"recipient name match\",function(){\r",
+							"    pm.expect(pm.response.json().recipientName).to.eql(\"natalia\");\r",
+							"})\r",
+							"pm.test(\"customer id match\",function(){\r",
+							"    pm.expect(pm.response.json().customerId).to.eql(pm.globals.get(\"NatcustomerId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId2\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId3\"));\r",
+							"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"shipmentId\" : {{NatshipmentId1}},\r\n    \"ccNum\" : \"4024007159291722\",\r\n    \"ccCSV\" : \"123\",\r\n    \"ccExp\" : \"1023\",\r\n    \"firstName\" : \"Natalia\",\r\n    \"lastName\" : \"Tabet\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/payShipment/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"payShipment",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "findShipment1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "290492c3-3c32-4b26-8cfd-f492a4728a5c",
+						"exec": [
+							"pm.globals.set(\"NatshipmentId1\",pm.response.json().shipmentId);\r",
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"source address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.sourceAddress).to.eql(\"3415 girouard, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"destination address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.destinationAddress).to.eql(\"1000 sherbrooke, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipping cost match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shippingCost).to.eql(25.6);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"total cost match\",function(){\r",
+							"    pm.expect(pm.response.json().totalCost).to.eql(4605.41);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment status match\",function(){\r",
+							"    pm.expect(pm.response.json().shipmentStatus).to.eql(\"PAID\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"recipient name match\",function(){\r",
+							"    pm.expect(pm.response.json().recipientName).to.eql(\"natalia\");\r",
+							"})\r",
+							"pm.test(\"customer id match\",function(){\r",
+							"    pm.expect(pm.response.json().customerId).to.eql(pm.globals.get(\"NatcustomerId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId2\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId3\"));\r",
+							"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getShipment/{{NatshipmentId1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getShipment",
+						"{{NatshipmentId1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteShipment1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "87aee9bd-45ef-4f9b-a8bd-d834cead1bda",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"source address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.sourceAddress).to.eql(\"3415 girouard, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"destination address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.destinationAddress).to.eql(\"1000 sherbrooke, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipping cost match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shippingCost).to.eql(25.6);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"total cost match\",function(){\r",
+							"    pm.expect(pm.response.json().totalCost).to.eql(4605.41);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment status match\",function(){\r",
+							"    pm.expect(pm.response.json().shipmentStatus).to.eql(\"PAID\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"recipient name match\",function(){\r",
+							"    pm.expect(pm.response.json().recipientName).to.eql(\"natalia\");\r",
+							"})\r",
+							"pm.test(\"customer id match\",function(){\r",
+							"    pm.expect(pm.response.json().customerId).to.eql(pm.globals.get(\"NatcustomerId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId1\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId2\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchases ids match\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId3\"));\r",
+							"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/deleteShipment/{{NatshipmentId1}}",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteShipment",
+						"{{NatshipmentId1}}"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllShipments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "949d1302-5a5e-4464-b37d-00a23cf47b63",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"no Shipments in system\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getAllShipments/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllShipments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createRegistration3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "eb57ba5b-0a25-4766-97e8-bcd92f64da4f",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"CaptainUppants2\",\n\t\"firstName\":\"CapUnder\",\n\t\"lastName\":\"CapLast\",\n\t\"email\":\"upants2@yahoo.com\",\n    \"password\":\"ay2Caramba2!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setArtistRegistration3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6975374d-4d71-4c70-bc10-b1a65d382eb2",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setArtist/CaptainUppants2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setArtist",
+						"CaptainUppants2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createRegistration4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "baca9d69-72b2-466c-b423-28a112c2ae8e",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"Player\",\n\t\"firstName\":\"Tom\",\n\t\"lastName\":\"Sawyer\",\n\t\"email\":\"weArenotCOOL@gmail.com\",\n    \"password\":\"hay2Caramba2!!!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setCustomerRegistration4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "85d4993d-7c55-45fa-8205-1c21b3e33dcc",
+						"exec": [
+							"pm.globals.set(\"NatcustomerId2\",pm.response.json().customerId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setCustomer/Player",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setCustomer",
+						"Player"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6d990c81-4445-472c-8ddf-3af2ea7199a3",
+						"exec": [
+							"pm.globals.set(\"NatartworkId4\",pm.response.json().artworkId);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"CaptainUppants2\",\n    \"name\": \"girl with a pearl earing\",\n    \"description\": \"perfection\",\n    \"price\": 50,\n    \"status\": 1,\n    \"dimension\": \"HUUUUGE2\",\n    \"weight\": 1900,\n    \"commission\":0.15,\n    \"numViews\": 0\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "269bc4c4-e44a-4bcd-88f4-a4103443fd2e",
+						"exec": [
+							"pm.globals.set(\"NatartworkId5\",pm.response.json().artworkId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"CaptainUppants2\",\n    \"name\": \"pollock no5\",\n    \"description\": \"weird\",\n    \"price\": 200,\n    \"status\": 1,\n    \"dimension\": \"SMOL2\",\n    \"weight\": 8,\n    \"commission\":0.22,\n    \"numViews\": 0\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPurchase4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "51e45d3a-d426-436e-bb36-4d552a211c6b",
+						"exec": [
+							"pm.globals.set(\"NatpurchaseId4\",pm.response.json().purchaseId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Player\",\r\n    \"artworkId\": {{NatartworkId4}},\r\n    \"shipmentType\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPurchase5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "97991958-c0b4-4c79-99cd-e6e28af3c83e",
+						"exec": [
+							"pm.globals.set(\"NatpurchaseId5\",pm.response.json().purchaseId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Player\",\r\n    \"artworkId\": {{NatartworkId5}},\r\n    \"shipmentType\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createShipment2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "39810386-10a4-44e4-bd49-f8b437acaa28",
+						"exec": [
+							"pm.globals.set(\"NatshipmentId2\",pm.response.json().shipmentId);\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"source address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.sourceAddress).to.eql(\"3415 girouard, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"destination address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.destinationAddress).to.eql(\"1000 sherbrooke, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipping cost match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shippingCost).to.eql(25);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"total cost match\",function(){\r",
+							"    pm.expect(pm.response.json().totalCost).to.eql(275);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment status match\",function(){\r",
+							"    pm.expect(pm.response.json().shipmentStatus).to.eql(\"CREATED\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"recipient name match\",function(){\r",
+							"    pm.expect(pm.response.json().recipientName).to.eql(\"natalia2\");\r",
+							"})\r",
+							"pm.test(\"customer id match\",function(){\r",
+							"    pm.expect(pm.response.json().customerId).to.eql(pm.globals.get(\"NatcustomerId2\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchase id contained\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId4\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchase id contained\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId5\"));\r",
+							"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"shipmentId\" : 666,\r\n    \"sourceAddress\" : \"3415 girouard, montreal, QC\", \r\n    \"destinationAddress\" : \"1000 sherbrooke, montreal, QC\",\r\n    \"recipientName\" : \"natalia2\",\r\n    \"shippingCost\" : 25, \r\n    \"totalCost\" : 70.72,\r\n    \"customerId\" :{{NatcustomerId2}} ,\r\n    \"shipmentStatus\" : 0, \r\n    \"purchases\" : [{{NatpurchaseId4}},{{NatpurchaseId5}}]\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createShipment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createShipment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createRegistration4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "7192f14c-5b78-49cf-8dbd-75985c0ef8b8",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"Lagi2000\",\n\t\"firstName\":\"Ximena\",\n\t\"lastName\":\"Tabet\",\n\t\"email\":\"agredito@yahoo.com\",\n    \"password\":\"ay4Caramba!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setArtistRegistration4",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "6c5ea006-5f83-463b-8e60-bdd887c93a72",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setArtist/Lagi2000",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setArtist",
+						"Lagi2000"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createRegistration5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cde1879c-60eb-4519-89b7-9add440ccd44",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"Juan44\",\n\t\"firstName\":\"Juanito\",\n\t\"lastName\":\"Gonalez\",\n\t\"email\":\"weAreCOOL4@gmail.com\",\n    \"password\":\"hay4Caramba2!!!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setCustomerRegistration5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "cf7ec13b-fbaa-4d25-9ab9-02e51db2fa67",
+						"exec": [
+							"pm.globals.set(\"NatcustomerId5\",pm.response.json().customerId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setCustomer/Juan44",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setCustomer",
+						"Juan44"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork5",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5cfcd1fd-7933-446e-a30a-3a1034a01fec",
+						"exec": [
+							"pm.globals.set(\"NatartworkId6\",pm.response.json().artworkId);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"Lagi2000\",\n    \"name\": \"Cafe terrace\",\n    \"description\": \"lonely\",\n    \"price\": 800,\n    \"status\": 1,\n    \"dimension\": \"standard\",\n    \"weight\": 90,\n    \"commission\":0.25,\n    \"numViews\": 0\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1b003eb7-b733-46da-8555-4a2f743fb5db",
+						"exec": [
+							"pm.globals.set(\"NatartworkId7\",pm.response.json().artworkId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"Lagi2000\",\n    \"name\": \"el grito\",\n    \"description\": \"scarry\",\n    \"price\": 400,\n    \"status\": 1,\n    \"dimension\": \"grande\",\n    \"weight\": 49,\n    \"commission\":0.55,\n    \"numViews\": 0\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPurchase6",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "1e2ab750-ac63-431d-9e6e-7d33c822319e",
+						"exec": [
+							"pm.globals.set(\"NatpurchaseId6\",pm.response.json().purchaseId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Juan44\",\r\n    \"artworkId\": {{NatartworkId6}},\r\n    \"shipmentType\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPurchase7",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0fa5dd40-04e7-4340-a9d5-5f9895f45bcd",
+						"exec": [
+							"pm.globals.set(\"NatpurchaseId7\",pm.response.json().purchaseId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Juan44\",\r\n    \"artworkId\": {{NatartworkId7}},\r\n    \"shipmentType\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createShipment3",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e16db21c-569c-4b40-9ce2-01f3aacfc8fd",
+						"exec": [
+							"pm.globals.set(\"NatshipmentId3\",pm.response.json().shipmentId);\r",
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([200, 201]);\r",
+							"});\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"source address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.sourceAddress).to.eql(\"1000 street, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"destination address match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.destinationAddress).to.eql(\"1000 avenue, montreal, QC\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipping cost match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shippingCost).to.eql(25.6);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"total cost match\",function(){\r",
+							"    pm.expect(pm.response.json().totalCost).to.eql(1225.6);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment status match\",function(){\r",
+							"    pm.expect(pm.response.json().shipmentStatus).to.eql(\"CREATED\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"recipient name match\",function(){\r",
+							"    pm.expect(pm.response.json().recipientName).to.eql(\"juan\");\r",
+							"})\r",
+							"pm.test(\"customer id match\",function(){\r",
+							"    pm.expect(pm.response.json().customerId).to.eql(pm.globals.get(\"NatcustomerId5\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchase id contained\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId6\"));\r",
+							"\r",
+							"})\r",
+							"pm.test(\"purchase id contained\",function(){\r",
+							"    pm.expect(pm.response.json().purchases).to.contains(pm.globals.get(\"NatpurchaseId7\"));\r",
+							"\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"shipmentId\" : 888,\r\n    \"sourceAddress\" : \"1000 street, montreal, QC\", \r\n    \"destinationAddress\" : \"1000 avenue, montreal, QC\",\r\n    \"recipientName\" : \"juan\",\r\n    \"shippingCost\" : 25.6, \r\n    \"totalCost\" : 1225.6,\r\n    \"customerId\" :{{NatcustomerId5}} ,\r\n    \"shipmentStatus\" : 0, \r\n    \"purchases\" : [{{NatpurchaseId6}},{{NatpurchaseId7}}]\r\n\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createShipment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createShipment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllShipments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0ce00006-5474-4ae6-be2d-a5bae75efbd5",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"2 GalleryRegistrations returned\",function(){\r",
+							"    pm.expect(pm.response.json()).length==2;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"2 different correct shipment ids returned\",function(){\r",
+							"    pm.expect(pm.response.json()[0].shipmentId).is.not.eql(pm.response.json()[1].shipmentId);\r",
+							"    pm.expect(pm.response.json()[0].shipmentId).to.be.oneOf([pm.globals.get(\"NatshipmentId2\"),pm.globals.get(\"NatshipmentId3\")]);\r",
+							"    pm.expect(pm.response.json()[1].shipmentId).to.be.oneOf([pm.globals.get(\"NatshipmentId2\"),pm.globals.get(\"NatshipmentId3\")]);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getAllShipments/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllShipments",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteAllShipments2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b05f3464-c71b-45bf-b5c4-1b3068554e43",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"2 GalleryRegistrations returned\",function(){\r",
+							"    pm.expect(pm.response.json()).length==2;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"2 different correct shipment ids returned\",function(){\r",
+							"    pm.expect(pm.response.json()[0].shipmentId).is.not.eql(pm.response.json()[1].shipmentId);\r",
+							"    pm.expect(pm.response.json()[0].shipmentId).to.be.oneOf([pm.globals.get(\"NatshipmentId2\"),pm.globals.get(\"NatshipmentId3\")]);\r",
+							"    pm.expect(pm.response.json()[1].shipmentId).to.be.oneOf([pm.globals.get(\"NatshipmentId2\"),pm.globals.get(\"NatshipmentId3\")]);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/deleteAllShipments",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteAllShipments"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllShipments",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e5519128-e4fb-43a0-9f4f-021b13e331d6",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {\r",
+							"    pm.response.to.have.body(\"no Shipments in system\");\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getAllShipments/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllShipments",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
