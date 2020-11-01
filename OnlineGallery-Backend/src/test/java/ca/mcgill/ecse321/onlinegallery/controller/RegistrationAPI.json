@@ -921,37 +921,7 @@
 			"response": []
 		},
 		{
-			"name": "deleteAll_NonEmpty",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "40e3f2ac-5640-4817-9b8f-2eae713e8516",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"",
-							"pm.test(\"non-null dto returned\", function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto).is.not.undefined;",
-							"});",
-							"",
-							"pm.test(\"2 GalleryRegistrations returned\",function(){",
-							"    pm.expect(pm.response.json()).length==2;",
-							"})",
-							"",
-							"pm.test(\"2 different correct usernames returned\",function(){",
-							"    pm.expect(pm.response.json()[0].username).is.not.eql(pm.response.json()[1].username);",
-							"    pm.expect(pm.response.json()[0].username).to.be.oneOf([\"bananaFartman\",\"donutLover\"]);",
-							"    pm.expect(pm.response.json()[1].username).to.be.oneOf([\"bananaFartman\",\"donutLover\"]);",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
+			"name": "deleteAll",
 			"request": {
 				"method": "DELETE",
 				"header": [],
@@ -965,8 +935,7 @@
 					"path": [
 						"deleteAllRegistrations"
 					]
-				},
-				"description": "tests delete all with existing Registrations"
+				}
 			},
 			"response": []
 		}

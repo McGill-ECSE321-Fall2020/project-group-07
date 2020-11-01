@@ -154,12 +154,6 @@ public class ShipmentDto
     
   }
 
-
-  public int indexOfPurchase(PurchaseDto aPurchase)
-  {
-    int index = purchases.indexOf(aPurchase);
-    return index;
-  }
  
   public void addPurchase(Long aPurchase)
   {

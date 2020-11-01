@@ -673,14 +673,13 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080///getAvailableArtworkDetail/{{lisaArtworkId}}",
+					"raw": "http://localhost:8080//getAvailableArtworkDetail/{{lisaArtworkId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"",
 						"",
 						"getAvailableArtworkDetail",
 						"{{lisaArtworkId}}"
