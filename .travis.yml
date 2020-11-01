@@ -1,4 +1,3 @@
-
 branches:
   only:
   - master  
@@ -45,9 +44,5 @@ matrix:
           - sleep 60        
 
           # run test suites geenrated from Postman
-          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/AdminAPI.json \
-          ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtistAPI.json \
-          ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtworkAPI.json \
-          ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/CustomerAPI.json \
-          ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/AdminAPI.json ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtistAPI.json ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtworkAPI.json ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/CustomerAPI.json ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.json
 
