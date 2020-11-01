@@ -1,0 +1,468 @@
+{
+	"info": {
+		"_postman_id": "c24bb197-503c-487d-8255-3bd33620a166",
+		"name": "ArtistAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "37b13fa0-8c24-4a17-be36-143ec160c21e",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"davinci\");",
+							"})",
+							"",
+							"pm.test(\"firstname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.firstName).to.eql(\"Bart\");",
+							"})",
+							"",
+							"pm.test(\"lastname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.lastName).to.eql(\"Simpson\");",
+							"})",
+							"",
+							"pm.test(\"email match\",function(){",
+							"    pm.expect(pm.response.json().email).to.eql(\"bsimpson@yahoo.com\");",
+							"})",
+							"",
+							"pm.test(\"password match\",function(){",
+							"    pm.expect(pm.response.json().password).to.eql(\"ay2Caramba!\");",
+							"})",
+							"",
+							"pm.test(\"not logged in\",function(){",
+							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"davinci\",\n\t\"firstName\":\"Bart\",\n\t\"lastName\":\"Simpson\",\n\t\"email\":\"bsimpson@yahoo.com\",\n    \"password\":\"ay2Caramba!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "setArtistRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d73d51b2-271b-4105-9c9a-f81ce7cc7e33",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"davinci\");",
+							"})",
+							"",
+							"pm.test(\"firstname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.firstName).to.eql(\"Bart\");",
+							"})",
+							"",
+							"pm.test(\"lastname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.lastName).to.eql(\"Simpson\");",
+							"})",
+							"",
+							"pm.test(\"email match\",function(){",
+							"    pm.expect(pm.response.json().email).to.eql(\"bsimpson@yahoo.com\");",
+							"})",
+							"",
+							"pm.test(\"password match\",function(){",
+							"    pm.expect(pm.response.json().password).to.eql(\"ay2Caramba!\");",
+							"})",
+							"",
+							"pm.test(\"not logged in\",function(){",
+							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
+							"})",
+							"",
+							"pm.test(\"artist id not null\",function(){",
+							"    pm.expect(pm.response.json().artistId).to.not.be.undefined;  ",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setArtist/davinci",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setArtist",
+						"davinci"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createProfile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "aa77d711-c9d4-4b4e-bfcb-6c37df01ef74",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201,202]);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"self description match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.selfDescription).to.eql(\"im the best artist!!!\");",
+							"})",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"davinci\");",
+							"})",
+							"pm.test(\"numSold match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.numSold).to.eql(0);",
+							"})",
+							"",
+							"pm.test(\"totalEarnings match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.totalEarnings).to.eql(0);",
+							"})",
+							"",
+							"pm.test(\"rating match\",function(){",
+							"    pm.expect(pm.response.json().rating).to.eql(0);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"davinci\",\n\t\"selfDescription\":\"im the best artist!!!\",\n    \"numSold\": 0,\n    \"totalEarnings\": 0,\n    \"rating\": 0\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createProfile/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createProfile",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getArtistByUsername",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d52221c8-8368-4929-94a0-14f6e646e472",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"davinci\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getArtistByUsername/davinci",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getArtistByUsername",
+						"davinci"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updateProfile",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f9e0b845-fd5e-4f39-8804-6981ef187c6d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"davinci\");",
+							"})",
+							"",
+							"pm.test(\"rating match\",function(){",
+							"    pm.expect(pm.response.json().rating).to.eql(7);",
+							"})",
+							"",
+							"pm.test(\"totalEarnings match\",function(){",
+							"    pm.expect(pm.response.json().totalEarnings).to.eql(110210.10);",
+							"})",
+							"",
+							"pm.test(\"numSold match\",function(){",
+							"    pm.expect(pm.response.json().numSold).to.eql(10);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"davinci\",\n    \"rating\": 7,\n    \"totalEarnings\": 110210.10,\n    \"numSold\": 10\n\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/updateProfile/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updateProfile",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getArtistByID",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "15e08fdc-8c0e-44b7-88ba-cc167067f7ac",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"A correct profile returned\",function(){",
+							"     pm.expect(pm.response.json()[0].username).is.eql(\"davinci\");",
+							"})",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getArtistById/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getArtistById",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllArtists",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b62620dc-c2ae-4c3e-9725-fce5e5b392b7",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"1 Artist returned\",function(){",
+							"    pm.expect(pm.response.json()).length==1;",
+							"})",
+							"",
+							"pm.test(\"A correct profile returned\",function(){",
+							"   pm.expect(pm.response.json()[0].username).is.eql(\"davinci\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getAllArtists",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllArtists"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deleteArtist",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "16ff0f0a-da81-4c38-b012-3001d29f37ec",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"no username associated with deleted artist!\");",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/deleteArtistByUsername/davinci",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteArtistByUsername",
+						"davinci"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

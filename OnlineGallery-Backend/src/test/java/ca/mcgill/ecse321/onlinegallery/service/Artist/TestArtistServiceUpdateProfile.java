@@ -19,7 +19,6 @@ import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.ProfileRepository;
 import ca.mcgill.ecse321.onlinegallery.dto.ProfileDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.Customer;

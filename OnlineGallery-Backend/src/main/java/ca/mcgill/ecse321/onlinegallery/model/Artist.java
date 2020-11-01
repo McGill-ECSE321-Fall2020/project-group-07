@@ -45,7 +45,7 @@ public class Artist {
 		return this.bankInfo;
 	}
 
-	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "artist")
+	@OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL, mappedBy = "artist",optional=true)
 	private GalleryRegistration galleryRegistration;
 
 	public void setGalleryRegistration(GalleryRegistration value) {

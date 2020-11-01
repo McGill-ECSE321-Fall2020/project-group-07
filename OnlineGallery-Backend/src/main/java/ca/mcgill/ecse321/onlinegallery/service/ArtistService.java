@@ -91,6 +91,7 @@ public class ArtistService {
 		Artist artist = reg.getArtist();
 		
 		reg.setArtist(null);
+		artist.setGalleryRegistration(null);
 		artistRepo.delete(artist);
 		
 		return artist;

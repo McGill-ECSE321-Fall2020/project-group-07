@@ -49,5 +49,4 @@ public class ProfileDto {
 	public String getUsername() {
 		return this.username;
 	}
-	
 }

@@ -6,40 +6,6 @@
 	},
 	"item": [
 		{
-			"name": "deleteAll",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "a4913642-ce00-4026-b46e-cac20c3ee4ad",
-						"exec": [
-							"pm.test(\"Body is correct\", function () {",
-							"    pm.response.to.have.body(\"no GalleryRegistrations in system\");",
-							"});"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/deleteAllRegistrations",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"deleteAllRegistrations"
-					]
-				},
-				"description": "deletes all Registrations from previous runs"
-			},
-			"response": []
-		},
-		{
 			"name": "createRegistration1",
 			"event": [
 				{
@@ -112,6 +78,74 @@
 					]
 				},
 				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "getRegistration1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0c1c24a4-f45e-4bf8-854b-676ca0466552",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"bananaFartman\");",
+							"})",
+							"",
+							"pm.test(\"firstname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.firstName).to.eql(\"Bart\");",
+							"})",
+							"",
+							"pm.test(\"lastname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.lastName).to.eql(\"Simpson\");",
+							"})",
+							"",
+							"pm.test(\"email match\",function(){",
+							"    pm.expect(pm.response.json().email).to.eql(\"bsimpson@yahoo.com\");",
+							"})",
+							"",
+							"pm.test(\"password match\",function(){",
+							"    pm.expect(pm.response.json().password).to.eql(\"ay2Caramba!\");",
+							"})",
+							"",
+							"pm.test(\"not logged in\",function(){",
+							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getRegistration/bananaFartman",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getRegistration",
+						"bananaFartman"
+					]
+				},
+				"description": "get one Reg"
 			},
 			"response": []
 		},
@@ -192,31 +226,46 @@
 			"response": []
 		},
 		{
-			"name": "deleteAll_NonEmpty",
+			"name": "deleteRegistration1",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "40e3f2ac-5640-4817-9b8f-2eae713e8516",
+						"id": "10ea1f72-2c88-45d4-9447-3e0cd87961dc",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
 							"});",
-							"",
 							"",
 							"pm.test(\"non-null dto returned\", function(){",
 							"    let dto=pm.response.json();",
 							"    pm.expect(dto).is.not.undefined;",
 							"});",
 							"",
-							"pm.test(\"2 GalleryRegistrations returned\",function(){",
-							"    pm.expect(pm.response.json()).length==2;",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"bananaFartman\");",
 							"})",
 							"",
-							"pm.test(\"2 different correct usernames returned\",function(){",
-							"    pm.expect(pm.response.json()[0].username).is.not.eql(pm.response.json()[1].username);",
-							"    pm.expect(pm.response.json()[0].username).to.be.oneOf([\"bananaFartman\",\"donutLover\"]);",
-							"    pm.expect(pm.response.json()[1].username).to.be.oneOf([\"bananaFartman\",\"donutLover\"]);",
+							"pm.test(\"firstname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.firstName).to.eql(\"Bart\");",
+							"})",
+							"",
+							"pm.test(\"lastname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.lastName).to.eql(\"Simpson\");",
+							"})",
+							"",
+							"pm.test(\"email match\",function(){",
+							"    pm.expect(pm.response.json().email).to.eql(\"newemail@yahoo.com\");",
+							"})",
+							"",
+							"pm.test(\"password match\",function(){",
+							"    pm.expect(pm.response.json().password).to.eql(\"bartRulez!123\");",
+							"})",
+							"pm.test(\"not logged in\",function(){",
+							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
 							"})"
 						],
 						"type": "text/javascript"
@@ -227,237 +276,18 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/deleteAllRegistrations",
+					"raw": "http://localhost:8080/deleteRegistration/bananaFartman/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"deleteAllRegistrations"
-					]
-				},
-				"description": "tests delete all with existing Registrations"
-			},
-			"response": []
-		},
-		{
-			"name": "createRegistration1 Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "23009e4f-2174-4438-b9c8-e332afbd6559",
-						"exec": [
-							"pm.test(\"Successful POST request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
-							"});",
-							"",
-							"pm.test(\"non-null dto returned\", function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto).is.not.undefined;",
-							"});",
-							"",
-							"pm.test(\"username match\",function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto.username).to.eql(\"bananaFartman\");",
-							"})",
-							"",
-							"pm.test(\"firstname match\",function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto.firstName).to.eql(\"Bart\");",
-							"})",
-							"",
-							"pm.test(\"lastname match\",function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto.lastName).to.eql(\"Simpson\");",
-							"})",
-							"",
-							"pm.test(\"email match\",function(){",
-							"    pm.expect(pm.response.json().email).to.eql(\"bsimpson@yahoo.com\");",
-							"})",
-							"",
-							"pm.test(\"password match\",function(){",
-							"    pm.expect(pm.response.json().password).to.eql(\"ay2Caramba!\");",
-							"})",
-							"",
-							"pm.test(\"not logged in\",function(){",
-							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"username\":\"bananaFartman\",\n\t\"firstName\":\"Bart\",\n\t\"lastName\":\"Simpson\",\n\t\"email\":\"bsimpson@yahoo.com\",\n    \"password\":\"ay2Caramba!\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/createRegistration/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"createRegistration",
+						"deleteRegistration",
+						"bananaFartman",
 						""
 					]
-				},
-				"description": "create Reg"
-			},
-			"response": []
-		},
-		{
-			"name": "createRegistration2 Copy",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "acbbd604-a882-4822-bef8-5dcde829c989",
-						"exec": [
-							"pm.test(\"Successful POST request\", function () {",
-							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
-							"});",
-							"",
-							"pm.test(\"non-null dto returned\", function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto).is.not.undefined;",
-							"});",
-							"",
-							"pm.test(\"username match\",function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto.username).to.eql(\"donutLover\");",
-							"})",
-							"",
-							"pm.test(\"firstname match\",function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto.firstName).to.eql(\"Homer\");",
-							"})",
-							"",
-							"pm.test(\"lastname match\",function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto.lastName).to.eql(\"Simpson\");",
-							"})",
-							"",
-							"pm.test(\"email match\",function(){",
-							"    pm.expect(pm.response.json().email).to.eql(\"hsimpson@yahoo.com\");",
-							"})",
-							"",
-							"pm.test(\"password match\",function(){",
-							"    pm.expect(pm.response.json().password).to.eql(\"Doh!nuts123\");",
-							"})",
-							"",
-							"pm.test(\"not logged in\",function(){",
-							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
-							"})"
-						],
-						"type": "text/javascript"
-					}
 				}
-			],
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"username\":\"donutLover\",\n\t\"firstName\":\"Homer\",\n\t\"lastName\":\"Simpson\",\n\t\"email\":\"hsimpson@yahoo.com\",\n    \"password\":\"Doh!nuts123\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8080/createRegistration/",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"createRegistration",
-						""
-					]
-				},
-				"description": "create Reg"
-			},
-			"response": []
-		},
-		{
-			"name": "getRegistration1",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"id": "0c1c24a4-f45e-4bf8-854b-676ca0466552",
-						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
-							"});",
-							"",
-							"",
-							"pm.test(\"non-null dto returned\", function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto).is.not.undefined;",
-							"});",
-							"",
-							"pm.test(\"username match\",function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto.username).to.eql(\"bananaFartman\");",
-							"})",
-							"",
-							"pm.test(\"firstname match\",function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto.firstName).to.eql(\"Bart\");",
-							"})",
-							"",
-							"pm.test(\"lastname match\",function(){",
-							"    let dto=pm.response.json();",
-							"    pm.expect(dto.lastName).to.eql(\"Simpson\");",
-							"})",
-							"",
-							"pm.test(\"email match\",function(){",
-							"    pm.expect(pm.response.json().email).to.eql(\"bsimpson@yahoo.com\");",
-							"})",
-							"",
-							"pm.test(\"password match\",function(){",
-							"    pm.expect(pm.response.json().password).to.eql(\"ay2Caramba!\");",
-							"})",
-							"",
-							"pm.test(\"not logged in\",function(){",
-							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
-							"})"
-						],
-						"type": "text/javascript"
-					}
-				}
-			],
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://localhost:8080/getRegistration/bananaFartman",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8080",
-					"path": [
-						"getRegistration",
-						"bananaFartman"
-					]
-				},
-				"description": "get one Reg"
 			},
 			"response": []
 		},
@@ -509,6 +339,72 @@
 					]
 				},
 				"description": "get all Reg"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteRegistration2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "20a1d9aa-0a1f-4057-b07b-8136dd689ac2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {",
+							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"username match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.username).to.eql(\"donutLover\");",
+							"})",
+							"",
+							"pm.test(\"firstname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.firstName).to.eql(\"Homer\");",
+							"})",
+							"",
+							"pm.test(\"lastname match\",function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto.lastName).to.eql(\"Simpson\");",
+							"})",
+							"",
+							"pm.test(\"email match\",function(){",
+							"    pm.expect(pm.response.json().email).to.eql(\"hsimpson@yahoo.com\");",
+							"})",
+							"",
+							"pm.test(\"password match\",function(){",
+							"    pm.expect(pm.response.json().password).to.eql(\"Doh!nuts123\");",
+							"})",
+							"pm.test(\"not logged in\",function(){",
+							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/deleteRegistration/donutLover/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteRegistration",
+						"donutLover",
+						""
+					]
+				}
 			},
 			"response": []
 		},
@@ -873,15 +769,99 @@
 			"response": []
 		},
 		{
-			"name": "deleteRegistration1",
+			"name": "deleteAll",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "10ea1f72-2c88-45d4-9447-3e0cd87961dc",
+						"id": "a4913642-ce00-4026-b46e-cac20c3ee4ad",
+						"exec": [
+							"pm.test(\"Body is correct\", function () {",
+							"    pm.response.to.have.body(\"no GalleryRegistrations in system\");",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/deleteAllRegistrations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteAllRegistrations"
+					]
+				},
+				"description": "deletes all Registrations from previous runs"
+			},
+			"response": []
+		},
+		{
+			"name": "deleteAll_NonEmpty",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "40e3f2ac-5640-4817-9b8f-2eae713e8516",
 						"exec": [
 							"pm.test(\"Status code is 200\", function () {",
 							"    pm.response.to.have.status(200);",
+							"});",
+							"",
+							"",
+							"pm.test(\"non-null dto returned\", function(){",
+							"    let dto=pm.response.json();",
+							"    pm.expect(dto).is.not.undefined;",
+							"});",
+							"",
+							"pm.test(\"2 GalleryRegistrations returned\",function(){",
+							"    pm.expect(pm.response.json()).length==2;",
+							"})",
+							"",
+							"pm.test(\"2 different correct usernames returned\",function(){",
+							"    pm.expect(pm.response.json()[0].username).is.not.eql(pm.response.json()[1].username);",
+							"    pm.expect(pm.response.json()[0].username).to.be.oneOf([\"bananaFartman\",\"donutLover\"]);",
+							"    pm.expect(pm.response.json()[1].username).to.be.oneOf([\"bananaFartman\",\"donutLover\"]);",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/deleteAllRegistrations",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deleteAllRegistrations"
+					]
+				},
+				"description": "tests delete all with existing Registrations"
+			},
+			"response": []
+		},
+		{
+			"name": "createRegistration1 Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "23009e4f-2174-4438-b9c8-e332afbd6559",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
 							"});",
 							"",
 							"pm.test(\"non-null dto returned\", function(){",
@@ -905,12 +885,13 @@
 							"})",
 							"",
 							"pm.test(\"email match\",function(){",
-							"    pm.expect(pm.response.json().email).to.eql(\"newemail@yahoo.com\");",
+							"    pm.expect(pm.response.json().email).to.eql(\"bsimpson@yahoo.com\");",
 							"})",
 							"",
 							"pm.test(\"password match\",function(){",
-							"    pm.expect(pm.response.json().password).to.eql(\"bartRulez!123\");",
+							"    pm.expect(pm.response.json().password).to.eql(\"ay2Caramba!\");",
 							"})",
+							"",
 							"pm.test(\"not logged in\",function(){",
 							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
 							"})"
@@ -920,34 +901,43 @@
 				}
 			],
 			"request": {
-				"method": "DELETE",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"bananaFartman\",\n\t\"firstName\":\"Bart\",\n\t\"lastName\":\"Simpson\",\n\t\"email\":\"bsimpson@yahoo.com\",\n    \"password\":\"ay2Caramba!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/deleteRegistration/bananaFartman/",
+					"raw": "http://localhost:8080/createRegistration/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"deleteRegistration",
-						"bananaFartman",
+						"createRegistration",
 						""
 					]
-				}
+				},
+				"description": "create Reg"
 			},
 			"response": []
 		},
 		{
-			"name": "deleteRegistration2",
+			"name": "createRegistration2 Copy",
 			"event": [
 				{
 					"listen": "test",
 					"script": {
-						"id": "20a1d9aa-0a1f-4057-b07b-8136dd689ac2",
+						"id": "acbbd604-a882-4822-bef8-5dcde829c989",
 						"exec": [
-							"pm.test(\"Status code is 200\", function () {",
-							"    pm.response.to.have.status(200);",
+							"pm.test(\"Successful POST request\", function () {",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);",
 							"});",
 							"",
 							"pm.test(\"non-null dto returned\", function(){",
@@ -977,6 +967,7 @@
 							"pm.test(\"password match\",function(){",
 							"    pm.expect(pm.response.json().password).to.eql(\"Doh!nuts123\");",
 							"})",
+							"",
 							"pm.test(\"not logged in\",function(){",
 							"    pm.expect(pm.response.json().loggedIn).to.eql(false);",
 							"})"
@@ -986,21 +977,30 @@
 				}
 			],
 			"request": {
-				"method": "DELETE",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"donutLover\",\n\t\"firstName\":\"Homer\",\n\t\"lastName\":\"Simpson\",\n\t\"email\":\"hsimpson@yahoo.com\",\n    \"password\":\"Doh!nuts123\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8080/deleteRegistration/donutLover/",
+					"raw": "http://localhost:8080/createRegistration/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
 					"port": "8080",
 					"path": [
-						"deleteRegistration",
-						"donutLover",
+						"createRegistration",
 						""
 					]
-				}
+				},
+				"description": "create Reg"
 			},
 			"response": []
 		}

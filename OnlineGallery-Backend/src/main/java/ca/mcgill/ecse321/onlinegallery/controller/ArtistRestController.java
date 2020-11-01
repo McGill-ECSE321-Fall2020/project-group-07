@@ -71,7 +71,7 @@ public class ArtistRestController {
 	public ResponseEntity<?> createProfile(@RequestBody ProfileDto dto) throws ArtistException {
 		try {
 			Artist artist=service.createProfile(dto);
-			return new ResponseEntity<>(convertToDto(artist), HttpStatus.OK);
+			return new ResponseEntity<>(convertToDto(artist), HttpStatus.CREATED);
 		}
 		catch(ArtistException e) {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -105,10 +105,20 @@ public class ArtistRestController {
 	private ArtistDto convertToDto(Artist artist) {
 
 		ArtistDto artistDto = new ArtistDto();
+
 		artistDto.setArtistId(artist.getArtistId());
 		artistDto.setBankInfo(artist.getBankInfo());
-		artistDto.setUsername(artist.getGalleryRegistration().getUserName());
+		if(artist.getGalleryRegistration()!=null) {
+			artistDto.setUsername(artist.getGalleryRegistration().getUserName());
+		}else {
+			artistDto.setUsername("no username associated with deleted artist!");
+		}
+		artistDto.setNumSold(artist.getProfile().getNumSold());
+		artistDto.setProfileId(artist.getProfile().getProfileId());
+		artistDto.setRating(artist.getProfile().getRating());
+		artistDto.setSelfDescription(artist.getProfile().getSelfDescription());
+		artistDto.setTotalEarnings(artist.getProfile().getTotalEarnings());
+		
 		return artistDto;
 	}
-
 }
