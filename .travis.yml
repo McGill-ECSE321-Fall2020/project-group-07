@@ -1,6 +1,6 @@
 branches:
   only:
-  - s2  
+  - jay-rest  
   
 matrix:
   include:
