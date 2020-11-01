@@ -137,6 +137,7 @@ public class ArtworkRestController {
 		artworkDto.setPrice(artwork.getPrice());
 		artworkDto.setStatus(artwork.getStatus());
 		artworkDto.setWeight(artwork.getWeight());
+		artworkDto.setArtworkId(artwork.getArtworkId());
 
 		
 		return artworkDto;

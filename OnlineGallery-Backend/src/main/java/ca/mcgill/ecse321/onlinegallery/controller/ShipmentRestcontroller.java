@@ -132,20 +132,25 @@ public class ShipmentRestcontroller {
 		String destinationAddress = shipment.getDestinationAddress();
 		double shippingCost = shipment.getShippingCost();
 		double totalCost = shipment.getTotalAmount();
-		
 		String recipient = shipment.getRecipientName();
 		long customerId = shipment.getPurchase().iterator().next().getCustomer().getCustomerId();
-		ShipmentDto shipDto = new ShipmentDto(shipmentId, sourceAddress, destinationAddress, shippingCost, totalCost, recipient, customerId);
+		ShipmentStatus status = shipment.getShipmentStatus();
+		
+		ShipmentDto shipDto = new ShipmentDto();
+		shipDto.setShipmentId(shipmentId);
+		shipDto.setSourceAddress(sourceAddress);
+		shipDto.setDestinationAddress(destinationAddress);
+		shipDto.setShippingCost(shippingCost);
+		shipDto.setTotalCost(totalCost);
+		shipDto.setRecipientName(recipient);
+		shipDto.setCustomerId(customerId);
+		shipDto.setShipmentStatus(status);
+	
 		
 		for (Purchase p : shipment.getPurchase()) {
 			shipDto.addPurchase(p.getPurchaseId());
 			
 		}
-		ShipmentStatus status = shipment.getShipmentStatus();
-		shipDto.setShipmentStatus(status);
-		
-		
-		
 		
 		return shipDto;
 		

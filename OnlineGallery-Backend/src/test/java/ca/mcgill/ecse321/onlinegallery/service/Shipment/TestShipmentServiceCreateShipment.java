@@ -271,7 +271,18 @@ public class TestShipmentServiceCreateShipment {
 	
 	@Test
 	public void testCreateShipmentValidParametersOffsite() {
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_CUSTOMER_ID);
+		ShipmentDto sTO = new ShipmentDto();
+		
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
+		
+		
 		sTO.addPurchase(VALID_PURCHASE_ID1);
 		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
@@ -312,7 +323,16 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithInvalidPurchaeId() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_CUSTOMER_ID);
+		ShipmentDto sTO = new ShipmentDto();
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
+		
 		sTO.addPurchase(INVALID_PURCHASE_ID_NONEXISTENT);
 		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
@@ -334,7 +354,17 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithPurchasesOfDifferentTypes() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_CUSTOMER_ID);
+		ShipmentDto sTO = new ShipmentDto();
+		
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
+		
 		sTO.addPurchase(INVALID_PURCHASE_ID_OFFSITE);
 		sTO.addPurchase(INVALID_PURCHASE_ID_ONSITE);
 		
@@ -355,7 +385,16 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithPurchasesFromDifferentCustomers() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_CUSTOMER_ID);
+		ShipmentDto sTO = new ShipmentDto();
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
+		
 		sTO.addPurchase(INVALID_PURCHASE_ID_CUSTOMER_A);
 		sTO.addPurchase(VALID_PURCHASE_ID1);
 		
@@ -377,7 +416,17 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithInvalidSourceAddress() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, INVALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_CUSTOMER_ID);
+		ShipmentDto sTO = new ShipmentDto();
+		
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(INVALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
+		
 		sTO.addPurchase(VALID_PURCHASE_ID1);
 		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
@@ -398,7 +447,17 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithInvaliddestinationAddress() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, INVALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_CUSTOMER_ID);
+		ShipmentDto sTO = new ShipmentDto();
+		
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(INVALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
+		
 		sTO.addPurchase(VALID_PURCHASE_ID1);
 		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
@@ -419,7 +478,17 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithMissingrecipientNameNull() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, null, VALID_CUSTOMER_ID);
+		ShipmentDto sTO = new ShipmentDto();
+		
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(null);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
+		
 		sTO.addPurchase(VALID_PURCHASE_ID1);
 		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
@@ -441,7 +510,17 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithMissingrecipientNameEmpty() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, "", VALID_CUSTOMER_ID);
+		ShipmentDto sTO = new ShipmentDto();
+		//(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, "", VALID_CUSTOMER_ID);
+		
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName("");
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
 		sTO.addPurchase(VALID_PURCHASE_ID1);
 		sTO.addPurchase(VALID_PURCHASE_ID2);
 		
@@ -462,7 +541,19 @@ public class TestShipmentServiceCreateShipment {
 	public void testCreateServiceWithArtworkStillAvailable() {
 		String error = null;
 		Shipment s = null ;
-		ShipmentDto sTO = new ShipmentDto(VALID_SHIPMENT_ID, VALID_SOURCE_ADDRESS, VALID_DESTINATION_ADDRESS, VALID_SHIPPING_COST,VALID_TOTAL_COST, VALID_RECIPIENT_STRING, VALID_CUSTOMER_ID);
+		ShipmentDto sTO = new ShipmentDto();
+		
+		sTO.setShipmentId(VALID_SHIPMENT_ID);
+		sTO.setSourceAddress(VALID_SOURCE_ADDRESS);
+		sTO.setDestinationAddress(VALID_DESTINATION_ADDRESS);
+		sTO.setShippingCost(VALID_SHIPPING_COST);
+		sTO.setTotalCost(VALID_TOTAL_COST);
+		sTO.setRecipientName(VALID_RECIPIENT_STRING);
+		sTO.setCustomerId(VALID_CUSTOMER_ID);
+		sTO.setShipmentStatus(ShipmentStatus.CREATED);
+		sTO.addPurchase(VALID_PURCHASE_ID1);
+		sTO.addPurchase(VALID_PURCHASE_ID2);
+		
 		sTO.addPurchase(INVALID_PURCHASE_ID_ARTWORK_STILL_AVAILABLE);
 		sTO.addPurchase(VALID_PURCHASE_ID2);
 		

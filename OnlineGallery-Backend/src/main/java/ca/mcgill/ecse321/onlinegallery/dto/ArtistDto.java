@@ -61,4 +61,5 @@ public class ArtistDto {
 	public Long getProfileId() {
 		return this.id;
 	}
+
 }

@@ -27,26 +27,6 @@ public class ShipmentDto
  
   private List<Long> purchases;
 
-  //------------------------
-  // CONSTRUCTOR
-  //------------------------
-
-  public ShipmentDto(Long aShipmentId, String aSourceAddress, String aDestinationAddress, double aShippingCost, double aTotalCost, String aRecipientName, Long acustomerId)
-  {
-    shipmentId = aShipmentId;
-    sourceAddress = aSourceAddress;
-    destinationAddress = aDestinationAddress;
-    shippingCost = aShippingCost;
-    totalCost = aTotalCost;
-    shipmentStatus = ShipmentStatus.CREATED;
-    recipientName = aRecipientName;
-    customerId = acustomerId;
-    purchases = new ArrayList<Long>();
-  }
-
-  //------------------------
-  // INTERFACE
-  //------------------------
 
   public boolean setShipmentId(Long aShipmentId)
   {
@@ -104,7 +84,7 @@ public class ShipmentDto
     return wasSet;
   }
 
-  public boolean setUserName(Long acustomerId)
+  public boolean setCustomerId(Long acustomerId)
   {
     boolean wasSet = false;
     customerId = acustomerId;
@@ -147,7 +127,7 @@ public class ShipmentDto
     return recipientName;
   }
 
-  public Long getUserName()
+  public Long getCustomerId()
   {
     return customerId;
   }
@@ -189,6 +169,9 @@ public class ShipmentDto
   /* Code from template association_AddManyToOptionalOne */
   public void addPurchase(Long aPurchase)
   {
+	  if (purchases == null) {
+		  purchases = new ArrayList<Long>();
+	  }
 	  purchases.add(aPurchase);
   }
 
@@ -214,7 +197,7 @@ public class ShipmentDto
             "shippingCost" + ":" + getShippingCost()+ "," +
             "totalCost" + ":" + getTotalCost()+ "," +
             "recipientName" + ":" + getRecipientName()+ "," +
-            "userName" + ":" + getUserName()+ "]" + System.getProperties().getProperty("line.separator") +
+            "userName" + ":" + getCustomerId()+ "]" + System.getProperties().getProperty("line.separator") +
             "  " + "shipmentStatus" + "=" + (getShipmentStatus() != null ? !getShipmentStatus().equals(this)  ? getShipmentStatus().toString().replaceAll("  ","    ") : "this" : "null");
   }
 }
