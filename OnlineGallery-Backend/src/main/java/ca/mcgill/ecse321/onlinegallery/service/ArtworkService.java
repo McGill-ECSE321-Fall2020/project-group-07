@@ -140,14 +140,15 @@ public class ArtworkService {
 		
 		List<Integer> usedIdx = new ArrayList<Integer>(); 
 		
-		for (int i = 0; i < numToRetrieve; i++) {
+		int i=0;
+		while (i<numToRetrieve) {
 	        int randomIndex = rand.nextInt(artworkList.size());
 	        if (!usedIdx.contains(randomIndex)) {
 	        	randomList.add(artworkList.get(randomIndex));
 	        	usedIdx.add(randomIndex);
+	        	i+=1;
 	        }
-	        
-	    }
+		}
 		return randomList;
 	
 		
