@@ -10,7 +10,7 @@ public class PurchaseDto {
 	public void setPurchaseId(Long id) {
 		this.purchaseId=id;
 	}
-	public Long getPurcahseId() {
+	public Long getPurchaseId() {
 		return this.purchaseId;
 	}
 	

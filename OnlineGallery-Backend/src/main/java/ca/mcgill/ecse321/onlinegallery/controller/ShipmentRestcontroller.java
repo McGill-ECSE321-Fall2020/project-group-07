@@ -75,7 +75,7 @@ public class ShipmentRestcontroller {
 		}
 	}
 	
-	@PutMapping(value= {"/addToShipment/{shipmentId,purchaseId }","/addToShipment/{shipmentId,purchaseId }/"})
+	@PutMapping(value= {"/addToShipment/{shipmentId}/{purchaseId}","/addToShipment/{shipmentId}/{purchaseId}/"})
 	public ResponseEntity<?> addToShipment(@PathVariable("shipmentId") Long shipmentId,@PathVariable("purchaseId") Long purchaseId ) throws ShipmentException, PurchaseException {
 		try {
 			Shipment ship = service.addToShipment(shipmentId, purchaseId);
@@ -91,7 +91,7 @@ public class ShipmentRestcontroller {
 		try {
 			Shipment ship = service.payShipment(dto);
 			//make sure response entity is paymentDto
-			return new ResponseEntity<>(convertToPaymentDto(ship),HttpStatus.OK);
+			return new ResponseEntity<>(convertToShipmentDto(ship),HttpStatus.OK);
 		}
 		catch(ShipmentException | CreditCardException e){
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
@@ -126,6 +126,7 @@ public class ShipmentRestcontroller {
 	
 	
 	private ShipmentDto convertToShipmentDto (Shipment shipment) {
+		System.out.println(shipment.getShipmentId());
 
 		long shipmentId = shipment.getShipmentId();
 		String sourceAddress = shipment.getSourceAddress();
@@ -133,10 +134,17 @@ public class ShipmentRestcontroller {
 		double shippingCost = shipment.getShippingCost();
 		double totalCost = shipment.getTotalAmount();
 		String recipient = shipment.getRecipientName();
-		long customerId = shipment.getPurchase().iterator().next().getCustomer().getCustomerId();
 		ShipmentStatus status = shipment.getShipmentStatus();
 		
 		ShipmentDto shipDto = new ShipmentDto();
+		List<Long> purchases = new ArrayList<Long>();
+		long customerId  = 0;
+		for (Purchase p : shipment.getPurchase()) {
+			customerId = p.getCustomer().getCustomerId();
+			purchases.add(p.getPurchaseId());
+		}
+		
+		shipDto.setPurchases(purchases);
 		shipDto.setShipmentId(shipmentId);
 		shipDto.setSourceAddress(sourceAddress);
 		shipDto.setDestinationAddress(destinationAddress);
@@ -147,27 +155,11 @@ public class ShipmentRestcontroller {
 		shipDto.setShipmentStatus(status);
 	
 		
-		for (Purchase p : shipment.getPurchase()) {
-			shipDto.addPurchase(p.getPurchaseId());
-			
-		}
 		
 		return shipDto;
 		
 	}
 	
-	private PaymentDto convertToPaymentDto (Shipment shipment) {
-		PaymentDto dto = new PaymentDto();
-		
-		dto.setCcFirstname(shipment.getCreditCardFirstName());
-		dto.setCcLastname(shipment.getCreditCardLastName());
-		dto.setCcNum(shipment.getCreditCardNumber());
-		dto.setShipmentId(shipment.getShipmentId());
-		
-		//expiration date, csv missing
-		return dto;
-		
-	}
 	
 
 }

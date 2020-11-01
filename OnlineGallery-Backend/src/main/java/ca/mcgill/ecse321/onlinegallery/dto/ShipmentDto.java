@@ -27,6 +27,9 @@ public class ShipmentDto
  
   private List<Long> purchases;
 
+  public ShipmentDto () {
+	  purchases = new ArrayList<Long>();
+  }
 
   public boolean setShipmentId(Long aShipmentId)
   {
@@ -140,33 +143,27 @@ public class ShipmentDto
 
   public List<Long> getPurchases()
   {
-    List<Long> newPurchases = Collections.unmodifiableList(purchases);
-    return newPurchases;
+	  
+	  return this.purchases;
+  }
+  
+  public void setPurchases(List<Long> aListOfPurchases)
+  {
+	 this.purchases.clear();
+	 purchases.addAll(aListOfPurchases);
+    
+    for (Long id : purchases) {
+    	System.out.println(" after transfering: " + id);
+    }
   }
 
-  public int numberOfPurchases()
-  {
-    int number = purchases.size();
-    return number;
-  }
-
-  public boolean hasPurchases()
-  {
-    boolean has = purchases.size() > 0;
-    return has;
-  }
 
   public int indexOfPurchase(PurchaseDto aPurchase)
   {
     int index = purchases.indexOf(aPurchase);
     return index;
   }
-  /* Code from template association_MinimumNumberOfMethod */
-  public static int minimumNumberOfPurchases()
-  {
-    return 0;
-  }
-  /* Code from template association_AddManyToOptionalOne */
+ 
   public void addPurchase(Long aPurchase)
   {
 	  if (purchases == null) {

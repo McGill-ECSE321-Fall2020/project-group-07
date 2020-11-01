@@ -3,7 +3,9 @@ package ca.mcgill.ecse321.onlinegallery.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Pattern;
 
 import javax.transaction.Transactional;
@@ -96,12 +98,16 @@ public class ShipmentService {
 		//validation passed
 		shipment = new Shipment();
 		Double totalPrice = 0.0;
+		Set<Purchase> shipPurchases = new HashSet<Purchase>();
 		for (Long p3 : purchases) {
 			Purchase aPurchase = purchaseRepo.findPurchaseByPurchaseId(p3);
 			Double artPrice = artworkRepo.findArtworkByArtworkId(aPurchase.getArtwork().getArtworkId()).getPrice();
 			totalPrice += artPrice;
 			shipment.getPurchase().add(aPurchase);
+			shipPurchases.add(aPurchase);
+			
 		}
+		
 		Double shippingCost = dto.getShippingCost();
 		totalPrice += shippingCost;
 		ShipmentStatus shipmentStatus = dto.getShipmentStatus();
@@ -114,6 +120,11 @@ public class ShipmentService {
 		shipment.setShipmentStatus(shipmentStatus);
 		shipment.setRecipientName(recipientName);
 		shipment.setTotalAmount(totalPrice);
+		
+		for (Purchase aP :shipPurchases ) {
+			aP.setShipment(shipment);
+			purchaseRepo.save(aP);
+		}
 		
 		return shipRepo.save(shipment);
 		
@@ -162,10 +173,10 @@ public class ShipmentService {
 		Long shipmentId = dto.getShipmentId();
 		String ccNum=dto.getCcNum();
 		String ccCSV=dto.getCcCSV();
-		String firstName=dto.getCcFirstname();
-		String lastName=dto.getccLastname();
+		String firstName=dto.getFirstName();
+		String lastName=dto.getLastName();
 		String ccExp=dto.getCcExp();
-		
+	
 		if (!shipRepo.existsById(shipmentId)) {
 			throw new ShipmentException("no Shipment with id ["+shipmentId+"] found");
 		}
@@ -243,11 +254,18 @@ public class ShipmentService {
 
 	@Transactional
 	public Shipment deleteShipment(Long shipmentId) throws ShipmentException {
+		System.out.println("id passed to delete: " + shipmentId);
 		Shipment s = this.getShipment(shipmentId);
-		
+		System.out.println("id found after calling get: " + s.getShipmentId());
+
+		Set<Purchase> shipPurchases = new HashSet<Purchase>(); 
 		for (Purchase p : s.getPurchase()) {
 			Purchase purchase = purchaseRepo.findPurchaseByPurchaseId(p.getPurchaseId());
-			purchase.setShipment(null);
+			shipPurchases.add(purchase);
+		}
+		for (Purchase aP :shipPurchases ) {
+			aP.setShipment(null);
+			purchaseRepo.save(aP);
 		}
 		shipRepo.delete(s);
 		

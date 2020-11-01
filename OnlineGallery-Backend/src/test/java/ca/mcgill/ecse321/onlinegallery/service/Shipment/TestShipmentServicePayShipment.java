@@ -116,8 +116,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo");
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo");
 		
 		Shipment s = null;
 		try {
@@ -139,8 +139,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo");
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo");
 		 
 		Shipment s = null;
 		String error=null;
@@ -162,8 +162,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -185,8 +185,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(INVALID_CCNUM_EMPTY);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -208,8 +208,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(INVALID_CCNUM_SPECIAL_CHAR);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -231,8 +231,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(INVALID_CCNUM_NOT_VISA);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -255,8 +255,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(INVALID_CCNUM_WRONG_LENGTH);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -278,8 +278,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(INVALID_CCNUM_WRONG_CHECKSUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -301,8 +301,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(INVALID_EXP_EMPTY);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -324,8 +324,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(INVALID_EXP_SPECIAL_CHAR);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -347,8 +347,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(INVALID_EXP_WRONG_LENGTH);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -370,8 +370,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(INVALID_EXP_INVALID_MONTH);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -393,8 +393,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(INVALID_EXP_YEAR);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -416,8 +416,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(INVALID_EXP_MONTH);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -439,8 +439,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(INVALID_CSV_EMPTY);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -462,8 +462,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(INVALID_CSV_SPECIAL_CHAR);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -485,8 +485,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(INVALID_CSV_WRONG_LENGTH);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(VALID_FIRSTNAME);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(VALID_FIRSTNAME);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -508,8 +508,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(INVALID_FIRSTNAME_EMPTY);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(INVALID_FIRSTNAME_EMPTY);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -531,8 +531,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(INVALID_FIRSTNAME_SPACE);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(INVALID_FIRSTNAME_SPACE);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
@@ -554,8 +554,8 @@ public class TestShipmentServicePayShipment {
 		dto.setCcNum(VALID_CCNUM);
 		dto.setCcCSV(VALID_CSV);
 		dto.setCcExp(VALID_EXP);
-		dto.setCcFirstname(INVALID_FIRSTNAME_SPECIAL_CHAR);
-		dto.setCcLastname("Solo"); 
+		dto.setFirstName(INVALID_FIRSTNAME_SPECIAL_CHAR);
+		dto.setLastName("Solo"); 
 		 
 		Shipment s = null;
 		String error=null;
