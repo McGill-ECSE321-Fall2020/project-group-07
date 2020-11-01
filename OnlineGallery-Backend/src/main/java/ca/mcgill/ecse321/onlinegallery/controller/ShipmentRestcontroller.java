@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.onlinegallery.controller;
 
 import java.util.ArrayList;
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +15,18 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import ca.mcgill.ecse321.onlinegallery.dto.GalleryRegistrationDto;
 import ca.mcgill.ecse321.onlinegallery.dto.PaymentDto;
+import ca.mcgill.ecse321.onlinegallery.dto.PurchaseDto;
 import ca.mcgill.ecse321.onlinegallery.dto.ShipmentDto;
+import ca.mcgill.ecse321.onlinegallery.dto.UpdateEmailDto;
+import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
 import ca.mcgill.ecse321.onlinegallery.model.Purchase;
 import ca.mcgill.ecse321.onlinegallery.model.Shipment;
 import ca.mcgill.ecse321.onlinegallery.model.ShipmentStatus;
 import ca.mcgill.ecse321.onlinegallery.service.ShipmentService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.CreditCardException;
+import ca.mcgill.ecse321.onlinegallery.service.exception.GalleryRegistrationException;
 import ca.mcgill.ecse321.onlinegallery.service.exception.PurchaseException;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ShipmentException;
 
@@ -122,6 +126,7 @@ public class ShipmentRestcontroller {
 	
 	
 	private ShipmentDto convertToShipmentDto (Shipment shipment) {
+		System.out.println(shipment.getShipmentId());
 
 		long shipmentId = shipment.getShipmentId();
 		String sourceAddress = shipment.getSourceAddress();
@@ -154,6 +159,8 @@ public class ShipmentRestcontroller {
 		return shipDto;
 		
 	}
+	
+	
 	
 	
 
