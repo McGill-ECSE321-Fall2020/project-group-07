@@ -5,16 +5,16 @@ branches:
 matrix:
   include:
 
-    # Backend tests
-    - language: java
+    # # Backend tests
+    # - language: java
 
-      before_install:
-        - chmod +x ./gradlew
-        - chmod +x ./resetdb.sh
-      script:
-        - ./resetdb.sh
-        - sleep 90
-        - ./gradlew build
+    #   before_install:
+    #     - chmod +x ./gradlew
+    #     - chmod +x ./resetdb.sh
+    #   script:
+    #     - ./resetdb.sh
+    #     - sleep 90
+    #     - ./gradlew build
 
 
     # Postman integration tests
