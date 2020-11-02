@@ -8,6 +8,7 @@ jobs:
     # Backend tests
     - stage: testBackend
 
+<<<<<<< HEAD
           language: java
 
           before_install:
@@ -18,6 +19,15 @@ jobs:
             - ./resetdb.sh
             - sleep 30
             - ./gradlew build
+=======
+      before_install:
+        - chmod +x ./gradlew
+        - chmod +x ./resetdb.sh
+      script:
+        - ./resetdb.sh
+        - sleep 90
+        - ./gradlew build
+>>>>>>> parent of b81143d... reset db before newman
 
 
     # Postman integration tests
