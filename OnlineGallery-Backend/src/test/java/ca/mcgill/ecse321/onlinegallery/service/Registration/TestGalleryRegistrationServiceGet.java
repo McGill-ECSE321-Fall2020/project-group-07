@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.service.Registration;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -19,7 +20,6 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.onlinegallery.dao.*;
-import ca.mcgill.ecse321.onlinegallery.dto.*;
 import ca.mcgill.ecse321.onlinegallery.model.*;
 import ca.mcgill.ecse321.onlinegallery.service.GalleryRegistrationService;
 import ca.mcgill.ecse321.onlinegallery.service.exception.*;

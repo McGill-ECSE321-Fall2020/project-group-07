@@ -268,7 +268,7 @@ public class GalleryRegistrationService {
 		return reg;
 		
 	}
-	
+
 	@Transactional
 	public GalleryRegistration setCustomer(String username) throws GalleryRegistrationException {
 		

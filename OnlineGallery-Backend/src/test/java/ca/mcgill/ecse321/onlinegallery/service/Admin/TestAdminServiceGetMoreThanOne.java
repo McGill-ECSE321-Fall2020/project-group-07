@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryAdminRepository;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryAdmin;
@@ -31,9 +30,7 @@ public class TestAdminServiceGetMoreThanOne {
 	
 	@BeforeEach
 	public void setMockOutput() {		
-		Answer<?> paramAsAnswer = (InvocationOnMock invocation)->{
-			return invocation.getArgument(0);
-		};
+
 		lenient().when(adminRepo.findAll()).thenAnswer((InvocationOnMock invocation) -> {
 			
 			GalleryAdmin admin1 = new GalleryAdmin();

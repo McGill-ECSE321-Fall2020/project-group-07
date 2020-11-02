@@ -2,10 +2,10 @@ package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,7 +111,7 @@ public class ArtworkService {
 		} 
 		return artwork;
 	}
- 
+
 	
 	@Transactional 
 	public Set<Artwork> getAvailableArtworkByArtistId(Long artistId) throws ArtworkException{
@@ -127,6 +127,8 @@ public class ArtworkService {
 		
 		List<Artwork> artworkList = new ArrayList<Artwork>();
 		artworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
+		
+		
 		List<Artwork> randomList = new ArrayList<Artwork>();
 		Random rand = new Random();
 		
@@ -134,11 +136,17 @@ public class ArtworkService {
 			throw new  ArtworkException("there is less than ["+numToRetrieve+"] artworks");
 		} 
 		
-		for (int i = 0; i < numToRetrieve; i++) {
+		List<Integer> usedIdx = new ArrayList<Integer>(); 
+		
+		int i=0;
+		while (i<numToRetrieve) {
 	        int randomIndex = rand.nextInt(artworkList.size());
-	        randomList.add(artworkList.get(randomIndex));
-	        artworkList.remove(randomIndex);
-	    }
+	        if (!usedIdx.contains(randomIndex)) {
+	        	randomList.add(artworkList.get(randomIndex));
+	        	usedIdx.add(randomIndex);
+	        	i+=1;
+	        }
+		}
 		return randomList;
 	
 		

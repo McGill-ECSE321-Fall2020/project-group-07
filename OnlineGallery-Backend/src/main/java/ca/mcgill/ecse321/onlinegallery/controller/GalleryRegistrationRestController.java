@@ -36,7 +36,6 @@ public class GalleryRegistrationRestController {
 		}
 		catch(GalleryRegistrationException e) {
 			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST); 
-			
 		}
 	}
 	
@@ -113,6 +112,16 @@ public class GalleryRegistrationRestController {
 		}
 	}
 
+	@GetMapping(value= {"/login","/login/"})
+	public ResponseEntity<?> login(@RequestBody LogginCredentialsDto dto) throws GalleryRegistrationException{
+		try {
+			GalleryRegistration reg = service.login(dto);
+			return new ResponseEntity<>(convertToDto(reg),HttpStatus.OK);
+		}
+		catch(GalleryRegistrationException e){
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+		}
+	}
 	
 	@PutMapping(value= {"/setCustomer/{username}","/setCustomer/{username}/"})
 	public ResponseEntity<?> setCustomer(@PathVariable("username") String username) throws GalleryRegistrationException{

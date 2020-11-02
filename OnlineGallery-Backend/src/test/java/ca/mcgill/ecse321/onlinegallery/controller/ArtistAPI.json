@@ -126,7 +126,10 @@
 							"",
 							"pm.test(\"artist id not null\",function(){",
 							"    pm.expect(pm.response.json().artistId).to.not.be.undefined;  ",
-							"})"
+							"})",
+							"",
+							"pm.globals.set(\"artistId\",pm.response.json().artistId);",
+							""
 						],
 						"type": "text/javascript"
 					}
@@ -347,7 +350,7 @@
 							"});",
 							"",
 							"pm.test(\"A correct profile returned\",function(){",
-							"     pm.expect(pm.response.json()[0].username).is.eql(\"davinci\");",
+							"     pm.expect(pm.response.json().username).is.eql(\"davinci\");",
 							"})",
 							""
 						],
@@ -359,7 +362,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8080/getArtistById/2",
+					"raw": "http://localhost:8080/getArtistById/{{artistId}}",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -367,7 +370,14 @@
 					"port": "8080",
 					"path": [
 						"getArtistById",
-						"2"
+						"{{artistId}}"
+					],
+					"query": [
+						{
+							"key": "artistId",
+							"value": "",
+							"disabled": true
+						}
 					]
 				}
 			},

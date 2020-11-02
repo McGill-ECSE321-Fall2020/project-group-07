@@ -4,6 +4,7 @@ import ca.mcgill.ecse321.onlinegallery.model.ArtworkStatus;
 
 public class ArtworkDto {
 
+
 	private Long id;
 	public void setArtworkId(Long id) {
 		this.id = id;
@@ -11,7 +12,7 @@ public class ArtworkDto {
 	public Long getArtworkId() {
 		return this.id;
 	}
-	
+
 	private String username;
 	public void setUsername(String username) {
 		this.username = username;

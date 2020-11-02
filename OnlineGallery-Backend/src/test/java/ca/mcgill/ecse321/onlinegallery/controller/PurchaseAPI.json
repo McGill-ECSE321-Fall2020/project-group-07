@@ -1,7 +1,7 @@
 {
 	"info": {
 		"_postman_id": "25d20b99-ab73-400d-8968-f8b18aac14c9",
-		"name": "Purchase-REST",
+		"name": "PurchaseAPI2",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
@@ -32,12 +32,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/createRegistration/",
+					"raw": "http://localhost:8080/createRegistration/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"createRegistration",
 						""
@@ -65,12 +65,12 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/setArtist/CaptainUnderpants",
+					"raw": "http://localhost:8080/setArtist/CaptainUnderpants",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"setArtist",
 						"CaptainUnderpants"
@@ -106,12 +106,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/createRegistration/",
+					"raw": "http://localhost:8080/createRegistration/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"createRegistration",
 						""
@@ -139,12 +139,12 @@
 				"method": "PUT",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/setCustomer/Astronaut",
+					"raw": "http://localhost:8080/setCustomer/Astronaut",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"setCustomer",
 						"Astronaut"
@@ -181,12 +181,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/createArtwork",
+					"raw": "http://localhost:8080/createArtwork",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"createArtwork"
 					]
@@ -221,12 +221,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/createArtwork",
+					"raw": "http://localhost:8080/createArtwork",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"createArtwork"
 					]
@@ -261,7 +261,7 @@
 							"    pm.expect(dto.shipmentType).to.eql('OFFSITE_DELIVERY');\r",
 							"})\r",
 							"\r",
-							"pm.test(\"purchase id match\",function(){\r",
+							"pm.test(\"artwork id match\",function(){\r",
 							"    let dto=pm.response.json();\r",
 							"    pm.expect(dto.artworkId).to.eql(pm.globals.get(\"artworkId1\"));\r",
 							"})"
@@ -283,12 +283,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/createPurchase/",
+					"raw": "http://localhost:8080/createPurchase/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"createPurchase",
 						""
@@ -324,7 +324,7 @@
 							"    pm.expect(dto.shipmentType).to.eql('OFFSITE_DELIVERY');\r",
 							"})\r",
 							"\r",
-							"pm.test(\"purchase id match\",function(){\r",
+							"pm.test(\"artwork id match\",function(){\r",
 							"    let dto=pm.response.json();\r",
 							"    pm.expect(dto.artworkId).to.eql(pm.globals.get(\"artworkId2\"));\r",
 							"})"
@@ -346,12 +346,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/createPurchase/",
+					"raw": "http://localhost:8080/createPurchase/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"createPurchase",
 						""
@@ -387,7 +387,7 @@
 							"    pm.expect(dto.shipmentType).to.eql('OFFSITE_DELIVERY');\r",
 							"})\r",
 							"\r",
-							"pm.test(\"purchase id match\",function(){\r",
+							"pm.test(\"artowrk id match\",function(){\r",
 							"    let dto=pm.response.json();\r",
 							"    pm.expect(dto.artworkId).to.eql(pm.globals.get(\"artworkId1\"));\r",
 							"})"
@@ -412,12 +412,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/getPurchase/",
+					"raw": "http://localhost:8080/getPurchase/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"getPurchase",
 						""
@@ -453,7 +453,7 @@
 							"    pm.expect(dto.shipmentType).to.eql('ONSITE_PICKUP');\r",
 							"})\r",
 							"\r",
-							"pm.test(\"purchase id match\",function(){\r",
+							"pm.test(\"artowrk id match\",function(){\r",
 							"    let dto=pm.response.json();\r",
 							"    pm.expect(dto.artworkId).to.eql(pm.globals.get(\"artworkId2\"));\r",
 							"})"
@@ -475,12 +475,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/updatePurchase/",
+					"raw": "http://localhost:8080/updatePurchase/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"updatePurchase",
 						""
@@ -520,7 +520,7 @@
 							"    pm.expect(pm.response.json()[1].shipmentType).to.eql('ONSITE_PICKUP');\r",
 							"})\r",
 							"\r",
-							"pm.test(\"Correct purchases returned\",function(){\r",
+							"pm.test(\"Correct artwork returned\",function(){\r",
 							"    pm.expect(pm.response.json()[0].artworkId).to.eql(pm.globals.get(\"artworkId1\"));\r",
 							"    pm.expect(pm.response.json()[1].artworkId).to.eql(pm.globals.get(\"artworkId2\"));\r",
 							"})"
@@ -533,12 +533,12 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:3000/getAllPurchases/",
+					"raw": "http://localhost:8080/getAllPurchases/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"getAllPurchases",
 						""
@@ -569,7 +569,7 @@
 							"    pm.expect(dto.username).to.eql(\"Astronaut\");\r",
 							"})\r",
 							"\r",
-							"pm.test(\"purchase id match\",function(){\r",
+							"pm.test(\"artowrk id match\",function(){\r",
 							"    let dto=pm.response.json();\r",
 							"    pm.expect(dto.artworkId).to.eql(pm.globals.get(\"artworkId1\"));\r",
 							"})"
@@ -591,12 +591,12 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:3000/deletePurchase/",
+					"raw": "http://localhost:8080/deletePurchase/",
 					"protocol": "http",
 					"host": [
 						"localhost"
 					],
-					"port": "3000",
+					"port": "8080",
 					"path": [
 						"deletePurchase",
 						""

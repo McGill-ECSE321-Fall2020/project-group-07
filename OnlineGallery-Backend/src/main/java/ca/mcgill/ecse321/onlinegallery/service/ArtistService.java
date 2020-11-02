@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.transaction.Transactional;
@@ -12,7 +13,6 @@ import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ProfileRepository;
-import ca.mcgill.ecse321.onlinegallery.dao.PurchaseRepository;
 import ca.mcgill.ecse321.onlinegallery.dto.ProfileDto;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;

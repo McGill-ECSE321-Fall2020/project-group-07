@@ -2,11 +2,11 @@ package ca.mcgill.ecse321.onlinegallery.service.Artwork;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.lenient;
-import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.ArgumentMatchers.anyString;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -16,7 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
@@ -52,7 +51,6 @@ public class TestArtworkServiceCreation {
 	@SuppressWarnings("deprecation")
 	private static final Long VALID_ARTISTID=new Long(1);
 	@SuppressWarnings("deprecation")
-	private static final Long INVALID_ARTISTID=new Long(2);
 	
 	private static final Long ARTWORK_ID=new Long(4);
 	private static final String NAME = "pretty";
@@ -67,11 +65,7 @@ public class TestArtworkServiceCreation {
 
 	@BeforeEach
 	public void setMockOutput() {
-		Answer<?> paramAsAnswer = (InvocationOnMock invocation)->{
-			return invocation.getArgument(0);
-		};
 
-		
 		lenient().when(regRepo.existsByUserName(anyString())).thenAnswer((InvocationOnMock invocation)->{
 			if (invocation.getArgument(0).equals(VALID_USERNAME_ARTIST)|| invocation.getArgument(0).equals(VALID_USERNAME_NOTARTIST)) {
 				return true;

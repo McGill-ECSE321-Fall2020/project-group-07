@@ -14,7 +14,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
 import ca.mcgill.ecse321.onlinegallery.model.Artist;
@@ -39,10 +38,6 @@ public class TestArtworkServiceGetAvailable {
 
 	@BeforeEach
 	public void setMockOutput() {
-		Answer<?> paramAsAnswer = (InvocationOnMock invocation)->{
-			return invocation.getArgument(0);
-		};
-		
 		lenient().when(artworkRepo.findAll()).thenAnswer((InvocationOnMock invocation)->{
 			
 			List<Artwork> list = new ArrayList<Artwork>();

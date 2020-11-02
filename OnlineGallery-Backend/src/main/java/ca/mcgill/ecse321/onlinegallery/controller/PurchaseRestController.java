@@ -51,7 +51,7 @@ public class PurchaseRestController {
 		List<PurchaseDto> allPurchaseDto = new ArrayList<PurchaseDto>();
 		try {
 			for (Purchase purchase:service.getAllPurchases()) {
-				allPurchaseDto.add(convertToDto(purchase));
+				allPurchaseDto.add(convertToDto(purchase)); 
 			}
 			return new ResponseEntity<>(allPurchaseDto,HttpStatus.OK);
 		}

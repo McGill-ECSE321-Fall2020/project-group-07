@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.onlinegallery.dto;
 
-import java.sql.Date;
-
 import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
 
 
@@ -10,7 +8,7 @@ public class PurchaseDto {
 	public void setPurchaseId(Long id) {
 		this.purchaseId=id;
 	}
-	public Long getPurcahseId() {
+	public Long getPurchaseId() {
 		return this.purchaseId;
 	}
 	
@@ -38,4 +36,14 @@ public class PurchaseDto {
 	public ShipmentType getShipmentType() {
 		return this.shipmentType;
 	}
+	private Long shipmentId;
+	public Long getShipment()
+	 {
+	    return shipmentId;
+	 }
+	public void setShipmentId(Long shipmentId) {
+		this.shipmentId = shipmentId;
+	  }
+
+	 
 }
