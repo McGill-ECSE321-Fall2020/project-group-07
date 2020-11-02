@@ -19,11 +19,11 @@ The team is composed of 5 McGill University students within the Faculty of Engin
 ### Project
 | NAME                   | ROLE |  SPRINT 1 (Hours) | SPRINT 2 (Hours) | SPRINT 3 (Hours) | SPRINT 4 (Hours)|
 |------------------------|------|-----------|----------|----------|----------|
-| Anthony Dagher         | Software Developer       | 20  |   |   |          |
-| Jay Han                |Project Manager, Developer| 35            |   |   |          |
-| Keon Olsz              | Software Developer       | 20 |   |   |          |
-| Massimo Vadacchino     | CI lead, Developer       | 30  |   |   |          |
-| Natalia Tabet          | Software Developer       | 26  |   |   |          |
+| Anthony Dagher         | Software Developer       | 20  |  30 |   |          |
+| Jay Han                |Project Manager, Developer| 35  |  45 |   |          |
+| Keon Olsz              | Software Developer       | 20 |  25 |   |          |
+| Massimo Vadacchino     | CI lead, Developer       | 30  |  32 |   |          |
+| Natalia Tabet          | Software Developer       | 26  |   30 |   |          |
 
 ### Sprint 1
 
