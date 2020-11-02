@@ -36,3 +36,15 @@ The project report for Sprint 1 can be found [here](https://github.com/McGill-EC
 | Keon Olsz |<ins>Persistece tests for _GalleryAdmin, Artwork_ classes</ins>, CrudRepository interfaces for both classes, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model, collect & organize final 15 requirements, CrudRepository classes for both respective tests |20|
  |Massimo Vadacchino| UMLLab code generation, project wiki setup, Readme.md setup, project report, <ins>persistence tests for _Profile, Shipment_ classes</ins>, CrudRepository interfaces for both classes, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model, re-phrase final list of requirements, merged/finalized domain model, merged/finalized usecase diagrams | 30 |
  | Natalia Tabet | UMLLab code generation, <ins>persistence tests for _PhysicalGallery, Customer_ classes</ins>, CrudRepository interfaces for both classes, 3 individual requirements, 3 use cases, 1 activity diagram, 1 individual domain model, model diagrams merging. | 26 |
+ 
+### Sprint 2
+
+The project report for Sprint 2 can be found [here](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki/Sprint-2)).
+
+| NAME                   | ROLE | CONTRIBUTIONS | HOURS | 
+|------------------------|----------|---------------|-------|
+| Anthony Dagher         | Software Developer <br/> Quality Assurance  |**Artist** (4/6 Service methods and unit tests, Controller, Postman) <br/> **Artwork** (2/6 Service methods and unit tests)|   30    |
+| Jay Han                | Software Developer <br/> Quality Assurance <br/> C/I Lead, PM  |**Registration** (Service methods, unit tests, Controller, Postman) <br/> **Purchase** (Service methods, unit tests) <br/> **Shipment** (3/6 Sevice methods and unit tests) <br/> Setup travis scripts |   45    | 
+| Massimo Vadacchino     | Software Developer <br/> Quality Assurance  |**Admin** (Service methods, unit tests, Controller, Postman) <br/> **Customer** (Service methods, unit tests, Controller, Postman) <br/> **Artist** (2/6 Service methods and unit tests) <br/> **Purchase** (Controller, Postman) <br/> Wiki Project Report|  32  | 
+| Keon Olsz              | Software Developer <br/> Quality Assurance  |**Artwork** (4/6 Service methods and unit tests, Controller, Postman)              |   25    |  
+| Natalia Tabet          | Software Developer <br/> Quality Assurance  |**Application** (Service methods, unit tests) <br/> **Shipment** (3/6 Service methods and unit tests, DTO, Controller, Postman)              |  30  | 
