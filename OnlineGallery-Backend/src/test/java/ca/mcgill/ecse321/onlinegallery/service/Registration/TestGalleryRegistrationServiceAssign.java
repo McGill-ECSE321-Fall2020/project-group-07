@@ -44,6 +44,7 @@ public class TestGalleryRegistrationServiceAssign {
 	private static final String INVALID_USERNAMEALREADYHASCUSTOMER = "alreadyHasCustomer";
 	private static final String INVALID_USERNAMEALREADYHASARTIST = "alreadyHasArtist";
 	private static final String INVALID_USERNAMEALREADYHASADMIN = "alreadyHasAdmin";
+	
 
 	@BeforeEach
 	public void setMockOutput() {

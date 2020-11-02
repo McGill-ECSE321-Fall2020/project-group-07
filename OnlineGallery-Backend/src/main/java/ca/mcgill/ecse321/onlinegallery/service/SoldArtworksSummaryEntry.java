@@ -10,6 +10,7 @@ public class SoldArtworksSummaryEntry {
 	Map<String, Double> commisionMap;
 	Map<String, Date> dateMap;
 	
+	
 	public SoldArtworksSummaryEntry(String aName, double aPrice, double aCommission, Date aDate) {
 		nameMap = new HashMap <String, String> ();
 		nameMap.put("name", aName);
@@ -22,7 +23,11 @@ public class SoldArtworksSummaryEntry {
 		
 		dateMap = new HashMap <String, Date> ();
 		dateMap.put("datePurchased", aDate);
+		
+		
+		
 	}
+
 
 	public Map<String, String> getNameMap() {
 		return nameMap;

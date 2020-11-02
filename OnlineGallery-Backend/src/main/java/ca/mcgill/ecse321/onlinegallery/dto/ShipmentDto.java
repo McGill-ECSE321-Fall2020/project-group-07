@@ -151,9 +151,14 @@ public class ShipmentDto
   {
 	 this.purchases.clear();
 	 purchases.addAll(aListOfPurchases);
-    
   }
 
+
+  public int indexOfPurchase(PurchaseDto aPurchase)
+  {
+    int index = purchases.indexOf(aPurchase);
+    return index;
+  }
  
   public void addPurchase(Long aPurchase)
   {
