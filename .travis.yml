@@ -2,19 +2,26 @@ branches:
   only:
   - master  
   
-matrix:
+jobs:
   include:
 
     # Backend tests
+    - stage: testBackend
+
     - language: java
 
       before_install:
         - chmod +x ./gradlew
+        - chmod +x ./resetdb.sh
+
       script:
+        - ./resetdb.sh
+        - sleep 30
         - ./gradlew build
 
 
     # Postman integration tests
+    - stage: testNewman
     - language: node_js
       node_js:
           - "10.15"
