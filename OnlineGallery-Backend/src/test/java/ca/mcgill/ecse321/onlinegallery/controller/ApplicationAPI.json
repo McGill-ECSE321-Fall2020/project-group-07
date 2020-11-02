@@ -1,0 +1,382 @@
+{
+	"info": {
+		"_postman_id": "480f06c6-0604-49ac-9035-1c6a7229b6a3",
+		"name": "ApplicationAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createRegistration1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "f92b342a-d6a7-4425-bb72-766080c65325",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"IPhoneX\",\n\t\"firstName\":\"Iphone\",\n\t\"lastName\":\"XXXXXX\",\n\t\"email\":\"IphoneX@yahoo.com\",\n    \"password\":\"ay2Caramba!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setArtistRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "735f20a4-8d20-4325-8210-7b3c2202c780",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setArtist/IPhoneX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setArtist",
+						"IPhoneX"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createRegistration2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "2aa26a8f-abd4-4861-97d2-f3d4dad29378",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"IPadX\",\n\t\"firstName\":\"IPad\",\n\t\"lastName\":\"XXXXXX\",\n\t\"email\":\"weAreCOOL@gmail.com\",\n    \"password\":\"hay2Caramba!!!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setCustomerRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5e3cf8e9-b475-4f3c-84d6-3efc6a8b1358",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setCustomer/IPadX",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setCustomer",
+						"IPadX"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "82e1fe9b-809f-447b-8dcb-f2d73520bf05",
+						"exec": [
+							"pm.globals.set(\"massArtworkId1\",pm.response.json().artworkId);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"IPhoneX\",\n    \"name\": \"MonaLisa\",\n    \"description\": \"extreme beauty\",\n    \"price\": 4569.12,\n    \"status\": 1,\n    \"dimension\": \"HUUUUUUGE\",\n    \"weight\": 190,\n    \"commission\":0.75,\n    \"numViews\": 0\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "acc56e24-b16b-4aa5-b18c-0aec9328cb0a",
+						"exec": [
+							"pm.globals.set(\"massArtworkId2\",pm.response.json().artworkId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"IPhoneX\",\n    \"name\": \"StarryNight\",\n    \"description\": \"Kinda okay\",\n    \"price\": 10.69,\n    \"status\": 1,\n    \"dimension\": \"SMOL\",\n    \"weight\": 4,\n    \"commission\":0.23,\n    \"numViews\": 0\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPurchase1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "4f55090d-3f0d-40a5-91cd-fe48c91d7507",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"IPadX\",\r\n    \"artworkId\": {{massArtworkId1}},\r\n    \"shipmentType\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPurchase2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5bcbff04-a11b-44e5-852f-2e4e564820d8",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"IPadX\",\r\n    \"artworkId\": {{massArtworkId2}},\r\n    \"shipmentType\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getSummary",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "94e7727d-8b01-4ce2-b3e1-69228c1f3e1a",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"2 summaries returned\",function(){\r",
+							"    pm.expect(pm.response.json()).length==2;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Correct artowrks returned\",function(){\r",
+							"    pm.expect(pm.response.json()[0].name).to.eql(\"MonaLisa\");\r",
+							"    pm.expect(pm.response.json()[1].name).to.eql(\"StarryNight\");\r",
+							"    pm.expect(pm.response.json()[0].artworkId).to.eql(pm.globals.get(\"massArtworkId1\"));\r",
+							"    pm.expect(pm.response.json()[1].artworkId).to.eql(pm.globals.get(\"massArtworkId2\"));\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Correct commissions returned\",function(){\r",
+							"    pm.expect(pm.response.json()[0].comission).to.eql(0.75);\r",
+							"    pm.expect(pm.response.json()[1].comission).to.eql(0.23);\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Correct prices returned\",function(){\r",
+							"    pm.expect(pm.response.json()[0].price).to.eql(4569.12);\r",
+							"    pm.expect(pm.response.json()[1].price).to.eql(10.69);\r",
+							"})\r",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/generateSummary/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"generateSummary",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

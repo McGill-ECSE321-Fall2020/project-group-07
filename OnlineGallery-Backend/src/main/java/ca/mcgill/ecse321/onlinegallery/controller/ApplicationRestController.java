@@ -1,9 +1,5 @@
 package ca.mcgill.ecse321.onlinegallery.controller;
 
-<<<<<<< HEAD
-public class ApplicationRestController {
-
-=======
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,5 +73,4 @@ public class ApplicationRestController {
 	}
 	
 	
->>>>>>> mass-rest
 }
