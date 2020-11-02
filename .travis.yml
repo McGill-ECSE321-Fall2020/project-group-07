@@ -2,68 +2,50 @@ branches:
   only:
   - master  
   
-jobs:
+matrix:
   include:
 
     # Backend tests
-    - stage: testBackend
+    - language: java
 
-<<<<<<< HEAD
-          language: java
-
-          before_install:
-            - chmod +x ./gradlew
-            - chmod +x ./resetdb.sh
-
-          script:
-            - ./resetdb.sh
-            - sleep 30
-            - ./gradlew build
-=======
       before_install:
         - chmod +x ./gradlew
-        - chmod +x ./resetdb.sh
       script:
-        - ./resetdb.sh
-        - sleep 90
         - ./gradlew build
->>>>>>> parent of b81143d... reset db before newman
 
 
     # Postman integration tests
-    - stage: testNewman
-    
-          language: node_js
-          node_js:
-              - "10.15"
+    - language: node_js
+      node_js:
+          - "10.15"
 
-          before_install:
-            - chmod +x ./gradlew
+      before_install:
+        - chmod +x ./gradlew
 
-          install:
-              - npm install -g newman
+      install:
+          - npm install -g newman
 
-          before_script:
-              - node --version
-              - npm --version
-              - node_modules/.bin/newman --version
-              - chmod +x ./resetdb.sh
+      before_script:
+          - node --version
+          - npm --version
+          - node_modules/.bin/newman --version
+          - chmod +x ./resetdb.sh
 
-          script:
+      script:
 
-              - ./resetdb.sh
-                
-              # run Spring app in background
-              - ./gradlew bootRun &
+          - ./resetdb.sh
+            
+          # run Spring app in background
+          - ./gradlew bootRun &
 
-              # give time for app to startup
-              - sleep 60     
+          # give time for app to startup
+          - sleep 60     
 
-              # run test suites geenrated from Postman
-              - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.json
-              - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/AdminAPI.json
-              - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtistAPI.json
-              - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtworkAPI.json
-              - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/CustomerAPI.json
-              - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/PurchaseAPI.json
-              - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ShipmentAPI.json
+          # run test suites geenrated from Postman
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/AdminAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtistAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtworkAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/CustomerAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/PurchaseAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ShipmentAPI.json
