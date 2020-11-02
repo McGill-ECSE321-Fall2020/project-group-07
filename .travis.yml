@@ -5,16 +5,16 @@ branches:
 matrix:
   include:
 
-    # Backend tests
-    - language: java
+    # # Backend tests
+    # - language: java
 
-      before_install:
-        - chmod +x ./gradlew
-        - chmod +x ./resetdb.sh
-      script:
-        - ./resetdb.sh
-        - sleep 30
-        - ./gradlew build
+    #   before_install:
+    #     - chmod +x ./gradlew
+    #     - chmod +x ./resetdb.sh
+    #   script:
+    #     - ./resetdb.sh
+    #     - sleep 90
+    #     - ./gradlew build
 
 
     # Postman integration tests
@@ -42,7 +42,7 @@ matrix:
           - ./gradlew bootRun &
 
           # give time for app to startup
-          - sleep 60        
+          - sleep 60     
 
           # run test suites geenrated from Postman
           - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.json

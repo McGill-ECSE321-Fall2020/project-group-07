@@ -126,7 +126,6 @@ public class ShipmentRestcontroller {
 	
 	
 	private ShipmentDto convertToShipmentDto (Shipment shipment) {
-		System.out.println(shipment.getShipmentId());
 
 		long shipmentId = shipment.getShipmentId();
 		String sourceAddress = shipment.getSourceAddress();
