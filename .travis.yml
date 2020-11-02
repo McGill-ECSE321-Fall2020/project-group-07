@@ -10,10 +10,7 @@ matrix:
 
       before_install:
         - chmod +x ./gradlew
-        - chmod +x ./resetdb.sh
       script:
-        - ./resetdb.sh
-        - sleep 90
         - ./gradlew build
 
 
