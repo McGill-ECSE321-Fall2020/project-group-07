@@ -136,5 +136,15 @@ public class Artwork {
 	public void setArtist(Artist artist) {
 		this.artist = artist;
 	}
+	
+	private String imgUrl;
+	
+	public String getUrl() {
+		return this.imgUrl;
+	}
+	
+	public void setUrl(String url) {
+		this.imgUrl=url;
+	}
 
 }

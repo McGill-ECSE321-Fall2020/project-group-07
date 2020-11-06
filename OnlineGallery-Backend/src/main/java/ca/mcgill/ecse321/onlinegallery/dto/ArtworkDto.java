@@ -12,6 +12,14 @@ public class ArtworkDto {
 	public Long getArtworkId() {
 		return this.id;
 	}
+	
+	private String imgUrl;
+	public void setUrl(String url) {
+		this.imgUrl=url;
+	}
+	public String getUrl() {
+		return this.imgUrl;
+	}
 
 	private String username;
 	public void setUsername(String username) {

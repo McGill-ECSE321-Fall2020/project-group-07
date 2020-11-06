@@ -65,5 +65,14 @@ public class Profile {
 	public double getRating() {
 		return this.rating;
 	}
+	
+	private String imgUrl;
+	
+	public String getUrl() {
+		return this.imgUrl;
+	}
+	public void setUrl(String url){
+		this.imgUrl=url;
+	}
 
 }
