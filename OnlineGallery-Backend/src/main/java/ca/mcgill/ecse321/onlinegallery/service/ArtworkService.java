@@ -1,8 +1,8 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
-
+import java.util.Calendar;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -165,6 +165,10 @@ public class ArtworkService {
 		return artworkList;
 	
 		
+	}
+	
+	public String generateFilename(String username){
+		return username + new SimpleDateFormat("yyyyMMddHHmmssSSS").format(Calendar.getInstance().getTime());
 	}
 	
 	private <T> List<T> toList(Iterable<T> iterable){
