@@ -1,17 +1,17 @@
 <template>
   <v-container>
-        <v-card @click="expand" @mouseover="hover = true" @mouseleave="hover=false;" :class="{active:hover}" class="m-0 ">
+        <v-card @click="expand" @mouseover="hover = true" @mouseleave="hover=false;" :class="{active:hover}" class="m-0 card">
              <v-img v-bind:src="imgSrc"/>
         </v-card>
-        <PopUp :dialog.sync="clicked" @closeDialog="clicked=false" v-bind:imgSrc="imgSrc" v-bind:title="title" v-bind:desc="desc" />
+        <ImageDialogue :dialog.sync="clicked" @closeDialog="clicked=false" v-bind:imgSrc="imgSrc" v-bind:title="title" v-bind:desc="desc" />
   </v-container>
 </template>
 
 <script>
-import PopUp from "@/components/PopUp";
+import ImageDialogue from "@/components/ImageDialogue";
 export default {
   name: 'image-tile',
-  components:{PopUp},
+  components:{ImageDialogue},
   props: ["imgSrc","title","desc"],
   data(){
     return{
@@ -37,5 +37,9 @@ export default {
 .title{
   font-family: Roboto;
   text-align: center;
+}
+
+.card{
+  border: 1px solid black !important;
 }
 </style>

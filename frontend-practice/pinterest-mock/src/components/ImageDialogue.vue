@@ -1,25 +1,41 @@
 <template>
   <v-container>
-        <v-dialog :value="dialog" @click:outside="closeDialog()" overlay-color="#ffffff" overlay-opacity="0.9" width="700">
+        <v-dialog :value="dialog" @click:outside="closeDialog()" overlay-color="#ffffff" overlay-opacity="0.9" width="1600">
           <div class="card-container">
-            <v-card color="#ffffff" class="rounded-lg" width="700" max-height="350">
+            <v-card color="#ffffff" class="rounded-lg" width="1600" height="800">
                <v-row no-gutters >
                         <v-col cols="8">
-                              <v-img v-bind:src="imgSrc" width="500" height="350"/>
+                              <div height="800">
+                                <perfect-scrollbar>
+                              <v-img v-bind:src="imgSrc" width="1200" min-height="800"/>
+                                </perfect-scrollbar>
+                              </div>
                         </v-col>
                         <v-col cols="4">
 
-                        <div height="100" class="title">
-                           <v-card-title class="justify-center text-sm-subtitle-1" >
+                        <div class="title">
+                           <v-card-title class="justify-center text-sm-h4 title" >
                               {{title}}
                             </v-card-title>
                         </div>
 
-                           <v-card-text class="body-2 pl-2 text-justify">
+                        <div class="subtitle">
+                           <v-card-title class="justify-center text-sm-body-1 subtitle">
+                              12"x8", oil on canvas
+                            </v-card-title>
+
+                           <v-card-title class="justify-center text-sm-body-1 subtitle" >
+
+                             <v-btn  outlined x-small>
+                              leo da binci
+                             </v-btn>
+                           </v-card-title>
+                        </div>
+
+
+                           <v-card-text class="text-sm-h5 pl-2 text-justify">
                                <div class="body">
-                                  <perfect-scrollbar>
                                       {{desc}}
-                                  </perfect-scrollbar>
                                </div>
                             </v-card-text>
 
@@ -27,9 +43,12 @@
                                <v-btn
                                 depressed
                                 elevation="2"
-                                x-small
+                                small
+                                outlined
                               >buy</v-btn>
                             </div>
+
+
 
 
                         </v-col>
@@ -65,21 +84,26 @@ export default {
 
 <style scoped>
 .title{
+  height: 100px;
+  padding-top: 20px;
+}
+
+.subtitle{
+  padding-bottom: 0px !important;
 }
 
 .body{
-  height:200px;
+  height:500px;
   overflow: scroll !important;
   word-break: normal;
   font-size:0.5em !important;
   overflow-x:hidden !important;
   overflow-y: hidden !important;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-left: 60px;
+  padding-right: 60px;
 }
-
 .ps{
-  height:200px;
+  height:800px;
 }
 
 </style>

@@ -1,6 +1,6 @@
 <template >
   <v-app>
-    <v-container class="underlay" fluid>
+    <v-container fluid>
       <div class="masonry-container">
       <div v-masonry item-selector=".item">
         <v-row dense no-gutters>
@@ -40,7 +40,7 @@ export default {
         let each={
           id:i,
           title:"Art Title",
-          desc:"Nam hendrerit lectus nec risus tempor, vitae convallis nibh elementum. Quisque nulla nulla, facilisis in hendrerit placerat, dictum et augue. Donec eu tortor hendrerit, feugiat dolor vel, molestie velit. Nulla dapibus feugiat sem nec condimentum. Nullam lorem orci, placerat eget rutrum non, molestie ut lorem. Mauris commodo metus vel turpis accumsan, quis ultricies sem sagittis. Proin bibendum orci a neque hendrerit, eleifend vestibulum felis porta. Praesent in libero elit. Mauris ac volutpat lectus. Integer et orci nec metus tincidunt bibendum. Sed eget nisl vitae risus vehicula dignissim sed ut eros. Aliquam id ipsum quam. Sed ultricies posuere cursus. In hac habitasse platea dictumst. Pellentesque eget molestie turpis",
+          desc:"Cras faucibus lorem fermentum odio viverra gravida vitae nec massa. Donec ut ultrices dui. Quisque vitae dolor et sem posuere pellentesque. Vestibulum tincidunt nulla quis rhoncus ultrices. Suspendisse neque neque, aliquet at neque a, finibus pretium sapien. Fusce sagittis tortor in commodo viverra. Duis lacinia risus sit amet scelerisque ultricies. Mauris in neque non erat molestie feugiat. Vivamus vel dictum libero. Maecenas mi nunc, consequat ac erat imperdiet, eleifend efficitur neque. Vestibulum id augue et turpis tincidunt sagittis id ac lorem. Integer malesuada magna vel lobortis lacinia. Etiam vitae nibh magna. Nullam dolor libero, lobortis a nisl vel, pretium tincidunt urna. Nullam facilisis diam ut pharetra interdum. Proin eu lorem felis. Maecenas diam sapien, lacinia in velit at, tempus dapibus magna. Morbi ultrices est nulla, faucibus malesuada urna tempus non. Integer eget orci vel lorem feugiat faucibus at et nisi. Nullam aliquam magna urna, sit amet faucibus risus elementum fringilla. Vivamus orci lacus, hendrerit et tempor eget",
           url:data[i].urls.regular
         }
         this.artworks.push(each);
@@ -55,9 +55,5 @@ export default {
 .masonry-container {
   width: 75%;
   margin:auto;
-}
-
-.underlay{
-  background-color: #DFDFDF;
 }
 </style>
