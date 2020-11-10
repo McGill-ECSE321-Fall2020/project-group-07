@@ -70,6 +70,7 @@
         class="white--text"
         color="deep-purple accent-4"
         depressed
+        @click="register()"
       >
         Register
     </v-btn> 
@@ -82,20 +83,17 @@
       </v-btn>  
     </v-card-actions>
     </v-card>
-  <ImageDialogue :dialog.sync="clicked" @closeDialog="clicked=false" v-bind:imgSrc="imgSrc" v-bind:title="title" v-bind:desc="desc" />
 </v-container>
 </template>
 
 <script>
-  import ImageDialogue from "@/components/ImageDialogue";
   export default {
     name: 'Registration',
-    components:{ImageDialogue},
-    props: ["imgSrc","title","desc"],
     data: () => ({
       form:false,
       isLoading: false,
       username: '',
+      select:'',
       usernameRules: [
         v => !!v || 'Username is required',
         v => (v && v.length <= 10) || 'Name must be at most 10 characters',
@@ -127,7 +125,15 @@
     }),
     methods: {
       register(){
-
+        var signup ={
+          username: this.username,
+          firstName: this.firstName,
+          lastName: this.lastName,
+          email: this.email,
+          password: this.password,
+          selection: this.select
+        }
+        console.log(signup)
       }
     }
   }
