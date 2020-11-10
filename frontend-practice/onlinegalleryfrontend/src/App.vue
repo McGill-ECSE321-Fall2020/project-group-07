@@ -1,7 +1,8 @@
-<template>    
-    <v-main>
-      <RegistrationPage>
-    </v-main>
+<template> 
+  <v-app>   
+      <Registration>
+      </Registration>
+  </v-app>
 </template>
 
 <script>
@@ -13,9 +14,8 @@ export default {
   components: {
     Registration,
   },
-
   data: () => ({
-    //
+
   }),
 };
 </script>
