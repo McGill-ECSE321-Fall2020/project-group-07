@@ -1,9 +1,20 @@
 <template>
   <v-container>
         <v-card @click="expand" @mouseover="hover = true" @mouseleave="hover=false;" :class="{active:hover}" class="m-0 card">
-             <v-img v-bind:src="imgSrc"/>
+             <v-img
+                 :src="imgUrl"
+                 :height="height"
+             />
         </v-card>
-        <ImageDialogue :dialog.sync="clicked" @closeDialog="clicked=false" v-bind:imgSrc="imgSrc" v-bind:title="title" v-bind:desc="desc" />
+        <ImageDialogue :dialog.sync="clicked" @closeDialog="clicked=false"
+                       :artid="artid"
+                       :imgUrl="imgUrl"
+                       :artname="artname"
+                       :artistname="artistname"
+                       :artdesc="artdesc"
+                       :medium="medium"
+                       :dimension="dimension"
+                       :price="price" />
   </v-container>
 </template>
 
@@ -12,7 +23,7 @@ import ImageDialogue from "@/components/ImageDialogue";
 export default {
   name: 'image-tile',
   components:{ImageDialogue},
-  props: ["imgSrc","title","desc"],
+  props: ["artid","imgUrl","artname","artistname","artdesc","medium", "dimension", "price","height"],
   data(){
     return{
       hover:false,

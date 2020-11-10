@@ -1,13 +1,13 @@
 <template>
-    <div class="home">
-      <div> home page</div>
+    <div class="placeholder">
+      <div> artist login</div>
     </div>
 </template>
 
 <script>
 
 export default {
-  name: 'Home',
+  name: 'artist-login',
   components: {
 
   }
@@ -16,7 +16,7 @@ export default {
 
 <style>
 
-.home{
+.placeholder{
   padding-top: 300px;
   text-align: center;
 }

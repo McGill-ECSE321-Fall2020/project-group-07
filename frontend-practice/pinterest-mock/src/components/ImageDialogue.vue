@@ -1,33 +1,33 @@
 <template>
   <v-container>
-        <v-dialog :value="dialog" @click:outside="closeDialog()" overlay-color="#ffffff" overlay-opacity="0.9" width="1600">
+        <v-dialog :value="dialog" @click:outside="closeDialog()" overlay-color="white" overlay-opacity="0.9" width="1600">
           <div class="card-container">
             <v-card color="#ffffff" class="rounded-lg" width="1600" height="800">
                <v-row no-gutters >
                         <v-col cols="8">
                               <div height="800">
                                 <perfect-scrollbar>
-                              <v-img v-bind:src="imgSrc" width="1200" min-height="800"/>
+                              <v-img :src="imgUrl" width="1200" min-height="800"/>
                                 </perfect-scrollbar>
                               </div>
                         </v-col>
                         <v-col cols="4">
 
                         <div class="title">
-                           <v-card-title class="justify-center text-sm-h4 title" >
-                              {{title}}
+                           <v-card-title class="justify-center text-sm-h5 title" >
+                              {{artname}}
                             </v-card-title>
                         </div>
 
                         <div class="subtitle">
-                           <v-card-title class="justify-center text-sm-body-1 subtitle">
-                              12"x8", oil on canvas
+                           <v-card-title class="justify-center text-sm-body-2 subtitle">
+                             {{dimension}}, {{medium}}
                             </v-card-title>
 
                            <v-card-title class="justify-center text-sm-body-1 subtitle" >
 
                              <v-btn  outlined x-small>
-                              leo da binci
+                               {{ artistname }}
                              </v-btn>
                            </v-card-title>
                         </div>
@@ -35,7 +35,7 @@
 
                            <v-card-text class="text-sm-h5 pl-2 text-justify">
                                <div class="body">
-                                      {{desc}}
+                                      {{artdesc}}
                                </div>
                             </v-card-text>
 
@@ -45,11 +45,9 @@
                                 elevation="2"
                                 small
                                 outlined
+                                @click="startBuy"
                               >buy</v-btn>
                             </div>
-
-
-
 
                         </v-col>
 
@@ -68,10 +66,13 @@ import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 Vue.use(PerfectScrollbar);
 export default {
   name: 'popup',
-  props: ["imgSrc","title","desc","dialog"],
+  props: ["dialog","artid","imgUrl","artname","artistname","artdesc","medium", "dimension", "price"],
   methods:{
     closeDialog(){
       this.$emit('closeDialog');
+    },
+    startBuy(){
+      console.log("buy artwork id: "+this.artid);
     }
   },
   data(){

@@ -1,41 +1,45 @@
 <template>
   <v-container>
-    <div class="navbar">
+    <div>
          <v-app-bar color="white" class="navbar" fixed elevation="0" >
            <v-row>
 
-             <v-col :sm="1" class="col">
-                 <router-link to="/" class="black-link">Home</router-link>
+             <v-col :sm="1" class="leftend">
+                 <router-link to="/home" class="black-link">Home</router-link>
              </v-col>
 
-             <v-col :sm="1">
+             <v-col :sm="1" class="col">
                  <router-link to="/about" class="black-link">about</router-link>
              </v-col>
 
-             <v-col :sm="2">
+             <v-col :sm="2" class="col">
                  <router-link to="/discover" class="black-link">discover artworks</router-link>
              </v-col>
 
-             <v-col :sm="2">
-                 <router-link to="/" class="black-link">view artists</router-link>
-             </v-col>
-
-              <v-col :sm="2">
-                 <router-link to="/" class="black-link">customer portal</router-link>
-             </v-col>
-
-             <v-col :sm="2">
-                 <router-link to="/" class="black-link">artist portal</router-link>
+             <v-col :sm="2" class="col">
+                 <router-link to="/all-artists" class="black-link">view artists</router-link>
              </v-col>
 
               <v-col :sm="2" class="col">
-                <v-text-field
-                    label="search"
-                solo
-                dense
-                    rounded
-              ></v-text-field>
+                 <router-link to="/customer-login" class="black-link">customer portal</router-link>
              </v-col>
+
+             <v-col :sm="2" class="col">
+                 <router-link to="/artist-login" class="black-link">artist portal</router-link>
+             </v-col>
+
+             <v-col :sm="1" class="col">
+                 <router-link to="/register" class="black-link">register</router-link>
+             </v-col>
+
+             <v-col :sm="1" class="rightend">
+               <v-btn text x-small>
+                 <v-icon color="#3b5998">
+                   mdi-facebook
+                 </v-icon>
+               </v-btn>
+             </v-col>
+
 
            </v-row>
           </v-app-bar>
@@ -56,6 +60,7 @@ export default {
   margin-left: auto;
   margin-right: auto;
   padding-top:50px;
+  border:1px solid red
 }
 
 .black-link{
@@ -65,5 +70,13 @@ export default {
 
 .col{
   text-align: center;
+}
+
+.rightend{
+  text-align: right;
+}
+
+.leftend{
+  text-align: left;
 }
 </style>
