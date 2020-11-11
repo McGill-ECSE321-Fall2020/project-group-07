@@ -3,6 +3,7 @@
       <div>
       <HeaderBar/>
       <div class="artist-details">
+
       <v-card
         class="mx-auto"
         max-wide="344"
@@ -28,13 +29,6 @@
     </v-card>
      </div>
           <div class="masonry-container">
-            <div class="refresh">
-              <v-btn text>
-                <v-icon class="black-link">
-                  mdi-refresh
-                </v-icon>
-              </v-btn>
-            </div>
 
             <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
               <v-col :sm="totalWidth" v-for="each in artworks" v-masonry-tile class="item" :key="each.id" >
@@ -96,7 +90,7 @@ export default {
 <style scoped>
 
 .artist-details {
-  width: 75%;
+  width: 73.15%;
   margin:auto;
   margin-top: 100px;
 }
