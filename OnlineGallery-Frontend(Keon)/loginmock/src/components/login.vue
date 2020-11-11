@@ -1,6 +1,8 @@
 <template>
 
-<v-container style="position: relative;top: 13%;" class="text-xs-center">
+
+        <v-flex xs4 class="grey lighten-4">
+            <v-container style="position: relative;top: 13%;" class="text-xs-center">
 
  <v-form
     ref="form"
@@ -35,8 +37,10 @@
     >
       Login
     </v-btn>
-  </v-form>
-  </v-container>
+            </v-form>
+         </v-container>
+     </v-flex>
+
 
     
 </template>
