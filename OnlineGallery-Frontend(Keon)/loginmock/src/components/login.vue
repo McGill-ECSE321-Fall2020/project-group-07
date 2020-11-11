@@ -1,13 +1,18 @@
 <template>
-
-
-        <v-flex xs4 class="grey lighten-4">
-            <v-container style="position: relative;top: 13%;" class="text-xs-center">
-
+<v-container>
+    <v-card
+    class="mx-auto"
+    style="max-width: 500px;"
+  >
+      <v-toolbar>
+      <v-card-title class="title font-weight-regular">
+        Login
+      </v-card-title>
+      </v-toolbar>
  <v-form
     ref="form"
-    v-model="valid"
-    lazy-validation
+    v-model="form"
+    class="pa-4 pt-6"
   >
     <v-text-field
       v-model="username"
@@ -29,21 +34,21 @@
        counter
        @click:append="show1 = !show1"
     ></v-text-field>
+ </v-form>
 
-
+    <v-divider></v-divider>
+    <v-card-actions>
     <v-btn
       class="mr-4"
       @click="Login"
     >
       Login
     </v-btn>
-            </v-form>
-         </v-container>
-     </v-flex>
-
-
-    
+      </v-card-actions>
+    </v-card>
+</v-container>
 </template>
+
 
 <script>
 export default {
@@ -64,6 +69,12 @@ export default {
 
     methods: {
       Login(){
+        var loginInfo={
+          username: this.username,
+          password: this.password,
+         
+        }
+        console.log(loginInfo)
       }
     }
     
@@ -72,4 +83,14 @@ export default {
 
 <style scoped>
 
+.active{
+  cursor: pointer;
+}
+.title{
+  font-family: Roboto;
+  text-align: center;
+}
+.card{
+  border: 1px solid black !important;
+}
 </style>
