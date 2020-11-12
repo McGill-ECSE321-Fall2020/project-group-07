@@ -43,6 +43,7 @@ export default {
     totalWidth:4,
     artworks:[],
     btnWidth:2
+
   }),
   created(){
     axios.get("https://api.unsplash.com/collections/9248817/photos?per_page=16&client_id=byOHc2uR5blXApgsdmB2HXqDUco4dtPAAvAfnAmQJDM")

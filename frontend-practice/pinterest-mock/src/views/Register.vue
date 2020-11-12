@@ -1,24 +1,24 @@
 <template>
-    <div class="placeholder">
-      <div> register page</div>
-    </div>
+    <v-container>
+      <div class="registration-form">
+        <RegistrationForm/>
+      </div>
+    </v-container>
 </template>
 
 <script>
+import RegistrationForm from "@/components/RegistrationForm";
 
 export default {
   name: 'register',
-  components: {
-
-  }
+  components: {RegistrationForm}
 }
 </script>
 
 <style>
 
-.placeholder{
-  padding-top: 300px;
-  text-align: center;
+.registration-form{
+  margin-top:10%;
 }
 
 </style>
