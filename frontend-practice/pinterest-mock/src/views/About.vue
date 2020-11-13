@@ -1,6 +1,7 @@
 <template>
     <div class="placeholder">
       <div> about page</div>
+
     </div>
 </template>
 
