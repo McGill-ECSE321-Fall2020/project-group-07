@@ -122,6 +122,7 @@ public class ArtistService {
 		profile.setNumSold(0);
 		profile.setRating(0.0);
 		profile.setTotalEarnings(0.0);
+		profile.setUrl(profileDto.getUrl());
 		artist.setProfile(profile);	
 	
 		artist = artistRepo.save(artist);

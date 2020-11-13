@@ -4,7 +4,7 @@
       <HeaderBar/>
           <div class="masonry-container">
             <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
-              <v-col :sm="totalWidth" v-for="each in artists" v-masonry-tile class="item" :key="each.id" >
+              <v-col :cols="totalWidth" v-for="each in artists" v-masonry-tile class="item" :key="each.id" >
                <ArtistTile :artid="each.id" :imgUrl="each.imgUrl" :artistname="each.username" :artdesc="each.description" :height="each.height"/>
               </v-col>
             </v-row>
@@ -30,7 +30,7 @@ export default {
   name: 'artist-page',
   components:{ArtistTile,HeaderBar},
   data:()=>({
-    totalWidth:4,
+    totalWidth:3,
     artists:[],
     btnWidth:2
 

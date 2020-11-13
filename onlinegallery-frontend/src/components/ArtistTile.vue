@@ -1,6 +1,6 @@
 <template>
   <v-container>
-        <v-card @click="gotoArtist" @mouseover="hover = true" @mouseleave="hover=false;" :class="{active:hover}" class="m-0 card">
+        <v-card @click="gotoArtist" class="m-0 card">
              <v-img
                  :src="imgUrl"
                  :height="height"

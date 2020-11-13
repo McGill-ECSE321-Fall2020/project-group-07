@@ -10,12 +10,12 @@ public class ProfileDto {
 		return this.id;
 	}
 	
-	private String imgUrl;
+	private String url;
 	public void setUrl(String url) {
-		this.imgUrl=url;
+		this.url=url;
 	}
 	public String getUrl() {
-		return this.imgUrl;
+		return this.url;
 	}
 	
 	private int numSold;
