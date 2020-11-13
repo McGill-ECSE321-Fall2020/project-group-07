@@ -48,9 +48,9 @@ export default {
       };
       console.log(loginInfo);
       axios
-        .post(
-          "https://onlinegallery-backend-g7.herokuapp.com/customerLogin", 
-          loginInfo //not sure if its the right request
+        .get(
+          "https://onlinegallery-backend-g7.herokuapp.com//getCustomerByUsername", 
+          loginInfo 
         ) 
         .then((res) => {
           this.responseMsg = this.username + " Logged in!";
