@@ -137,14 +137,14 @@ public class Artwork {
 		this.artist = artist;
 	}
 	
-	private String imgUrl;
+	private String url;
 	
 	public String getUrl() {
-		return this.imgUrl;
+		return this.url;
 	}
 	
 	public void setUrl(String url) {
-		this.imgUrl=url;
+		this.url=url;
 	}
 	
 	private String medium;

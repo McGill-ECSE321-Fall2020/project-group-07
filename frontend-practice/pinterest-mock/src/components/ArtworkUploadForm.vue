@@ -72,7 +72,7 @@
           weight: parseFloat(this.weight),
           commission: parseFloat(this.commission),
           numViews: 0,
-          imgUrl:this.imgUrl
+          imgurl:this.imgUrl
         }
 
         console.log(dto);
@@ -108,7 +108,7 @@
         this.weight=null;
         this.commission=null;
         this.numViews=0;
-        this.imgUrl="";
+        this.imgurl="";
         this.imgEncoding="";
         this.response="";
      }
