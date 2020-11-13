@@ -47,7 +47,7 @@ export default {
       this.$emit('closeDialog');
     },
     yes(){
-       axios.put(`https://onlinegallery-backend-g7.herokuapp.com/setArtist/${this.props.username}`)
+       axios.put(`https://onlinegallery-backend-g7.herokuapp.com/setArtist/${this.$props.username}`)
        this.$emit('closeDialog');
          
     },

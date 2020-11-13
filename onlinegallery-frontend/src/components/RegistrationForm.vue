@@ -43,7 +43,7 @@
   Vue.use(VueAxios,axios);
 
   export default {
-    components:{ArtistDialogue, CustomerDialogue},
+    components:{CustomerDialogue, ArtistDialogue},
     name: 'Registration',
     data:()=>{
       return{
