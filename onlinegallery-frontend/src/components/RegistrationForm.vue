@@ -69,7 +69,6 @@
           email: this.email,
           password: this.password,
         }
-        this.artistclicked=true,
         console.log(signup)
         axios.post("https://onlinegallery-backend-g7.herokuapp.com/createRegistration",signup)
         .then(res=>{
