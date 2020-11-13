@@ -30,12 +30,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62c4ff74-3d65-416b-bcb2-d36ff1ba6ed5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/views/ArtistPortfolio.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ArtworkUploadForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ArtworkUploadForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/AllArtists.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AllArtists.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ArtistLogin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ArtistLogin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ArtistPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ArtistPortalPage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
@@ -50,7 +64,13 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/views" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -63,6 +83,8 @@
       <workItem from="1605270481017" duration="8000" />
       <workItem from="1605270514332" duration="431000" />
       <workItem from="1605271158867" duration="944000" />
+      <workItem from="1605272496141" duration="1504000" />
+      <workItem from="1605277818850" duration="1877000" />
     </task>
     <servers />
   </component>
@@ -80,5 +102,11 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="689" y="355" width="603" height="417" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605277564531">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="689" y="355" width="603" height="417" key="#com.intellij.fileTypes.FileTypeChooser/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605277564531" />
   </component>
 </project>

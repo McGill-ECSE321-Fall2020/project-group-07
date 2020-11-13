@@ -21,7 +21,7 @@ export default {
   },
   methods:{
     login(){
-      this.$router.push({name:"/artistpage", params: {username:"dali"}});     // to be replaced by username from the artist login form
+      this.$router.push({name:"/artist-portal", params: {username:"dali"}});     // to be replaced by username from the artist login form
     }
   }
 
