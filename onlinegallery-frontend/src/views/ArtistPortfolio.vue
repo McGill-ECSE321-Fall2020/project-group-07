@@ -15,15 +15,15 @@
           Artist Information
         </div>
         <v-list-item-title class="headline mb-1">
-          Da Vinci, Leonardo
+          {{artistFirstname}} {{artistLastname}}
         </v-list-item-title>
-        <v-list-item-subtitle>Painted the Mona Lisa! Renown artist from some centuries ago. Also a teenage mutant ninja turtle kawabunga</v-list-item-subtitle>
+        <v-list-item-subtitle>{{artistDesc}}</v-list-item-subtitle>
       </v-list-item-content>
 
       <v-list-item-avatar
       tile
       size="175">
-      <v-img src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTIwNjA4NjMzNTM4MDUzNjQ0/salvador-dali-40389-2-402.jpg"/>
+      <v-img :src="profileUrl"/>
       </v-list-item-avatar>
     </v-list-item>
     </v-card>
@@ -68,7 +68,11 @@ export default {
     artworks:[],
     backendInfo:null,
     btnWidth:2,
-    awsAddress:"http://og-img-repo.s3.us-east-1.amazonaws.com/"
+    awsAddress:"http://og-img-repo.s3.us-east-1.amazonaws.com/",
+    profileUrl:"",
+    artistFirstname:"",
+    artistLastname:"",
+    artistDesc:"",
   }),
   mounted(){
     axios.get(`https://onlinegallery-backend-g7.herokuapp.com//getAvailableArtworkByArtistId/${this.$props.artistid}`)
@@ -96,6 +100,21 @@ export default {
     })
     .catch((error)=>{
       console.log(error);
+    })
+
+    axios.get(`https://onlinegallery-backend-g7.herokuapp.com//getArtistById/${this.$props.artistid}`)
+    .then(res=>{
+        axios.get(res.data.url)
+        .then(res=>{
+          this.profileUrl=res.data;
+        })
+        .catch(error=>{
+          console.log(error);
+        });
+
+        this.artistFirstname=res.data.firstname;
+        this.artistLastname=res.data.lastname;
+        this.artistDesc=res.data.selfDescription;
     })
   },
   computed:{

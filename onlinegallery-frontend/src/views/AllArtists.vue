@@ -3,10 +3,9 @@
       <div>
       <HeaderBar/>
           <div class="masonry-container">
-            <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
-              <v-col :cols="totalWidth" v-for="each in artists" v-masonry-tile class="item" :key="each.id" >
-               <ArtistTile :artistId="each.artistId" :imgUrl="each.url" :firstname="each.firstname" :lastname="each.lastname"/>
-
+            <v-row dense no-gutters >
+              <v-col :cols="totalWidth" v-for="each in artists" :key="each.id" >
+                <ArtistTile :artistId="each.artistId" :imgUrl="each.url" :firstname="each.firstname" :lastname="each.lastname"/>
               </v-col>
             </v-row>
           </div>

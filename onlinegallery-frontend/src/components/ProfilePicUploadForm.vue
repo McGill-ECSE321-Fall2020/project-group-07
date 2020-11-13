@@ -46,17 +46,17 @@
       handleUpload(url,imgEncoding){
         this.url=url;
         this.imgEncoding=imgEncoding;
+        this.$emit("new-pic-ready",this.url,this.imgEncoding);
       },
       upload(){
         let dto={
           username:this.$props.username,
-          url:this.url,
+          url:`http://og-img-repo.s3.us-east-1.amazonaws.com/${this.url}`,
           selfDescription:this.$props.desc
         }
         this.transmit(dto);
       },
       transmit(dto){
-        console.log(dto);
         this.response="submitting ...";
         axios.put(`http://og-img-repo.s3.us-east-1.amazonaws.com/${this.url}`,this.imgEncoding)
           .then(()=>{

@@ -4,7 +4,7 @@
         <v-row>
           <v-col :cols="3">
             <v-card height="320">
-              <v-img height="320" :src="imgUrl" />
+              <v-img height="320" :src="imgEncoding" />
             </v-card>
           </v-col>
 
@@ -69,7 +69,7 @@
 
          <v-dialog :value="uploadProfile" width="600" @click:outside="upload=false">
           <v-card height="300" width="600" class="pa-5">
-              <ProfilePicUploadForm :username="this.username" :desc="this.desc"/>
+              <ProfilePicUploadForm :username="this.username" :desc="this.desc" @new-pic-ready="swapProfilePic"/>
           </v-card>
         </v-dialog>
 
@@ -104,12 +104,17 @@ export default {
       lastname:"",
       desc:"",
       imgUrl:"",
+      imgEncoding:"",
       artistId:null,
       profileEncoding:null,
     }
   },
 
   methods:{
+    swapProfilePic(newUrl,newEncoding){
+      this.imgUrl=`http://og-img-repo.s3.us-east-1.amazonaws.com/${newUrl}`;
+      this.imgEncoding=newEncoding;
+    },
     startEditBio(){
       this.dialog=true;
     },
@@ -133,11 +138,12 @@ export default {
   mounted(){
     axios.get(`https://onlinegallery-backend-g7.herokuapp.com/getArtistByUsername/${this.username}`)
     .then(res=>{
-      axios.get(res.data.url).then(res=>{this.imgUrl=res.data})
+      axios.get(res.data.url).then(res=>{this.imgEncoding=res.data})
       this.firstname=res.data.firstname;
       this.lastname=res.data.lastname;
       this.desc=res.data.selfDescription;
       this.artistId=res.data.artistId;
+      this.imgUrl=res.data.url;
     })
   }
 

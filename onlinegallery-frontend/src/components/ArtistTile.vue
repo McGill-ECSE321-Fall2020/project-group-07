@@ -3,6 +3,7 @@
         <v-card @click="gotoArtist" @mouseover="hover=true" @mouseleave="hover=false" class="m-0 card">
              <v-img
                  :src="imgUrl"
+                 height="200"
              />
           <v-fade-transition>
             <v-overlay v-if="hover" absolute color="#737373">
