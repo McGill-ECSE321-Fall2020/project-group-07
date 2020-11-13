@@ -11,6 +11,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Lob;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -41,7 +42,8 @@ public class Artwork {
 	public String getName() {
 		return this.name;
 	}
-
+	
+	@Lob
 	private String description;
 
 	public void setDescription(String value) {

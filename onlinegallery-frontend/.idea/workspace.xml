@@ -30,38 +30,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62c4ff74-3d65-416b-bcb2-d36ff1ba6ed5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/onlinegallery-frontend.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/babel.config.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/favicon.ico" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/App.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/assets/logo.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ArtworkUploadForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/HeaderBar.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ImageBoard.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ImageDialogue.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/ImageTile.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/RegistrationForm.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/components/Uploader.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/plugins/vuetify.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/About.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/AllArtists.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/ArtistLogin.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/ArtistPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/CustomerLogin.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/DiscoverPage.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Home.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/views/Register.vue" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/vue.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,6 +62,7 @@
       <updated>1605270479524</updated>
       <workItem from="1605270481017" duration="8000" />
       <workItem from="1605270514332" duration="431000" />
+      <workItem from="1605271158867" duration="944000" />
     </task>
     <servers />
   </component>
