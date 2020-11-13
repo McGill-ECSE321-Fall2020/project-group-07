@@ -1,14 +1,13 @@
 <template>
     <div class="placeholder">
-      <div> about page</div>
-
+      <div> all artists page</div>
     </div>
 </template>
 
 <script>
 
 export default {
-  name: 'About',
+  name: 'artist-page',
   components: {
 
   }

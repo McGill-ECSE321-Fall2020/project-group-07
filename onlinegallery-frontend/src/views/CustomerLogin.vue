@@ -1,14 +1,13 @@
 <template>
     <div class="placeholder">
-      <div> about page</div>
-
+      <div> customer login</div>
     </div>
 </template>
 
 <script>
 
 export default {
-  name: 'About',
+  name: 'customer-login',
   components: {
 
   }

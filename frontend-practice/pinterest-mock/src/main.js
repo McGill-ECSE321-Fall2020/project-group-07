@@ -24,6 +24,7 @@ const router = new VueRouter({
     {path:"/customer-login", component: CustomerLogin},
     {path:"/artist-login", component:ArtistLogin},
     {path:"/register", component: Register},
+    {path:"/artistpage", name:"/artistpage", component:ArtistPage, props: true}
 
   ],
   mode:'history'

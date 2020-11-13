@@ -1,14 +1,13 @@
 <template>
-    <div class="placeholder">
-      <div> about page</div>
-
+    <div class="home">
+      <div> home page</div>
     </div>
 </template>
 
 <script>
 
 export default {
-  name: 'About',
+  name: 'Home',
   components: {
 
   }
@@ -17,7 +16,7 @@ export default {
 
 <style>
 
-.placeholder{
+.home{
   padding-top: 300px;
   text-align: center;
 }
