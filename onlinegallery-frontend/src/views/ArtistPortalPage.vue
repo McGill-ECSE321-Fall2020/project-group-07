@@ -24,11 +24,11 @@
 
          <v-row>
               <v-col :cols="3">
-                <v-btn small text  >change profile pic</v-btn>
+                <v-btn small text @click="uploadProfile=true" >change profile pic</v-btn>
               </v-col>
 
               <v-col :cols="2">
-                <v-btn small text  @click="editDesc">update bio</v-btn>
+                <v-btn small text  @click="startEditBio">update bio</v-btn>
               </v-col>
 
               <v-col :cols="3">
@@ -36,7 +36,7 @@
               </v-col>
 
               <v-col :cols="2">
-                <v-btn small text  >portfolio</v-btn>
+                <v-btn small text @click="gotoMyPage" >my page</v-btn>
               </v-col>
 
               <v-col :cols="2">
@@ -53,7 +53,7 @@
             </div>
 
             <div class="text-right">
-              <v-btn outlined @click="dialog=false">
+              <v-btn outlined @click="updateProfile">
                 done
               </v-btn>
             </div>
@@ -62,12 +62,17 @@
         </v-dialog>
 
         <v-dialog :value="upload" width="600" @click:outside="upload=false">
-
           <v-card height="800" width="600" class="pa-5">
-              <ArtworkUploadForm />
+              <ArtworkUploadForm :username="this.username"/>
           </v-card>
-
         </v-dialog>
+
+         <v-dialog :value="uploadProfile" width="600" @click:outside="upload=false">
+          <v-card height="300" width="600" class="pa-5">
+              <ProfilePicUploadForm :username="this.username" :desc="this.desc"/>
+          </v-card>
+        </v-dialog>
+
 
       </div>
 
@@ -84,28 +89,45 @@ Vue.use(PerfectScrollbar);
 Vue.use(VueAxios,axios);
 
 import ArtworkUploadForm from "@/components/ArtworkUploadForm";
+import ProfilePicUploadForm from "@/components/ProfilePicUploadForm";
 
 export default {
   name: 'artist-portal',
-  components: {ArtworkUploadForm},
+  components: {ArtworkUploadForm, ProfilePicUploadForm},
   props:["username","profileId"],
   data(){
     return{
       dialog:false,
       upload:false,
+      uploadProfile:false,
       firstname:"",
       lastname:"",
       desc:"",
-      imgUrl:""
+      imgUrl:"",
+      artistId:null,
+      profileEncoding:null,
     }
   },
 
   methods:{
-    editDesc(){
+    startEditBio(){
       this.dialog=true;
+    },
+    updateProfile(){
+      this.dialog=false;
+      let profileDto={
+        "username":this.username,
+        "selfDescription":this.desc,
+        "url":this.imgUrl
+      }
+      axios.put("https://onlinegallery-backend-g7.herokuapp.com/updateProfile",profileDto)
+      .then(res=>{console.log(res)});
     },
     startUpload(){
       this.upload=true;
+    },
+    gotoMyPage(){
+      this.$router.push({name:"/artist-portfolio", params: {artistid:this.artistId}});
     }
   },
   mounted(){
@@ -115,6 +137,7 @@ export default {
       this.firstname=res.data.firstname;
       this.lastname=res.data.lastname;
       this.desc=res.data.selfDescription;
+      this.artistId=res.data.artistId;
     })
   }
 

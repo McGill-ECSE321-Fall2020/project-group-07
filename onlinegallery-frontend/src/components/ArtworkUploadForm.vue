@@ -10,7 +10,7 @@
             <v-text-field v-model="dimension" label="dimension" required />
             <v-text-field v-model="weight" label="weight" required />
             <v-text-field v-model="commission" label="commission" required />
-            <Uploader @upload-ready="handleUpload" username="jhansolo"/>
+            <Uploader @upload-ready="handleUpload" :username="username"/>
             <div class="text-center">
               <p>{{response}}</p>
             </div>
@@ -43,7 +43,7 @@
   import Uploader from "@/components/Uploader";
 
   export default {
-    name: 'Registration',
+    name: 'artwork-upload-form',
     components:{Uploader},
     props:["username"],
     data:()=>{
@@ -69,8 +69,7 @@
       },
       upload(){
         let dto={
-          // username:this.$props.username,
-          username:"jhansolo",
+          username:this.$props.username,
           name:this.name,
           description:this.description,
           medium:this.medium,

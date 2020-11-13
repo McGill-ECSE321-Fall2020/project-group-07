@@ -30,11 +30,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62c4ff74-3d65-416b-bcb2-d36ff1ba6ed5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/ArtistLoginForm.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/ProfilePicUploadForm.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ArtistTile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ArtistTile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/AllArtists.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AllArtists.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/ArtistLogin.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ArtistLogin.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ArtistDialogue.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ArtistDialogue.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ArtworkUploadForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ArtworkUploadForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ImageBoard.vue" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ImageDialogue.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImageDialogue.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/RegistrationForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/RegistrationForm.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/Uploader.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/Uploader.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/ArtistPortalPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ArtistPortalPage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -62,11 +65,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/views" />
     </key>
   </component>
@@ -83,7 +87,7 @@
       <workItem from="1605271158867" duration="944000" />
       <workItem from="1605272496141" duration="1504000" />
       <workItem from="1605277818850" duration="7360000" />
-      <workItem from="1605286031913" duration="10757000" />
+      <workItem from="1605286031913" duration="15520000" />
     </task>
     <servers />
   </component>

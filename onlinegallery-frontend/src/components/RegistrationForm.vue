@@ -31,7 +31,7 @@
   Vue.use(VueAxios,axios);
 
   export default {
-    name: 'Registration',
+    name: 'registration-form',
     data:()=>{
       return{
         username:"",

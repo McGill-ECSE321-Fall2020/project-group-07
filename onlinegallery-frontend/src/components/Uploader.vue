@@ -1,7 +1,7 @@
 <template>
     <v-container>
         <v-card flat>
-            <v-file-input label="upload your art!" outlined dense @change="uploadResize"/>
+            <v-file-input label="upload your image" outlined dense @change="uploadResize"/>
             <v-card-text>{{this.response}}</v-card-text>
         </v-card>
     </v-container>
@@ -50,7 +50,6 @@ export default {
 
               this.generateFilename();
               this.$emit('upload-ready',this.filename, this.transmittedFile);
-
 
             }
           }

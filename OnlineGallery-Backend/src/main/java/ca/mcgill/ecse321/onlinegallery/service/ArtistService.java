@@ -154,6 +154,7 @@ public class ArtistService {
 		profile.setNumSold(profileDto.getNumSold());
 		profile.setRating(profileDto.getRating());
 		profile.setTotalEarnings(profileDto.getTotalEarnings());
+		profile.setUrl(profileDto.getUrl());
 		artistRepo.save(artist);
 		
 		return artist;
