@@ -1,6 +1,6 @@
 <template>
   <v-container>
-      <v-card class="mx-auto" style="max-width: 500px;">
+      <v-card height="750x">
 
           <v-form class="pa-4 pt-6">
             <v-text-field v-model="name" label="artwork title" required />
@@ -11,16 +11,24 @@
             <v-text-field v-model="weight" label="weight" required />
             <v-text-field v-model="commission" label="commission" required />
             <Uploader @upload-ready="handleUpload" username="jhansolo"/>
+            <div class="text-center">
+              <p>{{response}}</p>
+            </div>
 
           </v-form>
+          <v-row>
+                        <v-spacer/>
 
-          <v-card-actions>
-            <v-btn @click="upload" color="primary">Register</v-btn>
-            <v-spacer/>
-            <v-btn text @click="resetForm">Clear</v-btn>
-          </v-card-actions>
+            <v-col :cols="3">
+                          <v-btn @click="upload" outlined>submit</v-btn>
+            </v-col>
+            <v-col :cols="3">
+                          <v-btn  @click="resetForm" outlined>Clear</v-btn>
 
-<!--        <v-card-text class="text-center">{{responseMsg}}</v-card-text>-->
+            </v-col>
+                        <v-spacer/>
+
+          </v-row>
       </v-card>
 
   </v-container>
@@ -49,14 +57,14 @@
         weight: null,
         commission: null,
         numViews: 0,
-        imgUrl:"",
+        url:"",
         imgEncoding:"",
         response:"",
       }
     },
     methods: {
       handleUpload(url,imgEncoding){
-        this.imgUrl=url;
+        this.url=url;
         this.imgEncoding=imgEncoding;
       },
       upload(){
@@ -72,7 +80,7 @@
           weight: parseFloat(this.weight),
           commission: parseFloat(this.commission),
           numViews: 0,
-          imgurl:this.imgUrl
+          url:this.url
         }
 
         console.log(dto);
@@ -81,7 +89,7 @@
       },
       transmit(dto){
         this.response="submitting ...";
-        axios.put(`http://og-img-repo.s3.us-east-1.amazonaws.com/${this.imgUrl}`,this.imgEncoding)
+        axios.put(`http://og-img-repo.s3.us-east-1.amazonaws.com/${this.url}`,this.imgEncoding)
           .then(()=>{
             this.response="done!"
           })
@@ -108,7 +116,7 @@
         this.weight=null;
         this.commission=null;
         this.numViews=0;
-        this.imgurl="";
+        this.url="";
         this.imgEncoding="";
         this.response="";
      }

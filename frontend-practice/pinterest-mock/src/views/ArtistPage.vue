@@ -23,7 +23,6 @@
         </v-row>
 
          <v-row>
-
                     <v-col :cols="3">
                       <v-btn small text  >change profile pic</v-btn>
                     </v-col>
@@ -66,7 +65,7 @@
 
         <v-dialog :value="upload" width="600" @click:outside="upload=false">
 
-          <v-card height="610" width="600" class="pa-5">
+          <v-card height="800" width="600" class="pa-5">
               <ArtworkUploadForm />
           </v-card>
 
@@ -74,9 +73,6 @@
 
       </div>
 
-<!--      <div>-->
-<!--        <Uploader/>-->
-<!--      </div>-->
     </v-container>
 </template>
 
@@ -86,7 +82,6 @@ import PerfectScrollbar from 'vue2-perfect-scrollbar'
 import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 Vue.use(PerfectScrollbar);
 
-// import Uploader from "@/components/Uploader";
 import ArtworkUploadForm from "@/components/ArtworkUploadForm";
 
 export default {
