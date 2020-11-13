@@ -23,8 +23,16 @@
                                       {{artdesc}}
                                </div>
                             </v-card-text>
+                            <div class="text-center">
+                               <v-btn
+                                depressed
+                                elevation="2"
+                                small
+                                outlined
+                                @click="discoverArtwork"
+                              >See Artist's Work</v-btn>
+                            </div>
                         </v-col>
-
                       </v-row>
             </v-card>
           </div>
@@ -45,6 +53,9 @@ export default {
     closeDialog(){
       this.$emit('closeDialog');
     },
+    discoverArtwork(){
+      //get artwork by artist and go to his page
+    }
   },
   data(){
     return{
@@ -57,11 +68,7 @@ export default {
 <style scoped>
 .title{
   height: 100px;
-  padding-top: 20px;
-}
-
-.subtitle{
-  padding-bottom: 0px !important;
+  padding-top: 25px;
 }
 
 .body{
@@ -77,5 +84,4 @@ export default {
 .ps{
   height:800px;
 }
-
 </style>
