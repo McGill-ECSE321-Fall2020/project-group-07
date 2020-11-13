@@ -10,7 +10,7 @@
             <v-text-field v-model="dimension" label="dimension" required />
             <v-text-field v-model="weight" label="weight" required />
             <v-text-field v-model="commission" label="commission" required />
-            <Uploader @upload-ready="handleUpload"/>
+            <Uploader @upload-ready="handleUpload" username="jhansolo"/>
 
           </v-form>
 
@@ -89,7 +89,7 @@
           this.response="something went wrong, try again later";
         })
 
-        axios.put("https://onlinegallery-backend-g7.herokuapp.com/createArtwork",dto)
+        axios.post("https://onlinegallery-backend-g7.herokuapp.com/createArtwork",dto)
         .then((res)=>{
           console.log(res);
         })

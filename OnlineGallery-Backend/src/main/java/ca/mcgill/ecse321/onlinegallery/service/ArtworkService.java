@@ -70,6 +70,8 @@ public class ArtworkService {
 		art.setDimension(dto.getDimension());
 		art.setWeight(dto.getWeight());
 		art.setCommission(dto.getCommission()); 
+		art.setUrl(dto.getUrl());
+		art.setMedium(dto.getMedium());
 
 		artist.getArtwork().add(art);
 		art.setArtist(artist);
