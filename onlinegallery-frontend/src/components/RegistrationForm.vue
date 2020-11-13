@@ -8,6 +8,8 @@
             <v-text-field v-model="lastName" label="Last Name" required />
             <v-text-field v-model="email" label="E-mail" required />
             <v-text-field v-model="password" :type="'password'" name="input-10-1" label="Password" />
+
+<!--            < checkbox component v-model="asCustomer" /> -->
           </v-form>
 
           <v-card-actions>
@@ -39,8 +41,7 @@
         password:"",
         responseMsg:"",
         asArtist: false,
-        asCustomer: false,
-        asAdmin: false
+        asCustomer: false
       }
     },
     methods: {
@@ -62,6 +63,8 @@
         .catch(error=>{
           this.responseMsg=error.response.data;
         })
+
+        // if asCustomer, axios.put("...../setAsCustomer/username).....
       },
 
       resetForm(){

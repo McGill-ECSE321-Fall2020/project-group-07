@@ -1,25 +1,18 @@
 <template>
   <v-container>
-        <v-card @click="expand" @mouseover="hover = true" @mouseleave="hover=false;" :class="{active:hover}" class="m-0 card">
+        <v-card @click="gotoArtist" @mouseover="hover = true" @mouseleave="hover=false;" :class="{active:hover}" class="m-0 card">
              <v-img
                  :src="imgUrl"
                  :height="height"
              />
         </v-card>
-        <ArtistDialogue :dialog.sync="clicked" @closeDialog="clicked=false"
-                       :artid="artid"
-                       :imgUrl="imgUrl"
-                       :artistname="artistname"
-                       :artdesc="artdesc" />
   </v-container>
 </template>
 
 <script>
-import ArtistDialogue from "@/components/ArtistDialogue";
 export default {
   name: 'image-tile',
-  components:{ArtistDialogue},
-  props: ["artistid","imgUrl","artistname","artdesc","height"],
+  props: ["artistid","imgUrl","height"],
   data(){
     return{
       hover:false,
@@ -28,9 +21,8 @@ export default {
     }
   },
   methods:{
-    expand(){
-      this.clicked=true;
-      console.log("clicked")
+    gotoArtist(){
+        this.$router.push({name:"/artist-portfolio", params: {artistid:"2"}});     // to be replaced by username from the artist login form
     }
   }
 };
