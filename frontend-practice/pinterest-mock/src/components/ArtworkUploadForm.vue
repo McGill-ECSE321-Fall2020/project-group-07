@@ -62,7 +62,7 @@
       upload(){
         let dto={
           // username:this.$props.username,
-          username:"fakeArtist",
+          username:"jhansolo",
           name:this.name,
           description:this.description,
           medium:this.medium,
@@ -77,9 +77,9 @@
 
         console.log(dto);
         console.log(this.imgEncoding);
-        // this.transmit();
+        this.transmit(dto);
       },
-      transmit(){
+      transmit(dto){
         this.response="submitting ...";
         axios.put(`http://og-img-repo.s3.us-east-1.amazonaws.com/${this.imgUrl}`,this.imgEncoding)
           .then(()=>{
@@ -87,6 +87,14 @@
           })
         .catch(()=>{
           this.response="something went wrong, try again later";
+        })
+
+        axios.put("https://onlinegallery-backend-g7.herokuapp.com/createArtwork",dto)
+        .then((res)=>{
+          console.log(res);
+        })
+        .catch((error)=>{
+          console.log(error);
         })
       },
 
