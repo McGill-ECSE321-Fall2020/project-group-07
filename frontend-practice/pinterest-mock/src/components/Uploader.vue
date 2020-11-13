@@ -2,15 +2,13 @@
     <v-container>
         <v-card flat>
             <v-file-input label="upload your art!" outlined dense @change="uploadResize"/>
-            <v-btn :disabled="disabled" small outlined @click="transmit"> submit </v-btn>
-
             <v-card-text>{{this.response}}</v-card-text>
         </v-card>
     </v-container>
 </template>
 
 <script>
-import axios from 'axios';
+// import axios from 'axios';
 
 export default {
   name: 'uploader',
@@ -51,24 +49,15 @@ export default {
               this.disabled=false;
 
               this.generateFilename();
+              this.$emit('upload-ready',this.filename, this.transmittedFile);
+
 
             }
           }
           this.reader.readAsDataURL(file);
         }
     },
-    transmit(){
-      this.response="submitting ...";
-      axios.put(`http://[].s3.us-east-1.amazonaws.com/${this.filename}`,this.transmittedFile)
-        .then(()=>{
-          this.response="done!"
 
-          // placeholder for another axios call to backed for updating db with filename and dto info
-        })
-      .catch(()=>{
-        this.response="something went wrong";
-      })
-    },
     generateFilename(){
         let d = new Date();
         this.timeSubmitted=d.toLocaleDateString()+"_"+d.toLocaleTimeString();

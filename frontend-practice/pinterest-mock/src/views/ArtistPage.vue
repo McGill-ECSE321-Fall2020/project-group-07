@@ -67,7 +67,7 @@
         <v-dialog :value="upload" width="600" @click:outside="upload=false">
 
           <v-card height="610" width="600" class="pa-5">
-              <Uploader/>
+              <ArtworkUploadForm />
           </v-card>
 
         </v-dialog>
@@ -86,10 +86,12 @@ import PerfectScrollbar from 'vue2-perfect-scrollbar'
 import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 Vue.use(PerfectScrollbar);
 
-import Uploader from "@/components/Uploader";
+// import Uploader from "@/components/Uploader";
+import ArtworkUploadForm from "@/components/ArtworkUploadForm";
+
 export default {
   name: 'artist-page',
-  components: {Uploader},
+  components: {ArtworkUploadForm},
   props:["username"],
   data(){
     return{
@@ -105,7 +107,12 @@ export default {
     },
     startUpload(){
       this.upload=true;
+    },
+
+    log(){
+      console.log("hey");
     }
+
   }
 }
 </script>

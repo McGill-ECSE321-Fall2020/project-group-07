@@ -20,6 +20,14 @@ public class ArtworkDto {
 	public String getUrl() {
 		return this.imgUrl;
 	}
+	
+	private String medium;
+	public void setMedium(String medium) {
+		this.medium=medium;
+	}
+	public String getMedium() {
+		return this.medium;
+	}
 
 	private String username;
 	public void setUsername(String username) {

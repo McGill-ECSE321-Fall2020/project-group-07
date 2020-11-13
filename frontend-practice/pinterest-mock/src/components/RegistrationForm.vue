@@ -62,10 +62,6 @@
         .catch(error=>{
           this.responseMsg=error.response.data;
         })
-
-        // if (asArtist){
-        //   axios.post(....../setArtist/username)
-        // }
       },
 
       resetForm(){

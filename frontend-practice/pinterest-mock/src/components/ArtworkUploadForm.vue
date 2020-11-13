@@ -3,20 +3,24 @@
       <v-card class="mx-auto" style="max-width: 500px;">
 
           <v-form class="pa-4 pt-6">
-            <v-text-field v-model="username" label="Username" required/>
-            <v-text-field v-model="firstName" label="First Name" required />
-            <v-text-field v-model="lastName" label="Last Name" required />
-            <v-text-field v-model="email" label="E-mail" required />
-            <v-text-field v-model="password" :type="'password'" name="input-10-1" label="Password" />
+            <v-text-field v-model="name" label="artwork title" required />
+            <v-text-field v-model="description" label="description" required />
+            <v-text-field v-model="medium" label="medium" required />
+            <v-text-field v-model="price" label="price" required />
+            <v-text-field v-model="dimension" label="dimension" required />
+            <v-text-field v-model="weight" label="weight" required />
+            <v-text-field v-model="commission" label="commission" required />
+            <Uploader @upload-ready="handleUpload"/>
+
           </v-form>
 
           <v-card-actions>
-            <v-btn @click="register" color="primary">Register</v-btn>
+            <v-btn @click="upload" color="primary">Register</v-btn>
             <v-spacer/>
             <v-btn text @click="resetForm">Clear</v-btn>
           </v-card-actions>
 
-        <v-card-text class="text-center">{{responseMsg}}</v-card-text>
+<!--        <v-card-text class="text-center">{{responseMsg}}</v-card-text>-->
       </v-card>
 
   </v-container>
@@ -28,55 +32,78 @@
   import VueAxios from 'vue-axios';
   Vue.use(VueAxios,axios);
 
+  import Uploader from "@/components/Uploader";
+
   export default {
     name: 'Registration',
+    components:{Uploader},
     props:["username"],
     data:()=>{
       return{
-        username:this.$props.username,
         name:"",
         description:"",
+        medium:"",
         price: null,
         status:1,
         dimension:"",
         weight: null,
         commission: null,
-        numViews: 0
+        numViews: 0,
+        imgUrl:"",
+        imgEncoding:"",
+        response:"",
       }
     },
     methods: {
-      register(){
-        let signup ={
-          username: this.username,
-          firstName: this.firstName,
-          lastName: this.lastName,
-          email: this.email,
-          password: this.password
+      handleUpload(url,imgEncoding){
+        this.imgUrl=url;
+        this.imgEncoding=imgEncoding;
+      },
+      upload(){
+        let dto={
+          // username:this.$props.username,
+          username:"fakeArtist",
+          name:this.name,
+          description:this.description,
+          medium:this.medium,
+          price: parseFloat(this.price),
+          status:1,
+          dimension:this.dimension,
+          weight: parseFloat(this.weight),
+          commission: parseFloat(this.commission),
+          numViews: 0,
+          imgUrl:this.imgUrl
         }
-        console.log(signup)
 
-        axios.post("https://onlinegallery-backend-g7.herokuapp.com/createRegistration",signup)
-        .then(res=>{
-          this.responseMsg=this.username+" registered!"
-          console.log(res);
+        console.log(dto);
+        console.log(this.imgEncoding);
+        // this.transmit();
+      },
+      transmit(){
+        this.response="submitting ...";
+        axios.put(`http://og-img-repo.s3.us-east-1.amazonaws.com/${this.imgUrl}`,this.imgEncoding)
+          .then(()=>{
+            this.response="done!"
+          })
+        .catch(()=>{
+          this.response="something went wrong, try again later";
         })
-        .catch(error=>{
-          this.responseMsg=error.response.data;
-        })
-
-        // if (asArtist){
-        //   axios.post(....../setArtist/username)
-        // }
       },
 
-      resetForm(){
-        this.username="";
-        this.firstName="";
-        this.lastName="";
-        this.email="";
-        this.password="";
-        this.responseMsg="";
-      }
+     resetForm(){
+        this.name="";
+        this.description="";
+        this.medium="";
+        this.price=null;
+        this.status=1;
+        this.dimension="";
+        this.weight=null;
+        this.commission=null;
+        this.numViews=0;
+        this.imgUrl="";
+        this.imgEncoding="";
+        this.response="";
+     }
     }
   }
 

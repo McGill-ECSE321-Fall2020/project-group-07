@@ -146,5 +146,13 @@ public class Artwork {
 	public void setUrl(String url) {
 		this.imgUrl=url;
 	}
+	
+	private String medium;
+	public String getMedium() {
+		return this.medium;
+	}
+	public void setMedium(String medium) {
+		this.medium=medium;
+	}
 
 }
