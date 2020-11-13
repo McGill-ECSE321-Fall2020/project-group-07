@@ -1,6 +1,9 @@
 <template>
     <div class="placeholder">
       <div> all artists page</div>
+      <v-btn @click="gotoArtist">
+        artist
+      </v-btn>
     </div>
 </template>
 
@@ -10,6 +13,11 @@ export default {
   name: 'artist-page',
   components: {
 
+  },
+  methods:{
+      gotoArtist(){
+        this.$router.push({name:"/artist-portfolio", params: {artistid:"2"}});     // to be replaced by username from the artist login form
+    }
   }
 }
 </script>

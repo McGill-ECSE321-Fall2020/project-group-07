@@ -10,7 +10,8 @@ import AllArtists from "@/views/AllArtists";
 import CustomerLogin from "@/views/CustomerLogin";
 import ArtistLogin from "@/views/ArtistLogin";
 import Register from "@/views/Register";
-import ArtistPage from "@/views/ArtistPage";
+import ArtistPortalPage from "@/views/ArtistPortalPage";
+import ArtistPortfolio from "@/views/ArtistPortfolio";
 
 Vue.use(VueRouter);
 Vue.config.productionTip = false;
@@ -25,7 +26,8 @@ const router = new VueRouter({
     {path:"/customer-login", component: CustomerLogin, meta:{title:"Customer Login"}},
     {path:"/artist-login", component:ArtistLogin,meta:{title:"Artist Login"}},
     {path:"/register", component: Register, meta:{title:"Register"}},
-    {path:"/artistpage", name:"/artistpage", component:ArtistPage, props: true, meta:{title:"Artist Page"}}
+    {path:"/artist-portal", name:"/artist-portal", component:ArtistPortalPage, props: true, meta:{title:"Artist Portal"}},
+    {path:"/artist-portfolio", name:"/artist-portfolio", component:ArtistPortfolio, props: true, meta:{title:"Artist Portfolio"}}
 
   ],
   mode:'history'

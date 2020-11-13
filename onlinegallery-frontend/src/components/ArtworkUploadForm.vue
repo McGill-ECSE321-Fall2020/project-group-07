@@ -83,8 +83,6 @@
           url:this.url
         }
 
-        console.log(dto);
-        console.log(this.imgEncoding);
         this.transmit(dto);
       },
       transmit(dto){
