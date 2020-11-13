@@ -119,6 +119,8 @@ public class ArtistRestController {
 		artistDto.setSelfDescription(artist.getProfile().getSelfDescription());
 		artistDto.setTotalEarnings(artist.getProfile().getTotalEarnings());
 		artistDto.setUrl(artist.getProfile().getUrl());
+		artistDto.setFirstname(artist.getGalleryRegistration().getFirstName());
+		artistDto.setLastname(artist.getGalleryRegistration().getLastName());
 		
 		return artistDto;
 	}
