@@ -4,7 +4,7 @@
             <v-card color="#ffffff">
                 <div class="title">
                   <v-card-title class="justify-center text-sm-h5 title" >
-                      Are you signing up as an Artist?
+                      Are you signing up as a Customer?
                   </v-card-title>
                 </div>
                   <v-card-text class="text-sm-h5 pl-2 text-justify">
@@ -40,16 +40,15 @@ import VueAxios from 'vue-axios';
 Vue.use(VueAxios,axios);
 
 export default {
-  name: 'artist-popup',
+  name: 'customer-popup',
   props: ["dialog", "username"],
   methods:{
     closeDialog(){
       this.$emit('closeDialog');
     },
     yes(){
-       axios.put(`https://onlinegallery-backend-g7.herokuapp.com/setArtist/${this.props.username}`)
-       this.$emit('closeDialog');
-         
+      axios.put(`https://onlinegallery-backend-g7.herokuapp.com/setCustomer/${this.$props.username}`)
+      this.$emit('closeDialog');
     },
     no(){
       this.$emit('closeDialog');
@@ -73,7 +72,7 @@ export default {
   height:250px;
   text-align: center;
   font-size:0.5em !important;
-   padding-top: 60px;
+  padding-top: 60px;
 
 }
 .text-xs-center{
