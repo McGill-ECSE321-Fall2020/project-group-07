@@ -73,6 +73,7 @@ export default {
     artistFirstname:"",
     artistLastname:"",
     artistDesc:"",
+    addedArtworkIds: []
   }),
   mounted(){
     axios.get(`https://onlinegallery-backend-g7.herokuapp.com//getAvailableArtworkByArtistId/${this.$props.artistid}`)

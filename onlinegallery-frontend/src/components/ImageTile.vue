@@ -14,7 +14,9 @@
                        :artdesc="artdesc"
                        :medium="medium"
                        :dimension="dimension"
-                       :price="price" />
+                       :price="price"
+                       @added-to-cart="handleAddedToCart"
+        />
   </v-container>
 </template>
 
@@ -35,7 +37,11 @@ export default {
     expand(){
       this.clicked=true;
       console.log("clicked")
+    },
+    handleAddedToCart(){
+      this.$emit
     }
+
   }
 };
 </script>

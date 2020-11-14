@@ -31,10 +31,8 @@
   <component name="ChangeListManager">
     <list default="true" id="62c4ff74-3d65-416b-bcb2-d36ff1ba6ed5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ArtistTile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ArtistTile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ProfilePicUploadForm.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ProfilePicUploadForm.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/AllArtists.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/AllArtists.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/ArtistPortalPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ArtistPortalPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ImageDialogue.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImageDialogue.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ImageTile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImageTile.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/ArtistPortfolio.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ArtistPortfolio.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -85,6 +83,7 @@
       <workItem from="1605272496141" duration="1504000" />
       <workItem from="1605277818850" duration="7360000" />
       <workItem from="1605286031913" duration="19682000" />
+      <workItem from="1605364516530" duration="1133000" />
     </task>
     <servers />
   </component>

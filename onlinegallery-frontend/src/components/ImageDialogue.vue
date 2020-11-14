@@ -45,8 +45,8 @@
                                 elevation="2"
                                 small
                                 outlined
-                                @click="startBuy"
-                              >buy</v-btn>
+                                @click="addToCart"
+                              >add to cart</v-btn>
                             </div>
 
                         </v-col>
@@ -71,7 +71,8 @@ export default {
     closeDialog(){
       this.$emit('closeDialog');
     },
-    startBuy(){
+    addToCart(){
+      this.$emit("added-to-cart")
       console.log("buy artwork id: "+this.artid);
     }
   },
