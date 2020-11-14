@@ -40,13 +40,7 @@
                             </v-card-text>
 
                              <div class="text-center">
-                               <v-btn
-                                depressed
-                                elevation="2"
-                                small
-                                outlined
-                                @click="addToCart"
-                              >add to cart</v-btn>
+                               <v-btn depressed elevation="2" small outlined @click="addToCart">add to cart</v-btn>
                             </div>
 
                         </v-col>
@@ -73,7 +67,7 @@ export default {
     },
     addToCart(){
       this.$emit("added-to-cart", this.artid)
-      console.log("buy artwork id: "+this.artid);
+      this.$emit('closeDialog');
     }
   },
   data(){

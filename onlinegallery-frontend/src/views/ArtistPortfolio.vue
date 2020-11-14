@@ -1,44 +1,46 @@
 <template>
   <v-container fluid>
-      <div>
-      <HeaderBar/>
-      <div class="artist-details">
+          <div>
+          <HeaderBar/>
+          <div class="artist-details">
+            <v-card class="mx-auto" max-wide="344" outlined>
+              <v-list-item three-line>
 
-      <v-card
-        class="mx-auto"
-        max-wide="344"
-        outlined
-      >
-       <v-list-item three-line>
-      <v-list-item-content>
-        <div class="overline mb-4">
-          Artist Information
-        </div>
-        <v-list-item-title class="headline mb-1">
-          {{artistFirstname}} {{artistLastname}}
-        </v-list-item-title>
-        <v-list-item-subtitle>{{artistDesc}}</v-list-item-subtitle>
-      </v-list-item-content>
+                  <v-list-item-content>
+                    <div class="overline mb-4">Artist Information</div>
+                    <v-list-item-title class="headline mb-1"> {{artistFirstname}} {{artistLastname}} </v-list-item-title>
+                    <v-list-item-subtitle>{{artistDesc}}</v-list-item-subtitle>
+                  </v-list-item-content>
 
-      <v-list-item-avatar
-      tile
-      size="175">
-      <v-img :src="profileUrl"/>
-      </v-list-item-avatar>
-    </v-list-item>
-    </v-card>
+                  <v-list-item-avatar tile size="175">
+                    <v-img :src="profileUrl"/>
+                  </v-list-item-avatar>
 
+              </v-list-item>
+            </v-card>
+         </div>
 
-     </div>
           <div class="masonry-container">
-
-            <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
-              <v-col :sm="totalWidth" v-for="each in orderedArtworks" v-masonry-tile class="item" :key="each.id" >
-               <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height" @gatherID="gather"/>
+            <v-row>
+              <v-col :cols="9">
+                <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
+                  <v-col :sm="totalWidth" v-for="each in orderedArtworks" v-masonry-tile class="item" :key="each.id" >
+                   <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height" @gatherID="gather"/>
+                  </v-col>
+                </v-row>
               </v-col>
+
+              <v-col :cols="1" class="checkout-btn">
+                <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">checkout</v-btn>
+              </v-col>
+
             </v-row>
           </div>
     </div>
+
+    <v-dialog v-model="checkoutDialog" overlay-color="white" overlay-opacity="1.0" width="600" class="pa-0">
+        <CheckoutArtworkTable :ids="addedArtworkIds" />
+    </v-dialog>
 
   </v-container>
 </template>
@@ -49,6 +51,7 @@ import Vue from 'vue';
 import {VueMasonryPlugin} from 'vue-masonry';
 import ImageTile from "@/components/ImageTile";
 import HeaderBar from "@/components/HeaderBar";
+import CheckoutArtworkTable from "@/components/CheckoutArtworkTable";
 import axios from 'axios';
 import VueAxios from 'vue-axios';
 import imagesLoaded from 'vue-images-loaded';
@@ -61,7 +64,7 @@ Vue.use(underscore);
 
 export default {
   name:'artist-portfolio',
-  components:{ImageTile,HeaderBar},
+  components:{ImageTile,HeaderBar,CheckoutArtworkTable},
   props:["artistid", "artid"],
   data:()=>({
     totalWidth:4,
@@ -73,7 +76,8 @@ export default {
     artistFirstname:"",
     artistLastname:"",
     artistDesc:"",
-    addedArtworkIds:[]
+    addedArtworkIds:[],
+    checkoutDialog:false
   }),
   mounted(){
     axios.get(`https://onlinegallery-backend-g7.herokuapp.com//getAvailableArtworkByArtistId/${this.$props.artistid}`)
@@ -121,6 +125,9 @@ export default {
   methods:{
     gather(artid){
       this.addedArtworkIds.push(artid);
+    },
+    initiateCheckout(){
+      this.checkoutDialog=true;
     }
   },
   computed:{
@@ -140,8 +147,8 @@ export default {
 }
 
 .masonry-container {
-  width: 75%;
-  margin:auto;
+  width: 100%;
+  margin-left:13%;
   margin-top: 20px;
 }
 
@@ -153,5 +160,8 @@ export default {
 .black-link{
   color:black !important;
   text-decoration: none !important;
+}
+.checkout-btn{
+  padding-top:50vh;
 }
 </style>

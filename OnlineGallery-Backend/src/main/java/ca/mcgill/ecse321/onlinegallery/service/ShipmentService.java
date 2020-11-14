@@ -32,6 +32,9 @@ public class ShipmentService {
 	
 	@Autowired
 	ArtworkRepository artworkRepo;
+	
+	@Autowired
+	CustomerRepository custRepo;
 
 	
 	@Transactional 
@@ -58,7 +61,6 @@ public class ShipmentService {
 		}
 		
 		Long customerId = first.getCustomer().getCustomerId();
-		
 		
 		for (Long p2 : purchases) {
 			Purchase aPurchase = purchaseRepo.findPurchaseByPurchaseId(p2);
@@ -113,18 +115,22 @@ public class ShipmentService {
 		ShipmentStatus shipmentStatus = dto.getShipmentStatus();
 		
 		
-		shipment.setShipmentId(dto.getShipmentId());
+//		shipment.setShipmentId(dto.getShipmentId());
 		shipment.setSourceAddress(sourceAddress);
 		shipment.setDestinationAddress(destinationAddress);
 		shipment.setShippingCost(shippingCost);
 		shipment.setShipmentStatus(shipmentStatus);
 		shipment.setRecipientName(recipientName);
 		shipment.setTotalAmount(totalPrice);
-		
+
 		for (Purchase aP :shipPurchases ) {
 			aP.setShipment(shipment);
 			purchaseRepo.save(aP);
 		}
+		
+		Customer cust=first.getCustomer();
+		cust.getShipment().add(shipment);
+		custRepo.save(cust);
 		
 		return shipRepo.save(shipment);
 		
