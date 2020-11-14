@@ -68,6 +68,7 @@ public class PurchaseService {
 		purchase.setCustomer(customer);
 		
 		purchase.setDate(Date.valueOf(LocalDate.now()));
+		purchase.setShipmentType(dto.getShipmentType());
 		
 		return purchaseRepo.save(purchase);
 	
