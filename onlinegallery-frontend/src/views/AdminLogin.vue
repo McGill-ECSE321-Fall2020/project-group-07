@@ -1,37 +1,23 @@
 <template>
     <div class="placeholder">
-      <div>Admin login</div>
-      <v-btn @click="login">
-        login
-      </v-btn>
+      <div>Admin Login</div>
+      <AdminLoginForm/>
     </div>
   </template>
 
 <script>
+import AdminLoginForm from "@/components/AdminLoginForm";
 
 export default {
   name: 'admin-login',
-  components: {
-
-  },
-  data(){
-    return{
-      username:""
-    }
-  },
-  methods:{
-    login(){
-      this.$router.push({name:"/admin-portal", params: {username:"dali"}});     // to be replaced by username from the artist login form
-    }
-  }
-
+  components: {AdminLoginForm},
 }
 </script>
 
 <style>
 
 .placeholder{
-  padding-top: 300px;
+  padding-top: 15%!important;
   text-align: center;
 }
 

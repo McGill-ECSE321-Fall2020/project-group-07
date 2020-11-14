@@ -4,14 +4,14 @@
         <v-row>
           <v-col :cols="3">
             <v-card height="320">
-              <v-img height="320" src="https://www.biography.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cg_face%2Cq_auto:good%2Cw_300/MTIwNjA4NjMzNTM4MDUzNjQ0/salvador-dali-40389-2-402.jpg" />
+              <v-img height="320" :src="imgEncoding" />
             </v-card>
           </v-col>
 
           <v-col :cols="9">
             <v-card height="320">
                 <div>
-                  <v-card-title> {{username}} </v-card-title>
+                  <v-card-title> {{firstname}} {{lastname}} </v-card-title>
                 </div>
                 <div class="desc">
                   <perfect-scrollbar>
@@ -23,27 +23,25 @@
         </v-row>
 
          <v-row>
-                    <v-col :cols="3">
-                      <v-btn small text  >change profile pic</v-btn>
-                    </v-col>
+              <v-col :cols="3">
+                <v-btn small text @click="uploadProfile=true" >change profile pic</v-btn>
+              </v-col>
 
-                    <v-col :cols="2">
-                      <v-btn small text  @click="editDesc">update bio</v-btn>
-                    </v-col>
+              <v-col :cols="2">
+                <v-btn small text  @click="startEditBio">update bio</v-btn>
+              </v-col>
 
-                    <v-col :cols="3">
-                      <v-btn small text  @click="startUpload">upload artworks</v-btn>
-                    </v-col>
+              <v-col :cols="3">
+                <v-btn small text  @click="startUpload">upload artworks</v-btn>
+              </v-col>
 
-                    <v-col :cols="2">
-                      <v-btn small text  >portfolio</v-btn>
-                    </v-col>
+              <v-col :cols="2">
+                <v-btn small text @click="gotoMyPage" >my page</v-btn>
+              </v-col>
 
-                    <v-col :cols="2">
-                      <v-btn small text  >view sales</v-btn>
-                    </v-col>
-
-
+              <v-col :cols="2">
+                <v-btn small text  >view sales</v-btn>
+              </v-col>
           </v-row>
 
 
@@ -55,7 +53,7 @@
             </div>
 
             <div class="text-right">
-              <v-btn outlined @click="dialog=false">
+              <v-btn outlined @click="updateProfile">
                 done
               </v-btn>
             </div>
@@ -64,12 +62,17 @@
         </v-dialog>
 
         <v-dialog :value="upload" width="600" @click:outside="upload=false">
-
           <v-card height="800" width="600" class="pa-5">
-              <ArtworkUploadForm />
+              <ArtworkUploadForm :username="this.username"/>
           </v-card>
-
         </v-dialog>
+
+         <v-dialog :value="uploadProfile" width="600" @click:outside="upload=false">
+          <v-card height="300" width="600" class="pa-5">
+              <ProfilePicUploadForm :username="this.username" :desc="this.desc" @new-pic-ready="swapProfilePic"/>
+          </v-card>
+        </v-dialog>
+
 
       </div>
 
@@ -80,35 +83,70 @@
 import Vue from 'vue';
 import PerfectScrollbar from 'vue2-perfect-scrollbar'
 import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 Vue.use(PerfectScrollbar);
+Vue.use(VueAxios,axios);
 
 import ArtworkUploadForm from "@/components/ArtworkUploadForm";
+import ProfilePicUploadForm from "@/components/ProfilePicUploadForm";
 
 export default {
-  name: 'artist-page',
-  components: {ArtworkUploadForm},
-  props:["username"],
+  name: 'artist-portal',
+  components: {ArtworkUploadForm, ProfilePicUploadForm},
+  props:["username","profileId"],
   data(){
     return{
       dialog:false,
       upload:false,
-      desc:"it amet, consectetur adipiscing elit. Nullam in orci mi. Cras accumsan turpis ut metus placerat, quis lobortis magna vehicula. Sed nisi nulla, pulvinar nec sapien ac, sagittis bibendum quam. Curabitur id ligula quis elit porta pellentesque ac vel libero. Proin finibus nibh vel commodo malesuada. Vestibulum volutpat mauris nisl. Vestibulum luctus lorem at nisl elementum, nec placerat lacus auctor. Integer ac elit a urna ornare sollicitudin in vitae libero. Phasellus ac egestas metus. Integer pellentesque quis ex ac fringilla. Pellentesque placerat sem vitae justo dictum, vitae feugiat tellus congue. Etiam sagittis, ligula pulvinar vulputate tempus, urna tortor rhoncus metus, ut sodales erat erat non ex. Nunc quam ipsum, tempus at sapien ut, bibendum facilisis lectus. Suspendisse potenti. Aliquam cursus dictum fringilla. Ut nibh ligula, placerat sit amet ipsum non, porttitor venenatis velit. Nam ante dui, volutpat sed mauris nec, laoreet suscipit enim. Donec ante tellus, vulputate id suscipit at, pretium vitae est. Nunc congue nulla eget eros ornare semper. Praesent in imperdiet turpis."
+      uploadProfile:false,
+      firstname:"",
+      lastname:"",
+      desc:"",
+      imgUrl:"",
+      imgEncoding:"",
+      artistId:null,
+      profileEncoding:null,
     }
   },
 
   methods:{
-    editDesc(){
+    swapProfilePic(newUrl,newEncoding){
+      this.imgUrl=`http://og-img-repo.s3.us-east-1.amazonaws.com/${newUrl}`;
+      this.imgEncoding=newEncoding;
+    },
+    startEditBio(){
       this.dialog=true;
+    },
+    updateProfile(){
+      this.dialog=false;
+      let profileDto={
+        "username":this.username,
+        "selfDescription":this.desc,
+        "url":this.imgUrl
+      }
+      axios.put("https://onlinegallery-backend-g7.herokuapp.com/updateProfile",profileDto)
+      .then(res=>{console.log(res)});
     },
     startUpload(){
       this.upload=true;
     },
-
-    log(){
-      console.log("hey");
+    gotoMyPage(){
+      this.$router.push({name:"/artist-portfolio", params: {artistid:this.artistId}});
     }
-
+  },
+  mounted(){
+    axios.get(`https://onlinegallery-backend-g7.herokuapp.com/getArtistByUsername/${this.username}`)
+    .then(res=>{
+      axios.get(res.data.url).then(res=>{this.imgEncoding=res.data})
+      this.firstname=res.data.firstname;
+      this.lastname=res.data.lastname;
+      this.desc=res.data.selfDescription;
+      this.artistId=res.data.artistId;
+      this.imgUrl=res.data.url;
+    })
   }
+
 }
 </script>
 

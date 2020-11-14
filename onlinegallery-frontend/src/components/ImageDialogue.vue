@@ -65,7 +65,7 @@ import PerfectScrollbar from 'vue2-perfect-scrollbar'
 import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
 Vue.use(PerfectScrollbar);
 export default {
-  name: 'popup',
+  name: 'image-dialog',
   props: ["dialog","artid","imgUrl","artname","artistname","artdesc","medium", "dimension", "price"],
   methods:{
     closeDialog(){

@@ -138,6 +138,7 @@ public class ArtworkRestController {
 		artworkDto.setWeight(artwork.getWeight());
 		artworkDto.setArtworkId(artwork.getArtworkId());
 		artworkDto.setUrl(artwork.getUrl());
+		artworkDto.setMedium(artwork.getMedium());
 
 		return artworkDto;
 	}

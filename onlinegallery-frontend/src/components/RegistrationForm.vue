@@ -7,11 +7,15 @@
             <v-text-field v-model="firstName" label="First Name" required />
             <v-text-field v-model="lastName" label="Last Name" required />
             <v-text-field v-model="email" label="E-mail" required />
-            <v-text-field v-model="password" :type="'password'" name="input-10-1" label="Password" />
-
-<!--            < checkbox component v-model="asCustomer" /> -->
-          </v-form>
-
+            <v-text-field v-model="password" 
+            name="input-10-1" 
+            label="Password" 
+            :append-icon="show1 ? 'mdi-eye' : 'mdi-eye-off'"
+            :type="show1 ? 'text' : 'password'"
+            @click:append="show1 = !show1"
+            />         
+             </v-form>
+         
           <v-card-actions>
             <v-btn @click="register" color="primary">Register</v-btn>
             <v-spacer/>
@@ -20,6 +24,12 @@
 
         <v-card-text class="text-center">{{responseMsg}}</v-card-text>
       </v-card>
+      <CustomerDialogue :dialog.sync="customerclicked" @closeDialog="customerclicked=false"
+                       :username="username"
+                      />
+      <ArtistDialogue :dialog.sync="artistclicked" @closeDialog="artistclicked=false"
+                       :username="username"
+                      />
 
   </v-container>
 </template>
@@ -28,12 +38,18 @@
   import Vue from 'vue'
   import axios from 'axios';
   import VueAxios from 'vue-axios';
+  import ArtistDialogue from "@/components/ArtistDialogue";
+  import CustomerDialogue from "@/components/CustomerDialogue";
   Vue.use(VueAxios,axios);
 
   export default {
+    components:{CustomerDialogue, ArtistDialogue},
     name: 'Registration',
     data:()=>{
       return{
+        artistclicked:false,
+        customerclicked:false,
+        show1 :false,
         username:"",
         firstName:"",
         lastName:"",
@@ -51,32 +67,35 @@
           firstName: this.firstName,
           lastName: this.lastName,
           email: this.email,
-          password: this.password
+          password: this.password,
         }
         console.log(signup)
-
         axios.post("https://onlinegallery-backend-g7.herokuapp.com/createRegistration",signup)
         .then(res=>{
+          this.customerclicked=true,
+          this.artistclicked=true,
           this.responseMsg=this.username+" registered!"
           console.log(res);
         })
         .catch(error=>{
           this.responseMsg=error.response.data;
         })
-
-        // if asCustomer, axios.put("...../setAsCustomer/username).....
       },
 
       resetForm(){
+        this.show1 = "";
         this.username="";
         this.firstName="";
         this.lastName="";
         this.email="";
         this.password="";
         this.responseMsg="";
+        this.asCustomer="";
+        this.asArtist="";
       }
     }
   }
+
 
 </script>
 
@@ -84,7 +103,7 @@
 .active{
   cursor: pointer;
 }
-.title{
+.checkbox{
   font-family: Roboto;
   text-align: center;
 }
