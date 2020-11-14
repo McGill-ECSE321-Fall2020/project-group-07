@@ -42,18 +42,14 @@ export default {
 
   methods: {
     Login() {
-      var loginInfo = {
+      var logininfo = {
         username: this.username,
         password: this.password,
       };
-      console.log(loginInfo);
-      axios
-        .get(
-          "https://onlinegallery-backend-g7.herokuapp.com//getCustomerByUsername", 
-          loginInfo.username
-        ) 
+      console.log(logininfo);
+      axios.get(`https://onlinegallery-backend-g7.herokuapp.com/getCustomerByUsername/${this.username}`) 
         .then((res) => {
-          this.responseMsg = this.username + " Logged in!";
+          this.responseMsg = this.username + " logged in!";
           console.log(res);
         })
         .catch((error) => {

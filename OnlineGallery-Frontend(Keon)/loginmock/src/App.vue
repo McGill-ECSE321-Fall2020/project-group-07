@@ -1,17 +1,17 @@
   
 <template> 
   <v-app>   
-      <login>
-      </login>
+      <customerLoginForm>
+      </customerLoginForm>
   </v-app>
 </template>
 
 <script>
-import login from './components/login';
+import customerLoginForm from './components/customerLoginForm';
 export default {
   name: 'App',
   components: {
-    login,
+    customerLoginForm,
   },
   data: () => ({
   }),
