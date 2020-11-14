@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:backend-heroku" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:backend2" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="62c4ff74-3d65-416b-bcb2-d36ff1ba6ed5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ImageDialogue.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImageDialogue.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ImageTile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImageTile.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ArtistPortfolio.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ArtistPortfolio.vue" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Vue Single File Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="JupyterTrust" id="8ef9e2d0-8349-43c2-bd42-49ca37950865" />
+  <component name="ProjectId" id="1kEf3wn86vsDL5axgFWl0T9tW86" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
+    <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/views" />
+    </key>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="62c4ff74-3d65-416b-bcb2-d36ff1ba6ed5" name="Default Changelist" comment="" />
+      <created>1605270479524</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1605270479524</updated>
+      <workItem from="1605270481017" duration="8000" />
+      <workItem from="1605270514332" duration="431000" />
+      <workItem from="1605271158867" duration="944000" />
+      <workItem from="1605272496141" duration="1504000" />
+      <workItem from="1605277818850" duration="7360000" />
+      <workItem from="1605286031913" duration="19682000" />
+      <workItem from="1605364516530" duration="1133000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="689" y="355" width="603" height="417" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1605277564531">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="689" y="355" width="603" height="417" key="#com.intellij.fileTypes.FileTypeChooser/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605277564531" />
+    <state x="659" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1605308421270">
+      <screen x="72" y="27" width="1848" height="1053" />
+    </state>
+    <state x="659" y="259" width="672" height="678" key="search.everywhere.popup/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605308421270" />
+  </component>
+</project>

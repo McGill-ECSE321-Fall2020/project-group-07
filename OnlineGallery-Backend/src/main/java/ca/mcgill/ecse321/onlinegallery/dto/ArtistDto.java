@@ -23,6 +23,24 @@ public class ArtistDto {
 	public String getUsername() {
 		return this.username;
 	}
+	
+	private String firstname;
+	public void setFirstname(String firstname) {
+		this.firstname=firstname;
+	}
+	public String getFirstname() {
+		return this.firstname;
+	}
+	
+	private String lastname;
+	public void setLastname(String lastname) {
+		this.lastname=lastname;
+	}
+	public String getLastname() {
+		return this.lastname;
+	}
+	
+	
 	private int numSold;
 	public void setNumSold(int numSold) {
 		this.numSold = numSold;
@@ -60,6 +78,14 @@ public class ArtistDto {
 	}
 	public Long getProfileId() {
 		return this.id;
+	}
+	
+	private String url;
+	public void setUrl(String url) {
+		this.url=url;
+	}
+	public String getUrl() {
+		return this.url;
 	}
 
 }

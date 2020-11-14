@@ -2,10 +2,10 @@ package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,23 +37,31 @@ public class ArtworkService {
 	
 
 	@Transactional
-	public Artwork createArtwork(Long artistId, ArtworkDto dto) throws ArtworkException, ArtistException {
+	public Artwork createArtwork(ArtworkDto dto) throws ArtworkException, ArtistException {
 		
-		if(!artistRepo.existsById(artistId)) { 
-			throw new ArtistException("No artist with ID ["+artistId+"] exists");
+		String artistUserName = dto.getUsername();
+		if(!regRepo.existsByUserName(dto.getUsername())){ 
+			throw new ArtistException("User does not exist"); 
 		}
 		
-		Artist artist = artistRepo.findArtistByArtistId(artistId);
-		GalleryRegistration reg= artist.getGalleryRegistration();
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(artistUserName);
+		
+		if(reg.getArtist() == null) {
+			throw new ArtistException("User is not an artist");
+		}
+		
+		Artist artist = reg.getArtist();
 		
 		Artwork art = new Artwork();
+		
+;
 		
 		if(dto.getName() == null || dto.getDescription() == null || 
 				dto.getPrice() <= 0 || dto.getDimension() == null || dto.getNumViews() != 0 ||
 						dto.getStatus() == null || dto.getWeight() <= 0 || dto.getCommission() == 0){
 			throw new ArtworkException("Invalid artwork attributes");	
 						}
-		
+
 		art.setName(dto.getName());
 		art.setDescription(dto.getDescription());
 		art.setPrice(dto.getPrice());
@@ -61,13 +69,15 @@ public class ArtworkService {
 		art.setNumViews(dto.getNumViews());
 		art.setDimension(dto.getDimension());
 		art.setWeight(dto.getWeight());
-		art.setCommission(dto.getCommission());
-		
+		art.setCommission(dto.getCommission()); 
+		art.setUrl(dto.getUrl());
+		art.setMedium(dto.getMedium());
+
 		artist.getArtwork().add(art);
 		art.setArtist(artist);
-		
+
 		artworkRepo.save(art);
-		
+
 		return art;
 	}
 	
@@ -103,7 +113,7 @@ public class ArtworkService {
 		} 
 		return artwork;
 	}
- 
+
 	
 	@Transactional 
 	public Set<Artwork> getAvailableArtworkByArtistId(Long artistId) throws ArtworkException{
@@ -119,6 +129,8 @@ public class ArtworkService {
 		
 		List<Artwork> artworkList = new ArrayList<Artwork>();
 		artworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
+		
+		
 		List<Artwork> randomList = new ArrayList<Artwork>();
 		Random rand = new Random();
 		
@@ -126,11 +138,17 @@ public class ArtworkService {
 			throw new  ArtworkException("there is less than ["+numToRetrieve+"] artworks");
 		} 
 		
-		for (int i = 0; i < numToRetrieve; i++) {
+		List<Integer> usedIdx = new ArrayList<Integer>(); 
+		
+		int i=0;
+		while (i<numToRetrieve) {
 	        int randomIndex = rand.nextInt(artworkList.size());
-	        randomList.add(artworkList.get(randomIndex));
-	        artworkList.remove(randomIndex);
-	    }
+	        if (!usedIdx.contains(randomIndex)) {
+	        	randomList.add(artworkList.get(randomIndex));
+	        	usedIdx.add(randomIndex);
+	        	i+=1;
+	        }
+		}
 		return randomList;
 	
 		

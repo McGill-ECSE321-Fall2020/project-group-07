@@ -33,6 +33,7 @@ public class AdminRestController {
 
 		AdminDto dto = new AdminDto();
 		dto.setUsername(admin.getGalleryRegistration().getUserName());
+		dto.setPassword(admin.getGalleryRegistration().getPassWord());
 		
 		return dto;
 	}
