@@ -130,7 +130,6 @@ public class ShipmentService {
 		
 		Customer cust=first.getCustomer();
 		cust.getShipment().add(shipment);
-		custRepo.save(cust);
 		
 		return shipRepo.save(shipment);
 		
