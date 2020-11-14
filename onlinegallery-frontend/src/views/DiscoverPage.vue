@@ -5,10 +5,9 @@
           <div class="masonry-container">
 
             <div class="refresh">
-              <v-btn text>
+              <v-btn text @click="refresh">
                 <v-icon class="black-link">
-                  mdi-refresh
-                </v-icon>
+                  mdi-refresh</v-icon>
               </v-btn>
             </div>
 
@@ -21,7 +20,6 @@
        </div>
   </v-container>
 </template>
-
 
 <script>
 import Vue from 'vue';
@@ -40,35 +38,74 @@ export default {
   name:'discover-page',
   components:{ImageTile,HeaderBar},
   data:()=>({
+    number:12,
     totalWidth:4,
     artworks:[],
     btnWidth:2,
+    awsAddress:"http://og-img-repo.s3.us-east-1.amazonaws.com/",
     addedArtworkIds: []
 
   }),
   created(){
-    axios.get("https://api.unsplash.com/collections/9248817/photos?per_page=16&client_id=byOHc2uR5blXApgsdmB2HXqDUco4dtPAAvAfnAmQJDM")
+    axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
     .then(res=>{
-      let data=res.data;
-      for (var i=0;i<data.length;i++){
-        let each={
-          id:i,
-          imgUrl:data[i].urls.regular,
-          name:"Art Name",
-          username:"artist username",
-          dimension:"12in x 8in",
-          description:"Cras faucibus lorem fermentum odio viverra gravida vitae nec massa. Donec ut ultrices dui. Quisque vitae dolor et sem posuere pellentesque. Vestibulum tincidunt nulla quis rhoncus ultrices. Suspendisse neque neque, aliquet at neque a, finibus pretium sapien. Fusce sagittis tortor in commodo viverra. Duis lacinia risus sit amet scelerisque ultricies. Mauris in neque non erat molestie feugiat. Vivamus vel dictum libero. Maecenas mi nunc, consequat ac erat imperdiet, eleifend efficitur neque. Vestibulum id augue et turpis tincidunt sagittis id ac lorem. Integer malesuada magna vel lobortis lacinia. Etiam vitae nibh magna. Nullam dolor libero, lobortis a nisl vel, pretium tincidunt urna. Nullam facilisis diam ut pharetra interdum. Proin eu lorem felis. Maecenas diam sapien, lacinia in velit at, tempus dapibus magna. Morbi ultrices est nulla, faucibus malesuada urna tempus non. Integer eget orci vel lorem feugiat faucibus at et nisi. Nullam aliquam magna urna, sit amet faucibus risus elementum fringilla. Vivamus orci lacus, hendrerit et tempor eget",
-          medium:"oil on canvas",
-          price:"100",
-          height:Math.floor(Math.random() * Math.floor(500))+300
+      for (let i=0;i<res.data.length;i++){
+       let data=res.data[i];
+        let awsUrl=this.awsAddress.concat(data.url);
+        axios.get(awsUrl)
+        .then(awsRes=>{
+          let each= {
+            id: data.artworkId,
+            imgUrl: awsRes.data,
+            name: data.name,
+            username: data.username,
+            dimension: data.dimension,
+            description: data.description,
+            medium: data.medium,
+            price: data.price,
+            weight: data.weight,
+            height: data.url.split("_")[4]
         }
         this.artworks.push(each);
+       })
       }
-
+    })
+    .catch((error)=>{
+      console.log(error);
     })
   },
-  gather(artid){
-    this.addedArtworkIds.push(artid);
+    methods:{
+      gather(artid){
+        this.addedArtworkIds.push(artid);
+    },
+    refresh(){
+         axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
+    .then(res=>{
+      for (let i=0;i<res.data.length;i++){
+       let data=res.data[i];
+        let awsUrl=this.awsAddress.concat(data.url);
+        axios.get(awsUrl)
+        .then(awsRes=>{
+          let each= {
+            id: data.artworkId,
+            imgUrl: awsRes.data,
+            name: data.name,
+            username: data.username,
+            dimension: data.dimension,
+            description: data.description,
+            medium: data.medium,
+            price: data.price,
+            weight: data.weight,
+            height: data.url.split("_")[4]
+        }
+        this.artworks.push(each);
+       })
+      }
+    })
+    .catch((error)=>{
+      console.log(error);
+    })
+    }
   }
 }
 </script>
