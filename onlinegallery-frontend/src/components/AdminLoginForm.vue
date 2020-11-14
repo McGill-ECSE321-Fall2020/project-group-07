@@ -40,14 +40,18 @@
         this.responseMsg="logging in ..."
         axios.get(`https://onlinegallery-backend-g7.herokuapp.com/getAdmin`)
         .then(res=>{
-          
-          console.log(this.username + "     " + this.password + "\n");
-          console.log(res.data.username + "    " + res.data.password);
-
-          this.responseMsg="logged in!";
+        
+          if(this.username.localeCompare(res.data.username)){
+            throw new Error("Incorrect Username!");
+          } else if(this.password.localeCompare(res.data.password)){
+            throw new Error("Incorrect Password!");
+          } else{
+            this.responseMsg="logged in!";
+            this.$router.push({name:"/admin-portal", params: {username:this.username}});  
+          } 
         })
         .catch(error=>{
-          this.responseMsg=error.response.data;
+          this.responseMsg=error;
         })
       },
       resetForm(){

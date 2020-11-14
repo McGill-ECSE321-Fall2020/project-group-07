@@ -99,7 +99,7 @@ export default {
   justify-content: center;
   align-items: center;
   font-size: 5.25vw;
-  font-family: 'Maven Pro', sans-serif;;
+  font-family: 'Maven Pro', sans-serif;
   font-weight: 700;
   user-select: none;
   animation: dissapear 1s ease forwards 1s;
