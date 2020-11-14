@@ -36,11 +36,10 @@ export default {
   methods:{
     expand(){
       this.clicked=true;
-      console.log("clicked")
     },
     handleAddedToCart(){
-      this.$emit
-    }
+      this.$emit("gatherID", this.artid);
+   }
 
   }
 };

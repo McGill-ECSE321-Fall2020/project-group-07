@@ -14,7 +14,7 @@
 
             <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
               <v-col :sm="totalWidth" v-for="each in artworks" v-masonry-tile class="item" :key="each.id" >
-               <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height"/>
+               <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height" @gatherID="gather"/>
               </v-col>
             </v-row>
           </div>
@@ -42,7 +42,8 @@ export default {
   data:()=>({
     totalWidth:4,
     artworks:[],
-    btnWidth:2
+    btnWidth:2,
+    addedArtworkIds: []
 
   }),
   created(){
@@ -65,6 +66,9 @@ export default {
       }
 
     })
+  },
+  gather(artid){
+    this.addedArtworkIds.push(artid);
   }
 }
 </script>

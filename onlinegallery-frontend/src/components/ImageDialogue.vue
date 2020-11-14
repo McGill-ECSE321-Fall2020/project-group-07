@@ -72,7 +72,7 @@ export default {
       this.$emit('closeDialog');
     },
     addToCart(){
-      this.$emit("added-to-cart")
+      this.$emit("added-to-cart", this.artid)
       console.log("buy artwork id: "+this.artid);
     }
   },

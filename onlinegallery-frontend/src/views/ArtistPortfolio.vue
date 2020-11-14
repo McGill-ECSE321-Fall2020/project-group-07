@@ -34,7 +34,7 @@
 
             <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
               <v-col :sm="totalWidth" v-for="each in orderedArtworks" v-masonry-tile class="item" :key="each.id" >
-               <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height"/>
+               <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height" @gatherID="gather"/>
               </v-col>
             </v-row>
           </div>
@@ -62,7 +62,7 @@ Vue.use(underscore);
 export default {
   name:'artist-portfolio',
   components:{ImageTile,HeaderBar},
-  props:["artistid"],
+  props:["artistid", "artid"],
   data:()=>({
     totalWidth:4,
     artworks:[],
@@ -73,7 +73,7 @@ export default {
     artistFirstname:"",
     artistLastname:"",
     artistDesc:"",
-    addedArtworkIds: []
+    addedArtworkIds:[]
   }),
   mounted(){
     axios.get(`https://onlinegallery-backend-g7.herokuapp.com//getAvailableArtworkByArtistId/${this.$props.artistid}`)
@@ -118,13 +118,16 @@ export default {
         this.artistDesc=res.data.selfDescription;
     })
   },
+  methods:{
+    gather(artid){
+      this.addedArtworkIds.push(artid);
+    }
+  },
   computed:{
     orderedArtworks: function(){
       return this.$_.sortBy(this.artworks,"id").reverse();
     }
   }
-
-
 }
 </script>
 
@@ -152,5 +155,3 @@ export default {
   text-decoration: none !important;
 }
 </style>
-
-=
