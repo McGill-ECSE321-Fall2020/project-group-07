@@ -40,7 +40,10 @@
         this.responseMsg="logging in ..."
         axios.get(`https://onlinegallery-backend-g7.herokuapp.com/getAdmin`)
         .then(res=>{
-          console.log(res);
+          
+          console.log(this.username + "     " + this.password + "\n");
+          console.log(res.data.username + "    " + res.data.password);
+
           this.responseMsg="logged in!";
         })
         .catch(error=>{
