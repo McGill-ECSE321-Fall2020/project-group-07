@@ -1,8 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
-
-
+import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
 import java.util.Set;
@@ -121,15 +120,28 @@ public class ArtworkService {
 			throw new  ArtworkException("No artist with artistId ["+artistId+"] exists");
 		} 
 		Artist artist = artistRepo.findArtistByArtistId(artistId);
-		return artist.getArtwork();
+		Set<Artwork> availableArtwork = new HashSet<Artwork>();
+		
+		for (Artwork art:artist.getArtwork()) {
+			if (art.getStatus()==ArtworkStatus.AVAILABLE) {
+				availableArtwork.add(art);
+			}
+		}
+		return availableArtwork;
 	}
 	
 	@Transactional 
 	public  List<Artwork> retrieveRandomAvailableArtworks(int numToRetrieve) throws ArtworkException{
 		
-		List<Artwork> artworkList = new ArrayList<Artwork>();
-		artworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
+		List<Artwork> allArtworkList = new ArrayList<Artwork>();
+		allArtworkList = toList((Iterable<Artwork>) artworkRepo.findAll());
 		
+		List<Artwork> artworkList = new ArrayList<Artwork>();
+		for (Artwork art:allArtworkList) {
+			if (art.getStatus()==ArtworkStatus.AVAILABLE) {
+				artworkList.add(art);
+			}
+		}
 		
 		List<Artwork> randomList = new ArrayList<Artwork>();
 		Random rand = new Random();
