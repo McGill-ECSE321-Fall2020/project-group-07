@@ -50,7 +50,7 @@ export default {
       axios
         .get(
           "https://onlinegallery-backend-g7.herokuapp.com//getCustomerByUsername", 
-          loginInfo 
+          loginInfo.username
         ) 
         .then((res) => {
           this.responseMsg = this.username + " Logged in!";
