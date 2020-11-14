@@ -9,6 +9,7 @@ import DiscoverPage from "@/views/DiscoverPage";
 import AllArtists from "@/views/AllArtists";
 import CustomerLogin from "@/views/CustomerLogin";
 import ArtistLogin from "@/views/ArtistLogin";
+import AdminLogin from "@/views/AdminLogin";
 import Register from "@/views/Register";
 import ArtistPortalPage from "@/views/ArtistPortalPage";
 import ArtistPortfolio from "@/views/ArtistPortfolio";
@@ -25,6 +26,7 @@ const router = new VueRouter({
     {path:'/all-artists',component:AllArtists, meta:{title:"All Artists"}},
     {path:"/customer-login", component: CustomerLogin, meta:{title:"Customer Login"}},
     {path:"/artist-login", component:ArtistLogin,meta:{title:"Artist Login"}},
+    {path:"/admin-login", component:AdminLogin, meta:{title:"Admin Login"}},
     {path:"/register", component: Register, meta:{title:"Register"}},
     {path:"/artist-portal", name:"/artist-portal", component:ArtistPortalPage, props: true, meta:{title:"Artist Portal"}},
     {path:"/artist-portfolio", name:"/artist-portfolio", component:ArtistPortfolio, props: true, meta:{title:"Artist Portfolio"}}
