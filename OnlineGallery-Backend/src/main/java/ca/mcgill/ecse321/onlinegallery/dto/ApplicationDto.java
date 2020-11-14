@@ -2,6 +2,8 @@ package ca.mcgill.ecse321.onlinegallery.dto;
 
 import java.sql.Date;
 
+import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
+
 public class ApplicationDto {
 
 	private Double commission;
@@ -42,6 +44,30 @@ public class ApplicationDto {
 	}
 	public Long getArtworkId() {
 		return this.artworkId;
+	}
+	
+	public String customerName;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getCustomerName() {
+		return this.customerName;
+	}
+	
+	public String artistName;
+	public void setArtistName(String artistName) {
+		this.artistName = artistName;
+	}
+	public String getArtistName() {
+		return this.artistName;
+	}
+	
+	ShipmentType shipmentType;
+	public void setShipmentType(ShipmentType shipmentType) {
+		this.shipmentType = shipmentType;
+	}
+	public ShipmentType getShipmentType() {
+		return this.shipmentType;
 	}
 	
 }

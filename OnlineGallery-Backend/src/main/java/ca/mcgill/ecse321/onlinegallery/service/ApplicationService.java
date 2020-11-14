@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import ca.mcgill.ecse321.onlinegallery.dao.ArtworkRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.PurchaseRepository;
 import ca.mcgill.ecse321.onlinegallery.model.Purchase;
+import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
 import ca.mcgill.ecse321.onlinegallery.service.exception.ApplicationException;
 
 @Service
@@ -38,8 +39,11 @@ public class ApplicationService {
 				double price = p.getArtwork().getPrice();
 				double commission = p.getArtwork().getComission();
 				Date purshaseDate = p.getDate();
+				ShipmentType shipmentType = p.getShipmentType();
+				String customerName = p.getCustomer().getGalleryRegistration().getUserName();
+				String artistName = p.getArtwork().getArtist().getGalleryRegistration().getUserName();
 
-				SoldArtworksSummaryEntry aSummary = new SoldArtworksSummaryEntry(name, price, commission, purshaseDate);
+				SoldArtworksSummaryEntry aSummary = new SoldArtworksSummaryEntry(name, price, commission, purshaseDate, shipmentType, customerName, artistName);
 				summaryList.put(artworkId, aSummary);
 			
 			}
