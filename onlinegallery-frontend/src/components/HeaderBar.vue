@@ -4,7 +4,7 @@
          <v-app-bar style = "justify-content: space-evenly!important" color="white" class="navbar" fixed elevation="0" >
            <v-row style = "justify-content: space-evenly!important">
 
-             <v-col :sm="1" class = "col">
+             <v-col :sm="1" class = "first-col">
                  <router-link to="/home" class="black-link">Home</router-link>
              </v-col>
 
@@ -57,6 +57,14 @@
           </v-col>
 
           <v-col :sm="1" class = "col facebook">
+            <v-btn text x-small @click="handleHelp">
+              <v-icon>
+                mdi-help
+              </v-icon>
+            </v-btn>
+          </v-col>
+
+          <v-col :sm="1" class = "col facebook">
             <v-btn text x-small href="https://www.facebook.com/Completely-Secure-Gallery-107431924517668" target="_blank">
               <v-icon color="#3b5998">
                 mdi-facebook
@@ -64,9 +72,11 @@
             </v-btn>
           </v-col>
 
+
         </v-row>
       </v-app-bar>
     </div>
+
   </v-container>
 </template>
 
@@ -80,7 +90,13 @@ export default {
       colors: ['white accent-4', 'error', 'white darken-1'],
       items: ["Artist", "Customer", "Admin"],
     }),
+    methods:{
+      handleHelp(){
+        this.$router.push("/help")
+      }
+    }
   }
+
 </script>
 
 <style scoped>
@@ -132,6 +148,11 @@ export default {
 
 .col{
   text-align: center;
+  flex-grow: 0!important;
+}
+
+.first-col{
+  text-align: right;
   flex-grow: 0!important;
 }
 

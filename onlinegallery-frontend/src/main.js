@@ -18,6 +18,8 @@ import ArtistPortfolio from "@/views/ArtistPortfolio";
 import Summary from "@/views/Summary";
 import CustomerSummary from "@/views/CustomerSummary";
 import ViewPurchasedArtworks from "@/views/ViewPurchasedArtworks";
+import PaymentProcessed from "@/views/PaymentProcessed";
+import Help from "@/views/Help";
 
 Vue.use(VueRouter);
 Vue.config.productionTip = false;
@@ -39,7 +41,10 @@ const router = new VueRouter({
     {path:"/gallery-summary", name:"/gallery-summary", component:Summary, meta:{title:"Summary"}},
     {path:"/artist-portfolio", name:"/artist-portfolio", component:ArtistPortfolio, props: true, meta:{title:"Artist Portfolio"}},
     {path:"/customer-summary", name:"/customer-summary", component:CustomerSummary, props: true, meta:{title:"Summary"}},
-    {path:"/view-purchases", name: "/view-purchases", component:ViewPurchasedArtworks, props: true, meta:{tile:"Purchases"}}
+    {path:"/view-purchases", name: "/view-purchases", component:ViewPurchasedArtworks, props: true, meta:{tile:"Purchases"}},
+    {path:"/payment-processed", name: "/payment-processed", component:PaymentProcessed, props: true, meta:{tile:"Thank You"}},
+    {path:"/help", name: "/hep", component:Help, props: true, meta:{tile:"help"}}
+
 
   ],
   mode:'history'

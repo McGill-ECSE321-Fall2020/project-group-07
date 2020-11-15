@@ -124,7 +124,7 @@ export default {
       ccExp:"",
       ccFirstname:"",
       ccLastname:"",
-      ccResponse:"payment response",
+      ccResponse:"",
       paid:false,
       purchaseId:[],
       shipmentId:null
@@ -230,8 +230,9 @@ export default {
       .then(res=>{
         console.log(res)
         this.ccResponse="shipment paid!"
-        this.loggedIn=false;
-        this.startLogin=false;
+        // this.loggedIn=false;
+        // this.startLogin=false;
+        this.$router.push("/payment-processed");
       })
       .catch(error=>{
         console.log(error.response)

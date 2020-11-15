@@ -42,7 +42,13 @@ public class ApplicationService {
 				ShipmentType shipmentType = p.getShipmentType();
 				String customerName = p.getCustomer().getGalleryRegistration().getUserName();
 				String artistName = p.getArtwork().getArtist().getGalleryRegistration().getUserName();
-				Long shipmentId = p.getShipment().getShipmentId();
+				Long shipmentId;
+				try {
+					shipmentId = p.getShipment().getShipmentId();
+				}
+				catch (Exception e) {
+					shipmentId= (long) -1;
+				}
 
 				SoldArtworksSummaryEntry aSummary = new SoldArtworksSummaryEntry(name, price, commission, purshaseDate, shipmentType, customerName, artistName, shipmentId);
 				summaryList.put(artworkId, aSummary);

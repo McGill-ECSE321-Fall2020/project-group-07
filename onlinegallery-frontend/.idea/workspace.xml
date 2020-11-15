@@ -30,11 +30,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62c4ff74-3d65-416b-bcb2-d36ff1ba6ed5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/views/Help.vue" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/views/PaymentProcessed.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../OnlineGallery-Backend/src/main/java/ca/mcgill/ecse321/onlinegallery/service/ApplicationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../OnlineGallery-Backend/src/main/java/ca/mcgill/ecse321/onlinegallery/service/ApplicationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ImageTile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImageTile.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/About.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/About.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/ArtistPortfolio.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ArtistPortfolio.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/DiscoverPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/DiscoverPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/CheckoutArtworkTable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/CheckoutArtworkTable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HeaderBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeaderBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Home.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Home.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,14 +64,14 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/components" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/views" />
     <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/components" />
       <recent name="$PROJECT_DIR$/src/views" />
+      <recent name="$PROJECT_DIR$/src/components" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
@@ -96,7 +99,7 @@
       <workItem from="1605452753072" duration="5430000" />
       <workItem from="1605458327489" duration="3667000" />
       <workItem from="1605468130271" duration="3189000" />
-      <workItem from="1605474310385" duration="416000" />
+      <workItem from="1605474310385" duration="5407000" />
     </task>
     <servers />
   </component>
@@ -132,9 +135,9 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="1920" y="0" width="1802" height="825" maximized="true" key="dock-window-2/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605398943076" />
-    <state x="659" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1605308421270">
+    <state x="659" y="259" width="672" height="678" key="search.everywhere.popup" timestamp="1605479630882">
       <screen x="72" y="27" width="1848" height="1053" />
     </state>
-    <state x="659" y="259" width="672" height="678" key="search.everywhere.popup/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605308421270" />
+    <state x="659" y="259" width="672" height="678" key="search.everywhere.popup/72.27.1848.1053/1920.0.1920.1080@72.27.1848.1053" timestamp="1605479630882" />
   </component>
 </project>
