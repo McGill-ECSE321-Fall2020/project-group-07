@@ -27,6 +27,9 @@
             </v-row>
           </div>
        </div>
+        <v-dialog v-model="checkoutDialog" overlay-color="white" overlay-opacity="1.0" width="600" class="pa-0">
+            <CheckoutArtworkTable :ids="addedArtworkIds" />
+        </v-dialog>
   </v-container>
 </template>
 
@@ -34,6 +37,7 @@
 import Vue from 'vue';
 import {VueMasonryPlugin} from 'vue-masonry';
 import ImageTile from "@/components/ImageTile";
+import CheckoutArtworkTable from "@/components/CheckoutArtworkTable";
 import HeaderBar from "@/components/HeaderBar";
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -45,7 +49,7 @@ Vue.use(imagesLoaded);
 
 export default {
   name:'discover-page',
-  components:{ImageTile,HeaderBar},
+  components:{ImageTile,HeaderBar, CheckoutArtworkTable},
   data:()=>({
     number:6,
     totalWidth:4,
@@ -57,7 +61,7 @@ export default {
 
 
   }),
-  created(){
+  mounted(){
     axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
     .then(res=>{
       for (let i=0;i<res.data.length;i++){
@@ -85,10 +89,17 @@ export default {
       console.log(error);
     })
   },
-    methods:{
-      gather(artid){
+
+  methods:{
+    gather(artid){
         this.addedArtworkIds.push(artid);
     },
+    initiateCheckout(){
+      this.checkoutDialog=true;
+    },
+
+
+
     refresh(){
          axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
     .then(res=>{
@@ -123,9 +134,9 @@ export default {
 
 <style scoped>
 .masonry-container {
-  width: 75%;
-  margin:auto;
-  margin-top: 100px;
+  width: 100%;
+  margin-left:13%;
+  margin-top: 20px;
 }
 
 .refresh{
@@ -136,5 +147,8 @@ export default {
 .black-link{
   color:black !important;
   text-decoration: none !important;
+}
+.checkout-btn{
+  padding-top:65vh;
 }
 </style>
