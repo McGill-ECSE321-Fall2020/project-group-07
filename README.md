@@ -19,11 +19,11 @@ The team is composed of 5 McGill University students within the Faculty of Engin
 ### Project
 | NAME                   | ROLE |  SPRINT 1 (Hours) | SPRINT 2 (Hours) | SPRINT 3 (Hours) | SPRINT 4 (Hours)|
 |------------------------|------|-----------|----------|----------|----------|
-| Anthony Dagher         | Software Developer       | 20  |  30 |   |          |
-| Jay Han                |Project Manager, Developer| 35  |  45 |   |          |
-| Keon Olsz              | Software Developer       | 20 |  25 |   |          |
-| Massimo Vadacchino     | CI lead, Developer       | 30  |  32 |   |          |
-| Natalia Tabet          | Software Developer       | 26  |   30 |   |          |
+| Anthony Dagher         | Software Developer       | 20  |  30 | 35  |          |
+| Jay Han                |Project Manager, Developer| 35  |  45 |  45 |          |
+| Keon Olsz              | Software Developer       | 20 |  25 | 25  |          |
+| Massimo Vadacchino     | CI lead, Developer       | 30  |  32 |  40  |          |
+| Natalia Tabet          | Software Developer       | 26  |   30 |  25 |          |
 
 ### Sprint 1
 
@@ -39,7 +39,7 @@ The project report for Sprint 1 can be found [here](https://github.com/McGill-EC
  
 ### Sprint 2
 
-The project report for Sprint 2 can be found [here](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki/Sprint-2)).
+The project report for Sprint 2 can be found [here](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki/Sprint-2).
 
 | NAME                   | ROLE | CONTRIBUTIONS | HOURS | 
 |------------------------|----------|---------------|-------|
@@ -48,3 +48,14 @@ The project report for Sprint 2 can be found [here](https://github.com/McGill-EC
 | Massimo Vadacchino     | Software Developer <br/> Quality Assurance  |**Admin** (Service methods, unit tests, Controller, Postman) <br/> **Customer** (Service methods, unit tests, Controller, Postman) <br/> **Artist** (2/6 Service methods and unit tests) <br/> **Purchase** (Controller, Postman) <br/> Wiki Project Report|  32  | 
 | Keon Olsz              | Software Developer <br/> Quality Assurance  |**Artwork** (4/6 Service methods and unit tests, Controller, Postman)              |   25    |  
 | Natalia Tabet          | Software Developer <br/> Quality Assurance  |**Application** (Service methods, unit tests) <br/> **Shipment** (3/6 Service methods and unit tests, DTO, Controller, Postman)              |  30  | 
+
+### Sprint 2
+The project report for Sprint 3 can be found [here](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki/Sprint-3).
+
+| NAME                   | ROLE | CONTRIBUTIONS | HOURS | 
+|------------------------|----------|---------------|-------|
+| Anthony Dagher         |Frontend Developer <br/> | Registration Form, Artwork Discovery Page, Artist Biography, Wiki |  35   |
+| Jay Han                |Frontend Developer <br/> Project lead | Artist Portfolio & Login Page, Checkout Process, Artwork Discovery Page, Deployment | 45    | 
+| Massimo Vadacchino     |Frontend Developer <br/> | Website Header, Home Page, Admin Login Portal, Architecture  | 40  | 
+| Keon Olsz              |Frontend Developer <br/> | About Page, Facebook Page, Customer Login Portal |  25  |  
+| Natalia Tabet          |Architecture Setup <br/> | Diagram modeling of the entire software system   |  25 | 
