@@ -10,14 +10,14 @@ import AdminLoginForm from "@/components/AdminLoginForm";
 
 export default {
   name: 'admin-login',
-  components: {AdminLoginForm},
+  components: {AdminLoginForm}
 }
 </script>
 
 <style>
 
 .placeholder{
-  padding-top: 15%!important;
+  padding-top: 30vh!important;
   text-align: center;
 }
 
