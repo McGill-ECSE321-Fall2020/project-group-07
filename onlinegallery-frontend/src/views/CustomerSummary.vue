@@ -27,23 +27,22 @@ import VueAxios from 'vue-axios';
 Vue.use(VueAxios,axios);
 
 export default {
-   name: 'gallery-summary',
+   name: 'customer-summary',
+   props:["username"],
    data () {
       return {
          search: '',
          headers: [
             {
-            text: 'Customer',
+            text: 'Date',
             align: 'start',
-            value: 'name',
+            value: 'date',
             },
             { text: 'Price', value: 'price' },
             { text: 'Commission', value: 'commission' },
-            { text: 'Date', value: 'date' },
             { text: 'Artist', value: 'artist' },
             { text: 'Artwork', value: 'artwork' },
-            { text: 'Shipment', value: 'shipment' },
-            { text: 'ShipmentId', value: 'shipmentId'}
+            { text: 'Shipment', value: 'shipment'}
          ],
          info: [
             
@@ -57,17 +56,18 @@ export default {
       .then(res=>{
          let datas = res.data;
          for(let i = 0; i<datas.length; i++){
+
             let data = datas[i];
 
+            if((data.customerName).localeCompare(this.username)) continue;
+
             let info ={
-               name: data.customerName,
                price: data.price,
                commission: data.comission,
                date: data.datePurchased,
                artist: data.artistName,
                artwork: data.name,
-               shipment: data.shipmentType,
-               shipmentId: data.shipmentId
+               shipment: data.shipmentType
             }
             
             if(info!=undefined)this.info.push(info);

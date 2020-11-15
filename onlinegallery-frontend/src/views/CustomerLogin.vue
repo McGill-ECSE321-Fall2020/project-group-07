@@ -1,16 +1,16 @@
 <template>
     <div class="placeholder">
-      <div> customer login</div>
+      <div> Customer Login</div>
+      <CustomerLoginForm/>
     </div>
 </template>
 
 <script>
+import CustomerLoginForm from "@/components/CustomerLoginForm";
 
 export default {
   name: 'customer-login',
-  components: {
-
-  }
+  components: {CustomerLoginForm}
 }
 </script>
 

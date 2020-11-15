@@ -10,7 +10,7 @@ import AdminLoginForm from "@/components/AdminLoginForm";
 
 export default {
   name: 'admin-login',
-  components: {AdminLoginForm},
+  components: {AdminLoginForm}
 }
 </script>
 

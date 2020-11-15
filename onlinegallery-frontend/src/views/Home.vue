@@ -39,8 +39,8 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 40%;
-  height: 40%;
+  width: 30%;
+  height: 30%;
   transform: translate(-50%, -37.5%);
   animation: appear 0.5s ease forwards 1.5s;
 }
