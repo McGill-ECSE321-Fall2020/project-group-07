@@ -38,15 +38,19 @@ export default {
   name:'discover-page',
   components:{ImageTile,HeaderBar},
   data:()=>({
-    number:12,
+    number: "",
     totalWidth:4,
     artworks:[],
     btnWidth:2,
     awsAddress:"http://og-img-repo.s3.us-east-1.amazonaws.com/",
     addedArtworkIds: []
-
   }),
+  
   created(){
+    axios.get("https://onlinegallery-backend-g7.herokuapp.com/getAllArtworks")
+    .then(response=>{
+      this.number = response.data.length;
+    });
     axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
     .then(res=>{
       for (let i=0;i<res.data.length;i++){
@@ -70,34 +74,32 @@ export default {
        })
       }
     })
-    .catch((error)=>{
-      console.log(error);
-    })
   },
     methods:{
       gather(artid){
         this.addedArtworkIds.push(artid);
     },
-    refresh(){
+      refresh(){
+        this.artworks = [];
          axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
-    .then(res=>{
-      for (let i=0;i<res.data.length;i++){
-       let data=res.data[i];
-        let awsUrl=this.awsAddress.concat(data.url);
-        axios.get(awsUrl)
-        .then(awsRes=>{
-          let each= {
-            id: data.artworkId,
-            imgUrl: awsRes.data,
-            name: data.name,
-            username: data.username,
-            dimension: data.dimension,
-            description: data.description,
-            medium: data.medium,
-            price: data.price,
-            weight: data.weight,
-            height: data.url.split("_")[4]
-        }
+       .then(res=>{
+         for (let i=0;i<res.data.length;i++){
+          let data=res.data[i];
+           let awsUrl=this.awsAddress.concat(data.url);
+           axios.get(awsUrl)
+            .then(awsRes=>{
+             let each= {
+             id: data.artworkId,
+             imgUrl: awsRes.data,
+             name: data.name,
+             username: data.username,
+             dimension: data.dimension,
+             description: data.description,
+             medium: data.medium,
+             price: data.price,
+              weight: data.weight,
+             height: data.url.split("_")[4]
+          }
         this.artworks.push(each);
        })
       }
