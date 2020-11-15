@@ -228,6 +228,8 @@ public class ShipmentService {
 		
 		shipment.setCreditCardNumber(ccNum.substring(ccNum.length()-4));		//store only last 4 digits of credit card
 		shipment.setShipmentStatus(ShipmentStatus.PAID);
+		shipment.setCreditCardFirstName(dto.getFirstName());
+		shipment.setCreditCardLastName(dto.getLastName());
 		
 		shipment=shipRepo.save(shipment);
 		
