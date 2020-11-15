@@ -1,12 +1,12 @@
 <template>
     <div class="about">
-    <h1 class="text-center">About CSG</h1>
+    <h1 class="text-center">About Gallery Overflow</h1>
     <v-divider class="pb-8"/>
     <p class="text-justify">
-      Located in the Old Port of Montreal, Completely Secure Gallery is proud to
+      Located in the Old Port of Montreal, Gallery Overflow is proud to
       finally share its rich history online with the rest of the world! Here at
       CSG, we take pride in sharing beautiful artworks from local and
-      international artists alike. Completely Secure Gallery was founded in 1972
+      international artists alike. Gallery Overflow was founded in 1972
       by two longtime friends: Vincenzo Spaghetti, a gallery agent, and Nico
       Pastrami, a painter. Both shared the common desire to create a designated
       area in the heart of the Quartier International de Montreal for various

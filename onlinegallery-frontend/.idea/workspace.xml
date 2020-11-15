@@ -31,8 +31,10 @@
   <component name="ChangeListManager">
     <list default="true" id="62c4ff74-3d65-416b-bcb2-d36ff1ba6ed5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ArtistDialogue.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ArtistDialogue.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ImageTile.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImageTile.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/About.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/About.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ArtistPortfolio.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ArtistPortfolio.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/DiscoverPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/DiscoverPage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,6 +96,7 @@
       <workItem from="1605452753072" duration="5430000" />
       <workItem from="1605458327489" duration="3667000" />
       <workItem from="1605468130271" duration="3189000" />
+      <workItem from="1605474310385" duration="416000" />
     </task>
     <servers />
   </component>

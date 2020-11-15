@@ -169,6 +169,6 @@ export default {
   text-decoration: none !important;
 }
 .checkout-btn{
-  padding-top:40vh;
+  padding-top:2vh;
 }
 </style>
