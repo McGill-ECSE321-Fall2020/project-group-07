@@ -26,7 +26,7 @@
 
                            <v-card-title class="justify-center text-sm-body-1 subtitle" >
 
-                             <v-btn  outlined x-small>
+                             <v-btn  @click="gotoArtist" outlined x-small>
                                {{ artistname }}
                              </v-btn>
                            </v-card-title>
@@ -57,6 +57,10 @@
 import Vue from 'vue';
 import PerfectScrollbar from 'vue2-perfect-scrollbar'
 import 'vue2-perfect-scrollbar/dist/vue2-perfect-scrollbar.css'
+import axios from 'axios';
+import VueAxios from 'vue-axios';
+
+Vue.use(VueAxios,axios);
 Vue.use(PerfectScrollbar);
 export default {
   name: 'image-dialog',
@@ -68,6 +72,15 @@ export default {
     addToCart(){
       this.$emit("added-to-cart", this.artid)
       this.$emit('closeDialog');
+    },
+    gotoArtist(){
+      axios.get(`https://onlinegallery-backend-g7.herokuapp.com/getArtistByUsername/${this.$props.artistname}`)
+      .then(res=>{
+        this.$router.push({name:"/artist-portfolio", params: {artistid:res.data.artistId}}).catch(()=>{this.closeDialog()})
+      })
+      .catch(err=>{
+        console.log(err);
+      })
     }
   },
   data(){

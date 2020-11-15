@@ -11,10 +11,19 @@
               </v-btn>
             </div>
 
-            <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
-              <v-col :sm="totalWidth" v-for="each in artworks" v-masonry-tile class="item" :key="each.id" >
-               <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height" @gatherID="gather"/>
+            <v-row>
+              <v-col :cols="9">
+                <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
+                  <v-col :sm="totalWidth" v-for="each in artworks" v-masonry-tile class="item" :key="each.id" >
+                   <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height" @gatherID="gather"/>
+                  </v-col>
+                </v-row>
               </v-col>
+
+              <v-col :cols="1" class="checkout-btn">
+                <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">checkout</v-btn>
+              </v-col>
+
             </v-row>
           </div>
        </div>
@@ -38,12 +47,14 @@ export default {
   name:'discover-page',
   components:{ImageTile,HeaderBar},
   data:()=>({
-    number:12,
+    number:6,
     totalWidth:4,
     artworks:[],
     btnWidth:2,
     awsAddress:"http://og-img-repo.s3.us-east-1.amazonaws.com/",
-    addedArtworkIds: []
+    addedArtworkIds: [],
+    checkoutDialog:false
+
 
   }),
   created(){
