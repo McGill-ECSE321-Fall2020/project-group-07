@@ -27,7 +27,7 @@
   Vue.use(VueAxios,axios);
 
   export default {
-    name: 'artist-login-form',
+    name: 'admin-login-form',
     data:()=>{
       return{
         username:"",
@@ -38,14 +38,20 @@
     methods: {
       login(){
         this.responseMsg="logging in ..."
-        axios.get(`https://onlinegallery-backend-g7.herokuapp.com/getArtistByUsername/${this.username}`)
+        axios.get(`https://onlinegallery-backend-g7.herokuapp.com/getAdmin`)
         .then(res=>{
-          // console.log(res);
-          this.responseMsg="logged in!";
-          this.$router.push({name:"/artist-portal", params: {username:this.username, profileId:res.data.profileId}});     // to be replaced by username from the artist login form
+        
+          if(this.username.localeCompare(res.data.username)){
+            throw new Error("Incorrect Username!");
+          } else if(this.password.localeCompare(res.data.password)){
+            throw new Error("Incorrect Password!");
+          } else{
+            this.responseMsg="logged in!";
+            this.$router.push({name:"/admin-portal", params: {username:this.username}});  
+          } 
         })
         .catch(error=>{
-          this.responseMsg=error.response.data;
+          this.responseMsg=error;
         })
       },
       resetForm(){

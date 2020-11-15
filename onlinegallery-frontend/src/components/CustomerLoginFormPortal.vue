@@ -21,37 +21,28 @@
 </template>
 
 <script>
-  import Vue from 'vue'
-  import axios from 'axios';
-  import VueAxios from 'vue-axios';
-  Vue.use(VueAxios,axios);
+import Vue from "vue";
+import axios from "axios";
+import VueAxios from "vue-axios";
+Vue.use(VueAxios, axios);
 
-  export default {
-    name: 'admin-login-form',
-    data:()=>{
-      return{
-        username:"",
-        password:"",
-        responseMsg:""
-      }
-    },
-    methods: {
+export default {
+  name: "customer-login-portal",
+  data: () => ({
+    username: "",
+    password: "",
+    responseMsg: "",
+  }),
+   methods: {
       login(){
         this.responseMsg="logging in ..."
-        axios.get(`https://onlinegallery-backend-g7.herokuapp.com/getAdmin`)
+        axios.get(`https://onlinegallery-backend-g7.herokuapp.com/getCustomerByUsername/${this.username}`)
         .then(res=>{
-        
-          if(this.username.localeCompare(res.data.username)){
-            throw new Error("Incorrect Username!");
-          } else if(this.password.localeCompare(res.data.password)){
-            throw new Error("Incorrect Password!");
-          } else{
-            this.responseMsg="logged in!";
-            this.$router.push({name:"/admin-portal", params: {username:this.username}});  
-          } 
+          this.responseMsg="logged in!";
+          this.$router.push({name:"/customer-portal", params: {username:res.data.username}});  
         })
         .catch(error=>{
-          this.responseMsg=error;
+          this.responseMsg=error.response.data;
         })
       },
       resetForm(){
@@ -60,19 +51,18 @@
         this.responseMsg="";
       }
     }
-  }
-
+};
 </script>
 
-<style>
-.active{
+<style scoped>
+.active {
   cursor: pointer;
 }
-.title{
+.title {
   font-family: Roboto;
   text-align: center;
 }
-.card{
+.card {
   border: 1px solid black !important;
 }
 </style>

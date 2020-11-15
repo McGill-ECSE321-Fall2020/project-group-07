@@ -1,6 +1,6 @@
 <template>
     <div class="placeholder">
-      <div> artist login</div>
+      <div>Artist Login</div>
       <ArtistLoginForm/>
     </div>
   </template>
@@ -17,7 +17,7 @@ export default {
 <style>
 
 .placeholder{
-  padding-top: 300px;
+  padding-top: 25vw;
   text-align: center;
 }
 
