@@ -4,7 +4,7 @@
          <v-app-bar style = "justify-content: space-evenly!important" color="white" class="navbar" fixed elevation="0" >
            <v-row style = "justify-content: space-evenly!important">
 
-             <v-col :sm="1" class = "first-col">
+             <v-col :sm="1" class = "col">
                  <router-link to="/home" class="black-link">Home</router-link>
              </v-col>
 

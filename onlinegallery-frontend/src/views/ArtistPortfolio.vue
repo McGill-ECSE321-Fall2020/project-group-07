@@ -6,14 +6,14 @@
             <v-card class="mx-auto rounded-lg" max-wide="344" outlined>
               <v-list-item three-line>
                 <v-row  >
-                  <v-col :cols="2">
+                  <v-col :cols="3">
                     <v-list-item-content class="pt-5">
                       <v-list-item-title class="overline mb-4 text-left">Artist Information</v-list-item-title>
                       <v-list-item-title class="headline mb-1 text-left"> {{artistFirstname}} {{artistLastname}} </v-list-item-title>
                     </v-list-item-content>
                   </v-col>
 
-                  <v-col :cols="8">
+                  <v-col :cols="7">
                       <v-list-item-content class="text-justify pt-0">
                         <v-card-subtitle class="text-sm-body-2">{{artistDesc}}</v-card-subtitle>
                       </v-list-item-content>
@@ -38,7 +38,7 @@
               </v-col>
 
               <v-col :cols="1" class="checkout-btn">
-                <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">my cart</v-btn>
+                <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">checkout</v-btn>
               </v-col>
 
             </v-row>
@@ -46,7 +46,7 @@
     </div>
 
     <v-dialog v-model="checkoutDialog" overlay-color="white" overlay-opacity="1.0" width="600" class="pa-0">
-        <CheckoutArtworkTable :ids="addedArtworkIds" />
+        <CheckoutArtworkTable :ids="addedArtworkIds" class="checkout-table"/>
     </v-dialog>
 
   </v-container>
@@ -171,4 +171,9 @@ export default {
 .checkout-btn{
   padding-top:2vh;
 }
+
+.checkout-table{
+  z-index:10000;
+}
+
 </style>

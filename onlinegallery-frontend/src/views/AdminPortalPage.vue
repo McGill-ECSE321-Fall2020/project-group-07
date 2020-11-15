@@ -1,6 +1,6 @@
 <template>
    <div>
-      <div class="hello"><p>Welocme, {{username}}.</p></div>
+      <div class="hello"><p>Welcome, {{username}}.</p></div>
       <div class="btns">
          <button class="summary" @click="summary">Summary</button>
          <button class="btn btn-danger">Delete Repo</button>

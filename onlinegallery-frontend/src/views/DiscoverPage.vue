@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
       <div>
-      <HeaderBar/>
+      <HeaderBar class="header"/>
 
           <div class="refresh">
               <v-btn text @click="refresh">
@@ -22,14 +22,14 @@
             </v-col>
 
             <v-col :cols="1" class="checkout-btn">
-              <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">my cart</v-btn>
+              <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">checkout</v-btn>
             </v-col>
 
             </v-row>
           </div>
        </div>
         <v-dialog v-model="checkoutDialog" overlay-color="white" overlay-opacity="1.0" width="600" class="pa-0">
-            <CheckoutArtworkTable :ids="addedArtworkIds" />
+            <CheckoutArtworkTable :ids="addedArtworkIds" class="checkout-table"/>
         </v-dialog>
   </v-container>
 </template>
@@ -133,6 +133,7 @@ export default {
 </script>
 
 <style scoped>
+
 .masonry-container {
   width: 100%;
   margin-left:13%;
@@ -153,4 +154,9 @@ export default {
 .checkout-btn{
   padding-top:2vh;
 }
+
+.checkout-table{
+  z-index:10000;
+}
+
 </style>

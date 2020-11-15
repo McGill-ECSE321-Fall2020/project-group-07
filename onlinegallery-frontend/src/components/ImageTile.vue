@@ -5,7 +5,6 @@
                  :src="imgUrl"
                  :height="height"
              />
-
         </v-card>
         <ImageDialogue :dialog.sync="clicked" @closeDialog="clicked=false"
                        :artid="artid"

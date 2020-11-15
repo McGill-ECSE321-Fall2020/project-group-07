@@ -21,7 +21,7 @@
 
                         <div class="subtitle">
                            <v-card-title class="justify-center text-sm-body-2 subtitle">
-                             {{dimension}}, {{medium}}
+                             {{dimension}}, {{medium}}. ${{price}}
                             </v-card-title>
 
                            <v-card-title class="justify-center text-sm-body-1 subtitle" >
