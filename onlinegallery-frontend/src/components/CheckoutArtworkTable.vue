@@ -153,8 +153,6 @@ export default {
       this.customerName=username;
       this.customerId=customerId;
 
-      console.log("hey im gathering purchase Ids");
-
       let promise=[]
 
       for (let i=0;i<this.$props.ids.length;i++){
@@ -168,10 +166,29 @@ export default {
             axios.post("https://onlinegallery-backend-g7.herokuapp.com/createPurchase",purchaseDto)
             .then(res=>{this.purchaseId.push(res.data.purchaseId)})
             .catch(error=>{console.log(error)}))
-        }
+       }
 
-        Promise.all(promise).then(()=>this.loggedIn=true);
+        Promise.all(promise)
+        .then(()=>{
+            let shipmentDto={
+                shipmentId:-1,
+                sourceAddress:this.srcAddress,
+                destinationAddress:this.destAddress,
+                recipientName:this.receiptName,
+                shippingCost:this.shippingCost,
+                totalCost:this.totalCost,
+                customerId:this.customerId,
+                shipmentStatus:0,
+                purchases:this.purchaseId
+              }
 
+            axios.post("https://onlinegallery-backend-g7.herokuapp.com/createShipment", shipmentDto)
+            .then(res=>{
+              console.log(res);
+              this.loggedIn=true;
+            })
+            .then(err=>{console.log(err)})
+        })
     },
     handleNotLoggedIn(){
       this.loggedIn=false
@@ -192,21 +209,6 @@ export default {
       this.loggedIn=false;
       this.startLogin=false;
 
-
-      let shipmentDto={
-        shipmentId:-1,
-        sourceAddress:this.srcAddress,
-        destinationAddress:this.destAddress,
-        recipientName:this.receiptName,
-        shippingCost:this.shippingCost,
-        totalCost:this.totalCost,
-        customerId:this.customerId,
-        shipmentStatus:0,
-        purchases:this.purchaseId
-      }
-      axios.post("https://onlinegallery-backend-g7.herokuapp.com/createShipment", shipmentDto)
-      .then(res=>{console.log(res)})
-      .then(err=>{console.log(err)})
     }
 
   }

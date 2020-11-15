@@ -77,17 +77,10 @@ public class ShipmentService {
 		}
 		
 	
-		String regExp = "\\d{1,6}\\s(?:[A-Za-z0-9#]+\\s){0,7}(?:[A-Za-z0-9#]+,)\\s*(?:[A-Za-z]+\\s){0,3}(?:[A-Za-z]+,)\\s*[A-Z]{2}\\s*";
 		
 		String sourceAddress = dto.getSourceAddress();
-		if (!Pattern.matches(regExp, sourceAddress)){
-			throw new ShipmentException("invalid source address. Address must be in format 1111 StreetName, Montreal, QC" );
-		}
-		
 		String destinationAddress = dto.getDestinationAddress();
-		if (!Pattern.matches(regExp, destinationAddress)){
-			throw new ShipmentException("invalid destination address. Address must be in format 1111 StreetName, Montreal, QC" );
-		}
+
 		String recipientName = dto.getRecipientName();
 		
 		if (recipientName == null ) {

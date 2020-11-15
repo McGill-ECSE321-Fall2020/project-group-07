@@ -2,20 +2,29 @@
   <v-container fluid>
           <div>
           <HeaderBar/>
-          <div class="artist-details">
-            <v-card class="mx-auto" max-wide="344" outlined>
+              <div class="artist-details">
+            <v-card class="mx-auto rounded-lg" max-wide="344" outlined>
               <v-list-item three-line>
+                <v-row  >
+                  <v-col :cols="2">
+                    <v-list-item-content class="pt-5">
+                      <v-list-item-title class="overline mb-4 text-left">Artist Information</v-list-item-title>
+                      <v-list-item-title class="headline mb-1 text-left"> {{artistFirstname}} {{artistLastname}} </v-list-item-title>
+                    </v-list-item-content>
+                  </v-col>
 
-                  <v-list-item-content>
-                    <div class="overline mb-4">Artist Information</div>
-                    <v-list-item-title class="headline mb-1"> {{artistFirstname}} {{artistLastname}} </v-list-item-title>
-                    <v-list-item-subtitle>{{artistDesc}}</v-list-item-subtitle>
-                  </v-list-item-content>
+                  <v-col :cols="8">
+                      <v-list-item-content class="text-justify pt-0">
+                        <v-card-subtitle class="text-sm-body-2">{{artistDesc}}</v-card-subtitle>
+                      </v-list-item-content>
+                  </v-col>
 
-                  <v-list-item-avatar tile size="175">
-                    <v-img :src="profileUrl"/>
-                  </v-list-item-avatar>
-
+                  <v-col :cols="2">
+<!--                      <v-list-item-avatar tile size="180" class="mt-5">-->
+                        <v-img :src="profileUrl" class="rounded-lg"/>
+<!--                      </v-list-item-avatar>-->
+                  </v-col>
+                </v-row>
               </v-list-item>
             </v-card>
          </div>
@@ -148,7 +157,7 @@ export default {
 
 .masonry-container {
   width: 100%;
-  margin-left:13%;
+  margin-left:12.7%;
   margin-top: 20px;
 }
 

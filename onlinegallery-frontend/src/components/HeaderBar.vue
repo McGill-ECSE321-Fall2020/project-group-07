@@ -77,6 +77,6 @@ export default {
 }
 
 .leftend{
-  text-align: left;
+  text-align: center;
 }
 </style>
