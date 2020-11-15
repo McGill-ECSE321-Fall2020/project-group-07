@@ -11,7 +11,7 @@
       by two longtime friends: Vincenzo Spaghetti, a gallery agent, and Nico
       Pastrami, a painter. Both shared the common desire to create a designated
       area in the heart of the Quartier International de Montreal for various
-      artists to display their artwork. Our mandate, since day 1, has been to
+      artists to display their artwork. Our mandate, since day one, has been to
       discover emerging artists and to help the public discover them as well. We
       also wish to help the public discover established, modern artists, may
       they be Canadian or international artists. We wish to do so through
