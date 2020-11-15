@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class = "priority">
         <v-dialog :value="dialog" @click:outside="closeDialog()" overlay-color="white" overlay-opacity="0.9" width="1600">
           <div class="card-container">
             <v-card color="#ffffff" class="rounded-lg" width="1600" height="800">
@@ -92,6 +92,10 @@ export default {
 </script>
 
 <style scoped>
+.priority{
+  z-index: 100000;
+}
+
 .title{
   height: 100px;
   padding-top: 20px;
