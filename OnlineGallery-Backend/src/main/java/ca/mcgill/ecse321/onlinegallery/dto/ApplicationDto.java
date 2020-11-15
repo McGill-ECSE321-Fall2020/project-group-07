@@ -70,4 +70,12 @@ public class ApplicationDto {
 		return this.shipmentType;
 	}
 	
+	Long shipmentId;
+	public void setShipmentId(Long shipmentId) {
+		this.shipmentId = shipmentId;
+	}
+	public Long getShipmentId() {
+		return this.shipmentId;
+	}
+	
 }

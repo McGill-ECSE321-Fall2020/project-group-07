@@ -56,6 +56,7 @@ public class ApplicationRestController {
 			Map<String, String> customerMap = entry.getCustomerMap();
 			Map<String, String> artistMap = entry.getArtistMap();
 			Map<String, ShipmentType> shipmentMap = entry.getShipmentMap();
+			Map<String, Long> shipmentIdMap = entry.getShipmentIdMap();
 			
 			double commission = commissionMap.get("commission");
 			double price = priceMap.get("price");
@@ -64,6 +65,7 @@ public class ApplicationRestController {
 			ShipmentType shipmentType = shipmentMap.get("shipmentType");
 			String customerName = customerMap.get("customer");
 			String artistName = artistMap.get("artist");
+			Long shipmentId = shipmentIdMap.get("shipmentId");
 			
 			ApplicationDto appDto = new ApplicationDto();
 			appDto.setCommission(commission);
@@ -74,6 +76,7 @@ public class ApplicationRestController {
 			appDto.setArtistName(artistName);
 			appDto.setCustomerName(customerName);
 			appDto.setShipmentType(shipmentType);
+			appDto.setShipmentId(shipmentId);
 			
 			dto.add(appDto);
 			
