@@ -100,7 +100,7 @@ export default {
     },
 
     refresh(){
-      this.artwork=[];
+      this.artworks=[];
          axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
     .then(res=>{
       for (let i=0;i<res.data.length;i++){

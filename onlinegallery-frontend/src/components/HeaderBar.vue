@@ -33,7 +33,7 @@
              </v-col>
 
              <v-col :sm="1" class="rightend">
-               <v-btn text x-small>
+               <v-btn text x-small href="https://www.facebook.com/Completely-Secure-Gallery-107431924517668" target="_blank">
                  <v-icon color="#3b5998">
                    mdi-facebook
                  </v-icon>

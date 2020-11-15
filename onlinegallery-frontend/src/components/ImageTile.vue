@@ -5,6 +5,12 @@
                  :src="imgUrl"
                  :height="height"
              />
+          <v-fade-transition>
+            <v-overlay v-if="hover" absolute color="#737373">
+              <v-card-text class="white--text text-sm-h5">{{artname}}</v-card-text>
+            </v-overlay>
+          </v-fade-transition>
+
         </v-card>
         <ImageDialogue :dialog.sync="clicked" @closeDialog="clicked=false"
                        :artid="artid"
