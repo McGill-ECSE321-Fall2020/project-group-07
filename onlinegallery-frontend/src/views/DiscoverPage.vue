@@ -29,7 +29,7 @@
           </div>
        </div>
         <v-dialog v-model="checkoutDialog" overlay-color="white" overlay-opacity="1.0" width="600" class="pa-0">
-            <CheckoutArtworkTable :ids="addedArtworkIds" class="checkout-table"/>
+            <CheckoutArtworkTable :ids="addedArtworkIds"/>
         </v-dialog>
   </v-container>
 </template>
@@ -153,10 +153,6 @@ export default {
 }
 .checkout-btn{
   padding-top:2vh;
-}
-
-.checkout-table{
-  z-index:10000;
 }
 
 </style>
