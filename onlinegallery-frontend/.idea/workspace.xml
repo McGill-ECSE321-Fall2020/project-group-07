@@ -32,7 +32,6 @@
     <list default="true" id="62c4ff74-3d65-416b-bcb2-d36ff1ba6ed5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ImageDialogue.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ImageDialogue.vue" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/DiscoverPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/DiscoverPage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +95,7 @@
       <workItem from="1605468130271" duration="3189000" />
       <workItem from="1605474310385" duration="5407000" />
       <workItem from="1605481875838" duration="1354000" />
-      <workItem from="1605483830514" duration="167000" />
+      <workItem from="1605483830514" duration="408000" />
     </task>
     <servers />
   </component>

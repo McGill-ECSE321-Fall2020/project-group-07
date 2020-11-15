@@ -2,7 +2,7 @@
   <v-container class = "priority">
 
 
-        <v-dialog :value="dialog" @click:outside="closeDialog()" overlay-color="white" overlay-opacity="0.9" width="1600" style='z-index:1000;'>
+        <v-dialog :value="dialog" @click:outside="closeDialog()" overlay-color="white" overlay-opacity="0.9" width="1600" style='z-index:100000;'>
           <div class="card-container">
             <v-card color="#ffffff" class="rounded-lg" width="1600" height="800">
                <v-row no-gutters >
