@@ -20,9 +20,7 @@
                   </v-col>
 
                   <v-col :cols="2">
-<!--                      <v-list-item-avatar tile size="180" class="mt-5">-->
                         <v-img :src="profileUrl" class="rounded-lg"/>
-<!--                      </v-list-item-avatar>-->
                   </v-col>
                 </v-row>
               </v-list-item>
@@ -40,7 +38,7 @@
               </v-col>
 
               <v-col :cols="1" class="checkout-btn">
-                <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">checkout</v-btn>
+                <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">my cart</v-btn>
               </v-col>
 
             </v-row>
@@ -171,6 +169,6 @@ export default {
   text-decoration: none !important;
 }
 .checkout-btn{
-  padding-top:50vh;
+  padding-top:40vh;
 }
 </style>

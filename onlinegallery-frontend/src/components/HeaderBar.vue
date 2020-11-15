@@ -5,7 +5,7 @@
            <v-row>
 
              <v-col :sm="1" class="leftend">
-                 <router-link to="/home" class="black-link">Home</router-link>
+                 <router-link to="/home" class="black-link">home</router-link>
              </v-col>
 
              <v-col :sm="1" class="col">

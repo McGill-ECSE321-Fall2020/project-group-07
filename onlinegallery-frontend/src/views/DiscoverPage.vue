@@ -22,7 +22,7 @@
             </v-col>
 
             <v-col :cols="1" class="checkout-btn">
-              <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">checkout</v-btn>
+              <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">my cart</v-btn>
             </v-col>
 
             </v-row>

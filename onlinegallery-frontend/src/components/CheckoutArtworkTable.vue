@@ -52,7 +52,7 @@
     </v-dialog>
 
     <v-dialog v-model="loggedIn" overlay-color="white" class="rounded-lg" width="400">
-      <v-card width="400" height="500" flat>
+      <v-card width="400" height="720" flat>
 
           <div class="title">
             <v-card-title>credit card info</v-card-title>
@@ -60,6 +60,8 @@
            <v-form class="pa-4 pt-6" v-model="loggedIn">
 
             <v-text-field v-model="ccNum" label="credit card number" required solo outlined/>
+            <v-text-field v-model="ccFirstname" label="credit card first name" required solo outlined/>
+            <v-text-field v-model="ccLastname" label="credit card last name" required solo outlined/>
             <v-text-field v-model="ccExp" label="credit card expiration date" required solo outlined/>
             <v-text-field v-model="ccCsv" label="credit card CSV code" required solo outlined/>
          </v-form>
@@ -69,10 +71,10 @@
       </div>
 
       <div class="btn text-right pr-5">
-<!--        <v-btn  small outlined @click="handlePay" :disabled="(ccNum.length==0 || ccCsv.length==0 || ccExp.length==0 )">pay</v-btn>-->
-            <v-btn  small outlined @click="this.handlePay">pay</v-btn>
-
+        <v-btn  small outlined @click="handlePay" :disabled="(ccNum.length==0 || ccCsv.length==0 || ccExp.length==0 || ccFirstname.length==0 || ccLastname.length==0 )">pay</v-btn>
       </div>
+
+      <v-card-text class="text-center">{{ccResponse}}</v-card-text>
 
       </v-card>
     </v-dialog>
@@ -120,6 +122,9 @@ export default {
       ccNum:"",
       ccCsv:"",
       ccExp:"",
+      ccFirstname:"",
+      ccLastname:"",
+      ccResponse:"payment response",
       paid:false,
       purchaseId:[],
       shipmentId:null
@@ -167,9 +172,10 @@ export default {
             .then(res=>{this.purchaseId.push(res.data.purchaseId)})
             .catch(error=>{console.log(error)}))
        }
-
         Promise.all(promise)
         .then(()=>{
+
+          let promise2=[];
             let shipmentDto={
                 shipmentId:-1,
                 sourceAddress:this.srcAddress,
@@ -182,12 +188,17 @@ export default {
                 purchases:this.purchaseId
               }
 
-            axios.post("https://onlinegallery-backend-g7.herokuapp.com/createShipment", shipmentDto)
-            .then(res=>{
-              console.log(res);
-              this.loggedIn=true;
-            })
-            .then(err=>{console.log(err)})
+          promise2.push(
+              axios.post("https://onlinegallery-backend-g7.herokuapp.com/createShipment", shipmentDto)
+              .then(res=>{
+                console.log(res);
+                this.loggedIn=true;
+                this.shipmentId=res.data.shipmentId;
+              })
+              .catch(err=>{console.log(err)})
+          )
+
+          Promise.all(promise2).then(()=>{});
         })
     },
     handleNotLoggedIn(){
@@ -206,8 +217,26 @@ export default {
       }
     },
     handlePay(){
-      this.loggedIn=false;
-      this.startLogin=false;
+      let paymentDto={
+        shipmentId:this.shipmentId,
+        ccNum:this.ccNum,
+        ccCSV:this.ccCsv,
+        ccExp:this.ccExp,
+        firstName:this.ccFirstname,
+        lastName:this.ccLastname
+      }
+
+      axios.put("https://onlinegallery-backend-g7.herokuapp.com/payShipment", paymentDto)
+      .then(res=>{
+        console.log(res)
+        this.ccResponse="shipment paid!"
+        this.loggedIn=false;
+        this.startLogin=false;
+      })
+      .catch(error=>{
+        console.log(error.response)
+        this.ccResponse=error.response.data;
+      });
 
     }
 
