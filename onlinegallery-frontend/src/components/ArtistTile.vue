@@ -28,7 +28,6 @@ export default {
   },
   methods:{
     gotoArtist(){
-      console.log(this.artistId);
         this.$router.push({name:"/artist-portfolio", params: {artistid:this.artistId}});     // to be replaced by username from the artist login form
     }
   }

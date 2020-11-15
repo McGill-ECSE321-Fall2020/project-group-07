@@ -14,8 +14,9 @@ public class SoldArtworksSummaryEntry {
 	Map<String, String> customerMap;
 	Map<String, String> artistMap;
 	Map<String, ShipmentType> shipmentMap;
+	Map<String, Long> shipmentIdMap;
 	
-	public SoldArtworksSummaryEntry(String aName, double aPrice, double aCommission, Date aDate, ShipmentType shipmentType, String customerName, String artistName) {
+	public SoldArtworksSummaryEntry(String aName, double aPrice, double aCommission, Date aDate, ShipmentType shipmentType, String customerName, String artistName, Long shipmentId) {
 		nameMap = new HashMap <String, String> ();
 		nameMap.put("name", aName);
 		
@@ -36,6 +37,9 @@ public class SoldArtworksSummaryEntry {
 		
 		shipmentMap = new HashMap <String, ShipmentType> ();
 		shipmentMap.put("shipmentType", shipmentType);
+		
+		shipmentIdMap = new HashMap<String, Long> ();
+		shipmentIdMap.put("shipmentId", shipmentId);
 		
 	}
 
@@ -67,6 +71,10 @@ public class SoldArtworksSummaryEntry {
 	
 	public Map<String, ShipmentType> getShipmentMap(){
 		return shipmentMap;
+	}
+	
+	public Map<String, Long> getShipmentIdMap(){
+		return shipmentIdMap;
 	}
 
 }

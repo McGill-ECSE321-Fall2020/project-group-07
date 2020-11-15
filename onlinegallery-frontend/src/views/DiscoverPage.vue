@@ -11,13 +11,25 @@
               </v-btn>
             </div>
 
-            <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
-              <v-col :sm="totalWidth" v-for="each in artworks" v-masonry-tile class="item" :key="each.id" >
-               <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height" @gatherID="gather"/>
+            <v-row>
+              <v-col :cols="9">
+                <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
+                  <v-col :sm="totalWidth" v-for="each in artworks" v-masonry-tile class="item" :key="each.id" >
+                   <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height" @gatherID="gather"/>
+                  </v-col>
+                </v-row>
               </v-col>
+
+              <v-col :cols="1" class="checkout-btn">
+                <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">checkout</v-btn>
+              </v-col>
+
             </v-row>
           </div>
        </div>
+        <v-dialog v-model="checkoutDialog" overlay-color="white" overlay-opacity="1.0" width="600" class="pa-0">
+            <CheckoutArtworkTable :ids="addedArtworkIds" />
+        </v-dialog>
   </v-container>
 </template>
 
@@ -25,6 +37,7 @@
 import Vue from 'vue';
 import {VueMasonryPlugin} from 'vue-masonry';
 import ImageTile from "@/components/ImageTile";
+import CheckoutArtworkTable from "@/components/CheckoutArtworkTable";
 import HeaderBar from "@/components/HeaderBar";
 import axios from 'axios';
 import VueAxios from 'vue-axios';
@@ -36,21 +49,19 @@ Vue.use(imagesLoaded);
 
 export default {
   name:'discover-page',
-  components:{ImageTile,HeaderBar},
+  components:{ImageTile,HeaderBar, CheckoutArtworkTable},
   data:()=>({
-    number: "",
+    number:6,
     totalWidth:4,
     artworks:[],
     btnWidth:2,
     awsAddress:"http://og-img-repo.s3.us-east-1.amazonaws.com/",
-    addedArtworkIds: []
+    addedArtworkIds: [],
+    checkoutDialog:false
+
+
   }),
-  
-  created(){
-    axios.get("https://onlinegallery-backend-g7.herokuapp.com/getAllArtworks")
-    .then(response=>{
-      this.number = response.data.length;
-    });
+  mounted(){
     axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
     .then(res=>{
       for (let i=0;i<res.data.length;i++){
@@ -74,32 +85,41 @@ export default {
        })
       }
     })
+    .catch((error)=>{
+      console.log(error);
+    })
   },
-    methods:{
-      gather(artid){
+
+  methods:{
+    gather(artid){
         this.addedArtworkIds.push(artid);
     },
-      refresh(){
-        this.artworks = [];
+    initiateCheckout(){
+      this.checkoutDialog=true;
+    },
+
+
+
+    refresh(){
          axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
-       .then(res=>{
-         for (let i=0;i<res.data.length;i++){
-          let data=res.data[i];
-           let awsUrl=this.awsAddress.concat(data.url);
-           axios.get(awsUrl)
-            .then(awsRes=>{
-             let each= {
-             id: data.artworkId,
-             imgUrl: awsRes.data,
-             name: data.name,
-             username: data.username,
-             dimension: data.dimension,
-             description: data.description,
-             medium: data.medium,
-             price: data.price,
-              weight: data.weight,
-             height: data.url.split("_")[4]
-          }
+    .then(res=>{
+      for (let i=0;i<res.data.length;i++){
+       let data=res.data[i];
+        let awsUrl=this.awsAddress.concat(data.url);
+        axios.get(awsUrl)
+        .then(awsRes=>{
+          let each= {
+            id: data.artworkId,
+            imgUrl: awsRes.data,
+            name: data.name,
+            username: data.username,
+            dimension: data.dimension,
+            description: data.description,
+            medium: data.medium,
+            price: data.price,
+            weight: data.weight,
+            height: data.url.split("_")[4]
+        }
         this.artworks.push(each);
        })
       }
@@ -114,9 +134,9 @@ export default {
 
 <style scoped>
 .masonry-container {
-  width: 75%;
-  margin:auto;
-  margin-top: 100px;
+  width: 100%;
+  margin-left:13%;
+  margin-top: 20px;
 }
 
 .refresh{
@@ -127,5 +147,8 @@ export default {
 .black-link{
   color:black !important;
   text-decoration: none !important;
+}
+.checkout-btn{
+  padding-top:65vh;
 }
 </style>

@@ -153,8 +153,6 @@ public class ShipmentRestcontroller {
 		shipDto.setCustomerId(customerId);
 		shipDto.setShipmentStatus(status);
 	
-		
-		
 		return shipDto;
 		
 	}
