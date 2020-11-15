@@ -48,6 +48,22 @@ export default {
     },
     yes(){
        axios.put(`https://onlinegallery-backend-g7.herokuapp.com/setArtist/${this.$props.username}`)
+      .then(res=>{this.artistId=res.data.artistId})
+      .then(()=>{
+        let profileDto = {
+              id:this.artistId,
+              url:"https://og-img-repo.s3.amazonaws.com/profile-placholder",
+              numSold:0,
+              totalEarnings:0,
+              selfDescription:"self description placeholder",
+              rating:3,
+              username:this.$props.username
+        }
+        axios.post("https://onlinegallery-backend-g7.herokuapp.com/createProfile/", profileDto)
+        .then(res=>{
+          console.log(res);
+        })
+      })
        this.$emit('closeDialog');
          
     },
@@ -57,7 +73,8 @@ export default {
   },
   data(){
     return{
-      ops:{}
+      ops:{},
+      artistId:null,
     }
   }
 };
