@@ -49,7 +49,7 @@ The project report for Sprint 2 can be found [here](https://github.com/McGill-EC
 | Keon Olsz              | Software Developer <br/> Quality Assurance  |**Artwork** (4/6 Service methods and unit tests, Controller, Postman)              |   25    |  
 | Natalia Tabet          | Software Developer <br/> Quality Assurance  |**Application** (Service methods, unit tests) <br/> **Shipment** (3/6 Service methods and unit tests, DTO, Controller, Postman)              |  30  | 
 
-### Sprint 2
+### Sprint 3
 The project report for Sprint 3 can be found [here](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki/Sprint-3).
 
 | NAME                   | ROLE | CONTRIBUTIONS | HOURS | 
