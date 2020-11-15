@@ -60,8 +60,8 @@ export default {
     addedArtworkIds: [],
     checkoutDialog:false
 
-
   }),
+  
   mounted(){
     axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
     .then(res=>{
@@ -99,9 +99,8 @@ export default {
       this.checkoutDialog=true;
     },
 
-
-
     refresh(){
+      this.artwork=[];
          axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
     .then(res=>{
       for (let i=0;i<res.data.length;i++){
