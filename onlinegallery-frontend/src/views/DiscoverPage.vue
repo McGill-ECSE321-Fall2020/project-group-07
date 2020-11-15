@@ -2,27 +2,28 @@
   <v-container fluid>
       <div>
       <HeaderBar/>
-          <div class="masonry-container">
 
-            <div class="refresh">
+          <div class="refresh">
               <v-btn text @click="refresh">
                 <v-icon class="black-link">
                   mdi-refresh</v-icon>
               </v-btn>
-            </div>
+          </div>
 
-            <v-row>
-              <v-col :cols="9">
-                <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
-                  <v-col :sm="totalWidth" v-for="each in artworks" v-masonry-tile class="item" :key="each.id" >
-                   <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height" @gatherID="gather"/>
-                  </v-col>
-                </v-row>
-              </v-col>
+          <div class="masonry-container">
 
-              <v-col :cols="1" class="checkout-btn">
-                <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">checkout</v-btn>
-              </v-col>
+          <v-row>
+            <v-col :cols="9">
+              <v-row dense no-gutters v-masonry origin-left="true" horizontal-order="true" item-selector=".item">
+                <v-col :sm="totalWidth" v-for="each in artworks" v-masonry-tile class="item" :key="each.id" >
+                 <ImageTile :artid="each.id" :imgUrl="each.imgUrl" :artname="each.name" :artistname="each.username" :artdesc="each.description" :medium="each.medium" :dimension="each.dimension" :price="each.price" :height="each.height" @gatherID="gather"/>
+                </v-col>
+              </v-row>
+            </v-col>
+
+            <v-col :cols="1" class="checkout-btn">
+              <v-btn fixed outlined @click="initiateCheckout" :disabled="this.addedArtworkIds.length==0">checkout</v-btn>
+            </v-col>
 
             </v-row>
           </div>
@@ -142,6 +143,8 @@ export default {
 .refresh{
   text-align: center;
   margin-bottom: 50px;
+  padding-top: 100px;
+  /*background-color: blue;*/
 }
 
 .black-link{
