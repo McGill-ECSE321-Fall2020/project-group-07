@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
       <div>
-      <HeaderBar class="header"/>
+      <HeaderBar/>
 
           <div class="refresh">
               <v-btn text @click="refresh">

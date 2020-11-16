@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="header">
     <div>
          <v-app-bar style = "justify-content: space-evenly!important" color="white" class="navbar" fixed elevation="0" >
            <v-row style = "justify-content: space-evenly!important">
@@ -107,8 +107,8 @@ export default {
   margin-right: auto;
   padding-top:50px;
   border:1px solid red;
-  z-index:1000;
 }
+
 
 .portal{
   border-right: none!important;
