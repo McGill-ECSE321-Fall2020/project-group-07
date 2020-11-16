@@ -55,7 +55,7 @@ The project report for Sprint 3 can be found [here](https://github.com/McGill-EC
 | NAME                   | ROLE | CONTRIBUTIONS | HOURS | 
 |------------------------|----------|---------------|-------|
 | Anthony Dagher         |Frontend Developer <br/> | Registration Form, Artwork Discovery Page, Artist Biography, Wiki |  35   |
-| Jay Han                |Frontend Developer <br/> Project lead | Artist Portfolio & Login Page, Checkout Process, Artwork Discovery Page, Help Page Deployment | 45    | 
+| Jay Han                |Frontend Developer <br/> Project lead | Artist Portfolio & Login Page, Checkout Process, Artwork Discovery Page, Help Page, Deployment | 45    | 
 | Massimo Vadacchino     |Frontend Developer <br/> | Website Header, Home Page, Admin Login Portal, Architecture  | 40  | 
 | Keon Olsz              |Frontend Developer <br/> | About Page, Facebook Page, Customer Login Portal |  25  |  
 | Natalia Tabet          |Architecture Setup <br/> | Diagram modeling of the entire software system   |  25 | 
