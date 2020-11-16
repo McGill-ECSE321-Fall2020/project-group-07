@@ -31,7 +31,9 @@
   <component name="ChangeListManager">
     <list default="true" id="62c4ff74-3d65-416b-bcb2-d36ff1ba6ed5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/views/DiscoverPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/DiscoverPage.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/public/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HeaderBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeaderBar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/ArtistPortalPage.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/ArtistPortalPage.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -97,6 +99,7 @@
       <workItem from="1605481875838" duration="1354000" />
       <workItem from="1605483830514" duration="1390000" />
       <workItem from="1605490191417" duration="1689000" />
+      <workItem from="1605492547951" duration="982000" />
     </task>
     <servers />
   </component>

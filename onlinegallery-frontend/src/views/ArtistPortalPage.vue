@@ -67,7 +67,7 @@
           </v-card>
         </v-dialog>
 
-         <v-dialog :value="uploadProfile" width="600" @click:outside="upload=false">
+         <v-dialog :value="uploadProfile" width="600" @click:outside="uploadProfile=false">
           <v-card height="300" width="600" class="pa-5">
               <ProfilePicUploadForm :username="this.username" :desc="this.desc" @new-pic-ready="swapProfilePic"/>
           </v-card>
