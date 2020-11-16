@@ -52,43 +52,18 @@ export default {
   name:'discover-page',
   components:{ImageTile,HeaderBar, CheckoutArtworkTable},
   data:()=>({
-    number:6,
     totalWidth:4,
     artworks:[],
     btnWidth:2,
     awsAddress:"http://og-img-repo.s3.us-east-1.amazonaws.com/",
     addedArtworkIds: [],
-    checkoutDialog:false
+    checkoutDialog:false,
+    numAvailable:0
 
   }),
   
   mounted(){
-    axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
-    .then(res=>{
-      for (let i=0;i<res.data.length;i++){
-       let data=res.data[i];
-        let awsUrl=this.awsAddress.concat(data.url);
-        axios.get(awsUrl)
-        .then(awsRes=>{
-          let each= {
-            id: data.artworkId,
-            imgUrl: awsRes.data,
-            name: data.name,
-            username: data.username,
-            dimension: data.dimension,
-            description: data.description,
-            medium: data.medium,
-            price: data.price,
-            weight: data.weight,
-            height: data.url.split("_")[4]
-        }
-        this.artworks.push(each);
-       })
-      }
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
+    this.retrieveArtworks();
   },
 
   methods:{
@@ -99,34 +74,48 @@ export default {
       this.checkoutDialog=true;
     },
 
+    retrieveArtworks(){
+        let promise=[]
+        promise.push(
+            axios.get("https://onlinegallery-backend-g7.herokuapp.com/getAllAvailableArtwork")
+            .then(res=>{
+              this.numAvailable=Math.min(res.data.length,30);
+            })
+        )
+        Promise.all(promise)
+        .then(()=>{
+          axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.numAvailable}`)
+          .then(res=>{
+            for (let i=0;i<res.data.length;i++){
+             let data=res.data[i];
+              let awsUrl=this.awsAddress.concat(data.url);
+              axios.get(awsUrl)
+              .then(awsRes=>{
+                let each= {
+                  id: data.artworkId,
+                  imgUrl: awsRes.data,
+                  name: data.name,
+                  username: data.username,
+                  dimension: data.dimension,
+                  description: data.description,
+                  medium: data.medium,
+                  price: data.price,
+                  weight: data.weight,
+                  height: data.url.split("_")[4]
+              }
+              this.artworks.push(each);
+             })
+            }
+          })
+          .catch((error)=>{
+            console.log(error);
+          })
+        });
+    },
+
     refresh(){
       this.artworks=[];
-         axios.get(`https://onlinegallery-backend-g7.herokuapp.com/retrieveRandomAvailableArtworks/${this.number}`)
-    .then(res=>{
-      for (let i=0;i<res.data.length;i++){
-       let data=res.data[i];
-        let awsUrl=this.awsAddress.concat(data.url);
-        axios.get(awsUrl)
-        .then(awsRes=>{
-          let each= {
-            id: data.artworkId,
-            imgUrl: awsRes.data,
-            name: data.name,
-            username: data.username,
-            dimension: data.dimension,
-            description: data.description,
-            medium: data.medium,
-            price: data.price,
-            weight: data.weight,
-            height: data.url.split("_")[4]
-        }
-        this.artworks.push(each);
-       })
-      }
-    })
-    .catch((error)=>{
-      console.log(error);
-    })
+      this.retrieveArtworks();
     }
   }
 }
