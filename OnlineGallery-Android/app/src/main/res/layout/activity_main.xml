@@ -6,52 +6,147 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/registrationTitle"
+        android:layout_width="172dp"
+        android:layout_height="26dp"
+        android:lineSpacingExtra="24sp"
+        android:text=" Registration Form"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        tools:layout_editor_absoluteX="119dp"
+        tools:layout_editor_absoluteY="61dp" />
+
     <EditText
         android:id="@+id/usernameInput"
-        android:layout_width="0dp"
-        android:layout_height="43dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
+        android:layout_width="377dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="128dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/edit_message"
-        app:layout_constraintEnd_toStartOf="@+id/button2"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/button2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:onClick="getRegistration"
-        android:text="@string/button_send"
-        app:layout_constraintBaseline_toBaselineOf="@+id/usernameInput"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/usernameInput" />
+    <EditText
+        android:id="@+id/firstNameInput"
+        android:layout_width="377dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="232dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/firstNameTitle"
+        android:layout_width="172dp"
+        android:layout_height="26dp"
+        android:text="first name"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="207dp" />
+
+    <TextView
+        android:id="@+id/lastNameTitle"
+        android:layout_width="172dp"
+        android:layout_height="26dp"
+        android:text="last name"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="304dp" />
 
     <EditText
-        android:id="@+id/registrationInfo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginLeft="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:layout_marginRight="16dp"
-        android:layout_marginBottom="16dp"
+        android:id="@+id/lastNameInput"
+        android:layout_width="377dp"
+        android:layout_height="50dp"
         android:ems="10"
-        android:gravity="start|top"
-        android:inputType="textMultiLine"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/usernameInput" />
+        android:inputType="textPersonName"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="330dp" />
+
+    <TextView
+        android:id="@+id/emailTitle"
+        android:layout_width="172dp"
+        android:layout_height="26dp"
+        android:text="email"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="416dp" />
+
+    <EditText
+        android:id="@+id/emailInput"
+        android:layout_width="377dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="textEmailAddress"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="441dp" />
+
+    <TextView
+        android:id="@+id/passwordTitle"
+        android:layout_width="172dp"
+        android:layout_height="26dp"
+        android:text="password"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        tools:layout_editor_absoluteX="14dp"
+        tools:layout_editor_absoluteY="519dp" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="377dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="545dp" />
+
+    <TextView
+        android:id="@+id/usernameTitle"
+        android:layout_width="172dp"
+        android:layout_height="26dp"
+        android:text="username"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="102dp" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="110dp"
+        android:layout_height="61dp"
+        android:text="REGISTER"
+        android:textStyle="bold"
+        app:backgroundTint="#3F51B5"
+        tools:layout_editor_absoluteX="16dp"
+        tools:layout_editor_absoluteY="641dp" />
+
+    <Button
+        android:id="@+id/clearButton"
+        android:layout_width="89dp"
+        android:layout_height="61dp"
+        android:text="CLEAR"
+        android:textStyle="bold"
+        app:backgroundTint="#CA1212"
+        tools:layout_editor_absoluteX="307dp"
+        tools:layout_editor_absoluteY="641dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="80dp"
+        android:layout_height="42dp"
+        android:text="back"
+        android:textStyle="bold|italic"
+        app:backgroundTint="#8E8A8A"
+        tools:layout_editor_absoluteX="13dp"
+        tools:layout_editor_absoluteY="16dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
