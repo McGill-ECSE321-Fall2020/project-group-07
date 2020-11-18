@@ -35,7 +35,7 @@ public class GalleryRegistrationRestController {
 			return new ResponseEntity<>(convertToDto(reg), HttpStatus.OK);
 		}
 		catch(GalleryRegistrationException e) {
-			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST); 
 			
 		}
 	}

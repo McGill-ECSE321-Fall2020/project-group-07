@@ -1,7 +1,5 @@
 package ca.mcgill.ecse321.onlinegallery.model;
 
-import java.util.Set;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,16 +7,13 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
+import javax.persistence.Lob;
 
 import org.hibernate.annotations.GenericGenerator;
-
-import java.util.HashSet;
 
 @Entity
 @Table(name = "artwork")
@@ -47,7 +42,8 @@ public class Artwork {
 	public String getName() {
 		return this.name;
 	}
-
+	
+	@Lob
 	private String description;
 
 	public void setDescription(String value) {
@@ -141,6 +137,24 @@ public class Artwork {
 
 	public void setArtist(Artist artist) {
 		this.artist = artist;
+	}
+	
+	private String url;
+	
+	public String getUrl() {
+		return this.url;
+	}
+	
+	public void setUrl(String url) {
+		this.url=url;
+	}
+	
+	private String medium;
+	public String getMedium() {
+		return this.medium;
+	}
+	public void setMedium(String medium) {
+		this.medium=medium;
 	}
 
 }

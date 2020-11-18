@@ -1,0 +1,250 @@
+{
+	"info": {
+		"_postman_id": "bdc17339-4449-4b57-ab0a-47513f3224b5",
+		"name": "CustomerAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createRegistration1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9d9a35f4-e062-40f1-854c-8c0e45128d73",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"HICTOOT\",\n\t\"firstName\":\"Hiccup\",\n\t\"lastName\":\"Toothless\",\n\t\"email\":\"httyd@hotmail.ca\",\n    \"password\":\"DragonsLove1#\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setCustomerRegistration1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "b5b065f4-15da-49c7-99ff-132b4ec52b79",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setCustomer/HICTOOT",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setCustomer",
+						"HICTOOT"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getCustomerByUsername",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "73b6bc11-c625-457c-a4af-eb765f776bac",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"username match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.username).to.eql(\"HICTOOT\");\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getCustomerByUsername/HICTOOT",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getCustomerByUsername",
+						"HICTOOT"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createRegistration2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "0240c8b8-90bc-44ab-a233-a113a5becb6d",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"PB_TIME\",\n\t\"firstName\":\"Peabdody\",\n\t\"lastName\":\"Sherman\",\n\t\"email\":\"timeTravel@yahoo.ca\",\n    \"password\":\"TimeMachine101#\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setCustomerRegistration2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "d9ddf5fb-3647-4688-b385-4b3eb146237f",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setCustomer/PB_TIME",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setCustomer",
+						"PB_TIME"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllCustomers",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fa34fc52-49e0-4801-a37d-0051b2650d59",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"2 Customers returned\",function(){\r",
+							"    pm.expect(pm.response.json()).length==2;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Correct artists returned\",function(){\r",
+							"    pm.expect(pm.response.json()[0].username).is.not.eql(pm.response.json()[1].username);\r",
+							"    pm.expect(pm.response.json()[0].username).to.be.oneOf([\"HICTOOT\",\"PB_TIME\"]);\r",
+							"    pm.expect(pm.response.json()[1].username).to.be.oneOf([\"HICTOOT\",\"PB_TIME\"]);\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getAllCustomers",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllCustomers"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

@@ -16,7 +16,6 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.mockito.stubbing.Answer;
 
 import ca.mcgill.ecse321.onlinegallery.dao.ArtistRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
@@ -45,9 +44,6 @@ public class TestArtistServiceDelete {
 
 	@BeforeEach
 	public void setMockOutput() {
-		Answer<?> paramAsAnswer = (InvocationOnMock invocation)->{
-			return invocation.getArgument(0);
-		};
 		lenient().when(regRepo.existsByUserName(anyString())).thenAnswer((InvocationOnMock invocation) -> {
 			if (invocation.getArgument(0).equals(INVALID_USERNAMENONEXIST)) {
 				return false;

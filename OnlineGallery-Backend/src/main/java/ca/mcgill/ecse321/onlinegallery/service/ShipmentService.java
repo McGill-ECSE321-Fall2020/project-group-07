@@ -3,7 +3,10 @@ package ca.mcgill.ecse321.onlinegallery.service;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
+import java.util.regex.Pattern;
 
 import javax.transaction.Transactional;
 
@@ -24,6 +27,106 @@ public class ShipmentService {
 	@Autowired
 	PurchaseRepository purchaseRepo;
 	
+	@Autowired
+	GalleryRegistrationRepository regRepo;
+	
+	@Autowired
+	ArtworkRepository artworkRepo;
+	
+	@Autowired
+	CustomerRepository custRepo;
+
+	
+	@Transactional 
+	public Shipment createShipment (ShipmentDto dto) throws ShipmentException, PurchaseException{
+		
+		Shipment shipment = null;
+		List<Long> purchases = dto.getPurchases();
+		
+		for (Long p : purchases) {
+			if (!purchaseRepo.existsByPurchaseId(p)) {
+				throw new PurchaseException("no purchase with id ["+p+"] found in system");
+			}
+		}
+		
+		Purchase first = purchaseRepo.findPurchaseByPurchaseId(purchases.get(0));
+		
+		ShipmentType type = first.getShipmentType();
+		for (Long p1 : purchases) {
+			Purchase aPurchase = purchaseRepo.findPurchaseByPurchaseId(p1);
+			if (!aPurchase.getShipmentType().equals(type)) {
+				throw new ShipmentException("not all purchases are of the same type");
+			}
+			
+		}
+		
+		Long customerId = first.getCustomer().getCustomerId();
+		
+		for (Long p2 : purchases) {
+			Purchase aPurchase = purchaseRepo.findPurchaseByPurchaseId(p2);
+			if (!aPurchase.getCustomer().getCustomerId().equals(customerId)) {
+				throw new ShipmentException("not all purchases are from the same client");
+			}
+		}
+		for (Long p3 : purchases) {
+			Purchase aPurchase = purchaseRepo.findPurchaseByPurchaseId(p3);
+			Artwork art = artworkRepo.findArtworkByArtworkId(aPurchase.getArtwork().getArtworkId());
+			if (art.getStatus() == ArtworkStatus.AVAILABLE) {
+				throw new ShipmentException("artwork is still avaiable and can not be shipped");
+			}
+		}
+		
+	
+		
+		String sourceAddress = dto.getSourceAddress();
+		String destinationAddress = dto.getDestinationAddress();
+
+		String recipientName = dto.getRecipientName();
+		
+		if (recipientName == null ) {
+			throw new ShipmentException("Recipient name missing" );
+		}
+		else if (recipientName.length() == 0) {
+			throw new ShipmentException("Recipient name missing" );
+		}
+		
+		//validation passed
+		shipment = new Shipment();
+		Double totalPrice = 0.0;
+		Set<Purchase> shipPurchases = new HashSet<Purchase>();
+		for (Long p3 : purchases) {
+			Purchase aPurchase = purchaseRepo.findPurchaseByPurchaseId(p3);
+			Double artPrice = artworkRepo.findArtworkByArtworkId(aPurchase.getArtwork().getArtworkId()).getPrice();
+			totalPrice += artPrice;
+			shipment.getPurchase().add(aPurchase);
+			shipPurchases.add(aPurchase);
+			
+		}
+		
+		Double shippingCost = dto.getShippingCost();
+		totalPrice += shippingCost;
+		ShipmentStatus shipmentStatus = dto.getShipmentStatus();
+		
+		
+//		shipment.setShipmentId(dto.getShipmentId());
+		shipment.setSourceAddress(sourceAddress);
+		shipment.setDestinationAddress(destinationAddress);
+		shipment.setShippingCost(shippingCost);
+		shipment.setShipmentStatus(shipmentStatus);
+		shipment.setRecipientName(recipientName);
+		shipment.setTotalAmount(totalPrice);
+
+		for (Purchase aP :shipPurchases ) {
+			aP.setShipment(shipment);
+			purchaseRepo.save(aP);
+		}
+		
+		Customer cust=first.getCustomer();
+		cust.getShipment().add(shipment);
+		
+		return shipRepo.save(shipment);
+		
+	}
 
 	@Transactional
 	public Shipment addToShipment(Long shipmentId, Long purchaseId) throws ShipmentException, PurchaseException{
@@ -68,10 +171,10 @@ public class ShipmentService {
 		Long shipmentId = dto.getShipmentId();
 		String ccNum=dto.getCcNum();
 		String ccCSV=dto.getCcCSV();
-		String firstName=dto.getCcFirstname();
-		String lastName=dto.getccLastname();
+		String firstName=dto.getFirstName();
+		String lastName=dto.getLastName();
 		String ccExp=dto.getCcExp();
-		
+	
 		if (!shipRepo.existsById(shipmentId)) {
 			throw new ShipmentException("no Shipment with id ["+shipmentId+"] found");
 		}
@@ -125,12 +228,15 @@ public class ShipmentService {
 		
 		shipment.setCreditCardNumber(ccNum.substring(ccNum.length()-4));		//store only last 4 digits of credit card
 		shipment.setShipmentStatus(ShipmentStatus.PAID);
+		shipment.setCreditCardFirstName(dto.getFirstName());
+		shipment.setCreditCardLastName(dto.getLastName());
 		
 		shipment=shipRepo.save(shipment);
 		
 		return shipment;
 	}
 	
+
 	public List<Shipment> getAllShipments() throws ShipmentException{
 		if (shipRepo.count()==0) {
 			throw new ShipmentException("no Shipments in system");
@@ -145,6 +251,51 @@ public class ShipmentService {
 		return slist;
 	}
 	
+
+	@Transactional
+	public Shipment deleteShipment(Long shipmentId) throws ShipmentException {
+		System.out.println("id passed to delete: " + shipmentId);
+		Shipment s = this.getShipment(shipmentId);
+		System.out.println("id found after calling get: " + s.getShipmentId());
+
+		Set<Purchase> shipPurchases = new HashSet<Purchase>(); 
+		for (Purchase p : s.getPurchase()) {
+			Purchase purchase = purchaseRepo.findPurchaseByPurchaseId(p.getPurchaseId());
+			shipPurchases.add(purchase);
+		}
+		for (Purchase aP :shipPurchases ) {
+			aP.setShipment(null);
+			purchaseRepo.save(aP);
+		}
+		shipRepo.delete(s);
+		
+		return s;
+	}
+	
+	@Transactional
+	public Shipment getShipment (long shipmentId) throws ShipmentException {
+		
+		Shipment s = shipRepo.findShipmentByShipmentId(shipmentId);
+		if (s == null) {
+			throw new ShipmentException("No shipment exists with id " + shipmentId);
+		}
+		return s;
+	}
+	
+	@Transactional
+	public List<Shipment> deleteAllShipments () throws ShipmentException{
+		List<Shipment> deletedShipments = new ArrayList <Shipment>();
+		if (shipRepo.count() == 0) {
+			throw new ShipmentException("no Shipments in system");
+		}
+		
+		for (Shipment s : shipRepo.findAll()) {
+			deletedShipments.add(s);
+			this.deleteShipment(s.getShipmentId());
+		}
+		return deletedShipments;
+	}
+
 	public void validateExp(String exp) throws CreditCardException{
 
 		
@@ -323,5 +474,7 @@ public class ShipmentService {
 			throw new CreditCardException("first or last name cannot contain special characters");
 		}
 	}
+	
+	
 
 }

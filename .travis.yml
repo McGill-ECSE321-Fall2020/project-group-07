@@ -1,34 +1,26 @@
+branches:
+  only:
+  - master  
+  
 matrix:
   include:
 
     # Backend tests
-    # - language: java
+    - language: java
 
-    #   branches:
-    #     only:
-    #       - master
+      before_install:
+        - chmod +x ./gradlew
+      script:
+        - ./gradlew build
 
-    #   before_install:
-    #     - chmod +x gradlew
-    #   script:
-    #     - ./gradlew build
-
-    # # start backend
-    #    - language: java
-
-      branches:
-        only:
-          - travis-exp
-
-    #   before_install:
-    #     - chmod +x gradlew
-    #   script:
-    #     - ./gradlew bootRun
 
     # Postman integration tests
     - language: node_js
       node_js:
           - "10.15"
+
+      before_install:
+        - chmod +x ./gradlew
 
       install:
           - npm install -g newman
@@ -37,11 +29,23 @@ matrix:
           - node --version
           - npm --version
           - node_modules/.bin/newman --version
-
+          - chmod +x ./resetdb.sh
 
       script:
+
+          - ./resetdb.sh
+            
+          # run Spring app in background
           - ./gradlew bootRun &
-          - sleep 60
-          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.postman_collection.json
-          # - tmux kill-winodw
-          # - tmux ls
+
+          # give time for app to startup
+          - sleep 60     
+
+          # run test suites geenrated from Postman
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/RegistrationAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/AdminAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtistAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ArtworkAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/CustomerAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/PurchaseAPI.json
+          - node_modules/.bin/newman run ./OnlineGallery-Backend/src/test/java/ca/mcgill/ecse321/onlinegallery/controller/ShipmentAPI.json

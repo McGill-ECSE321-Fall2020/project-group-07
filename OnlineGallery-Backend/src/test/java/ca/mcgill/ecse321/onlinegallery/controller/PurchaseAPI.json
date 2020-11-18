@@ -1,0 +1,610 @@
+{
+	"info": {
+		"_postman_id": "25d20b99-ab73-400d-8968-f8b18aac14c9",
+		"name": "PurchaseAPI2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "createRegistration1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "be3255ae-855b-4c6f-a2c2-e39544493354",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"CaptainUnderpants\",\n\t\"firstName\":\"Cap\",\n\t\"lastName\":\"Under\",\n\t\"email\":\"underpants@yahoo.com\",\n    \"password\":\"ay2Caramba!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setArtistRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "caab2295-5952-41be-bd1c-73ca99f149b5",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setArtist/CaptainUnderpants",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setArtist",
+						"CaptainUnderpants"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createRegistration2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "bb43a6b3-6d76-4f25-a12d-fbf9268854f9",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"username\":\"Astronaut\",\n\t\"firstName\":\"Rick\",\n\t\"lastName\":\"Morty\",\n\t\"email\":\"weAreCOOL@gmail.com\",\n    \"password\":\"hay2Caramba!!!\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createRegistration/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createRegistration",
+						""
+					]
+				},
+				"description": "creates a Registration"
+			},
+			"response": []
+		},
+		{
+			"name": "setCustomerRegistration",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9515a859-f89c-4b8c-ab09-b6ddf7d3e790",
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/setCustomer/Astronaut",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"setCustomer",
+						"Astronaut"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "9e5d8d1c-b4be-4a59-91de-1909548e782d",
+						"exec": [
+							"pm.globals.set(\"artworkId1\",pm.response.json().artworkId);",
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"CaptainUnderpants\",\n    \"name\": \"MonaLisa\",\n    \"description\": \"extreme beauty\",\n    \"price\": 4569.12,\n    \"status\": 1,\n    \"dimension\": \"HUUUUUUGE\",\n    \"weight\": 190,\n    \"commission\":0.75,\n    \"numViews\": 0\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createArtwork2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fbf9ba7b-82dd-44d6-a90a-07c49a1eb6d7",
+						"exec": [
+							"pm.globals.set(\"artworkId2\",pm.response.json().artworkId);"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\":\"CaptainUnderpants\",\n    \"name\": \"StarryNight\",\n    \"description\": \"Kinda okay\",\n    \"price\": 10.69,\n    \"status\": 1,\n    \"dimension\": \"SMOL\",\n    \"weight\": 4,\n    \"commission\":0.23,\n    \"numViews\": 0\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createArtwork",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createArtwork"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPurchase1",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "e268a736-825b-45ff-887a-409b6cd3f5f2",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"username match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.username).to.eql(\"Astronaut\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment type match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shipmentType).to.eql('OFFSITE_DELIVERY');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"artwork id match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.artworkId).to.eql(pm.globals.get(\"artworkId1\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Astronaut\",\r\n    \"artworkId\": {{artworkId1}},\r\n    \"shipmentType\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "createPurchase2",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "71d18b4b-0597-4d84-b536-1b18ed680a74",
+						"exec": [
+							"pm.test(\"Successful POST request\", function () {\r",
+							"    pm.expect(pm.response.code).to.be.oneOf([201, 202]);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"username match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.username).to.eql(\"Astronaut\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment type match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shipmentType).to.eql('OFFSITE_DELIVERY');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"artwork id match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.artworkId).to.eql(pm.globals.get(\"artworkId2\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Astronaut\",\r\n    \"artworkId\": {{artworkId2}},\r\n    \"shipmentType\": 0\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/createPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"createPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getPurchase",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "5ea68830-0776-4e19-bf87-b3f92bd2f61e",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"username match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.username).to.eql(\"Astronaut\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment type match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shipmentType).to.eql('OFFSITE_DELIVERY');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"artowrk id match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.artworkId).to.eql(pm.globals.get(\"artworkId1\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Astronaut\",\r\n    \"artworkId\": {{artworkId1}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/getPurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getPurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "updatePurchase",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "475b85fc-e2e4-43fd-bcf4-edbf4fbe1ef8",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"username match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.username).to.eql(\"Astronaut\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"shipment type match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.shipmentType).to.eql('ONSITE_PICKUP');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"artowrk id match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.artworkId).to.eql(pm.globals.get(\"artworkId2\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Astronaut\",\r\n    \"artworkId\": {{artworkId2}},\r\n    \"shipmentType\": 1\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/updatePurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"updatePurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "getAllPurchases",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "fb289400-bcbc-4b2b-a700-a21385de1ce2",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"2 purchases returned\",function(){\r",
+							"    pm.expect(pm.response.json()).length==2;\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Correct customer purchases returned\",function(){\r",
+							"    pm.expect(pm.response.json()[0].username).to.eql(\"Astronaut\");\r",
+							"    pm.expect(pm.response.json()[1].username).to.eql(\"Astronaut\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Correct shipment types returned\",function(){\r",
+							"    pm.expect(pm.response.json()[0].shipmentType).to.eql('OFFSITE_DELIVERY');\r",
+							"    pm.expect(pm.response.json()[1].shipmentType).to.eql('ONSITE_PICKUP');\r",
+							"})\r",
+							"\r",
+							"pm.test(\"Correct artwork returned\",function(){\r",
+							"    pm.expect(pm.response.json()[0].artworkId).to.eql(pm.globals.get(\"artworkId1\"));\r",
+							"    pm.expect(pm.response.json()[1].artworkId).to.eql(pm.globals.get(\"artworkId2\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/getAllPurchases/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"getAllPurchases",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "deletePurchase",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "25e256d1-b225-4e87-8e00-fa7ab51b116d",
+						"exec": [
+							"pm.test(\"Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(\"non-null dto returned\", function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto).is.not.undefined;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"username match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.username).to.eql(\"Astronaut\");\r",
+							"})\r",
+							"\r",
+							"pm.test(\"artowrk id match\",function(){\r",
+							"    let dto=pm.response.json();\r",
+							"    pm.expect(dto.artworkId).to.eql(pm.globals.get(\"artworkId1\"));\r",
+							"})"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\":\"Astronaut\",\r\n    \"artworkId\": {{artworkId1}}\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/deletePurchase/",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"deletePurchase",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}

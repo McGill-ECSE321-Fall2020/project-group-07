@@ -10,6 +10,14 @@ public class ProfileDto {
 		return this.id;
 	}
 	
+	private String url;
+	public void setUrl(String url) {
+		this.url=url;
+	}
+	public String getUrl() {
+		return this.url;
+	}
+	
 	private int numSold;
 	public void setNumSold(int numSold) {
 		this.numSold = numSold;
@@ -41,5 +49,13 @@ public class ProfileDto {
 	public double getRating() {
 		return this.rating;
 	}
-	
+
+	private String username;
+	public void setUsername(String username) {
+		this.username = username;
+	}
+	public String getUsername() {
+		return this.username;
+	}
+
 }

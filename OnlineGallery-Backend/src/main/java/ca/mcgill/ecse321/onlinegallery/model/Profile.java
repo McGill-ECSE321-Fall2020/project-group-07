@@ -6,6 +6,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Lob;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -46,6 +47,7 @@ public class Profile {
 		return this.totalEarnings;
 	}
 
+	@Lob
 	private String selfDescription;
 
 	public void setSelfDescription(String value) {
@@ -64,6 +66,15 @@ public class Profile {
 
 	public double getRating() {
 		return this.rating;
+	}
+	
+	private String imgUrl;
+	
+	public String getUrl() {
+		return this.imgUrl;
+	}
+	public void setUrl(String url){
+		this.imgUrl=url;
 	}
 
 }

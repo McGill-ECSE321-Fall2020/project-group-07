@@ -5,3 +5,5 @@ bin/
 build
 node_modules
 package-lock*
+artworks/
+aws/
