@@ -15,7 +15,16 @@
         android:textSize="18sp"
         android:textStyle="bold"
         tools:layout_editor_absoluteX="110dp"
-        tools:layout_editor_absoluteY="81dp" />
+        tools:layout_editor_absoluteY="58dp" />
+
+    <EditText
+        android:id="@+id/passwordInput"
+        android:layout_width="377dp"
+        android:layout_height="50dp"
+        android:ems="10"
+        android:inputType="textPassword"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="567dp" />
 
     <EditText
         android:id="@+id/usernameInput"
@@ -23,33 +32,11 @@
         android:layout_height="50dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginTop="120dp"
         android:ems="10"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/firstNameInput"
-        android:layout_width="377dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="272dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/firstNameTitle"
-        android:layout_width="172dp"
-        android:layout_height="26dp"
-        android:text="first name"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="246dp" />
 
     <TextView
         android:id="@+id/lastNameTitle"
@@ -59,7 +46,7 @@
         android:textSize="14sp"
         android:textStyle="italic"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="352dp" />
+        tools:layout_editor_absoluteY="314dp" />
 
     <EditText
         android:id="@+id/lastNameInput"
@@ -68,7 +55,39 @@
         android:ems="10"
         android:inputType="textPersonName"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="378dp" />
+        tools:layout_editor_absoluteY="340dp" />
+
+    <TextView
+        android:id="@+id/firstNameTitle"
+        android:layout_width="172dp"
+        android:layout_height="26dp"
+        android:text="first name"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="208dp" />
+
+    <TextView
+        android:id="@+id/passwordTitle"
+        android:layout_width="172dp"
+        android:layout_height="26dp"
+        android:text="password"
+        android:textSize="14sp"
+        android:textStyle="italic"
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="541dp" />
+
+    <EditText
+        android:id="@+id/firstNameInput"
+        android:layout_width="377dp"
+        android:layout_height="50dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="232dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/emailTitle"
@@ -79,7 +98,7 @@
         android:textSize="14sp"
         android:textStyle="italic"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="463dp" />
+        tools:layout_editor_absoluteY="425dp" />
 
     <EditText
         android:id="@+id/emailInput"
@@ -88,26 +107,7 @@
         android:ems="10"
         android:inputType="textEmailAddress"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="489dp" />
-
-    <TextView
-        android:id="@+id/passwordTitle"
-        android:layout_width="172dp"
-        android:layout_height="26dp"
-        android:text="password"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="579dp" />
-
-    <EditText
-        android:id="@+id/passwordInput"
-        android:layout_width="377dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="605dp" />
+        tools:layout_editor_absoluteY="451dp" />
 
     <TextView
         android:id="@+id/usernameTitle"
@@ -117,7 +117,7 @@
         android:textSize="14sp"
         android:textStyle="italic"
         tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="134dp" />
+        tools:layout_editor_absoluteY="96dp" />
 
     <Button
         android:id="@+id/registerButton"
@@ -148,5 +148,23 @@
         app:backgroundTint="#8E8A8A"
         tools:layout_editor_absoluteX="13dp"
         tools:layout_editor_absoluteY="16dp" />
+
+    <CheckBox
+        android:id="@+id/artistCheck"
+        android:layout_width="147dp"
+        android:layout_height="55dp"
+        android:text="As an Artist"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="33dp"
+        tools:layout_editor_absoluteY="639dp" />
+
+    <CheckBox
+        android:id="@+id/customerCheck"
+        android:layout_width="160dp"
+        android:layout_height="55dp"
+        android:text="As a Customer"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="202dp"
+        tools:layout_editor_absoluteY="639dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
