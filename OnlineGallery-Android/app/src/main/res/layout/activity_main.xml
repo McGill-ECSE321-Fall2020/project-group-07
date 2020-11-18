@@ -7,137 +7,48 @@
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/registrationTitle"
-        android:layout_width="172dp"
-        android:layout_height="26dp"
+        android:id="@+id/loginTitle"
+        android:layout_width="108dp"
+        android:layout_height="33dp"
         android:lineSpacingExtra="24sp"
-        android:text=" Registration Form"
+        android:text="Login Form"
         android:textSize="18sp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="110dp"
-        tools:layout_editor_absoluteY="81dp" />
+        tools:layout_editor_absoluteX="152dp"
+        tools:layout_editor_absoluteY="140dp" />
 
     <EditText
         android:id="@+id/usernameInput"
         android:layout_width="377dp"
         android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="160dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginTop="256dp"
         android:ems="10"
+        android:hint="username"
         android:inputType="textPersonName"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/firstNameInput"
-        android:layout_width="377dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="272dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/firstNameTitle"
-        android:layout_width="172dp"
-        android:layout_height="26dp"
-        android:text="first name"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="246dp" />
-
-    <TextView
-        android:id="@+id/lastNameTitle"
-        android:layout_width="172dp"
-        android:layout_height="26dp"
-        android:text="last name"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="352dp" />
-
-    <EditText
-        android:id="@+id/lastNameInput"
-        android:layout_width="377dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="378dp" />
-
-    <TextView
-        android:id="@+id/emailTitle"
-        android:layout_width="172dp"
-        android:layout_height="26dp"
-        android:text="email"
-        android:textAllCaps="false"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="463dp" />
-
-    <EditText
-        android:id="@+id/emailInput"
-        android:layout_width="377dp"
-        android:layout_height="50dp"
-        android:ems="10"
-        android:inputType="textEmailAddress"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="489dp" />
-
-    <TextView
-        android:id="@+id/passwordTitle"
-        android:layout_width="172dp"
-        android:layout_height="26dp"
-        android:text="password"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="579dp" />
 
     <EditText
         android:id="@+id/passwordInput"
         android:layout_width="377dp"
         android:layout_height="50dp"
         android:ems="10"
+        android:hint="password"
         android:inputType="textPassword"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="605dp" />
-
-    <TextView
-        android:id="@+id/usernameTitle"
-        android:layout_width="172dp"
-        android:layout_height="26dp"
-        android:text="username"
-        android:textSize="14sp"
-        android:textStyle="italic"
-        tools:layout_editor_absoluteX="8dp"
-        tools:layout_editor_absoluteY="134dp" />
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="349dp" />
 
     <Button
-        android:id="@+id/registerButton"
+        android:id="@+id/loginButton"
         android:layout_width="110dp"
         android:layout_height="61dp"
-        android:text="REGISTER"
+        android:text="LOGIN"
         android:textStyle="bold"
         app:backgroundTint="#3F51B5"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="712dp" />
-
-    <Button
-        android:id="@+id/clearButton"
-        android:layout_width="89dp"
-        android:layout_height="61dp"
-        android:text="CLEAR"
-        android:textStyle="bold"
-        app:backgroundTint="#CA1212"
-        tools:layout_editor_absoluteX="288dp"
-        tools:layout_editor_absoluteY="712dp" />
+        tools:layout_editor_absoluteX="150dp"
+        tools:layout_editor_absoluteY="596dp" />
 
     <Button
         android:id="@+id/backButton"
@@ -148,5 +59,33 @@
         app:backgroundTint="#8E8A8A"
         tools:layout_editor_absoluteX="13dp"
         tools:layout_editor_absoluteY="16dp" />
+
+    <CheckBox
+        android:id="@+id/customerBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="customer"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="422dp" />
+
+    <CheckBox
+        android:id="@+id/artistBox"
+        android:layout_width="262dp"
+        android:layout_height="67dp"
+        android:text="artist"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="466dp" />
+
+    <CheckBox
+        android:id="@+id/adminBox"
+        style="@android:style/Widget.CompoundButton.CheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Admin"
+        android:textSize="18sp"
+        tools:layout_editor_absoluteX="18dp"
+        tools:layout_editor_absoluteY="533dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
