@@ -10,12 +10,12 @@
         android:id="@+id/discoverButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="316dp"
+        android:layout_marginTop="196dp"
         android:onClick="startDiscover"
         android:text="Discover Artworks"
         app:backgroundTint="@color/design_default_color_primary_variant"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.455"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
