@@ -102,7 +102,7 @@ public class ArtworkService {
 	
 	@Transactional
 	public int countAvailableArtworks() throws ArtworkException{
-		return this.getAllArtworks().size();
+		return this.getAllAvailableArtwork().size();
 	}
 	
 	@Transactional
