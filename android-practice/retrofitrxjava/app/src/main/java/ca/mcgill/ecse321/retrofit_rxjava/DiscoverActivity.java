@@ -27,7 +27,7 @@ public class DiscoverActivity extends AppCompatActivity {
     private static final String TAG = "DiscoverActivity";
     private static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
     private static final String AWS = "https://og-img-repo.s3.us-east-1.amazonaws.com";
-    private static final int NUM_TO_PULL = 3;
+    private static final int NUM_TO_PULL = 12;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
