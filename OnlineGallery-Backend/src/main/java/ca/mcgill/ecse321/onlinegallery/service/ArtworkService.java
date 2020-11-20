@@ -101,6 +101,11 @@ public class ArtworkService {
 	}
 	
 	@Transactional
+	public int countAvailableArtworks() throws ArtworkException{
+		return this.getAllArtworks().size();
+	}
+	
+	@Transactional
 	public Artwork getAvailableArtworkDetail(Long artworkId) throws ArtworkException{
 		if (!artworkRepo.existsByArtworkId(artworkId)) {
 			throw new  ArtworkException("No artwork with artworkID ["+artworkId+"] exists");

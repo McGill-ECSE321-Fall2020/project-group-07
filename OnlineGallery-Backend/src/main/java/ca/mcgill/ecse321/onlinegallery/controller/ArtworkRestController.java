@@ -59,6 +59,25 @@ public class ArtworkRestController {
 	
 	}
 	
+	@GetMapping(value = { "/countAvailableArtworks", "/countAvailableArtworks/" })
+	public ResponseEntity<?> countAvailableArtworks() throws ArtworkException {
+		
+		int numAvailable;
+		AvailableCount countDto = new AvailableCount();
+		
+		try {
+			numAvailable = service.countAvailableArtworks();
+			countDto.setAvailable(numAvailable);
+			return new ResponseEntity<>(countDto,HttpStatus.OK);
+		}
+		catch(ArtworkException e) {
+			return new ResponseEntity<>(e.getMessage(),HttpStatus.BAD_REQUEST);
+			
+		}
+	
+	}
+	
+	
 	@GetMapping(value = { "/getAllArtworks", "/getAllArtworks/" })
 	public ResponseEntity<?> getAllArtworks() throws ArtworkException {
 		
@@ -141,6 +160,17 @@ public class ArtworkRestController {
 		artworkDto.setMedium(artwork.getMedium());
 
 		return artworkDto;
+	}
+	
+	private class AvailableCount{
+		int available;
+		
+		public void setAvailable(int available) {
+			this.available=available;
+		}
+		public int getAvailable() {
+			return this.available;
+		}
 	}
 
 
