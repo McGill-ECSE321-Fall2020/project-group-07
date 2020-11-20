@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.retrofit_rxjava;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
@@ -44,44 +45,3 @@ public class MainActivity extends AppCompatActivity {
         startActivity(discoverIntent);
     }
 }
-
-
-//    List<String> zippedStrings = new ArrayList<>();
-//
-//    Observable<String> ob1 = awsInterface.getImgEncoding("magicMike_11132020_65456PM_600_402");
-//        ob1.subscribeOn(Schedulers.io());
-//
-//                Observable<String> ob2=awsInterface.getImgEncoding("jhansolo_11132020_81813AM_600_568");
-//        ob2.subscribeOn(Schedulers.io());
-//
-//        List<Observable<String>>requests=new ArrayList<>();
-//        requests.add(ob1);
-//        requests.add(ob2);
-//
-//
-//        Observable.zip(
-//        requests,
-//        new Function<Object[],Object>(){
-//@Override
-//public Object apply(Object[]objects)throws Exception{
-//        List<String> zippedStrings=new ArrayList<>();
-//        for(Object o:objects){
-//        zippedStrings.add((String)o);
-//        }
-//        return zippedStrings;
-//        }
-//        }
-//        ).subscribeOn(Schedulers.newThread())
-//        .subscribe(new Consumer<Object>(){
-//        @Override
-//        public void accept(Object o)throws Exception{
-//                for(String s:(List<String>)o){
-//                Log.e(TAG,s);
-//                }
-//            }
-//        },new Consumer<Throwable>(){
-//        @Override
-//        public void accept(Throwable throwable){
-//                Log.e(TAG,throwable.getMessage(),throwable);
-//                }
-//                });

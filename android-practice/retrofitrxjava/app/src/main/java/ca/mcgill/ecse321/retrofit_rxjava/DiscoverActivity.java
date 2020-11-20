@@ -1,11 +1,16 @@
 package ca.mcgill.ecse321.retrofit_rxjava;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.annotation.SuppressLint;
+import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +19,11 @@ import ca.mcgill.ecse321.retrofit_rxjava.dto.ArtworkDto;
 import ca.mcgill.ecse321.retrofit_rxjava.dto.AvailableNumDto;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
+import io.reactivex.functions.Function3;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -27,12 +34,13 @@ public class DiscoverActivity extends AppCompatActivity {
     private static final String TAG = "DiscoverActivity";
     private static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
     private static final String AWS = "https://og-img-repo.s3.us-east-1.amazonaws.com";
-    private static final int NUM_TO_PULL = 12;
+    private static final int NUM_TO_PULL = 20;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
         loadData();
     }
 
@@ -51,16 +59,14 @@ public class DiscoverActivity extends AppCompatActivity {
 
         BackendInterface backendInterface = retrofit.create(BackendInterface.class);
 
-
-        Observable<AvailableNumDto> numDtoObservable = backendInterface.countAvailableArtwork().subscribeOn(Schedulers.io());
+        Observable<AvailableNumDto> numDtoObservable = backendInterface.countAvailableArtwork().subscribeOn(Schedulers.newThread());
         numDtoObservable.flatMap((Function<AvailableNumDto, ObservableSource<List<ArtworkDto>>>) availableNumDto -> {
             int num = Math.min(NUM_TO_PULL, availableNumDto.getAvailable());
             return backendInterface.getRandomArtworks(num);
         })
-                .subscribeOn(Schedulers.io())
-                .subscribe(
-                        t -> fetchAws(t)
-                );
+        .subscribe(
+                t -> fetchAws(t)
+        );
     }
 
     @SuppressLint("CheckResult")
@@ -76,9 +82,7 @@ public class DiscoverActivity extends AppCompatActivity {
         List<Observable<String>> requests = new ArrayList<>();
 
         for (ArtworkDto d:dtos){
-            requests.add(
-                    awsInterface.getImgEncoding(d.getUrl()).subscribeOn(Schedulers.io())
-            );
+            requests.add(awsInterface.getImgEncoding(d.getUrl()).subscribeOn(Schedulers.newThread()));
         }
 
         Observable.zip(
@@ -90,7 +94,7 @@ public class DiscoverActivity extends AppCompatActivity {
                     }
                     return zippedStrings;
                 })
-                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                         t->print(dtos, (List<String>) t)
                 );
@@ -100,50 +104,15 @@ public class DiscoverActivity extends AppCompatActivity {
 
         // easily turn this method into instantiating the recyclerview
         Log.e(TAG, "\n-------------------------------- refresh ----------------------------\n");
+        List<Bitmap> bitmapList = new ArrayList<>();
         for (int i=0;i<dtos.size();i++){
-            Log.e(TAG, dtos.get(i).getName()+"  "+t.get(i) );
+            Bitmap artBitmap=Helpers.Base64ToBitmap(t.get(i));
+            bitmapList.add(artBitmap);
         }
+
+        RecyclerView rView = findViewById(R.id.recycler_view);
+        ImageAdapter adapter = new ImageAdapter(bitmapList.toArray(new Bitmap[0]));
+        rView.setAdapter(adapter);
+        rView.setLayoutManager(new LinearLayoutManager(DiscoverActivity.this));
     }
 }
-
-//        List<String> zippedStrings = new ArrayList<>();
-//
-//        Observable<String> ob1 = awsInterface.getImgEncoding("magicMike_11132020_65456PM_600_402");
-//        ob1.subscribeOn(Schedulers.io());
-//
-//        Observable<String> ob2=awsInterface.getImgEncoding("jhansolo_11132020_81813AM_600_568");
-//        ob2.subscribeOn(Schedulers.io());
-//
-//        List<Observable<String>>requests=new ArrayList<>();
-//        requests.add(ob1);
-//        requests.add(ob2);
-//
-//
-//        Observable.zip(
-//            requests,
-//            new Function<Object[],Object>(){
-//                    @Override
-//                    public Object apply(Object[]objects)throws Exception{
-//                            List<String> zippedStrings=new ArrayList<>();
-//                            for(Object o:objects){
-//                            zippedStrings.add((String)o);
-//                            }
-//                            return zippedStrings;
-//                            }
-//                })
-//        .subscribeOn(Schedulers.newThread())
-//        .subscribe(
-//                new Consumer<Object>(){
-//                @Override
-//                public void accept(Object o)throws Exception{
-//                        for(String s:(List<String>)o){
-//                        Log.e(TAG,s);
-//                        }
-//                    }
-//                },
-//                new Consumer<Throwable>(){
-//                @Override
-//                public void accept(Throwable throwable){
-//                        Log.e(TAG,throwable.getMessage(),throwable);
-//                    }
-//                });
