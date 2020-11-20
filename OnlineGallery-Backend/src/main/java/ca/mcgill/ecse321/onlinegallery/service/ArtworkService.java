@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Random;
@@ -147,26 +148,14 @@ public class ArtworkService {
 				artworkList.add(art);
 			}
 		}
-		
-		List<Artwork> randomList = new ArrayList<Artwork>();
-		Random rand = new Random();
-		
+				
 		if (numToRetrieve > artworkList.size()) {
 			throw new  ArtworkException("there is less than ["+numToRetrieve+"] artworks");
 		} 
 		
-		List<Integer> usedIdx = new ArrayList<Integer>(); 
-		
-		int i=0;
-		while (i<numToRetrieve) {
-	        int randomIndex = rand.nextInt(artworkList.size());
-	        if (!usedIdx.contains(randomIndex)) {
-	        	randomList.add(artworkList.get(randomIndex));
-	        	usedIdx.add(randomIndex);
-	        	i+=1;
-	        }
-		}
-		return randomList;
+		List<Artwork> randomList = new ArrayList<Artwork>(allArtworkList);
+		Collections.shuffle(randomList);
+		return randomList.subList(0, numToRetrieve);
 	
 		
 	}
