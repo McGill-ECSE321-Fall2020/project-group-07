@@ -1,17 +1,31 @@
 package ca.mcgill.ecse321.retrofit_rxjava;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
+
+import java.util.List;
+
+import ca.mcgill.ecse321.retrofit_rxjava.dto.ArtworkDto;
 
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
 
     private Bitmap[] localBitmapSet;
+    private String [] title;
+    private String [] artist;
+    private String [] desc;
+    private String [] medium;
+    private String [] dimension;
+    private double [] price;
 
     /**
      * Provide a reference to the type of views that you are using
@@ -36,8 +50,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
      * @param bitmapSet Bitmap[] containing the data to populate views to be used
      * by RecyclerView.
      */
-    public ImageAdapter(Bitmap[] bitmapSet) {
+    public ImageAdapter(Context context, Bitmap[] bitmapSet, List<ArtworkDto> dtos) {
         localBitmapSet = bitmapSet;
+        setAttributes(dtos);
     }
 
     // Create new views (invoked by the layout manager)
@@ -53,12 +68,51 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     // Replace the contents of a view (invoked by the layout manager)
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
+
         viewHolder.getImageView().setImageBitmap(localBitmapSet[position]);
+
+        viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(),ArtworkDetailActivity.class);
+                intent.putExtra("TITLE",title[position]);
+                intent.putExtra("DESC",desc[position]);
+                intent.putExtra("MEDIUM",medium[position]);
+                intent.putExtra("DIMENSION",dimension[position]);
+                intent.putExtra("PRICE",price[position]);
+                intent.putExtra("ARTIST",artist[position]);
+
+
+                view.getContext().startActivity(intent);
+            }
+        });
     }
 
     // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
         return localBitmapSet.length;
+    }
+
+
+
+    private void setAttributes(List<ArtworkDto> dtos){
+        int n=dtos.size();
+        title=new String[n];
+        artist=new String[n];
+        desc=new String[n];
+        medium=new String[n];
+        dimension=new String[n];
+        price=new double[n];
+
+        for (int i=0;i<n;i++){
+            ArtworkDto d = dtos.get(i);
+            title[i]=d.getName();
+            artist[i]=d.getUsername();
+            desc[i]=d.getDescription();
+            medium[i]=d.getMedium();
+            dimension[i]=d.getDimension();
+            price[i]=d.getPrice();
+        }
     }
 }

@@ -96,11 +96,11 @@ public class DiscoverActivity extends AppCompatActivity {
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
-                        t->print(dtos, (List<String>) t)
+                        t->startRecyclerView(dtos, (List<String>) t)
                 );
     }
 
-    public void print(List<ArtworkDto> dtos, List<String> t){
+    public void startRecyclerView(List<ArtworkDto> dtos, List<String> t){
 
         // easily turn this method into instantiating the recyclerview
         Log.e(TAG, "\n-------------------------------- refresh ----------------------------\n");
@@ -111,8 +111,12 @@ public class DiscoverActivity extends AppCompatActivity {
         }
 
         RecyclerView rView = findViewById(R.id.recycler_view);
-        ImageAdapter adapter = new ImageAdapter(bitmapList.toArray(new Bitmap[0]));
+        ImageAdapter adapter = new ImageAdapter(this,bitmapList.toArray(new Bitmap[0]),dtos);
         rView.setAdapter(adapter);
         rView.setLayoutManager(new LinearLayoutManager(DiscoverActivity.this));
+    }
+
+    public void detailActivity(View view){
+
     }
 }
