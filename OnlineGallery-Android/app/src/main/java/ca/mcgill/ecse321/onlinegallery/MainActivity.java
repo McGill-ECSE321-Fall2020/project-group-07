@@ -34,6 +34,12 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG="MainActivity";
     public static final String API_ROOT="https://onlinegallery-backend-g7.herokuapp.com";
     public Button regButton;
+    public Button clearButton;
+    public EditText usernameInput;
+    public EditText firstNameInput;
+    public EditText lastNameInput;
+    public EditText emailInput;
+    public EditText passwordInput;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         regButton = findViewById(R.id.registerButton);
         regButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
 
                 //create registration
                 //then, if successful open set customer page
@@ -51,8 +57,23 @@ public class MainActivity extends AppCompatActivity {
                 openCustomerRegistration();
 
             }
-
         });
+        clearButton = findViewById(R.id.clearButton);
+        clearButton.setOnClickListener((new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                usernameInput = findViewById(R.id.usernameInput);
+                usernameInput.setText("");
+                firstNameInput = findViewById(R.id.firstNameInput);
+                firstNameInput.setText("");
+                lastNameInput = findViewById(R.id.lastNameInput);
+                lastNameInput.setText("");
+                emailInput = findViewById(R.id.emailInput);
+                emailInput.setText("");
+                passwordInput = findViewById(R.id.passwordInput);
+                passwordInput.setText("");
+            }
+        }));
     }
 
     public void openCustomerRegistration(){
