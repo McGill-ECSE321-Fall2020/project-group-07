@@ -25,7 +25,10 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     private String [] desc;
     private String [] medium;
     private String [] dimension;
+    private double [] weight;
     private double [] price;
+    private int [] artId;
+
 
     /**
      * Provide a reference to the type of views that you are using
@@ -81,7 +84,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 intent.putExtra("DIMENSION",dimension[position]);
                 intent.putExtra("PRICE",price[position]);
                 intent.putExtra("ARTIST",artist[position]);
-
+                intent.putExtra("ARTWORKID",((Integer) artId[position]).toString());
+                intent.putExtra("WEIGHT",((Double) weight[position]).toString());
 
                 view.getContext().startActivity(intent);
             }
@@ -104,6 +108,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         medium=new String[n];
         dimension=new String[n];
         price=new double[n];
+        artId=new int[n];
+        weight=new double[n];
 
         for (int i=0;i<n;i++){
             ArtworkDto d = dtos.get(i);
@@ -113,6 +119,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
             medium[i]=d.getMedium();
             dimension[i]=d.getDimension();
             price[i]=d.getPrice();
+            artId[i]=d.getArtworkId();
+            weight[i]=d.getWeight();
         }
     }
 }

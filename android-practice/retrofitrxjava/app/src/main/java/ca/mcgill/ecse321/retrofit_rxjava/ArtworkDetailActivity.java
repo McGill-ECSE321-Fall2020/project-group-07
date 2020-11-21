@@ -4,10 +4,20 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
 public class ArtworkDetailActivity extends AppCompatActivity {
+
+    private String title;
+    private String desc;
+    private String dimension;
+    private String medium;
+    private String price;
+    private String artist;
+    private String artworkId;
+    private String weight;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,12 +28,14 @@ public class ArtworkDetailActivity extends AppCompatActivity {
 
 
         Intent intent = getIntent();
-        String title=(String) intent.getSerializableExtra("TITLE");
-        String desc = (String) intent.getSerializableExtra("DESC");
-        String dimension = (String) intent.getSerializableExtra("DIMENSION");
-        String medium = (String) intent.getSerializableExtra("MEDIUM");
-        String price = "$"+((Double) intent.getSerializableExtra("PRICE")).toString();
-        String artist = (String) intent.getSerializableExtra("ARTIST");
+        title=(String) intent.getSerializableExtra("TITLE");
+        desc = (String) intent.getSerializableExtra("DESC");
+        dimension = (String) intent.getSerializableExtra("DIMENSION");
+        medium = (String) intent.getSerializableExtra("MEDIUM");
+        price = "$"+((Double) intent.getSerializableExtra("PRICE")).toString();
+        artist = (String) intent.getSerializableExtra("ARTIST");
+        artworkId = (String) intent.getSerializableExtra("ARTWORKID");
+        weight = (String) intent.getSerializableExtra("WEIGHT");
 
         TextView titleText = findViewById(R.id.detail_title);
         TextView descText=findViewById(R.id.detail_desc);
@@ -39,5 +51,20 @@ public class ArtworkDetailActivity extends AppCompatActivity {
         priceText.setText(price);
         artistText.setText(artist);
 
+    }
+
+    public void initiateBuy(View view){
+        Intent intent = new Intent(view.getContext(),OrderActivity.class);
+
+        intent.putExtra("TITLE",title);
+        intent.putExtra("DESC",desc);
+        intent.putExtra("MEDIUM",medium);
+        intent.putExtra("DIMENSION",dimension);
+        intent.putExtra("PRICE",price);
+        intent.putExtra("ARTIST",artist);
+        intent.putExtra("ARTWORkID",artworkId);
+        intent.putExtra("WEIGHT",weight);
+
+        view.getContext().startActivity(intent);
     }
 }
