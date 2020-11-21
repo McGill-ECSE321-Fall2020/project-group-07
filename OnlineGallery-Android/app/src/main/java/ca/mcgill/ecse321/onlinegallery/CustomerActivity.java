@@ -30,33 +30,44 @@ import io.reactivex.Observable;
 
 import org.json.JSONObject;
 
-public class MainActivity extends AppCompatActivity {
-    public static final String TAG="MainActivity";
-    public static final String API_ROOT="https://onlinegallery-backend-g7.herokuapp.com";
-    public Button regButton;
+public class CustomerActivity extends AppCompatActivity {
+    public static final String TAG = "CustomerActivity";
+    public static final String API_ROOT = "https://onlinegallery-backend-g7.herokuapp.com";
+    public Button yesButton;
+    public Button noButton;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_regcustomer);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        regButton = findViewById(R.id.registerButton);
-        regButton.setOnClickListener(new View.OnClickListener(){
+        yesButton = findViewById(R.id.customerYesButton);
+        yesButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
 
-                //create registration
-                //then, if successful open set customer page
+                registerAsCustomer();
+            }
+        });
+        noButton = findViewById(R.id.customerNoButton);
+        noButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
-                openCustomerRegistration();
+                openArtistRegistration();
 
             }
-
         });
     }
 
-    public void openCustomerRegistration(){
-        Intent customerIntent = new Intent(this, CustomerActivity.class);
-        startActivity(customerIntent);
+    public void registerAsCustomer() {
+        //do stuff
+        openArtistRegistration();
+
+    }
+    public void openArtistRegistration() {
+        Intent artistIntent = new Intent(this, ArtistActivity.class);
+        startActivity(artistIntent);
     }
 }
+
