@@ -30,8 +30,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="62c4ff74-3d65-416b-bcb2-d36ff1ba6ed5" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/dto/PaymentDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/dto/PurchaseDto.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/dto/ShipmentDto.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/ArtworkDetailActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/ArtworkDetailActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/BackendInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/BackendInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/CheckoutActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/CheckoutActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/ImageAdapter.java" beforeDir="false" afterPath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/ImageAdapter.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/OrderActivity.java" beforeDir="false" afterPath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/java/ca/mcgill/ecse321/retrofit_rxjava/OrderActivity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/res/layout/activity_artwork_detail.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/res/layout/activity_artwork_detail.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/res/layout/activity_checkout.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/res/layout/activity_checkout.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/res/layout/activity_order.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../android-practice/retrofitrxjava/app/src/main/res/layout/activity_order.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/HeaderBar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeaderBar.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +109,7 @@
       <workItem from="1605490191417" duration="1689000" />
       <workItem from="1605492547951" duration="982000" />
       <workItem from="1605496184954" duration="27000" />
+      <workItem from="1606142127694" duration="1841000" />
     </task>
     <servers />
   </component>

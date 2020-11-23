@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.TextView;
 
 public class ArtworkDetailActivity extends AppCompatActivity {
+    private static final String TAG = "ArtworkDetailActivity";
 
     private String title;
     private String desc;
@@ -34,8 +36,10 @@ public class ArtworkDetailActivity extends AppCompatActivity {
         medium = (String) intent.getSerializableExtra("MEDIUM");
         price = ((Double) intent.getSerializableExtra("PRICE")).toString();
         artist = (String) intent.getSerializableExtra("ARTIST");
-        artworkId = (String) intent.getSerializableExtra("ARTWORKID");
+        artworkId = (String) intent.getSerializableExtra("ID");
         weight = (String) intent.getSerializableExtra("WEIGHT");
+
+        Log.e(TAG, artworkId);
 
         TextView titleText = findViewById(R.id.detail_title);
         TextView descText=findViewById(R.id.detail_desc);
@@ -62,7 +66,7 @@ public class ArtworkDetailActivity extends AppCompatActivity {
         intent.putExtra("DIMENSION",dimension);
         intent.putExtra("PRICE",price);
         intent.putExtra("ARTIST",artist);
-        intent.putExtra("ARTWORkID",artworkId);
+        intent.putExtra("ID",artworkId);
         intent.putExtra("WEIGHT",weight);
 
         view.getContext().startActivity(intent);

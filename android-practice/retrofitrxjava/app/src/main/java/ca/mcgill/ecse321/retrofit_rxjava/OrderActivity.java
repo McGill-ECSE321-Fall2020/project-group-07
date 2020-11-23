@@ -14,17 +14,22 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.text.DecimalFormat;
+
 public class OrderActivity extends AppCompatActivity {
 
     private static final String TAG = "OrderActivity";
+    private static DecimalFormat df = new DecimalFormat("0.00");
 
     private String title;
     private String dimension;
     private String medium;
-    private String price;
+    private double priceVal;
     private String artist;
     private String artworkId;
     private String weight;
+    private double shipVal;
+    private double totalVal;
 
     private String destAddress="shipping address";
     private String recipientName="recipient name";
@@ -40,6 +45,8 @@ public class OrderActivity extends AppCompatActivity {
     TextView titleMedium;
     TextView titlePrice;
     TextView titleWeight;
+    TextView titleShipping;
+    TextView titleTotal;
 
     TextView addressView;
     TextView recipientView;
@@ -51,35 +58,45 @@ public class OrderActivity extends AppCompatActivity {
         setContentView(R.layout.activity_order);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+
         Intent intent = getIntent();
 
         title=(String) intent.getSerializableExtra("TITLE");
         dimension = (String) intent.getSerializableExtra("DIMENSION");
         medium = (String) intent.getSerializableExtra("MEDIUM");
-        price = "$"+(String) intent.getSerializableExtra("PRICE");
+
+        priceVal= Double.parseDouble((String) intent.getSerializableExtra("PRICE"));
+        shipVal=Double.parseDouble((String) intent.getSerializableExtra("WEIGHT"))*110.34;
+        totalVal=priceVal+shipVal;
+
         artist = (String) intent.getSerializableExtra("ARTIST");
         weight = (String) intent.getSerializableExtra("WEIGHT");
-
-        artworkId = (String) intent.getSerializableExtra("ARTWORKID");
+        artworkId = (String) intent.getSerializableExtra("ID");
 
         titleView = findViewById(R.id.order_title);
         titleArtist = findViewById(R.id.order_artist);
         titleDimension = findViewById(R.id.order_dimension);
         titleMedium = findViewById(R.id.order_medium);
         titlePrice = findViewById(R.id.order_price);
+        titleShipping = findViewById(R.id.order_shippingPrice);
+        titleTotal = findViewById(R.id.order_totalPrice);
         titleWeight = findViewById(R.id.order_weight);
-        addressView = findViewById(R.id.order_shipAddress);
-        recipientView = findViewById(R.id.order_recipientName);
-        continueButton = findViewById(R.id.order_continue);
+        addressView = findViewById(R.id.ccNum);
+        recipientView = findViewById(R.id.checkout_ccFirstname);
+        continueButton = findViewById(R.id.checkout_finish);
 
         titleView.setText(title);
         titleArtist.setText(artist);
         titleDimension.setText(dimension);
         titleMedium.setText(medium);
-        titlePrice.setText(price);
+        titlePrice.setText("$"+df.format(priceVal));
+        titleShipping.setText("$"+df.format(shipVal));
+        titleTotal.setText("$"+df.format(totalVal));
         titleWeight.setText(weight);
 
         radioGroup=findViewById(R.id.radioGroup);
+
+        Log.e(TAG, "onCreate: "+artworkId);
 
     }
 
@@ -101,16 +118,30 @@ public class OrderActivity extends AppCompatActivity {
         recipientView.setText(recipientName);
 
         if (destAddress.equals("shipping address") || recipientName.equals("recipient name")){
-            continueButton.setEnabled(false);
+//            continueButton.setEnabled(false);
             continueButton.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
         }
         else{
-            continueButton.setEnabled(true);
+//            continueButton.setEnabled(true);
         }
     }
 
     public void continueButton(View view){
         Intent intent = new Intent(view.getContext(),CheckoutActivity.class);
+        intent.putExtra("ARTWORKID",artworkId);
+        intent.putExtra("TOTAL",((Double) totalVal).toString());
+        intent.putExtra("DEST",destAddress);
+        intent.putExtra("SHIPCOST",(Double) shipVal);
+        intent.putExtra("TOTAL",(Double) totalVal);
+        intent.putExtra("RECIPIENT",recipientName);
+
+        if (shipMethod.equals("gallery pickup")){
+            intent.putExtra("SHIPTYPE","ONSITE_PICKUP");
+        }
+        else if (shipMethod.equals("home delivery")){
+            intent.putExtra("SHIPTYPE","OFFSITE_DELIVERY");
+        }
+
         view.getContext().startActivity(intent);
     }
 

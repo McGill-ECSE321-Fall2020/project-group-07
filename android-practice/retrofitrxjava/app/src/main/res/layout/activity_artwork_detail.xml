@@ -94,7 +94,7 @@
         app:layout_constraintTop_toBottomOf="@+id/detail_medium" />
 
     <Button
-        android:id="@+id/order_continue"
+        android:id="@+id/checkout_finish"
         style="@android:style/Widget.Material.Button.Borderless"
         android:layout_width="150dp"
         android:layout_height="50dp"

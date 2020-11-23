@@ -3,6 +3,7 @@ package ca.mcgill.ecse321.retrofit_rxjava;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +19,8 @@ import ca.mcgill.ecse321.retrofit_rxjava.dto.ArtworkDto;
 
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
+
+    private static final String TAG = "ImageAdapter";
 
     private Bitmap[] localBitmapSet;
     private String [] title;
@@ -74,21 +77,19 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
         viewHolder.getImageView().setImageBitmap(localBitmapSet[position]);
 
-        viewHolder.itemView.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(view.getContext(),ArtworkDetailActivity.class);
-                intent.putExtra("TITLE",title[position]);
-                intent.putExtra("DESC",desc[position]);
-                intent.putExtra("MEDIUM",medium[position]);
-                intent.putExtra("DIMENSION",dimension[position]);
-                intent.putExtra("PRICE",price[position]);
-                intent.putExtra("ARTIST",artist[position]);
-                intent.putExtra("ARTWORKID",((Integer) artId[position]).toString());
-                intent.putExtra("WEIGHT",((Double) weight[position]).toString());
+        viewHolder.itemView.setOnClickListener(view -> {
+            Intent intent = new Intent(view.getContext(),ArtworkDetailActivity.class);
+            intent.putExtra("TITLE",title[position]);
+            intent.putExtra("DESC",desc[position]);
+            intent.putExtra("MEDIUM",medium[position]);
+            intent.putExtra("DIMENSION",dimension[position]);
+            intent.putExtra("PRICE",price[position]);
+            intent.putExtra("ARTIST",artist[position]);
+            intent.putExtra("ID",((Integer)artId[position]).toString());
+            intent.putExtra("WEIGHT",((Double) weight[position]).toString());
 
-                view.getContext().startActivity(intent);
-            }
+            view.getContext().startActivity(intent);
+            Log.e(TAG, "onClick: "+artId[position] );
         });
     }
 
@@ -98,10 +99,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         return localBitmapSet.length;
     }
 
-
-
     private void setAttributes(List<ArtworkDto> dtos){
         int n=dtos.size();
+
         title=new String[n];
         artist=new String[n];
         desc=new String[n];
@@ -112,6 +112,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         weight=new double[n];
 
         for (int i=0;i<n;i++){
+
             ArtworkDto d = dtos.get(i);
             title[i]=d.getName();
             artist[i]=d.getUsername();
