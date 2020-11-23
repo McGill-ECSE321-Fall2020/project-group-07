@@ -109,4 +109,9 @@ public class OrderActivity extends AppCompatActivity {
         }
     }
 
+    public void continueButton(View view){
+        Intent intent = new Intent(view.getContext(),CheckoutActivity.class);
+        view.getContext().startActivity(intent);
+    }
+
 }

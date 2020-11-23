@@ -32,7 +32,7 @@ public class ArtworkDetailActivity extends AppCompatActivity {
         desc = (String) intent.getSerializableExtra("DESC");
         dimension = (String) intent.getSerializableExtra("DIMENSION");
         medium = (String) intent.getSerializableExtra("MEDIUM");
-        price = "$"+((Double) intent.getSerializableExtra("PRICE")).toString();
+        price = ((Double) intent.getSerializableExtra("PRICE")).toString();
         artist = (String) intent.getSerializableExtra("ARTIST");
         artworkId = (String) intent.getSerializableExtra("ARTWORKID");
         weight = (String) intent.getSerializableExtra("WEIGHT");
