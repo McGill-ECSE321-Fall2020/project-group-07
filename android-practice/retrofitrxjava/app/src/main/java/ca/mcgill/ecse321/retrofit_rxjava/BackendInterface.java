@@ -43,4 +43,7 @@ public interface BackendInterface {
 
     @GET("/getAllArtists")
     Observable<List<ArtistDto>> getAllArtists();
+
+    @GET("/getAvailableArtworkByArtistId/{artistId}")
+    Observable<List<ArtworkDto>> getArtistArtworks(@Path("artistId") String artistId);
 }
