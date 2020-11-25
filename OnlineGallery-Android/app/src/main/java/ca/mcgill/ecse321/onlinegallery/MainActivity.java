@@ -8,51 +8,77 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
+import ca.mcgill.ecse321.onlinegallery.dto.CustomerDto;
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG="MainActivity";
-    public static final String EXTRA_MESSAGE="ca.mcgill.ecse321.onlinegallery.MESSAGE";
-    public static final String API_ROOT="https://onlinegallery-backend-g7.herokuapp.com";
+    public static final String BACKEND="https://onlinegallery-backend-g7.herokuapp.com";
 
-    @Override
+    Retrofit retrofit = new Retrofit.Builder()
+        .baseUrl(BACKEND)
+        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+         .addConverterFactory(GsonConverterFactory.create())
+        .build();
+
+    CustomerLoginBackend backendInterface = retrofit.create(CustomerLoginBackend.class);
+
+
+    
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        AndroidNetworking.initialize(getApplicationContext());
         setContentView(R.layout.activity_main);
-        AndroidNetworking.initialize(getApplicationContext());
-    }
+        usernameInput = findViewById(R.id.usernameInput);
+        passwordInput = findViewById(R.id.passwordInput);
 
-    public void getRegistration(View view){
-        EditText editText = (EditText) findViewById(R.id.usernameInput);
-        String username = editText.getText().toString();
-        String requestUrl=API_ROOT+"/getRegistration/"+username;
-        AndroidNetworking.get(requestUrl).build().getAsJSONObject(new JSONObjectRequestListener() {
+        loginButton = findViewById(R.id.loginButton);
+        loginButton.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onResponse(JSONObject response) {
-                EditText registrationText = (EditText) findViewById(R.id.registrationInfo);
-                registrationText.setText(response.toString());
-                Log.d(TAG,"s");
-            }
-            @Override
-            public void onError(ANError anError) {
-                EditText registrationText = (EditText) findViewById(R.id.registrationInfo);
-                registrationText.setText(anError.getErrorBody().toString());
-                Log.d(TAG,"F");
+            public void onClick(View v) {
+                String username = usernameInput.getText().toString().trim();
+                String password = passwordInput.getText().toString().trim();
+
+                Observable<CustomerDto> getCustomerCall = backendInterface.getCustomerByUsername(username);
+
+                getCustomerCall
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(new Observer<CustomerDto>() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(@NonNull CustomerDto purchaseDto) {
+
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
+                //openCustomerRegistration();
             }
         });
-    }
-
-    public void sendMessage(View view){
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.usernameInput);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
-        startActivity(intent);
 
     }
+   
+    
 }

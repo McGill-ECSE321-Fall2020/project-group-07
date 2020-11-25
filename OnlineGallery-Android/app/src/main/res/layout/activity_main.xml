@@ -60,32 +60,4 @@
         tools:layout_editor_absoluteX="13dp"
         tools:layout_editor_absoluteY="16dp" />
 
-    <CheckBox
-        android:id="@+id/customerBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="customer"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="422dp" />
-
-    <CheckBox
-        android:id="@+id/artistBox"
-        android:layout_width="262dp"
-        android:layout_height="67dp"
-        android:text="artist"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="466dp" />
-
-    <CheckBox
-        android:id="@+id/adminBox"
-        style="@android:style/Widget.CompoundButton.CheckBox"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Admin"
-        android:textSize="18sp"
-        tools:layout_editor_absoluteX="18dp"
-        tools:layout_editor_absoluteY="533dp" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>
