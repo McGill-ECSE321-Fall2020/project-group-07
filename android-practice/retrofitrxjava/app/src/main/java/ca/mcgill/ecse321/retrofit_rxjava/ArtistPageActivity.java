@@ -10,7 +10,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -35,6 +37,9 @@ public class ArtistPageActivity extends AppCompatActivity {
     private static final String TAG = "DiscoverActivity";
     private static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
     private static final String AWS = "https://og-img-repo.s3.us-east-1.amazonaws.com";
+
+    ProgressBar pBar;
+    TextView pText;
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
@@ -65,6 +70,12 @@ public class ArtistPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_artist_page);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        pBar= findViewById(R.id.artist_page_loading_bar);
+        pText=findViewById(R.id.artist_page_loading_text);
+
+        pBar.setVisibility(View.VISIBLE);
+        pText.setVisibility(View.VISIBLE);
 
         Intent intent = getIntent();
 
@@ -153,6 +164,9 @@ public class ArtistPageActivity extends AppCompatActivity {
             Bitmap artBitmap = Helpers.Base64ToBitmap(t.get(i));
             bitmapList.add(artBitmap);
         }
+
+        pBar.setVisibility(View.GONE);
+        pText.setVisibility(View.GONE);
 
         RecyclerView rView = findViewById(R.id.artist_page_recyclerview);
         ImageAdapter adapter = new ImageAdapter(this, bitmapList.toArray(new Bitmap[0]), dtos);

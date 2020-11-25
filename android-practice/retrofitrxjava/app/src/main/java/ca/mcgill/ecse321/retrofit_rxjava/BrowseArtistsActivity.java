@@ -8,7 +8,10 @@ import android.annotation.SuppressLint;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,9 @@ public class BrowseArtistsActivity extends AppCompatActivity {
     private static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
     private static final String AWS = "https://og-img-repo.s3.us-east-1.amazonaws.com";
 
+    ProgressBar pBar;
+    TextView pText;
+
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -55,6 +61,12 @@ public class BrowseArtistsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_browse_artists);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        pBar = findViewById(R.id.all_artist_loading_bar);
+        pBar.setVisibility(View.VISIBLE);
+
+        pText=findViewById(R.id.all_artist_loading_text);
+        pText.setVisibility(View.VISIBLE);
 
         loadData();
     }
@@ -126,6 +138,9 @@ public class BrowseArtistsActivity extends AppCompatActivity {
             Bitmap artBitmap = Helpers.Base64ToBitmap(t.get(i));
             bitmapList.add(artBitmap);
         }
+
+        pBar.setVisibility(View.GONE);
+        pText.setVisibility(View.GONE);
 
         RecyclerView rView = findViewById(R.id.artist_recyclerview);
         ArtistAdapter adapter = new ArtistAdapter(this, bitmapList.toArray(new Bitmap[0]), dtos);
