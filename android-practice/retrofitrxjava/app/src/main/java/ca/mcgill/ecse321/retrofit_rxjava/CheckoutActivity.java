@@ -4,12 +4,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,6 +25,8 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.HttpException;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -54,6 +59,7 @@ public class CheckoutActivity extends AppCompatActivity {
     TextView ccFirstView;
     TextView ccLastView;
     TextView ccCsvView;
+    TextView ccErrorView;
 
     Button finishButton;
 
@@ -65,17 +71,40 @@ public class CheckoutActivity extends AppCompatActivity {
 
     BackendInterface backendInterface = retrofit.create(BackendInterface.class);
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        finishButton=findViewById(R.id.finish_button);
+
         ccNumView=findViewById(R.id.ccNum);
+        ccNumView.setText("");
+
         ccFirstView=findViewById(R.id.ccFirstname);
+        ccFirstView.setText("");
+
         ccLastView=findViewById(R.id.ccLastname);
+        ccLastView.setText("");
+
         ccExpView=findViewById(R.id.ccExp);
+        ccExpView.setText("");
+
         ccCsvView=findViewById(R.id.ccCSV);
+        ccCsvView.setText("");
+
+        ccErrorView =findViewById(R.id.ccError);
+        ccErrorView.setText("");
+
+
+        ccNumView.addTextChangedListener(ccWatcher);
+        ccFirstView.addTextChangedListener(ccWatcher);
+        ccLastView.addTextChangedListener(ccWatcher);
+        ccExpView.addTextChangedListener(ccWatcher);
+        ccCsvView.addTextChangedListener(ccWatcher);
 
         Intent intent=getIntent();
 
@@ -131,6 +160,7 @@ public class CheckoutActivity extends AppCompatActivity {
                 sDto.setPurchases(ids);
 
                 Log.e(TAG, "onNext: "+sDto.toString() );
+
                 createShipment(sDto);
             }
 
@@ -207,7 +237,21 @@ public class CheckoutActivity extends AppCompatActivity {
 
             @Override
             public void onError(@NonNull Throwable e) {
-                Log.e(TAG, "onError: "+e.getLocalizedMessage() );
+
+                if (e instanceof HttpException){
+                    ResponseBody body = ((HttpException) e).response().errorBody();
+                    try {
+                        ccErrorView.setText(body.string());
+                    } catch (IOException ioException) {
+                        ccErrorView.setText("unknown error, try again later");
+                    }
+//                    try{
+//                        JSONObject jError = new JSONObject(body.string());
+//                        String msg = jError.getJSONObject("error").getString("message");
+//                    }catch(Exception exception){
+//                        Log.e(TAG, exception.toString());
+//                    }
+                }
             }
 
             @Override
@@ -218,20 +262,32 @@ public class CheckoutActivity extends AppCompatActivity {
 
     }
 
-//    public void enableBtn(){
-//        finishButton=findViewById(R.id.finish_button);
-//
-//
+    private TextWatcher ccWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-//
-//
-//        finishButton.setEnabled(
-//                (   (ccNum.length()>0 && !ccNum.equals("credit card number"))
-//                    && (ccFirstname.length()>0 && !ccFirstname.equals("cardholder first name"))
-//                    && (ccLastname.length()>0 && !ccLastname.equals("cardholder last name"))
-//                    && (ccExp.length()>0 && !ccExp.equals("credit card expiration date"))
-//                    && (ccCSV.length()>0 && !ccCSV.equals("credit card CSV"))
-//                    && (shipmentId!=null))
-//                );
-//    }
+            boolean nonEmpty=(ccNumView.getText().toString().trim().length()>0 &&
+                    ccFirstView.getText().toString().trim().length()>0 &&
+                    ccLastView.getText().toString().trim().length()>0 &&
+                    ccExpView.getText().toString().trim().length()>0 &&
+                    ccCsvView.getText().toString().trim().length()>0);
+            finishButton.setEnabled(nonEmpty);
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            boolean nonEmpty=(ccNumView.getText().toString().trim().length()>0 &&
+                    ccFirstView.getText().toString().trim().length()>0 &&
+                    ccLastView.getText().toString().trim().length()>0 &&
+                    ccExpView.getText().toString().trim().length()>0 &&
+                    ccCsvView.getText().toString().trim().length()>0);
+            finishButton.setEnabled(nonEmpty);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
 }

@@ -3,9 +3,9 @@ package ca.mcgill.ecse321.retrofit_rxjava;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -51,6 +51,31 @@ public class OrderActivity extends AppCompatActivity {
     TextView addressView;
     TextView recipientView;
 
+    private TextWatcher shippingWatcher = new TextWatcher() {
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            String address = addressView.getText().toString().trim();
+            String name = recipientView.getText().toString().trim();
+
+            boolean nonEmpty=((address.length()>0)&&(name.length()>0));
+            continueButton.setEnabled((nonEmpty));
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            String address = addressView.getText().toString().trim();
+            String name = recipientView.getText().toString().trim();
+
+            boolean nonEmpty=((address.length()>0)&&(name.length()>0));
+            continueButton.setEnabled(nonEmpty);
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,9 +106,14 @@ public class OrderActivity extends AppCompatActivity {
         titleShipping = findViewById(R.id.order_shippingPrice);
         titleTotal = findViewById(R.id.order_totalPrice);
         titleWeight = findViewById(R.id.order_weight);
+
         addressView = findViewById(R.id.ccNum);
-        recipientView = findViewById(R.id.checkout_ccFirstname);
-        continueButton = findViewById(R.id.checkout_finish);
+        addressView.addTextChangedListener(shippingWatcher);
+
+        recipientView = findViewById(R.id.recipientName);
+        recipientView.addTextChangedListener(shippingWatcher);
+
+        continueButton = findViewById(R.id.buy_button);
 
         titleView.setText(title);
         titleArtist.setText(artist);
@@ -95,6 +125,14 @@ public class OrderActivity extends AppCompatActivity {
         titleWeight.setText(weight);
 
         radioGroup=findViewById(R.id.radioGroup);
+
+        destAddress="115 Normand, Montreal, QC";
+        recipientName="Gallery Admin";
+
+        addressView.setText(destAddress);
+        recipientView.setText(recipientName);
+
+        shipMethod="gallery pickup";
 
         Log.e(TAG, "onCreate: "+artworkId);
 
@@ -110,20 +148,12 @@ public class OrderActivity extends AppCompatActivity {
 
         }
         else if (shipMethod.equals("home delivery")){
-            destAddress="shipping address";
-            recipientName="recipient name";
+            destAddress="";
+            recipientName="";
         }
 
         addressView.setText(destAddress);
         recipientView.setText(recipientName);
-
-        if (destAddress.equals("shipping address") || recipientName.equals("recipient name")){
-//            continueButton.setEnabled(false);
-            continueButton.getBackground().setColorFilter(Color.GRAY, PorterDuff.Mode.MULTIPLY);
-        }
-        else{
-//            continueButton.setEnabled(true);
-        }
     }
 
     public void continueButton(View view){

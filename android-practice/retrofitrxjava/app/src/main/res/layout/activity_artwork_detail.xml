@@ -95,14 +95,14 @@
 
     <Button
         android:id="@+id/checkout_finish"
-        style="@android:style/Widget.Material.Button.Borderless"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:layout_marginTop="16dp"
         android:onClick="initiateBuy"
         android:text="buy"
-        android:textColor="@color/black"
-        app:backgroundTint="@android:color/transparent"
+        android:textColor="@color/white"
+        app:backgroundTint="@android:color/holo_blue_dark"
         app:iconTint="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
