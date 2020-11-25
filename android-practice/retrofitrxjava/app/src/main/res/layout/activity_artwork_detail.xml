@@ -94,20 +94,14 @@
         app:layout_constraintTop_toBottomOf="@+id/detail_medium" />
 
     <Button
-        android:id="@+id/checkout_finish"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="16dp"
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:onClick="initiateBuy"
         android:text="buy"
-        android:textColor="@color/white"
-        app:backgroundTint="@android:color/holo_blue_dark"
-        app:iconTint="@color/black"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detail_desc"
-        app:strokeColor="@color/black" />
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

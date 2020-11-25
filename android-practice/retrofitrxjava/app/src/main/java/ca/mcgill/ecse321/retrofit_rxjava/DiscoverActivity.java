@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.retrofit_rxjava;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -11,26 +10,23 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import ca.mcgill.ecse321.retrofit_rxjava.dto.ArtworkDto;
 import ca.mcgill.ecse321.retrofit_rxjava.dto.AvailableNumDto;
-import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
-import io.reactivex.Single;
-import io.reactivex.SingleObserver;
+
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
-import io.reactivex.functions.Function3;
-import io.reactivex.internal.subscribers.SinglePostCompleteSubscriber;
+
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
@@ -41,7 +37,10 @@ public class DiscoverActivity extends AppCompatActivity {
     private static final String TAG = "DiscoverActivity";
     private static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
     private static final String AWS = "https://og-img-repo.s3.us-east-1.amazonaws.com";
-    private static final int NUM_TO_PULL = 1;
+    private static final int NUM_TO_PULL = 30;
+
+    ProgressBar pBar;
+    TextView pText;
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
@@ -64,6 +63,13 @@ public class DiscoverActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_discover);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        pBar=findViewById(R.id.discovery_load_progress);
+        pBar.setVisibility(View.VISIBLE);
+
+        pText=findViewById(R.id.loading_msg);
+        pText.setVisibility(View.VISIBLE);
+
         loadData();
     }
 
@@ -135,6 +141,9 @@ public class DiscoverActivity extends AppCompatActivity {
             Bitmap artBitmap = Helpers.Base64ToBitmap(t.get(i));
             bitmapList.add(artBitmap);
         }
+
+        pBar.setVisibility(View.GONE);
+        pText.setVisibility(View.GONE);
 
         RecyclerView rView = findViewById(R.id.recycler_view);
         ImageAdapter adapter = new ImageAdapter(this, bitmapList.toArray(new Bitmap[0]), dtos);
