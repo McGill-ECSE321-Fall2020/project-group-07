@@ -4,6 +4,7 @@ import com.google.gson.annotations.JsonAdapter;
 
 import java.util.List;
 
+import ca.mcgill.ecse321.retrofit_rxjava.dto.ArtistDto;
 import ca.mcgill.ecse321.retrofit_rxjava.dto.ArtworkDto;
 import ca.mcgill.ecse321.retrofit_rxjava.dto.AvailableNumDto;
 import ca.mcgill.ecse321.retrofit_rxjava.dto.PaymentDto;
@@ -39,4 +40,7 @@ public interface BackendInterface {
 
     @PUT("/payShipment")
     Observable<ShipmentDto> payShipment (@Body PaymentDto dto);
+
+    @GET("/getAllArtists")
+    Observable<List<ArtistDto>> getAllArtists();
 }

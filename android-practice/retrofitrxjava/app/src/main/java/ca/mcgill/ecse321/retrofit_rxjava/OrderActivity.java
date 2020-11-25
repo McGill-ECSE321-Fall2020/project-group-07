@@ -160,10 +160,10 @@ public class OrderActivity extends AppCompatActivity {
         Intent intent = new Intent(view.getContext(),CheckoutActivity.class);
         intent.putExtra("ARTWORKID",artworkId);
         intent.putExtra("TOTAL",((Double) totalVal).toString());
-        intent.putExtra("DEST",destAddress);
+        intent.putExtra("DEST",addressView.getText().toString().trim());
         intent.putExtra("SHIPCOST",(Double) shipVal);
         intent.putExtra("TOTAL",(Double) totalVal);
-        intent.putExtra("RECIPIENT",recipientName);
+        intent.putExtra("RECIPIENT",recipientView.getText().toString().trim());
 
         if (shipMethod.equals("gallery pickup")){
             intent.putExtra("SHIPTYPE","ONSITE_PICKUP");

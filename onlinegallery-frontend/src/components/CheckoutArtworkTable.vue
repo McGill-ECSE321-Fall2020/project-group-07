@@ -226,7 +226,8 @@ export default {
         lastName:this.ccLastname
       }
 
-      axios.put("https://onlinegallery-backend-g7.herokuapp.com/payShipment", paymentDto)
+      axios.put("https://onlinegallery-backend-g7.herokuapp.com/ed" +
+          "", paymentDto)
       .then(res=>{
         console.log(res)
         this.ccResponse="shipment paid!"

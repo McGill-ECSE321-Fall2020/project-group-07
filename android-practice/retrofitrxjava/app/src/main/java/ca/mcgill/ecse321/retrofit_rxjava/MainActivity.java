@@ -44,4 +44,9 @@ public class MainActivity extends AppCompatActivity {
         Intent discoverIntent = new Intent(MainActivity.this, DiscoverActivity.class);
         startActivity(discoverIntent);
     }
+
+    public void browseArtists(View view){
+        Intent artistIntent = new Intent(MainActivity.this,BrowseArtistsActivity.class);
+        startActivity(artistIntent);
+    }
 }

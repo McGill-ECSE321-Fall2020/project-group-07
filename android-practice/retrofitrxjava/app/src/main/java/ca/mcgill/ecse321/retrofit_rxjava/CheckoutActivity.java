@@ -232,7 +232,9 @@ public class CheckoutActivity extends AppCompatActivity {
 
             @Override
             public void onNext(@NonNull ShipmentDto shipmentDto) {
-                Log.e(TAG, "onNext: "+shipmentDto.toString() );
+                Log.e(TAG, "onNext: "+shipmentDto.toString());
+                Intent intent = new Intent(view.getContext(),PaymentConfirmedActivity.class);
+                view.getContext().startActivity(intent);
             }
 
             @Override
@@ -245,12 +247,6 @@ public class CheckoutActivity extends AppCompatActivity {
                     } catch (IOException ioException) {
                         ccErrorView.setText("unknown error, try again later");
                     }
-//                    try{
-//                        JSONObject jError = new JSONObject(body.string());
-//                        String msg = jError.getJSONObject("error").getString("message");
-//                    }catch(Exception exception){
-//                        Log.e(TAG, exception.toString());
-//                    }
                 }
             }
 
