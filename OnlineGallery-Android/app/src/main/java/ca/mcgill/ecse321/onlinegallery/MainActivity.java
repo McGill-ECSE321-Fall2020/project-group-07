@@ -1,38 +1,24 @@
 package ca.mcgill.ecse321.onlinegallery;
 
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.DialogInterface;
 import android.content.Intent;
-import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import ca.mcgill.ecse321.onlinegallery.dto.GalleryRegistrationDto;
-import io.reactivex.ObservableSource;
+import io.reactivex.Observable;
 import io.reactivex.Observer;
-import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
-import io.reactivex.functions.Consumer;
-import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
-import retrofit2.converter.scalars.ScalarsConverterFactory;
-import com.androidnetworking.AndroidNetworking;
-import com.androidnetworking.error.ANError;
-import com.androidnetworking.interfaces.JSONObjectRequestListener;
-import io.reactivex.Observable;
-
-import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG="MainActivity";
@@ -74,7 +60,7 @@ public class MainActivity extends AppCompatActivity {
                 dto.setPassword(passwordInput.getText().toString().trim());
                 dto.setUsername(usernameInput.getText().toString().trim());
 
-                Observable<GalleryRegistrationDto> createRegistrationCall=RegistrationBackend.createRegistration(dto);
+                Observable<GalleryRegistrationDto> createRegistrationCall=backendInterface.createRegistration(dto);
 
                 createRegistrationCall
                         .observeOn(AndroidSchedulers.mainThread())

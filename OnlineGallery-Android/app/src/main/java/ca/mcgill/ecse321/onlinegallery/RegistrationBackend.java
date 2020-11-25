@@ -11,6 +11,6 @@ import io.reactivex.Observable;
 public interface RegistrationBackend {
 
     @POST("/createRegistration")
-    Observable<GalleryRegistrationDto> createRegistration (@Body GalleryRegistrationDto dto);
+    Observable<GalleryRegistrationDto> createRegistration(@Body GalleryRegistrationDto dto);
 
 }
