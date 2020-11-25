@@ -192,6 +192,7 @@
         android:layout_marginStart="38dp"
         android:layout_marginLeft="38dp"
         android:layout_marginTop="42dp"
+        android:onClick="register"
         android:text="REGISTER"
         app:backgroundTint="#4CAF50"
         app:layout_constraintStart_toStartOf="parent"
