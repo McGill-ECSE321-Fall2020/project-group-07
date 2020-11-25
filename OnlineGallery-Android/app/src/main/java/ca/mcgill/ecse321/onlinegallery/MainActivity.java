@@ -11,11 +11,15 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
+
 import ca.mcgill.ecse321.onlinegallery.dto.GalleryRegistrationDto;
 import io.reactivex.ObservableSource;
+import io.reactivex.Observer;
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
+import io.reactivex.disposables.Disposable;
 import io.reactivex.functions.Consumer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
@@ -32,45 +36,81 @@ import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
     public static final String TAG="MainActivity";
-    public static final String API_ROOT="https://onlinegallery-backend-g7.herokuapp.com";
+    public static final String BACKEND="https://onlinegallery-backend-g7.herokuapp.com";
     public Button regButton;
     public Button clearButton;
-    public EditText usernameInput;
-    public EditText firstNameInput;
-    public EditText lastNameInput;
-    public EditText emailInput;
-    public EditText passwordInput;
+    public TextView usernameInput;
+    public TextView firstNameInput;
+    public TextView lastNameInput;
+    public TextView emailInput;
+    public TextView passwordInput;
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BACKEND)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    RegistrationBackend backendInterface = retrofit.create(RegistrationBackend.class);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        usernameInput = findViewById(R.id.usernameInput);
+        firstNameInput = findViewById(R.id.firstNameInput);
+        lastNameInput = findViewById(R.id.lastNameInput);
+        emailInput = findViewById(R.id.emailInput);
+        passwordInput = findViewById(R.id.passwordInput);
 
         regButton = findViewById(R.id.registerButton);
         regButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v) {
+                GalleryRegistrationDto dto = new GalleryRegistrationDto();
+                dto.setEmail(emailInput.getText().toString().trim());
+                dto.setFirstName(firstNameInput.getText().toString().trim());
+                dto.setLastName(lastNameInput.getText().toString().trim());
+                dto.setPassword(passwordInput.getText().toString().trim());
+                dto.setUsername(usernameInput.getText().toString().trim());
 
-                //create registration
-                //then, if successful open set customer page
+                Observable<GalleryRegistrationDto> createRegistrationCall=RegistrationBackend.createRegistration(dto);
 
+                createRegistrationCall
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(new Observer<GalleryRegistrationDto>() {
+                            @Override
+                            public void onSubscribe(@NonNull Disposable d) {
+
+                            }
+
+                            @Override
+                            public void onNext(@NonNull GalleryRegistrationDto purchaseDto) {
+
+                            }
+
+                            @Override
+                            public void onError(@NonNull Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
                 openCustomerRegistration();
-
             }
         });
         clearButton = findViewById(R.id.clearButton);
         clearButton.setOnClickListener((new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                usernameInput = findViewById(R.id.usernameInput);
                 usernameInput.setText("");
-                firstNameInput = findViewById(R.id.firstNameInput);
                 firstNameInput.setText("");
-                lastNameInput = findViewById(R.id.lastNameInput);
                 lastNameInput.setText("");
-                emailInput = findViewById(R.id.emailInput);
                 emailInput.setText("");
-                passwordInput = findViewById(R.id.passwordInput);
                 passwordInput.setText("");
             }
         }));
