@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.onlinegallery.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -12,6 +13,7 @@ import ca.mcgill.ecse321.onlinegallery.dao.CustomerRepository;
 import ca.mcgill.ecse321.onlinegallery.dao.GalleryRegistrationRepository;
 import ca.mcgill.ecse321.onlinegallery.model.Customer;
 import ca.mcgill.ecse321.onlinegallery.model.GalleryRegistration;
+import ca.mcgill.ecse321.onlinegallery.model.Purchase;
 import ca.mcgill.ecse321.onlinegallery.service.exception.CustomerException;
 
 @Service
@@ -40,6 +42,7 @@ public class CustomerService {
 		Customer customer = reg.getCustomer();	
 		return customer;
 	}
+	
 	
 	@Transactional
 	public List<Customer> findAllCustomers() throws CustomerException {

@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.transaction.Transactional;
 
@@ -105,6 +106,30 @@ public class PurchaseService {
 		}
 		return purchase;
 	}
+	
+	@Transactional
+	public List<Purchase> getPurchasesByCustomerUsername(String username) throws PurchaseException{
+		
+		if (!regRepo.existsByUserName(username)) {
+			
+			throw new PurchaseException("No registration exists under the username ["+username+"]");
+		}
+		
+		GalleryRegistration reg = regRepo.findGalleryRegisrationByUserName(username);
+		
+		if (reg.getCustomer() == null) {
+			
+			throw new PurchaseException("No customer exists under the username ["+username+"]");
+		}
+		
+		Customer customer = reg.getCustomer();	
+		Set<Purchase> purchasesSet = customer.getPurchase();
+		List<Purchase> purchases = new ArrayList<Purchase>();
+		purchases.addAll(purchasesSet);
+	
+		return purchases;
+	}
+	
 	
 	@Transactional
 	public List<Purchase> getAllPurchases() throws PurchaseException{
