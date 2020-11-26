@@ -118,7 +118,7 @@ public class PurchaseRestController {
 			
 			PurchaseSummaryDto purchaseDto = new PurchaseSummaryDto();
 			purchaseDto.setArtistName(purchases.get(i).getArtwork().getArtist().getGalleryRegistration().getUserName());
-			purchaseDto.setCommission(purchaseDto.getComission());
+			purchaseDto.setCommission(purchases.get(i).getArtwork().getComission());
 			purchaseDto.setDatePurchased(purchases.get(i).getDate());
 			purchaseDto.setName(purchases.get(i).getArtwork().getName());
 			purchaseDto.setPrice(purchases.get(i).getArtwork().getPrice());
