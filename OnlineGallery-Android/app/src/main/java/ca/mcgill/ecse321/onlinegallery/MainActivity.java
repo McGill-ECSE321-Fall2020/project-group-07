@@ -4,9 +4,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 
 import ca.mcgill.ecse321.onlinegallery.dto.CustomerDto;
 import io.reactivex.Observable;
@@ -24,6 +25,9 @@ import org.json.JSONObject;
 public class MainActivity extends AppCompatActivity {
     public static final String TAG="MainActivity";
     public static final String BACKEND="https://onlinegallery-backend-g7.herokuapp.com";
+    public Button loginButton;
+    public TextView usernameInput;
+    public TextView passwordInput;
 
     Retrofit retrofit = new Retrofit.Builder()
         .baseUrl(BACKEND)
