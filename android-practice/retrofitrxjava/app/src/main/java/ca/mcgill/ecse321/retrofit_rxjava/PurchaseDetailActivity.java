@@ -10,8 +10,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.ArrayList;
 import java.util.List;
 
-import ca.mcgill.ecse321.retrofit_rxjava.dto.ArtistDto;
 import ca.mcgill.ecse321.retrofit_rxjava.dto.PurchaseDto;
+import ca.mcgill.ecse321.retrofit_rxjava.dto.PurchaseSummaryDto;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -54,18 +54,24 @@ public class PurchaseDetailActivity extends AppCompatActivity {
     }
 
     public void loadData(){
-        Observable<List<PurchaseDto>> call = backendInterface.getPurchasesByCustomerUsername("mike13");
+        Observable<List<PurchaseSummaryDto>> call = backendInterface.getPurchasesByCustomerUsername("mike13");
         call
             .observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
-            .subscribe(new Observer<List<PurchaseDto>>() {
+            .subscribe(new Observer<List<PurchaseSummaryDto>>() {
                 @Override
                 public void onSubscribe(@NonNull Disposable d) {
 
                 }
 
                 @Override
-                public void onNext(@NonNull List<PurchaseDto> dtos) {
+                public void onNext(@NonNull List<PurchaseSummaryDto> dtos) {
+                    Log.e(TAG, "\n-------------------------------- DATA ----------------------------\n");
+
+                    for(int i = 0; i<dtos.size(); i++){
+                        Log.e(TAG, dtos.get(i).getArtistName());
+                    }
+
                     fetchAwsAndBuild(dtos);
                 }
 
@@ -82,11 +88,11 @@ public class PurchaseDetailActivity extends AppCompatActivity {
     }
 
     @SuppressLint("CheckResult")
-    public void fetchAwsAndBuild(List<PurchaseDto> dtos){
+    public void fetchAwsAndBuild(List<PurchaseSummaryDto> dtos){
 
         List<Observable<String>> images = new ArrayList<>();
 
-        for (PurchaseDto dto : dtos){
+        for (PurchaseSummaryDto dto : dtos){
             String image = dto.getArtowkrUrl().split(".com/")[1];
             images.add(awsInterface.getImgEncoding(image).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread()));
         }

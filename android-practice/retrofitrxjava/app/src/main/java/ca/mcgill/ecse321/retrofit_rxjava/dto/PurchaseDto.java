@@ -41,10 +41,6 @@ public class PurchaseDto {
         this.shipmentType = shipmentType;
     }
 
-    public void setArtworkUrl(String url) { this.artworkUrl = url; }
-
-    public String getArtowkrUrl() { return this.artworkUrl; }
-
     @Override
     public String toString() {
         return "PurchaseDto{" +

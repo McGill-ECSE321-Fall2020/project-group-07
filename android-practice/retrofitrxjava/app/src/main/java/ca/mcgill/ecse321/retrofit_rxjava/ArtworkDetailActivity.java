@@ -28,7 +28,6 @@ public class ArtworkDetailActivity extends AppCompatActivity {
 
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-
         Intent intent = getIntent();
         title=(String) intent.getSerializableExtra("TITLE");
         desc = (String) intent.getSerializableExtra("DESC");

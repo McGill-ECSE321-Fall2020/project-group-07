@@ -41,7 +41,7 @@ public class DiscoverActivity extends AppCompatActivity {
     private static final String TAG = "DiscoverActivity";
     private static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
     private static final String AWS = "https://og-img-repo.s3.us-east-1.amazonaws.com";
-    private static final int NUM_TO_PULL = 10;
+    private static final int NUM_TO_PULL = 1;
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)

@@ -57,11 +57,16 @@
                         android:layout_column="1"
                         android:gravity="center"
                         android:text="Artwork:"
+                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
+                        android:id="@+id/purchase_artwork_name"
                         android:layout_height="match_parent"
-                        android:layout_column="2" />
+                        android:layout_column="2"
+                        android:gravity="center"
+                        android:text="Woman with a Parasol"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                 </TableRow>
 
                 <TableRow android:layout_weight="1">
@@ -72,11 +77,16 @@
                         android:layout_column="1"
                         android:gravity="center"
                         android:text="Artist:"
+                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
+                        android:id="@+id/purchase_artist_name"
                         android:layout_height="match_parent"
-                        android:layout_column="2" />
+                        android:layout_column="2"
+                        android:gravity="center"
+                        android:text="edgardegars"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                 </TableRow>
 
                 <TableRow android:layout_weight="1">
@@ -87,11 +97,16 @@
                         android:layout_column="1"
                         android:gravity="center"
                         android:text="Date:"
+                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
+                        android:id="@+id/purchase_date_purchased"
                         android:layout_height="match_parent"
-                        android:layout_column="2" />
+                        android:layout_column="2"
+                        android:gravity="center"
+                        android:text="2020-11-20"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                 </TableRow>
 
                 <TableRow android:layout_weight="1">
@@ -102,11 +117,16 @@
                         android:layout_column="1"
                         android:gravity="center"
                         android:text="Price:"
+                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
+                        android:id="@+id/purchase_price_value"
                         android:layout_height="match_parent"
-                        android:layout_column="2" />
+                        android:layout_column="2"
+                        android:gravity="center"
+                        android:text="91823891"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
                 </TableRow>
 
                 <TableRow android:layout_weight="1">
@@ -117,11 +137,16 @@
                         android:layout_column="1"
                         android:gravity="center"
                         android:text="Commission:"
+                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
+                        android:id="@+id/purchase_commission_value"
                         android:layout_height="match_parent"
-                        android:layout_column="2" />
+                        android:layout_column="2"
+                        android:gravity="center"
+                        android:text="0.55"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
                 </TableRow>
 
                 <TableRow android:layout_weight="1">
@@ -132,11 +157,16 @@
                         android:layout_column="1"
                         android:gravity="center"
                         android:text="Shipment:"
+                        android:textStyle="bold"
                         android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                     <TextView
+                        android:id="@+id/purchase_shipment_type"
                         android:layout_height="match_parent"
-                        android:layout_column="2" />
+                        android:layout_column="2"
+                        android:gravity="center"
+                        android:text="OFFSITE_DELIVERY"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
                 </TableRow>
 
                 <!--

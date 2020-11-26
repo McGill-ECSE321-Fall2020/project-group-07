@@ -49,4 +49,9 @@ public class MainActivity extends AppCompatActivity {
         Intent artistIntent = new Intent(MainActivity.this,BrowseArtistsActivity.class);
         startActivity(artistIntent);
     }
+
+    public void startPurchaseHistory(View view){
+        Intent purchaseIntent = new Intent(MainActivity.this, PurchaseDetailActivity.class);
+        startActivity(purchaseIntent);
+    }
 }

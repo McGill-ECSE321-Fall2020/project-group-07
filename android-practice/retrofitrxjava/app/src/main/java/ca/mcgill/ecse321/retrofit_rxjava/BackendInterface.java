@@ -9,6 +9,7 @@ import ca.mcgill.ecse321.retrofit_rxjava.dto.ArtworkDto;
 import ca.mcgill.ecse321.retrofit_rxjava.dto.AvailableNumDto;
 import ca.mcgill.ecse321.retrofit_rxjava.dto.PaymentDto;
 import ca.mcgill.ecse321.retrofit_rxjava.dto.PurchaseDto;
+import ca.mcgill.ecse321.retrofit_rxjava.dto.PurchaseSummaryDto;
 import ca.mcgill.ecse321.retrofit_rxjava.dto.ShipmentDto;
 import io.reactivex.Single;
 import retrofit2.http.Body;
@@ -27,7 +28,7 @@ public interface BackendInterface {
     Observable<List<ArtworkDto>> getRandomArtworks(@Path("num") int num);
 
     @GET("/getPurchasesByCustomerUsername/{username}")
-    Observable<List<PurchaseDto>> getPurchasesByCustomerUsername(@Path("username") String username);
+    Observable<List<PurchaseSummaryDto>> getPurchasesByCustomerUsername(@Path("username") String username);
 
     @GET("/countAvailableArtworks")
     Observable<AvailableNumDto> countAvailableArtwork();
