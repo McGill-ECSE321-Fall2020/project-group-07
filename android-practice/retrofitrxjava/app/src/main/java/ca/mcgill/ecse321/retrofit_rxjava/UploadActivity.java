@@ -5,7 +5,6 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -14,30 +13,35 @@ import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
-import android.view.View;
 import android.view.WindowManager;
-import android.widget.ImageView;
-import android.widget.TextView;
 
-import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+import io.reactivex.Observable;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+import retrofit2.converter.scalars.ScalarsConverterFactory;
+
 public class UploadActivity extends AppCompatActivity {
+    private static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
+    private static final String AWS = "https://og-img-repo.s3.us-east-1.amazonaws.com";
+    private static final String TAG = "UploadActivity";
+
     private static final int PERMISSION_REQUEST = 0;
     private static final int RESULT_LOAD_IMAGE=0;
-//    private static final SimpleDateFormat sdf = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
+
     private static final SimpleDateFormat sdf = new SimpleDateFormat("MMddYYYY_HHmmss");
 
-    private static final String TAG = "UploadActivity";
 
     private String imgEncoding;
     private String awsUrl;
@@ -46,6 +50,22 @@ public class UploadActivity extends AppCompatActivity {
     Bitmap img;
     Bitmap scaledImg;
 
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BACKEND)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    BackendInterface backendInterface = retrofit.create(BackendInterface.class);
+
+    Retrofit retrofitAWS = new Retrofit.Builder()
+            .baseUrl(AWS)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(ScalarsConverterFactory.create())
+            .build();
+
+    BackendInterface awsInterface = retrofitAWS.create(BackendInterface.class);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +73,7 @@ public class UploadActivity extends AppCompatActivity {
         setContentView(R.layout.activity_upload);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        username="hansolo";             //this would be replaced by the artist login page before
+        username="aaaaaaa";             //this would be replaced by the artist login page before
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
             requestPermissions(new String [] {Manifest.permission.READ_EXTERNAL_STORAGE},PERMISSION_REQUEST);
@@ -85,7 +105,41 @@ public class UploadActivity extends AppCompatActivity {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         scaledImg.compress(Bitmap.CompressFormat.PNG, 90, byteArrayOutputStream);
         imgEncoding= "data:image/png;base64,"+Base64.encodeToString(byteArrayOutputStream.toByteArray(),Base64.DEFAULT);
+        uploadAws();
+    }
 
+    public void uploadAws(){
+        Observable<String> uploadCall = awsInterface.uploadImgEncoding(awsUrl,imgEncoding);
+        uploadCall
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .subscribe(new Observer<String>() {
+            @Override
+            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@io.reactivex.annotations.NonNull String s) {
+                Log.e(TAG, "onNext: "+s );
+                Log.e(TAG, "onNext: "+"successfully uploaded to aws!" );
+                createArtwork();
+            }
+
+            @Override
+            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                Log.e(TAG, "onError: "+e.getLocalizedMessage());
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
+
+    public void createArtwork(){
+        Log.e(TAG, "createArtwork: "+"this is the triggered backend call" );
     }
 
 

@@ -46,4 +46,7 @@ public interface BackendInterface {
 
     @GET("/getAvailableArtworkByArtistId/{artistId}")
     Observable<List<ArtworkDto>> getArtistArtworks(@Path("artistId") String artistId);
+
+    @PUT("/{awsUrl}")
+    Observable<String> uploadImgEncoding(@Path("awsUrl") String awsUrl,@Body String encoding);
 }
