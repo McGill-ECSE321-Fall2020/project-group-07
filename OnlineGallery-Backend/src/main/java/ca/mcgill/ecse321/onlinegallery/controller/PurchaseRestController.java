@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import ca.mcgill.ecse321.onlinegallery.dto.ApplicationDto;
 import ca.mcgill.ecse321.onlinegallery.dto.PurchaseDto;
+import ca.mcgill.ecse321.onlinegallery.dto.PurchaseSummaryDto;
 import ca.mcgill.ecse321.onlinegallery.model.Purchase;
 import ca.mcgill.ecse321.onlinegallery.model.ShipmentType;
 import ca.mcgill.ecse321.onlinegallery.service.PurchaseService;
@@ -109,18 +110,20 @@ public class PurchaseRestController {
 		return purchaseDto;
 	}
 	
-	private List<PurchaseDto> convertToDto(List<Purchase> purchases) {
+	private List<PurchaseSummaryDto> convertToDto(List<Purchase> purchases) {
 
-		List<PurchaseDto> dtos = new ArrayList<PurchaseDto>();
+		List<PurchaseSummaryDto> dtos = new ArrayList<PurchaseSummaryDto>();
 		
 		for(int i=0; i<purchases.size(); i++) {
 			
-			PurchaseDto purchaseDto = new PurchaseDto();
-			purchaseDto.setPurchaseId(purchases.get(i).getPurchaseId());
-			purchaseDto.setArtworkId(purchases.get(i).getArtwork().getArtworkId());
-			purchaseDto.setArtworkUrl(purchases.get(i).getArtwork().getUrl());
-			purchaseDto.setUsername(purchases.get(i).getCustomer().getGalleryRegistration().getUserName());
+			PurchaseSummaryDto purchaseDto = new PurchaseSummaryDto();
+			purchaseDto.setArtistName(purchases.get(i).getArtwork().getArtist().getGalleryRegistration().getUserName());
+			purchaseDto.setCommission(purchases.get(i).getArtwork().getComission());
+			purchaseDto.setDatePurchased(purchases.get(i).getDate());
+			purchaseDto.setName(purchases.get(i).getArtwork().getName());
+			purchaseDto.setPrice(purchases.get(i).getArtwork().getPrice());
 			purchaseDto.setShipmentType(purchases.get(i).getShipmentType());
+			purchaseDto.setArtworkUrl(purchases.get(i).getArtwork().getUrl());
 			
 			dtos.add(purchaseDto);
 			
