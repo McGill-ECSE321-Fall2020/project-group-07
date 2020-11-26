@@ -10,20 +10,20 @@ public class GalleryRegistrationDto {
         this.username=username;
     }
 
-    private String firstname;
+    private String firstName;
     public String getFirstName() {
-        return this.firstname;
+        return this.firstName;
     }
-    public void setFirstName(String firstname) {
-        this.firstname=firstname;
+    public void setFirstName(String firstName) {
+        this.firstName=firstName;
     }
 
-    private String lastname;
+    private String lastName;
     public String getLastName() {
-        return this.lastname;
+        return this.lastName;
     }
-    public void setLastName(String lastname) {
-        this.lastname=lastname;
+    public void setLastName(String lastName) {
+        this.lastName=lastName;
     }
 
     private String email;

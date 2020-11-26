@@ -7,34 +7,36 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
+
 public class ArtistActivity extends AppCompatActivity {
     public static final String TAG = "ArtistActivity";
-    public static final String API_ROOT = "https://onlinegallery-backend-g7.herokuapp.com";
-    public Button yesButton;
-    public Button noButton;
+    public static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
+
+    Retrofit retrofit = new Retrofit.Builder()
+            .baseUrl(BACKEND)
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build();
+
+    RegistrationBackend backendInterface = retrofit.create(RegistrationBackend.class);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_regartist);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+    }
+    public void yesArtist(View v) {
 
-        yesButton = findViewById(R.id.artistYesButton);
-        yesButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+        registerAsArtist();
+    }
 
-                registerAsArtist();
-            }
-        });
-        noButton = findViewById(R.id.artistNoButton);
-        noButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+    public void noArtist(View v) {
 
-                openMainPage();
+        openMainPage();
 
-            }
-        });
     }
 
     public void registerAsArtist() {

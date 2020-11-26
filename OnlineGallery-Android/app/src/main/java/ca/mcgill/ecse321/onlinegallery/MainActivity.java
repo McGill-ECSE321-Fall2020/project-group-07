@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.onlinegallery;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -23,8 +24,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class MainActivity extends AppCompatActivity {
     public static final String TAG="MainActivity";
     public static final String BACKEND="https://onlinegallery-backend-g7.herokuapp.com";
-    public Button regButton;
-    public Button clearButton;
     public TextView usernameInput;
     public TextView firstNameInput;
     public TextView lastNameInput;
@@ -49,57 +48,54 @@ public class MainActivity extends AppCompatActivity {
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.passwordInput);
 
-        regButton = findViewById(R.id.registerButton);
-        regButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                GalleryRegistrationDto dto = new GalleryRegistrationDto();
-                dto.setEmail(emailInput.getText().toString().trim());
-                dto.setFirstName(firstNameInput.getText().toString().trim());
-                dto.setLastName(lastNameInput.getText().toString().trim());
-                dto.setPassword(passwordInput.getText().toString().trim());
-                dto.setUsername(usernameInput.getText().toString().trim());
+    }
+    public void register(View v){
+        GalleryRegistrationDto dto = new GalleryRegistrationDto();
+        dto.setEmail(emailInput.getText().toString().trim());
+        dto.setFirstName(firstNameInput.getText().toString().trim());
+        dto.setLastName(lastNameInput.getText().toString().trim());
+        dto.setPassword(passwordInput.getText().toString().trim());
+        dto.setUsername(usernameInput.getText().toString().trim());
 
-                Observable<GalleryRegistrationDto> createRegistrationCall=backendInterface.createRegistration(dto);
+        Log.e(TAG, "onClick: " + dto.toString());
 
-                createRegistrationCall
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribeOn(Schedulers.io())
-                        .subscribe(new Observer<GalleryRegistrationDto>() {
-                            @Override
-                            public void onSubscribe(@NonNull Disposable d) {
+        Observable<GalleryRegistrationDto> createRegistrationCall=backendInterface.createRegistration(dto);
 
-                            }
+        createRegistrationCall
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Observer<GalleryRegistrationDto>() {
+                    @Override
+                    public void onSubscribe(@NonNull Disposable d) {
 
-                            @Override
-                            public void onNext(@NonNull GalleryRegistrationDto purchaseDto) {
+                    }
+                    @Override
+                    public void onNext(@NonNull GalleryRegistrationDto purchaseDto) {
+                        Log.e(TAG, "onNext: "+dto.toString());
+                    }
+                    @Override
+                    public void onError(@NonNull Throwable e) {
+                        Log.e(TAG, "onError: "+e.getLocalizedMessage());
 
-                            }
+                    }
+                    @Override
+                    public void onComplete() {
 
-                            @Override
-                            public void onError(@NonNull Throwable e) {
+                    }
+                });
+        openCustomerRegistration();
+    }
 
-                            }
+    public void clear(View view) {
 
-                            @Override
-                            public void onComplete() {
+        usernameInput.setText("");
+        firstNameInput.setText("");
+        lastNameInput.setText("");
+        emailInput.setText("");
+        passwordInput.setText("");
+    }
+    public void back(View view) {
 
-                            }
-                        });
-                openCustomerRegistration();
-            }
-        });
-        clearButton = findViewById(R.id.clearButton);
-        clearButton.setOnClickListener((new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                usernameInput.setText("");
-                firstNameInput.setText("");
-                lastNameInput.setText("");
-                emailInput.setText("");
-                passwordInput.setText("");
-            }
-        }));
     }
 
     public void openCustomerRegistration(){
