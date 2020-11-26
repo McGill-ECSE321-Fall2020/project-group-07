@@ -1,0 +1,111 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+    android:layout_width="match_parent"
+    android:padding="10dp"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id = "@+id/imageToUpload"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+
+        <LinearLayout android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent">
+
+            <TextView android:text="Name:"
+                android:layout_height="wrap_content"
+                android:layout_width = "wrap_content"/>
+
+            <EditText
+                android:id="@+id/nameArtwork"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent">
+
+            <TextView android:text="Description:"
+                android:layout_height="wrap_content"
+                android:layout_width = "wrap_content"/>
+
+            <EditText
+                android:id="@+id/descriptionArtwork"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent">
+
+            <TextView android:text="UserName:"
+                android:layout_height="wrap_content"
+                android:layout_width = "wrap_content"/>
+
+            <EditText
+                android:id="@+id/userNameArtist"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </LinearLayout>
+
+
+        <Button
+            android:id="@+id/bUploadImage"
+            android:text="Upload Artwork"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:id = "@+id/downloadedImage"
+            android:layout_gravity="center_horizontal"
+            android:layout_width="150dp"
+            android:layout_height="150dp" />
+
+        <LinearLayout android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent">
+
+            <TextView android:text="Name:"
+                android:layout_height="wrap_content"
+                android:layout_width = "wrap_content"/>
+
+            <EditText
+                android:id="@+id/downloadedImageName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <LinearLayout android:orientation="horizontal"
+            android:layout_height="wrap_content"
+            android:layout_width="fill_parent">
+
+            <TextView android:text="ArtowkId"
+                android:layout_height="wrap_content"
+                android:layout_width = "wrap_content"/>
+
+            <EditText
+                android:id="@+id/downloadedImageId"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/bDownloadImage"
+            android:text="Download Image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+
+    </LinearLayout>
+</ScrollView>
