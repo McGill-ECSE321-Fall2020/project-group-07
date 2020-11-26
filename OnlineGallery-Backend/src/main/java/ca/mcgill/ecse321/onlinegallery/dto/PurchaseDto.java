@@ -29,14 +29,6 @@ public class PurchaseDto {
 		return this.artworkId;
 	}
 	
-	private String artworkUrl;
-	public void setArtworkUrl(String url) {
-		this.artworkUrl = url;
-	}
-	public String getArtowkrUrl() {
-		return this.artworkUrl;
-	}
-	
 	private ShipmentType shipmentType;
 	public void setShipmentType(ShipmentType type) {
 		this.shipmentType=type;
