@@ -5,6 +5,7 @@ public class PurchaseDto {
     private String username;
     private String artworkId;
     private String shipmentType;
+    private String artworkUrl;
 
     public String getPurchaseId() {
         return purchaseId;
@@ -39,6 +40,10 @@ public class PurchaseDto {
     public void setShipmentType(String shipmentType) {
         this.shipmentType = shipmentType;
     }
+
+    public void setArtworkUrl(String url) { this.artworkUrl = url; }
+
+    public String getArtowkrUrl() { return this.artworkUrl; }
 
     @Override
     public String toString() {

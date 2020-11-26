@@ -26,6 +26,9 @@ public interface BackendInterface {
     @GET("/retrieveRandomAvailableArtworks/{num}")
     Observable<List<ArtworkDto>> getRandomArtworks(@Path("num") int num);
 
+    @GET("/getPurchasesByCustomerUsername/{username}")
+    Observable<List<PurchaseDto>> getPurchasesByCustomerUsername(@Path("username") String username);
+
     @GET("/countAvailableArtworks")
     Observable<AvailableNumDto> countAvailableArtwork();
 
