@@ -88,6 +88,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    public void Back(View view){
+        Intent artistIntent = new Intent(this, ArtistLoginActivity.class);
+        startActivity(artistIntent);
+    }
    
     
 }
