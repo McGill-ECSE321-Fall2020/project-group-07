@@ -25,4 +25,13 @@ public class CustomerDto {
 	public String getUsername() {
 		return this.username;
 	}
+
+	@Override
+	public String toString() {
+		return "CustomerDto{" +
+				"id=" + id +
+				", bankInfo='" + bankInfo + '\'' +
+				", username='" + username + '\'' +
+				'}';
+	}
 }

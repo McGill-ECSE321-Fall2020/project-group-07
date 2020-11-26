@@ -48,6 +48,7 @@
         android:id="@+id/loginButton"
         android:layout_width="110dp"
         android:layout_height="61dp"
+        android:onClick="Login"
         android:text="LOGIN"
         android:textStyle="bold"
         app:backgroundTint="#3F51B5"

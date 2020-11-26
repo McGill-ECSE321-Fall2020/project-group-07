@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -24,11 +25,11 @@ import retrofit2.converter.gson.GsonConverterFactory;
 import org.json.JSONObject;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String TAG="MainActivity";
-    public static final String BACKEND="https://onlinegallery-backend-g7.herokuapp.com";
-    public Button loginButton;
-    public EditText usernameInput;
-    public EditText passwordInput;
+    private static final String TAG="MainActivity";
+    private static final String BACKEND="https://onlinegallery-backend-g7.herokuapp.com";
+    Button loginButton;
+    EditText usernameInput;
+    EditText passwordInput;
 
     Retrofit retrofit = new Retrofit.Builder()
         .baseUrl(BACKEND)
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
     CustomerLoginBackend backendInterface = retrofit.create(CustomerLoginBackend.class);
 
 
-    
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -47,11 +48,13 @@ public class MainActivity extends AppCompatActivity {
         passwordInput = findViewById(R.id.passwordInput);
 
         loginButton = findViewById(R.id.loginButton);
-        loginButton.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v) {
-                String username = usernameInput.getText().toString().trim();
-                String password = passwordInput.getText().toString().trim();
+
+    }
+
+    public void Login(View view){
+
+        String username = usernameInput.getText().toString().trim();
+        String password = passwordInput.getText().toString().trim();
 
                 Observable<CustomerDto> getCustomerCall = backendInterface.getCustomerByUsername(username);
 
@@ -65,12 +68,14 @@ public class MainActivity extends AppCompatActivity {
                             }
 
                             @Override
-                            public void onNext(@NonNull CustomerDto purchaseDto) {
+                            public void onNext(@NonNull CustomerDto p) {
+                                Log.e(TAG, p.toString() );
 
                             }
 
                             @Override
                             public void onError(@NonNull Throwable e) {
+                                Log.e(TAG, e.getMessage() );
 
                             }
 
@@ -78,12 +83,11 @@ public class MainActivity extends AppCompatActivity {
                             public void onComplete() {
 
                             }
-                        });
-                //openCustomerRegistration();
-            }
-        });
+
+    });
 
     }
+
    
     
 }
