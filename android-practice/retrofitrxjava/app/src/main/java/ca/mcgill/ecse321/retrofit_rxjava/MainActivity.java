@@ -52,4 +52,9 @@ public class MainActivity extends AppCompatActivity {
         Intent artistIntent = new Intent(MainActivity.this,BrowseArtistsActivity.class);
         startActivity(artistIntent);
     }
+
+    public void startUpload(View view){
+        Intent uploadIntent = new Intent(MainActivity.this,UploadActivity.class);
+        startActivity(uploadIntent);
+    }
 }
