@@ -7,7 +7,7 @@ android {
     buildToolsVersion "30.0.2"
 
     defaultConfig {
-        applicationId "ca.mcgill.ecse321.retrofit_rxjava"
+        applicationId "ca.mcgill.ecse321.android_frontend"
         minSdkVersion 16
         targetSdkVersion 30
         versionCode 1
