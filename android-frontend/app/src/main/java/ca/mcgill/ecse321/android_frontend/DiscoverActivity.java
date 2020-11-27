@@ -58,6 +58,13 @@ public class DiscoverActivity extends AppCompatActivity {
 
     BackendInterface awsInterface = retrofitAWS.create(BackendInterface.class);
 
+    /**
+     * initiates the Activity, retrieves Serialized values passed to it by previous activities
+     * and sets various TextViews to corresponding information. Aslo instantiates the loadData()
+     * function
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,10 +80,12 @@ public class DiscoverActivity extends AppCompatActivity {
         loadData();
     }
 
-    public void refresh(View view) {
-        loadData();
-    }
 
+    /**
+     * makes backend call to retrieve a number of random artworks in the form of a List<ArtworkDto>
+     * upon call completion, passes the List<ArtworkDto> to fetchAws() to retrieve the Base64 of
+     * each Artwork's photo
+     */
     @SuppressLint("CheckResult")
     public void loadData() {
 
@@ -109,6 +118,12 @@ public class DiscoverActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * fetches each Artwork's Base64 photo from aws using the url associated with each ArtworkDto.
+     * Uses a Zip call from rxjava and retrofit. Makes the calls parallel and only execute the next
+     * step, which is startRecyclerView, after all parallel calls complete.
+     * @param dtos List<ArtworkDto>
+     */
     @SuppressLint("CheckResult")
     public void fetchAws(List<ArtworkDto> dtos) {
         Log.e(TAG, "stage1");
@@ -133,6 +148,15 @@ public class DiscoverActivity extends AppCompatActivity {
                 );
     }
 
+    /**
+     *uses the retrieved Base64 String representation of the artwork's photos and each Artwork's associated
+     * ArtworkDto to populate the RecyclerView that displays the artworks as a scrolling series on the
+     * phone
+     *
+     * @param dtos List<ArtworkDto> containing the data to eventually display the artist's
+     *             artworks in a RecyclerView
+     * @param t List<String> containing each artwork's photo's Base64 representation fetched from AWS
+     */
     public void startRecyclerView(List<ArtworkDto> dtos, List<String> t) {
 
         Log.e(TAG, "\n-------------------------------- refresh ----------------------------\n");

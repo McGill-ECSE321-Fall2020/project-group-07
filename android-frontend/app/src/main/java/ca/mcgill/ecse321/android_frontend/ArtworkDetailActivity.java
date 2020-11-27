@@ -21,6 +21,11 @@ public class ArtworkDetailActivity extends AppCompatActivity {
     private String artworkId;
     private String weight;
 
+    /**
+     * initiates the Activity, retrieves Serialized values passed to it by previous activities
+     * and sets the appropriate values to various TextViews
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +62,13 @@ public class ArtworkDetailActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * onClick function associated with the Buy button of the layout
+     * Serializes the relevant information needed, starts the OrderActivity
+     * by passing these serialized pieces of information
+     *
+     * @param view
+     */
     public void initiateBuy(View view){
         Intent intent = new Intent(view.getContext(),OrderActivity.class);
 

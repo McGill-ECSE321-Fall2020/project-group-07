@@ -72,7 +72,13 @@ public class CheckoutActivity extends AppCompatActivity {
     BackendInterface backendInterface = retrofit.create(BackendInterface.class);
 
 
-
+    /**
+     * initiates the Activity, retrieves Serialized values passed to it by previous activities
+     * and sets various TextViews to corresponding information. Aslo instantiates the createPurchase()
+     * function
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -121,10 +127,16 @@ public class CheckoutActivity extends AppCompatActivity {
         totalView=findViewById(R.id.checkout_total);
         totalView.setText("$"+totalCost.toString());
 
+        finishButton.setEnabled(false);
+
         createPurchase();
     }
 
 
+    /**
+     * backend call to create purchase. Uses a Retrofit call, which upon completion yields a unique
+     * purchaseId that is then used in the subsequent createShipment call
+     */
     public void createPurchase(){
         PurchaseDto dto = new PurchaseDto();
         dto.setArtworkId(artworkId);
@@ -176,6 +188,11 @@ public class CheckoutActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * backend call to create a Shipment. Uses a Retrofit call, which upon completion yields a unique
+     * shipmentId that is then used in the subsequent payShipment call
+     * @param dto ShipmentDto that contains the unique purchaseId from createPurchase
+     */
     public void createShipment(ShipmentDto dto){
         Observable<ShipmentDto> call = backendInterface.createShipment(dto);
         call
@@ -205,6 +222,9 @@ public class CheckoutActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * backend call to pay a shipment, using payment information collected from the layout
+     */
     public void payShipment(View view){
         ccNum=ccNumView.getText().toString().trim();
         ccFirstname=ccFirstView.getText().toString().trim();
@@ -258,6 +278,9 @@ public class CheckoutActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * watches the input fields, only enables the checkout button when all fields completed
+     */
     private TextWatcher ccWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {

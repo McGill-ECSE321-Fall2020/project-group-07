@@ -12,6 +12,10 @@ public class MainActivity extends AppCompatActivity {
     private static final String TAG="MainActivity";
     private static final String API_ROOT="https://onlinegallery-backend-g7.herokuapp.com";
 
+    /**
+     * instantiates the app
+     * @param savedInstanceState
+     */
     @SuppressLint("CheckResult")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -21,27 +25,32 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * onClick method of the "Discover Artworks" button, starts the DiscoverActivity
+     * @param view
+     */
     @SuppressLint("CheckResult")
     public void startDiscover(View view){
         Intent discoverIntent = new Intent(MainActivity.this, DiscoverActivity.class);
         startActivity(discoverIntent);
     }
 
+    /**
+     * onClick method of the "View Artists" button, starts the BrowseArtistsActivity
+     * @param view
+     */
     public void browseArtists(View view){
         Intent artistIntent = new Intent(MainActivity.this,BrowseArtistsActivity.class);
         startActivity(artistIntent);
     }
 
+    /**
+     * onClick method of the "Upload Artwork" button, starts the UploadActivity
+     * @param view
+     */
     public void startUpload(View view){
         Intent uploadIntent = new Intent(MainActivity.this,UploadActivity.class);
         startActivity(uploadIntent);
     }
 
-    public void triggerConfirmPage(View view){
-        Intent confirmIntent = new Intent(MainActivity.this,ConfirmUploadActivity.class);
-
-        String placeholderUsername="CMonet";
-        confirmIntent.putExtra("USERNAME",placeholderUsername);
-        startActivity(confirmIntent);
-    }
 }

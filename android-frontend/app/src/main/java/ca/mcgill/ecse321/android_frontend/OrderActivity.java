@@ -51,6 +51,9 @@ public class OrderActivity extends AppCompatActivity {
     TextView addressView;
     TextView recipientView;
 
+    /**
+     * text watcher for the shipment information, disables and enables the button depending on input fields
+     */
     private TextWatcher shippingWatcher = new TextWatcher() {
         @Override
         public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -77,6 +80,11 @@ public class OrderActivity extends AppCompatActivity {
     };
 
 
+    /**
+     * initiates the Activity, retrieves Serialized values passed to it by previous activities
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -138,6 +146,11 @@ public class OrderActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * obtains the result of the radio buttons on whether shipment is by gallery pickup or home
+     * delivery
+     * @param view
+     */
     public void checkButton(View view){
         int radioId=radioGroup.getCheckedRadioButtonId();
         radioButton=findViewById(radioId);
@@ -156,6 +169,12 @@ public class OrderActivity extends AppCompatActivity {
         recipientView.setText(recipientName);
     }
 
+    /**
+     * onClick method for the continue button,
+     * starts the CheckoutActiivty and passes the following
+     * fields as Serialized Extras
+     * @param view
+     */
     public void continueButton(View view){
         Intent intent = new Intent(view.getContext(),CheckoutActivity.class);
         intent.putExtra("ARTWORKID",artworkId);

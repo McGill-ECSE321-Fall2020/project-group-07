@@ -60,6 +60,13 @@ public class ConfirmUploadActivity extends AppCompatActivity {
 
     BackendInterface awsInterface = retrofitAWS.create(BackendInterface.class);
 
+    /**
+     * initiates the Activity, retrieves Serialized values passed to it by previous activities
+     * and sets various TextViews to corresponding information. Aslo instantiates the createPurchase()
+     * function
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -70,18 +77,34 @@ public class ConfirmUploadActivity extends AppCompatActivity {
         username=(String) i.getSerializableExtra("USERNAME");
         Log.e(TAG, "onCreate: "+username );
 
-
     }
 
+    /**
+     * onClick method associated with the "View My Portfolio" button after upload complete
+     * takes the uploading artist to his/her portfolio page where they can see the newly uploaded
+     * image at the top
+     *
+     * @param view
+     */
     public void viewArtworks(View view){
         fetchRegistration();
     }
 
+    /**
+     * onClick method associated with the "Return Home" button after upload complete
+     * takes the uploading artist back to app home page
+     *
+     * @param view
+     */
     public void returnHome(View view){
         Intent intent = new Intent(ConfirmUploadActivity.this, MainActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * retrieves the username, first last names, and the profile picture of the uploading artist
+     * for starting the ArtistPageActivity that would display the artist's artworks
+     */
     public void fetchRegistration(){
         Observable<GalleryRegistrationDto> call = backendInterface.getRegistration(username);
         call
@@ -113,6 +136,9 @@ public class ConfirmUploadActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * fetches the Base64 representation of the artist's profile image
+     */
     public void fetchAwsUrl(){
         Observable<ArtistDto> call = backendInterface.getArtist(artistId);
         call
@@ -143,6 +169,10 @@ public class ConfirmUploadActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * converts the Base64 profile pic to a Bitmap and then a byte[]
+     * starts the RecyclerView upon success
+     */
     public void getProfilePic(){
         Observable<String> call = awsInterface.getImgEncoding(awsUrl);
         call
@@ -176,6 +206,9 @@ public class ConfirmUploadActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * starts the RecyclerView for this artist
+     */
     public void startRecyclerView() {
         Intent intent = new Intent(ConfirmUploadActivity.this,ArtistPageActivity.class);
         intent.putExtra("USERNAME",username);

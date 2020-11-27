@@ -170,6 +170,13 @@ public class UploadActivity extends AppCompatActivity {
     };
 
 
+    /**
+     * initiates the Activity, retrieves Serialized values passed to it by previous activities
+     * and sets various TextViews to corresponding information.
+     * Asks for permission to access device storage and media
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -213,6 +220,10 @@ public class UploadActivity extends AppCompatActivity {
         startActivityForResult(intent, RESULT_LOAD_IMAGE);
     }
 
+    /**
+     * resizes the chosen image to a width of 600 px, scales height proportionally
+     * also creates a unique aws file name based on the artist username, time of upload, and image dimensions
+     */
     public void resizeImg() {
         double originalWidth = img.getWidth();
         double originalHeight = img.getHeight();
@@ -231,12 +242,21 @@ public class UploadActivity extends AppCompatActivity {
         encode();
     }
 
+    /**
+     * converts the image to upload to a Base64 string representation for upload to aws
+     */
     public void encode() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         scaledImg.compress(Bitmap.CompressFormat.PNG, 90, byteArrayOutputStream);
         imgEncoding = "data:image/png;base64," + Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
     }
 
+    /**
+     * makes a retrofit call to aws to upload the Base64 string of the image,
+     * upon success, makes the subsequent backend call to also create the Artwork in the database
+     * by sending an ArtworkDto with the url set to the unique aws filename
+     * @param view
+     */
     public void upload(View view) {
         Observable<String> uploadCall = awsInterface.uploadImgEncoding(awsUrl,imgEncoding);
         uploadCall
@@ -277,6 +297,11 @@ public class UploadActivity extends AppCompatActivity {
         });
     }
 
+    /**
+     * the retrofit call triggered after successfully uploading the artwork as a Base64 to aws.
+     * Body of the call is an ArtworkDto with the url attribute set to the unqiue aws url of the
+     * uploaded Base64.
+     */
     public void createArtwork() {
         Log.e(TAG, "createArtwork: " + "this is the triggered backend call");
 
@@ -325,6 +350,12 @@ public class UploadActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * boiler plate of the request device storage permission
+     * @param requestCode
+     * @param permissions
+     * @param grantResults
+     */
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         switch (requestCode) {
@@ -338,6 +369,12 @@ public class UploadActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * boiler plate of the process to select image from phone for upload
+     * @param requestCode
+     * @param resultCode
+     * @param data
+     */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);

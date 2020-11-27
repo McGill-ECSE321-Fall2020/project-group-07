@@ -14,6 +14,8 @@
         android:theme="@style/Theme.Retrofitrxjava">
         <activity android:name=".ConfirmUploadActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
+        <activity android:name=".PaymentConfirmedActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"></activity>
         <activity
             android:name=".UploadActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
@@ -23,7 +25,6 @@
         <activity
             android:name=".BrowseArtistsActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".PaymentConfirmedActivity" />
         <activity
             android:name=".CheckoutActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
