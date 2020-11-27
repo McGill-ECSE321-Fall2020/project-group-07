@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.onlinegallery;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     public TextView lastNameInput;
     public TextView emailInput;
     public TextView passwordInput;
+    public String username;
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
@@ -57,8 +59,6 @@ public class MainActivity extends AppCompatActivity {
         dto.setPassword(passwordInput.getText().toString().trim());
         dto.setUsername(usernameInput.getText().toString().trim());
 
-        Log.e(TAG, "onClick: " + dto.toString());
-
         Observable<GalleryRegistrationDto> createRegistrationCall=backendInterface.createRegistration(dto);
 
         createRegistrationCall
@@ -70,8 +70,9 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                     @Override
-                    public void onNext(@NonNull GalleryRegistrationDto purchaseDto) {
+                    public void onNext(@NonNull GalleryRegistrationDto gDto) {
                         Log.e(TAG, "onNext: "+dto.toString());
+
                     }
                     @Override
                     public void onError(@NonNull Throwable e) {
@@ -84,10 +85,10 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
         openCustomerRegistration();
+
     }
 
     public void clear(View view) {
-
         usernameInput.setText("");
         firstNameInput.setText("");
         lastNameInput.setText("");
@@ -100,6 +101,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void openCustomerRegistration(){
         Intent customerIntent = new Intent(this, CustomerActivity.class);
+        username = (usernameInput.getText().toString().trim());
+
+        customerIntent.putExtra("USERNAME", username);
+
         startActivity(customerIntent);
     }
 }
