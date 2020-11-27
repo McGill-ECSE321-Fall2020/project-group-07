@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class CustomerLoginActivity extends AppCompatActivity {
     private static final String TAG="MainActivity";
     private static final String BACKEND="https://onlinegallery-backend-g7.herokuapp.com";
     Button loginButton;
