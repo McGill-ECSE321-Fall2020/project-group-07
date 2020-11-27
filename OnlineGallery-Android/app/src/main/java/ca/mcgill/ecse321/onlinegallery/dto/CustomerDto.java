@@ -2,12 +2,12 @@ package ca.mcgill.ecse321.onlinegallery.dto;
 
 public class CustomerDto {
 
-	private Long id;
+	private Long customerId;
 	public void setCustomerId(Long id) {
-		this.id = id;
+		this.customerId = id;
 	}
 	public Long getCustomerId() {
-		return this.id;
+		return this.customerId;
 	}
 	
 	private String bankInfo;
@@ -29,7 +29,7 @@ public class CustomerDto {
 	@Override
 	public String toString() {
 		return "CustomerDto{" +
-				"id=" + id +
+				"customerId=" + customerId +
 				", bankInfo='" + bankInfo + '\'' +
 				", username='" + username + '\'' +
 				'}';
