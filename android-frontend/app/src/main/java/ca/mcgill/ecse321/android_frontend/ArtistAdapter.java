@@ -27,7 +27,9 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     private String [] username;
     private Long [] artistId;
 
-
+    /**
+     * Creates a Custom ViewHolder class that extends the RecyclerView.ViewHolder
+     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final CircleImageView imageView;
         private final TextView textView;
@@ -45,18 +47,24 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
     }
 
     /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param bitmapSet Bitmap[] containing the data to populate views to be used
-     * by RecyclerView.
+     * initializes the data of the Adapter to populate the Recylcer view
+     * @param context
+     * @param dtos  List<ArtistDto> containing the text information of the artist that
+     *              will eventually populate the RecyclerView
+     * @param bitmapSet Bitmap[], containing the profile image Bitmap of each ArtistDto
      */
     public ArtistAdapter(Context context, Bitmap[] bitmapSet, List<ArtistDto> dtos) {
         localBitmapSet = bitmapSet;
         setAttributes(dtos);
     }
 
-    // Create new views (invoked by the layout manager)
-    @Override
+    /**
+     * boiler plate of RecyclerView, essentially says that upon creation, associate the RecyclerView
+     * with the R.layout.artist_recycler_row elements as rows of the RecyclerView
+     * @param viewGroup
+     * @param viewType
+     * @return
+     */    @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
         // Create a new view, which defines the UI of the list item
         View view = LayoutInflater.from(viewGroup.getContext())
@@ -65,13 +73,22 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         return new ViewHolder(view);
     }
 
-    // Replace the contents of a view (invoked by the layout manager)
-    @Override
+    /**
+     * boilder plate of the RecyclerView, binds each row of the RecyclerView to an actual bitmap and
+     * the associated text information within the data supplied
+     *
+     * @param viewHolder
+     * @param position
+     */    @Override
     public void onBindViewHolder(ViewHolder viewHolder, final int position) {
 
         viewHolder.getImageView().setImageBitmap(localBitmapSet[position]);
         viewHolder.getTextView().setText(firstLastName[position]);
 
+        /**
+         * a custom onClickListener to each artist displayed in the recyclerview, takes you to
+         * the artist's page with his/her artwoks and the subsequent checkout options
+         */
         viewHolder.itemView.setOnClickListener(view -> {
             Intent intent = new Intent(view.getContext(),ArtistPageActivity.class);
             intent.putExtra("USERNAME",username[position]);
@@ -87,12 +104,20 @@ public class ArtistAdapter extends RecyclerView.Adapter<ArtistAdapter.ViewHolder
         });
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
-    @Override
+    /**
+     * boiler plate RecyclerView
+     * @return
+     */    @Override
     public int getItemCount() {
         return localBitmapSet.length;
     }
 
+
+    /**
+     * for parsing the List<ArtistDtos> so that the RecyclerView can get the right information in the
+     * right plates
+     * @param dtos List<ArtistDto>
+     */
     private void setAttributes(List<ArtistDto> dtos){
         int n=dtos.size();
 
