@@ -210,7 +210,8 @@ public class UploadActivity extends AppCompatActivity {
         uploadBtn = findViewById(R.id.btn_upload);
         uploadBtn.setEnabled(false);
 
-        username = "CMonet";             //this would be replaced by the artist login page before
+        Intent passsedIntent = getIntent();
+        username = (String) passsedIntent.getSerializableExtra("USERNAME");
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST);

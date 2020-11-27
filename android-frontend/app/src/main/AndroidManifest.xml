@@ -52,6 +52,9 @@
             android:name=".CustomerLoginActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
+            android:name=".ArtistLoginActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
             android:name=".PurchaseDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity

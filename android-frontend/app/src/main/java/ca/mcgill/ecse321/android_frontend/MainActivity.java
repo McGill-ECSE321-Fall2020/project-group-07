@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     public void startUpload(View view){
-        Intent uploadIntent = new Intent(MainActivity.this,UploadActivity.class);
+        Intent uploadIntent = new Intent(MainActivity.this,ArtistLoginActivity.class);
         startActivity(uploadIntent);
     }
 
