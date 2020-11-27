@@ -96,7 +96,7 @@ public class RegistrationActivity extends AppCompatActivity {
     }
 
     public void openCustomerRegistration(){
-        Intent customerIntent = new Intent(this, CustomerRegActivity.class);
+        Intent customerIntent = new Intent(this, CustomerRegistrationActivity.class);
         username = (usernameInput.getText().toString().trim());
 
         customerIntent.putExtra("USERNAME", username);

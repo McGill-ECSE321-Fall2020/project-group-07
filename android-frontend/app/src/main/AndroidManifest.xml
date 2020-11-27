@@ -38,10 +38,10 @@
             android:name=".DiscoverActivity"
             android:parentActivityName=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name=".ArtistRegActivity"
+        <activity android:name=".ArtistRegistrationActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
-        <activity android:name=".CustomerRegActivity"
+        <activity android:name=".CustomerRegistrationActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
 
         <activity android:name=".RegistrationActivity"

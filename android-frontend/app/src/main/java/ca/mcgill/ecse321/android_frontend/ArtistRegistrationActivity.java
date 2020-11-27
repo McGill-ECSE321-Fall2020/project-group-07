@@ -20,7 +20,7 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class ArtistRegActivity extends AppCompatActivity {
+public class ArtistRegistrationActivity extends AppCompatActivity {
     private static final String TAG = "ArtistActivity";
     private static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
     private String username;
