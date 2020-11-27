@@ -306,6 +306,11 @@ public class UploadActivity extends AppCompatActivity {
                     ResponseBody body = ((HttpException) e).response().errorBody();
                     try {
                         responseMsg.setText(body.string());
+                        Intent confirmIntent = new Intent(UploadActivity.this,ConfirmUploadActivity.class);
+
+                        confirmIntent.putExtra("USERNAME",username);
+                        startActivity(confirmIntent);
+
                     } catch (IOException ioException) {
                         responseMsg.setText("unknown error, try again later");
                     }

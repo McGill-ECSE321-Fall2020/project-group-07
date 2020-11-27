@@ -36,4 +36,12 @@ public class MainActivity extends AppCompatActivity {
         Intent uploadIntent = new Intent(MainActivity.this,UploadActivity.class);
         startActivity(uploadIntent);
     }
+
+    public void triggerConfirmPage(View view){
+        Intent confirmIntent = new Intent(MainActivity.this,ConfirmUploadActivity.class);
+
+        String placeholderUsername="CMonet";
+        confirmIntent.putExtra("USERNAME",placeholderUsername);
+        startActivity(confirmIntent);
+    }
 }

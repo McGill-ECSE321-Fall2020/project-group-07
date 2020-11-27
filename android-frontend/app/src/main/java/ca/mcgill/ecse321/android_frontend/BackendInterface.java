@@ -5,6 +5,7 @@ import java.util.List;
 import ca.mcgill.ecse321.android_frontend.dto.ArtistDto;
 import ca.mcgill.ecse321.android_frontend.dto.ArtworkDto;
 import ca.mcgill.ecse321.android_frontend.dto.AvailableNumDto;
+import ca.mcgill.ecse321.android_frontend.dto.GalleryRegistrationDto;
 import ca.mcgill.ecse321.android_frontend.dto.PaymentDto;
 import ca.mcgill.ecse321.android_frontend.dto.PurchaseDto;
 import ca.mcgill.ecse321.android_frontend.dto.ShipmentDto;
@@ -40,11 +41,17 @@ public interface BackendInterface {
     @GET("/getAllArtists")
     Observable<List<ArtistDto>> getAllArtists();
 
+    @GET("/getArtistById/{artistId}")
+    Observable<ArtistDto> getArtist(@Path("artistId") Long artistId);
+
     @GET("/getAvailableArtworkByArtistId/{artistId}")
     Observable<List<ArtworkDto>> getArtistArtworks(@Path("artistId") String artistId);
 
     @PUT("/{awsUrl}")
     Observable<String> uploadImgEncoding(@Path("awsUrl") String awsUrl,@Body String encoding);
+
+    @GET("/getRegistration/{username}")
+    Observable<GalleryRegistrationDto> getRegistration(@Path("username") String username);
 
     @POST("/createArtwork")
     Observable<ArtworkDto> createArtwork(@Body ArtworkDto dto);

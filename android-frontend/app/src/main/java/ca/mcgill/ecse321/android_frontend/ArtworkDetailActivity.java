@@ -52,7 +52,7 @@ public class ArtworkDetailActivity extends AppCompatActivity {
         descText.setText(desc);
         mediumText.setText(medium);
         dimensionText.setText(dimension);
-        priceText.setText(price);
+        priceText.setText("$"+price);
         artistText.setText(artist);
 
     }
