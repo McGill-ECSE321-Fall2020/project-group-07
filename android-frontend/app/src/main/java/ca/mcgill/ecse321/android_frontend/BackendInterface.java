@@ -170,6 +170,9 @@ public interface BackendInterface {
     @GET("/getArtistByUsername/{username}")
     Observable<ArtistDto> getArtistByUsername(@Path("username") String username);
 
+    @GET("/getPurchasesByCustomerUsername/{username}")
+    Observable<List<PurchaseSummaryDto>> getPurchasesByCustomerUsername(@Path("username") String username);
+
 }
 
 
