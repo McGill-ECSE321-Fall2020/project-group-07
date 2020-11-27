@@ -15,7 +15,7 @@
             android:layout_marginLeft="152dp"
             android:layout_marginTop="160dp"
             android:lineSpacingExtra="24sp"
-            android:text=" Artist Login"
+            android:text="Artist Login"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -27,7 +27,7 @@
             android:layout_height="50dp"
             android:layout_marginStart="16dp"
             android:layout_marginLeft="16dp"
-            android:layout_marginTop="268dp"
+            android:layout_marginTop="248dp"
             android:ems="10"
             android:hint="username"
             android:inputType="textPersonName"
@@ -38,10 +38,12 @@
             android:id="@+id/passwordInput"
             android:layout_width="377dp"
             android:layout_height="50dp"
+            android:layout_marginTop="52dp"
             android:ems="10"
             android:hint="password"
             android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.529"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/usernameInput" />
 
@@ -49,15 +51,15 @@
             android:id="@+id/loginButton"
             android:layout_width="110dp"
             android:layout_height="61dp"
+            android:layout_marginStart="148dp"
+            android:layout_marginLeft="148dp"
+            android:layout_marginTop="128dp"
             android:onClick="Login"
             android:text="LOGIN"
             android:textStyle="bold"
             app:backgroundTint="#3F51B5"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/passwordInput" />
-
-
-
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
