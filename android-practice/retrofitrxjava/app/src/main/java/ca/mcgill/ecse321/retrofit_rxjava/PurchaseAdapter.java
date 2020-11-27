@@ -1,7 +1,6 @@
 package ca.mcgill.ecse321.retrofit_rxjava;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,10 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.io.ByteArrayOutputStream;
 import java.util.List;
 
-import ca.mcgill.ecse321.retrofit_rxjava.dto.PurchaseDto;
 import ca.mcgill.ecse321.retrofit_rxjava.dto.PurchaseSummaryDto;
 
 public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHolder>{
@@ -111,7 +108,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHo
             artwork[i] = dto.getName();
             artist[i] = dto.getArtistName();
             date[i] = dto.getDatePurchased();
-            commission[i] = dto.getComission() +"";
+            commission[i] = dto.getCommission() +"";
             shipment[i] = dto.getShipmentType();
             price[i] = dto.getPrice()+"";
 

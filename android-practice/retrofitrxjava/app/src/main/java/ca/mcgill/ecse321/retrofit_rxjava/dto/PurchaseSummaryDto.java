@@ -1,12 +1,12 @@
 package ca.mcgill.ecse321.retrofit_rxjava.dto;
 
+import com.google.gson.annotations.SerializedName;
+
 public class PurchaseSummaryDto {
 
+    @SerializedName("comission")
     private Double commission;
-    public void setCommission(Double commission) {
-        this.commission = commission;
-    }
-    public Double getComission() {
+    public Double getCommission() {
         return this.commission;
     }
 
@@ -26,13 +26,9 @@ public class PurchaseSummaryDto {
         return this.datePurchased;
     }
 
+    @SerializedName("name")
     private String artworkName;
-    public void setName(String artworkName) {
-        this.artworkName = artworkName;
-    }
-    public String getName() {
-        return this.artworkName;
-    }
+    public String getName() { return this.artworkName; }
 
     public String artistName;
     public void setArtistName(String artistName) {
@@ -42,13 +38,9 @@ public class PurchaseSummaryDto {
         return this.artistName;
     }
 
+    @SerializedName("artowkrUrl")
     private String artworkUrl;
-    public void setArtworkUrl(String url) {
-        this.artworkUrl = url;
-    }
-    public String getArtowkrUrl() {
-        return this.artworkUrl;
-    }
+    public String getArtworkUrl() { return this.artworkUrl; }
 
     String shipmentType;
     public void setShipmentType(String shipmentType) {
