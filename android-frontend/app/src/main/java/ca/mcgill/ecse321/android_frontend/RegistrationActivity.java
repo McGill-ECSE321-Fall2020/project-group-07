@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.io.IOException;
+
 import ca.mcgill.ecse321.android_frontend.dto.GalleryRegistrationDto;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
@@ -16,19 +18,23 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.HttpException;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RegistrationActivity extends AppCompatActivity {
-    private static final String TAG="MainActivity";
+    private static final String TAG = "RegistrationActivity";
     private static final String BACKEND="https://onlinegallery-backend-g7.herokuapp.com";
     private TextView usernameInput;
     private TextView firstNameInput;
     private TextView lastNameInput;
     private TextView emailInput;
     private TextView passwordInput;
+    private TextView errorView;
     private String username;
+
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
@@ -40,13 +46,14 @@ public class RegistrationActivity extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_registration_page);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         usernameInput = findViewById(R.id.usernameInput);
         firstNameInput = findViewById(R.id.firstNameInput);
         lastNameInput = findViewById(R.id.lastNameInput);
         emailInput = findViewById(R.id.emailInput);
         passwordInput = findViewById(R.id.passwordInput);
+        errorView=findViewById(R.id.errorMsg);
 
     }
     public void register(View v){
@@ -75,7 +82,15 @@ public class RegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Log.e(TAG, "onError: "+e.getLocalizedMessage());
-
+                        if (e instanceof HttpException){
+                            ResponseBody body = ((HttpException) e).response().errorBody();
+                            try {
+                                errorView.setText(body.string());
+                            } catch (IOException ioException) {
+                                errorView.setText("unknown error, try again later");
+                            }
+                        }
+                        return;
                     }
                     @Override
                     public void onComplete() {

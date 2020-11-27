@@ -117,13 +117,12 @@ public class ArtistRegistrationActivity extends AppCompatActivity {
                 });
     }
     public void noArtist(View v) {
-
         openMainPage();
-
     }
 
     public void openMainPage() {
-
+        Intent i = new Intent(ArtistRegistrationActivity.this,MainActivity.class);
+        startActivity(i);
 
     }
 }

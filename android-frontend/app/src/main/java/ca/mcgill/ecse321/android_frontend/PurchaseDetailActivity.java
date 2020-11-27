@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.android_frontend;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
@@ -31,6 +32,7 @@ public class PurchaseDetailActivity extends AppCompatActivity {
     private static final String TAG = "PurchaseDetailActivity";
     private static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
     private static final String AWS = "https://og-img-repo.s3.us-east-1.amazonaws.com";
+    private String username;
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
@@ -53,11 +55,15 @@ public class PurchaseDetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_customer_purchases);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        Intent i = getIntent();
+        username=(String) i.getSerializableExtra("USERNAME");
+
         loadData();
     }
 
     public void loadData(){
-        Observable<List<PurchaseSummaryDto>> call = backendInterface.getPurchasesByCustomerUsername("mike13");
+        Observable<List<PurchaseSummaryDto>> call = backendInterface.getPurchasesByCustomerUsername(username);
         call
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())

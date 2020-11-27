@@ -8,14 +8,19 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
-import ca.mcgill.ecse321.onlinegallery.dto.CustomerDto;
+import java.io.IOException;
+
+import ca.mcgill.ecse321.android_frontend.dto.CustomerDto;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.annotations.NonNull;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.HttpException;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -23,6 +28,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class CustomerLoginActivity extends AppCompatActivity {
     private static final String TAG="MainActivity";
     private static final String BACKEND="https://onlinegallery-backend-g7.herokuapp.com";
+    private String type;
+    TextView msgView;
     Button loginButton;
     EditText usernameInput;
     EditText passwordInput;
@@ -33,17 +40,20 @@ public class CustomerLoginActivity extends AppCompatActivity {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    CustomerLoginBackend backendInterface = retrofit.create(CustomerLoginBackend.class);
+    BackendInterface backendInterface = retrofit.create(BackendInterface.class);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_customer_login);
         usernameInput = findViewById(R.id.usernameInput);
         passwordInput = findViewById(R.id.passwordInput);
-
+        msgView=findViewById(R.id.loginMsg);
         loginButton = findViewById(R.id.loginButton);
+
+        Intent i = getIntent();
+        type = (String) i.getSerializableExtra("TYPE");
 
     }
 
@@ -65,14 +75,47 @@ public class CustomerLoginActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(@NonNull CustomerDto p) {
-                        Log.e(TAG, p.toString() );
+                        if (type.equals("viewPurchase")) {
+                            Intent intent = new Intent(CustomerLoginActivity.this, PurchaseDetailActivity.class);
+                            intent.putExtra("USERNAME", p.getUsername());
+                            startActivity(intent);
+                        }
+                        else if (type.equals("startCheckout")){
+                            Intent passedIntent = getIntent();
+                            String artworkId = (String) passedIntent.getSerializableExtra("ARTWORKID");
+                            Double total = (Double) passedIntent.getSerializableExtra("TOTAL");
+                            String dest = (String) passedIntent.getSerializableExtra("DEST");
+                            Double shipcost = (Double) passedIntent.getSerializableExtra("SHIPCOST");
+                            String recipient = (String) passedIntent.getSerializableExtra("RECIPIENT");
+                            String shiptype=(String) passedIntent.getSerializableExtra("SHIPTYPE");
+
+
+                            Intent intent = new Intent(view.getContext(),CheckoutActivity.class);
+                            intent.putExtra("ARTWORKID",artworkId);
+                            intent.putExtra("DEST",dest);
+                            intent.putExtra("SHIPCOST",shipcost);
+                            intent.putExtra("TOTAL",total);
+                            intent.putExtra("RECIPIENT",recipient);
+                            intent.putExtra("SHIPTYPE",shiptype);
+                            intent.putExtra("USERNAME",p.getUsername());
+
+                            startActivity(intent);
+                        }
 
                     }
 
                     @Override
                     public void onError(@NonNull Throwable e) {
                         Log.e(TAG, e.getMessage() );
-
+                        if (e instanceof HttpException){
+                            ResponseBody body = ((HttpException) e).response().errorBody();
+                            try {
+                                msgView.setText(body.string());
+                            } catch (IOException ioException) {
+                                msgView.setText("unknown error, try again later");
+                            }
+                        }
+                        return;
                     }
 
                     @Override
@@ -83,11 +126,5 @@ public class CustomerLoginActivity extends AppCompatActivity {
                 });
 
     }
-
-    public void Back(View view){
-        Intent artistIntent = new Intent(this, ArtistLoginActivity.class);
-        startActivity(artistIntent);
-    }
-
 
 }

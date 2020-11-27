@@ -176,9 +176,8 @@ public class OrderActivity extends AppCompatActivity {
      * @param view
      */
     public void continueButton(View view){
-        Intent intent = new Intent(view.getContext(),CheckoutActivity.class);
+        Intent intent = new Intent(view.getContext(),CustomerLoginActivity.class);
         intent.putExtra("ARTWORKID",artworkId);
-        intent.putExtra("TOTAL",((Double) totalVal).toString());
         intent.putExtra("DEST",addressView.getText().toString().trim());
         intent.putExtra("SHIPCOST",(Double) shipVal);
         intent.putExtra("TOTAL",(Double) totalVal);
@@ -191,7 +190,33 @@ public class OrderActivity extends AppCompatActivity {
             intent.putExtra("SHIPTYPE","OFFSITE_DELIVERY");
         }
 
+        intent.putExtra("TYPE","startCheckout");
         view.getContext().startActivity(intent);
     }
+
+//    /**
+//     * onClick method for the continue button,
+//     * starts the CheckoutActiivty and passes the following
+//     * fields as Serialized Extras
+//     * @param view
+//     */
+//    public void continueButton(View view){
+//        Intent intent = new Intent(view.getContext(),CheckoutActivity.class);
+//        intent.putExtra("ARTWORKID",artworkId);
+//        intent.putExtra("TOTAL",((Double) totalVal).toString());
+//        intent.putExtra("DEST",addressView.getText().toString().trim());
+//        intent.putExtra("SHIPCOST",(Double) shipVal);
+//        intent.putExtra("TOTAL",(Double) totalVal);
+//        intent.putExtra("RECIPIENT",recipientView.getText().toString().trim());
+//
+//        if (shipMethod.equals("gallery pickup")){
+//            intent.putExtra("SHIPTYPE","ONSITE_PICKUP");
+//        }
+//        else if (shipMethod.equals("home delivery")){
+//            intent.putExtra("SHIPTYPE","OFFSITE_DELIVERY");
+//        }
+//
+//        view.getContext().startActivity(intent);
+//    }
 
 }

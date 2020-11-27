@@ -8,6 +8,7 @@ import android.view.View;
 
 public class PaymentConfirmedActivity extends AppCompatActivity {
 
+
     /**
      * initiates the Activity, retrieves Serialized values passed to it by previous activities
 

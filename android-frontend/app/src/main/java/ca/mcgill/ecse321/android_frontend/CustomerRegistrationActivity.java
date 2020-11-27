@@ -36,11 +36,11 @@ public class CustomerRegistrationActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_customer);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        Intent intent=getIntent();
+        username = (String) intent.getSerializableExtra("USERNAME");
 
     }
     public void yesCustomer(View v){
-        Intent intent=getIntent();
-        username = (String) intent.getSerializableExtra("USERNAME");
         Observable<GalleryRegistrationDto> createCustomerCall=backendInterface.setCustomer(username);
 
         createCustomerCall
@@ -60,6 +60,7 @@ public class CustomerRegistrationActivity extends AppCompatActivity {
                     public void onError(@NonNull Throwable e) {
                         Log.e(TAG, "onError: "+e.getLocalizedMessage());
 
+
                     }
                     @Override
                     public void onComplete() {
@@ -68,7 +69,6 @@ public class CustomerRegistrationActivity extends AppCompatActivity {
                 });
     }
     public void noCustomer(View v) {
-
         openArtistRegistration();
     }
 

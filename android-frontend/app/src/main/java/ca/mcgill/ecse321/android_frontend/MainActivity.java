@@ -53,4 +53,14 @@ public class MainActivity extends AppCompatActivity {
         startActivity(uploadIntent);
     }
 
+    public void register(View view){
+        Intent intent = new Intent(MainActivity.this,RegistrationActivity.class);
+        startActivity(intent);
+    }
+
+    public void viewPurchases(View view){
+        Intent purchaseIntent = new Intent(MainActivity.this,CustomerLoginActivity.class);
+        purchaseIntent.putExtra("TYPE","viewPurchase");
+        startActivity(purchaseIntent);
+    }
 }
