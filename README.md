@@ -2,7 +2,7 @@
 # Website User Documentation
 ### [Visit the site live!](http://onlinegallery-frontend-g7.herokuapp.com/)
 
-1. Discover Random Artworks by clicking the Discover tab of the menu bar
+1. Discover Random Artworks by clicking the Discover tab of the menu bar.
 
 
 ![discover page gif](https://github.com/McGill-ECSE321-Fall2020/project-group-07/blob/master/misc/frontend-gifs/discover.gif)
