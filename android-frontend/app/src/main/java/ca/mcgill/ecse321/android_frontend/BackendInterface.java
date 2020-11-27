@@ -7,6 +7,7 @@ import ca.mcgill.ecse321.android_frontend.dto.ArtworkDto;
 import ca.mcgill.ecse321.android_frontend.dto.AvailableNumDto;
 import ca.mcgill.ecse321.android_frontend.dto.GalleryRegistrationDto;
 import ca.mcgill.ecse321.android_frontend.dto.PaymentDto;
+import ca.mcgill.ecse321.android_frontend.dto.ProfileDto;
 import ca.mcgill.ecse321.android_frontend.dto.PurchaseDto;
 import ca.mcgill.ecse321.android_frontend.dto.ShipmentDto;
 import retrofit2.http.Body;
@@ -120,4 +121,33 @@ public interface BackendInterface {
      */
     @POST("/createArtwork")
     Observable<ArtworkDto> createArtwork(@Body ArtworkDto dto);
+
+    /**
+     * call to backend to create a registration
+     * @param dto GalleryRegistrationDto containing the necessary information to crete an registration
+     * @return
+     */
+    @POST("/createRegistration")
+    Observable<GalleryRegistrationDto> createRegistration(@Body GalleryRegistrationDto dto);
+    /**
+     * call to backend to set an artist to a registration
+     * @param username String
+     * @return
+     */
+    @PUT("/setArtist/{username}")
+    Observable<GalleryRegistrationDto> setArtist(@Path("username") String username);
+    /**
+     * call to backend to set a customer to a registration
+     * @param username String
+     * @return
+     */
+    @PUT("/setCustomer/{username}")
+    Observable<GalleryRegistrationDto> setCustomer(@Path("username") String username);
+    /**
+     * call to backend to create a profile
+     * @param dto ProfileDto containing the necessary information to create an profile
+     * @return
+     */
+    @POST("/createProfile")
+    Observable<ProfileDto> createProfile(@Body ProfileDto dto);
 }
