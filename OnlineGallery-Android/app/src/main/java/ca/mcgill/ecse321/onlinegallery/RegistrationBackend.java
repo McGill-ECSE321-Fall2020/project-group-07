@@ -1,6 +1,7 @@
 package ca.mcgill.ecse321.onlinegallery;
 
 import ca.mcgill.ecse321.onlinegallery.dto.GalleryRegistrationDto;
+import ca.mcgill.ecse321.onlinegallery.dto.ProfileDto;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -18,5 +19,7 @@ public interface RegistrationBackend {
     @PUT("/setCustomer/{username}")
     Observable<GalleryRegistrationDto> setCustomer(@Path("username") String username);
 
+    @POST("/createProfile")
+    Observable<ProfileDto> createProfile(@Body ProfileDto dto);
 
 }

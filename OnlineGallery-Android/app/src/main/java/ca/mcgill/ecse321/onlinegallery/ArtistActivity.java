@@ -2,6 +2,7 @@ package ca.mcgill.ecse321.onlinegallery;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -10,6 +11,7 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 
 import ca.mcgill.ecse321.onlinegallery.dto.GalleryRegistrationDto;
+import ca.mcgill.ecse321.onlinegallery.dto.ProfileDto;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -24,6 +26,13 @@ public class ArtistActivity extends AppCompatActivity {
     public static final String TAG = "ArtistActivity";
     public static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
     public String username;
+    public Long id;
+    public String url;
+    public int numSold;
+    public double totalEarnings;
+    public String selfDescription;
+    public double rating;
+
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -52,9 +61,48 @@ public class ArtistActivity extends AppCompatActivity {
 
                     }
                     @Override
-                    public void onNext(@NonNull GalleryRegistrationDto dto) {
+                    public void onNext(@NonNull GalleryRegistrationDto gDto) {
                         Log.e(TAG, "onNext: "+username.toString());
 
+                        ProfileDto dto = new ProfileDto();
+                        //find way to get artist id?
+                        url = "https://og-img-repo.s3.amazonaws.com/profile-placholder";
+                        numSold =0;
+                        totalEarnings = 0;
+                        selfDescription = "self description placeholder";
+                        rating = 0;
+
+                        dto.setNumSold(numSold);
+                       // dto.setProfileId();
+                        dto.setRating(rating);
+                        dto.setSelfDescription(selfDescription);
+                        dto.setUrl(url);
+                        dto.setUsername(username);
+
+                        Observable<ProfileDto> createProfileCall=backendInterface.createProfile(dto);
+                        createProfileCall
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribeOn(Schedulers.io())
+                                .subscribe(new Observer<ProfileDto>() {
+                                    @Override
+                                    public void onSubscribe(@NonNull Disposable d) {
+
+                                    }
+                                    @Override
+                                    public void onNext(@NonNull ProfileDto pDto) {
+                                        Log.e(TAG, "onNext: "+dto.toString());
+
+                                    }
+                                    @Override
+                                    public void onError(@NonNull Throwable e) {
+                                        Log.e(TAG, "onError: "+e.getLocalizedMessage());
+
+                                    }
+                                    @Override
+                                    public void onComplete() {
+
+                                    }
+                                });
                     }
                     @Override
                     public void onError(@NonNull Throwable e) {
