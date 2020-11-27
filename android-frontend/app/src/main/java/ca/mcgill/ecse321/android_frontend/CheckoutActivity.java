@@ -119,8 +119,8 @@ public class CheckoutActivity extends AppCompatActivity {
         shipCost=(Double) intent.getSerializableExtra("SHIPCOST");
         totalCost=(Double) intent.getSerializableExtra("TOTAL");
         recipient=(String) intent.getSerializableExtra("RECIPIENT");
-        customerUsername="mike13";                          // to be replaced with customerl ogin page
-        customerId="55";                                    // to be replaced with customer login page
+        customerUsername=(String) intent.getSerializableExtra("USERNAME");
+        customerId=((Long) intent.getSerializableExtra("CUSTOMERID")).toString();
         shipType=(String) intent.getSerializableExtra("SHIPTYPE");
 
 

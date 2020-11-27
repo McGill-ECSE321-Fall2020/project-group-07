@@ -98,7 +98,7 @@ public class CustomerLoginActivity extends AppCompatActivity {
                             intent.putExtra("RECIPIENT",recipient);
                             intent.putExtra("SHIPTYPE",shiptype);
                             intent.putExtra("USERNAME",p.getUsername());
-
+                            intent.putExtra("CUSTOMERID",p.getCustomerId());
                             startActivity(intent);
                         }
 
