@@ -11,10 +11,10 @@ import android.widget.ImageView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
 import java.util.List;
 
 import ca.mcgill.ecse321.android_frontend.dto.ArtworkDto;
-
 
 public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> {
 
@@ -31,10 +31,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     private int [] artId;
 
 
-    /**
-     * Provide a reference to the type of views that you are using
-     * (custom ViewHolder).
-     */
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private final ImageView imageView;
 
@@ -48,15 +44,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         }
     }
 
-    /**
-     * Initialize the dataset of the Adapter.
-     *
-     * @param bitmapSet Bitmap[] containing the data to populate views to be used
-     * by RecyclerView.
-     */
-    public ImageAdapter(Context context, Bitmap[] bitmapSet, List<ArtworkDto> dtos) {
-        localBitmapSet = bitmapSet;
-        setAttributes(dtos);
+
+    public ImageAdapter(Context context, List<ArtworkDto> dtos, boolean sortById) {
+        setAttributes(dtos,sortById);
     }
 
     // Create new views (invoked by the layout manager)
@@ -98,9 +88,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     }
 
 
-    private void setAttributes(List<ArtworkDto> dtos){
+    private void setAttributes(List<ArtworkDto> dtos, boolean sort){
+
+        if (sort){
+            Collections.sort(dtos);
+        }
         int n=dtos.size();
 
+        localBitmapSet=new Bitmap[n];
         title=new String[n];
         artist=new String[n];
         desc=new String[n];
@@ -111,8 +106,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
         weight=new double[n];
 
         for (int i=0;i<n;i++){
-
             ArtworkDto d = dtos.get(i);
+
+            localBitmapSet[i]=d.getArtBitmap();
             title[i]=d.getName();
             artist[i]=d.getUsername();
             desc[i]=d.getDescription();
@@ -121,6 +117,8 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
             price[i]=d.getPrice();
             artId[i]=d.getArtworkId();
             weight[i]=d.getWeight();
+
+            Log.e(TAG, "setAttributes: "+d.getArtworkId() );
         }
     }
 }

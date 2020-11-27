@@ -139,14 +139,14 @@ public class DiscoverActivity extends AppCompatActivity {
         List<Bitmap> bitmapList = new ArrayList<>();
         for (int i = 0; i < dtos.size(); i++) {
             Bitmap artBitmap = Helpers.Base64ToBitmap(t.get(i));
-            bitmapList.add(artBitmap);
+            dtos.get(i).setArtBitmap(artBitmap);
         }
 
         pBar.setVisibility(View.GONE);
         pText.setVisibility(View.GONE);
 
         RecyclerView rView = findViewById(R.id.recycler_view);
-        ImageAdapter adapter = new ImageAdapter(this, bitmapList.toArray(new Bitmap[0]), dtos);
+        ImageAdapter adapter = new ImageAdapter(this, dtos,false);
         rView.setAdapter(adapter);
         rView.setLayoutManager(new LinearLayoutManager(DiscoverActivity.this));
     }

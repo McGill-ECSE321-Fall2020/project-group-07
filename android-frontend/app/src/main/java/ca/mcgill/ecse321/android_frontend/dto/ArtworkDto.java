@@ -1,8 +1,10 @@
 package ca.mcgill.ecse321.android_frontend.dto;
 
+import android.graphics.Bitmap;
+
 import java.io.Serializable;
 
-public class ArtworkDto implements Serializable {
+public class ArtworkDto implements Serializable, Comparable {
     private String url;
     private String medium;
     private String username;
@@ -15,21 +17,7 @@ public class ArtworkDto implements Serializable {
     private double weight;
     private double commission;
     private int artworkId;
-
-    public ArtworkDto(String url, String medium, String username, String name, String description, double price, String status, int numViews, String dimension, double weight, double commission, int artworkId) {
-        this.url = url;
-        this.medium = medium;
-        this.username = username;
-        this.name = name;
-        this.description = description;
-        this.price = price;
-        this.status = status;
-        this.numViews = numViews;
-        this.dimension = dimension;
-        this.weight = weight;
-        this.commission = commission;
-        this.artworkId = artworkId;
-    }
+    private Bitmap artBitmap;
 
     public String getUrl() {
         return url;
@@ -127,6 +115,16 @@ public class ArtworkDto implements Serializable {
         this.artworkId = artworkId;
     }
 
+    public Bitmap getArtBitmap() {
+        return artBitmap;
+    }
+
+    public void setArtBitmap(Bitmap artBitmap) {
+        this.artBitmap = artBitmap;
+    }
+
+
+
     @Override
     public String toString() {
         return "ArtworkDto{" +
@@ -143,5 +141,22 @@ public class ArtworkDto implements Serializable {
                 ", commission=" + commission +
                 ", artworkId=" + artworkId +
                 '}'+"\n";
+    }
+
+    @Override
+    public int compareTo(Object arg0) {
+        ArtworkDto otherDto = (ArtworkDto) arg0;
+
+        int otherId = otherDto.getArtworkId();
+        int thisId = this.getArtworkId();
+
+        if (thisId<otherId) {
+            return 1;
+        }
+        else if (thisId==otherId) {
+            return 0;
+        }
+
+        return -1;
     }
 }
