@@ -1,8 +1,6 @@
 package ca.mcgill.ecse321.android_frontend;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,14 +9,9 @@ import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 
-import org.jetbrains.annotations.NotNull;
-
 import java.io.ByteArrayOutputStream;
-import java.util.ArrayList;
-import java.util.List;
 
 import ca.mcgill.ecse321.android_frontend.dto.ArtistDto;
-import ca.mcgill.ecse321.android_frontend.dto.ArtworkDto;
 import ca.mcgill.ecse321.android_frontend.dto.GalleryRegistrationDto;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
