@@ -14,19 +14,28 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.TextView;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 
+import ca.mcgill.ecse321.android_frontend.dto.ArtworkDto;
 import io.reactivex.Observable;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import okhttp3.ResponseBody;
+import retrofit2.HttpException;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -38,17 +47,30 @@ public class UploadActivity extends AppCompatActivity {
     private static final String TAG = "UploadActivity";
 
     private static final int PERMISSION_REQUEST = 0;
-    private static final int RESULT_LOAD_IMAGE=0;
+    private static final int RESULT_LOAD_IMAGE = 0;
 
     private static final SimpleDateFormat sdf = new SimpleDateFormat("MMddYYYY_HHmmss");
 
+    private ArtworkDto uploadDto = new ArtworkDto();
 
     private String imgEncoding;
-    private String awsUrl;
+    private String awsUrl="";
     private String username;
+
 
     Bitmap img;
     Bitmap scaledImg;
+
+    TextView titleView;
+    TextView descView;
+    TextView mediumView;
+    TextView priceView;
+    TextView dimView;
+    TextView weightView;
+    TextView commView;
+    TextView responseMsg;
+
+    Button uploadBtn;
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
@@ -66,21 +88,129 @@ public class UploadActivity extends AppCompatActivity {
 
     BackendInterface awsInterface = retrofitAWS.create(BackendInterface.class);
 
+    private TextWatcher uploadWatcher = new TextWatcher() {
+
+        private void populateDto(){
+            uploadDto.setUsername(username);
+
+            if (titleView.getText().toString().trim().length()>0){
+                uploadDto.setName(titleView.getText().toString().trim());
+            }
+            if (descView.getText().toString().trim().length()>0){
+                uploadDto.setDescription(descView.getText().toString().trim());
+            }
+            if (mediumView.getText().toString().trim().length()>0){
+                uploadDto.setMedium(mediumView.getText().toString().trim());
+            }
+            if (priceView.getText().toString().trim().length()>0){
+                uploadDto.setPrice(Double.parseDouble(priceView.getText().toString().trim()));
+            }
+
+            uploadDto.setStatus("1");
+
+            if (dimView.getText().toString().trim().length()>0){
+                uploadDto.setDimension(dimView.getText().toString().trim());
+            }
+            if (weightView.getText().toString().trim().length()>0){
+                uploadDto.setWeight(Double.parseDouble(weightView.getText().toString().trim()));
+            }
+            if (commView.getText().toString().trim().length()>0){
+                uploadDto.setCommission(Double.parseDouble(commView.getText().toString().trim()));
+            }
+
+            uploadDto.setNumViews(0);
+            uploadDto.setUrl(awsUrl);
+        }
+
+        @Override
+        public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            boolean nonEmpty=(
+                    (titleView.getText().toString().trim().length()>0) &&
+                            (descView.getText().toString().trim().length()>0)&&
+                            (mediumView.getText().toString().trim().length()>0)&&
+                            (priceView.getText().toString().trim().length()>0)&&
+                            (dimView.getText().toString().trim().length()>0)&&
+                            (weightView.getText().toString().trim().length()>0)&&
+                            (commView.getText().toString().trim().length()>0)
+            );
+            uploadBtn.setEnabled(nonEmpty);
+        }
+
+        @Override
+        public void onTextChanged(CharSequence s, int start, int before, int count) {
+            boolean nonEmpty=(
+                    (titleView.getText().toString().trim().length()>0) &&
+                            (descView.getText().toString().trim().length()>0)&&
+                            (mediumView.getText().toString().trim().length()>0)&&
+                            (priceView.getText().toString().trim().length()>0)&&
+                            (dimView.getText().toString().trim().length()>0)&&
+                            (weightView.getText().toString().trim().length()>0)&&
+                            (commView.getText().toString().trim().length()>0)
+            );
+            uploadBtn.setEnabled(nonEmpty);
+            populateDto();
+            if (nonEmpty){
+                Log.e(TAG, "onTextChanged: "+uploadDto.toString() );
+            }
+        }
+
+        @Override
+        public void afterTextChanged(Editable s) {
+            boolean nonEmpty=(
+                    (titleView.getText().toString().trim().length()>0) &&
+                            (descView.getText().toString().trim().length()>0)&&
+                            (mediumView.getText().toString().trim().length()>0)&&
+                            (priceView.getText().toString().trim().length()>0)&&
+                            (dimView.getText().toString().trim().length()>0)&&
+                            (weightView.getText().toString().trim().length()>0)&&
+                            (commView.getText().toString().trim().length()>0)
+            );
+            uploadBtn.setEnabled(nonEmpty);
+        }
+    };
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-        username="aaaaaaa";             //this would be replaced by the artist login page before
+        titleView = findViewById(R.id.upload_title);
+        titleView.addTextChangedListener(uploadWatcher);
 
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE)!=PackageManager.PERMISSION_GRANTED){
-            requestPermissions(new String [] {Manifest.permission.READ_EXTERNAL_STORAGE},PERMISSION_REQUEST);
+        descView = findViewById(R.id.upload_desc);
+        descView.addTextChangedListener(uploadWatcher);
+
+        mediumView = findViewById(R.id.upload_medium);
+        mediumView.addTextChangedListener(uploadWatcher);
+
+        priceView = findViewById(R.id.upload_price);
+        priceView.addTextChangedListener(uploadWatcher);
+
+        dimView = findViewById(R.id.upload_dimension);
+        dimView.addTextChangedListener(uploadWatcher);
+
+        weightView = findViewById(R.id.upload_weight);
+        weightView.addTextChangedListener(uploadWatcher);
+
+        commView = findViewById(R.id.upload_commission);
+        commView.addTextChangedListener(uploadWatcher);
+
+        responseMsg = findViewById(R.id.response_msg);
+        responseMsg.setText("");
+
+        uploadBtn = findViewById(R.id.btn_upload);
+        uploadBtn.setEnabled(false);
+
+        username = "CMonet";             //this would be replaced by the artist login page before
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, PERMISSION_REQUEST);
         }
 
-        Intent intent = new Intent (Intent.ACTION_PICK,MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-        startActivityForResult(intent,RESULT_LOAD_IMAGE);
+        Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+        startActivityForResult(intent, RESULT_LOAD_IMAGE);
     }
 
     public void resizeImg() {
@@ -95,20 +225,19 @@ public class UploadActivity extends AppCompatActivity {
         scaledImg = Bitmap.createScaledBitmap(img, newWidth, newHeight, false);
 
         Timestamp ts = new Timestamp(System.currentTimeMillis());
-        awsUrl=username+"_"+sdf.format(ts)+"_600"+"_"+((Integer) newHeight).toString();
+        awsUrl = username + "_" + sdf.format(ts) + "_600" + "_" + ((Integer) newHeight).toString();
 
-        Log.e(TAG, "resizeImg: "+awsUrl );
+        Log.e(TAG, "resizeImg: " + awsUrl);
         encode();
     }
 
-    public void encode(){
+    public void encode() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         scaledImg.compress(Bitmap.CompressFormat.PNG, 90, byteArrayOutputStream);
-        imgEncoding= "data:image/png;base64,"+Base64.encodeToString(byteArrayOutputStream.toByteArray(),Base64.DEFAULT);
-        uploadAws();
+        imgEncoding = "data:image/png;base64," + Base64.encodeToString(byteArrayOutputStream.toByteArray(), Base64.DEFAULT);
     }
 
-    public void uploadAws(){
+    public void upload(View view) {
         Observable<String> uploadCall = awsInterface.uploadImgEncoding(awsUrl,imgEncoding);
         uploadCall
         .observeOn(AndroidSchedulers.mainThread())
@@ -123,12 +252,22 @@ public class UploadActivity extends AppCompatActivity {
             public void onNext(@io.reactivex.annotations.NonNull String s) {
                 Log.e(TAG, "onNext: "+s );
                 Log.e(TAG, "onNext: "+"successfully uploaded to aws!" );
+                responseMsg.setText("artwork uploaded to AWS, creating in system ...");
                 createArtwork();
             }
 
             @Override
             public void onError(@io.reactivex.annotations.NonNull Throwable e) {
                 Log.e(TAG, "onError: "+e.getLocalizedMessage());
+
+                if (e instanceof HttpException){
+                    ResponseBody body = ((HttpException) e).response().errorBody();
+                    try {
+                        responseMsg.setText(body.string());
+                    } catch (IOException ioException) {
+                        responseMsg.setText("unknown error, try again later");
+                    }
+                }
             }
 
             @Override
@@ -138,20 +277,57 @@ public class UploadActivity extends AppCompatActivity {
         });
     }
 
-    public void createArtwork(){
-        Log.e(TAG, "createArtwork: "+"this is the triggered backend call" );
-    }
+    public void createArtwork() {
+        Log.e(TAG, "createArtwork: " + "this is the triggered backend call");
 
+        Observable<ArtworkDto> uploadCall = backendInterface.createArtwork(uploadDto);
+        uploadCall
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribeOn(Schedulers.io())
+        .subscribe(new Observer<ArtworkDto>() {
+            @Override
+            public void onSubscribe(@io.reactivex.annotations.NonNull Disposable d) {
+
+            }
+
+            @Override
+            public void onNext(@io.reactivex.annotations.NonNull ArtworkDto artworkDto) {
+                Log.e(TAG, "onNext: "+artworkDto.toString());
+                responseMsg.setText("created!");
+                Intent intent = new Intent(UploadActivity.this,ConfirmUploadActivity.class);
+                intent.putExtra("USERNAME",username);
+                startActivity(intent);
+            }
+
+            @Override
+            public void onError(@io.reactivex.annotations.NonNull Throwable e) {
+                Log.e(TAG, "onError: "+e.getLocalizedMessage());
+                if (e instanceof HttpException){
+                    ResponseBody body = ((HttpException) e).response().errorBody();
+                    try {
+                        responseMsg.setText(body.string());
+                    } catch (IOException ioException) {
+                        responseMsg.setText("unknown error, try again later");
+                    }
+                }
+            }
+
+            @Override
+            public void onComplete() {
+
+            }
+        });
+    }
 
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch(requestCode){
+        switch (requestCode) {
             case PERMISSION_REQUEST:
-                if (grantResults[0]==PackageManager.PERMISSION_GRANTED){
-                    Log.e(TAG, "onRequestPermissionsResult: "+"permission granted");
-                }else{
-                    Log.e(TAG, "onRequestPermissionsResult: "+"permission denied");
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.e(TAG, "onRequestPermissionsResult: " + "permission granted");
+                } else {
+                    Log.e(TAG, "onRequestPermissionsResult: " + "permission denied");
                     finish();
                 }
         }
@@ -170,9 +346,10 @@ public class UploadActivity extends AppCompatActivity {
                     int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
                     String picturePath = cursor.getString(columnIndex);
                     cursor.close();
-                    img=BitmapFactory.decodeFile(picturePath);
+                    img = BitmapFactory.decodeFile(picturePath);
                     resizeImg();
                 }
         }
     }
+
 }

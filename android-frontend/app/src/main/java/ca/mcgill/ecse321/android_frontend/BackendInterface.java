@@ -45,4 +45,7 @@ public interface BackendInterface {
 
     @PUT("/{awsUrl}")
     Observable<String> uploadImgEncoding(@Path("awsUrl") String awsUrl,@Body String encoding);
+
+    @POST("/createArtwork")
+    Observable<ArtworkDto> createArtwork(@Body ArtworkDto dto);
 }

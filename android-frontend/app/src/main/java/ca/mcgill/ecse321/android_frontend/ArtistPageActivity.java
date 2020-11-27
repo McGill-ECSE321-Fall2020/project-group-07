@@ -15,6 +15,8 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,7 +155,7 @@ public class ArtistPageActivity extends AppCompatActivity {
                 );
     }
 
-    public void startRecyclerView(List<ArtworkDto> dtos, List<String> t) {
+    public void startRecyclerView(List<ArtworkDto> dtos, @NotNull List<String> t) {
 
         Log.e(TAG, "\n-------------------------------- refresh ----------------------------\n");
         for (String s:t){
@@ -173,5 +175,4 @@ public class ArtistPageActivity extends AppCompatActivity {
         rView.setAdapter(adapter);
         rView.setLayoutManager(new LinearLayoutManager(ArtistPageActivity.this));
     }
-
 }

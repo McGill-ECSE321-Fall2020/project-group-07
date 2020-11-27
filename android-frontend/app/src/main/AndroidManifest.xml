@@ -12,29 +12,32 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Retrofitrxjava">
-        <activity android:name="ca.mcgill.ecse321.android_frontend.UploadActivity" android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+        <activity android:name=".ConfirmUploadActivity"></activity>
         <activity
-            android:name="ca.mcgill.ecse321.android_frontend.ArtistPageActivity"
+            android:name=".UploadActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="ca.mcgill.ecse321.android_frontend.BrowseArtistsActivity"
-            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
-        <activity android:name="ca.mcgill.ecse321.android_frontend.PaymentConfirmedActivity" />
-        <activity
-            android:name="ca.mcgill.ecse321.android_frontend.CheckoutActivity"
+            android:name=".ArtistPageActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="ca.mcgill.ecse321.android_frontend.OrderActivity"
+            android:name=".BrowseArtistsActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity android:name=".PaymentConfirmedActivity" />
+        <activity
+            android:name=".CheckoutActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="ca.mcgill.ecse321.android_frontend.ArtworkDetailActivity"
+            android:name=".OrderActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="ca.mcgill.ecse321.android_frontend.DiscoverActivity"
-            android:parentActivityName="ca.mcgill.ecse321.android_frontend.MainActivity"
+            android:name=".ArtworkDetailActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
         <activity
-            android:name="ca.mcgill.ecse321.android_frontend.MainActivity"
+            android:name=".DiscoverActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
