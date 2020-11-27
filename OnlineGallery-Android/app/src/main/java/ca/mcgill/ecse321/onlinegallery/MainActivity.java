@@ -2,11 +2,9 @@ package ca.mcgill.ecse321.onlinegallery;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,14 +21,14 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String TAG="MainActivity";
-    public static final String BACKEND="https://onlinegallery-backend-g7.herokuapp.com";
-    public TextView usernameInput;
-    public TextView firstNameInput;
-    public TextView lastNameInput;
-    public TextView emailInput;
-    public TextView passwordInput;
-    public String username;
+    private static final String TAG="MainActivity";
+    private static final String BACKEND="https://onlinegallery-backend-g7.herokuapp.com";
+    private TextView usernameInput;
+    private TextView firstNameInput;
+    private TextView lastNameInput;
+    private TextView emailInput;
+    private TextView passwordInput;
+    private String username;
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
@@ -38,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    RegistrationBackend backendInterface = retrofit.create(RegistrationBackend.class);
+    BackendInterface backendInterface = retrofit.create(BackendInterface.class);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,7 +70,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onNext(@NonNull GalleryRegistrationDto gDto) {
                         Log.e(TAG, "onNext: "+dto.toString());
-
+                        openCustomerRegistration();
                     }
                     @Override
                     public void onError(@NonNull Throwable e) {
@@ -84,8 +82,6 @@ public class MainActivity extends AppCompatActivity {
 
                     }
                 });
-        openCustomerRegistration();
-
     }
 
     public void clear(View view) {

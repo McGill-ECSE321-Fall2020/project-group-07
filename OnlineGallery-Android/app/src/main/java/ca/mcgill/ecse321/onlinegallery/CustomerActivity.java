@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -21,9 +20,9 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class CustomerActivity extends AppCompatActivity {
-    public static final String TAG = "CustomerActivity";
-    public static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
-    public String username;
+    private static final String TAG = "CustomerActivity";
+    private static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
+    private String username;
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
@@ -31,7 +30,7 @@ public class CustomerActivity extends AppCompatActivity {
             .addConverterFactory(GsonConverterFactory.create())
             .build();
 
-    RegistrationBackend backendInterface = retrofit.create(RegistrationBackend.class);
+    BackendInterface backendInterface = retrofit.create(BackendInterface.class);
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,7 +54,7 @@ public class CustomerActivity extends AppCompatActivity {
                     @Override
                     public void onNext(@NonNull GalleryRegistrationDto dto) {
                         Log.e(TAG, "onNext: "+username.toString());
-
+                        openArtistRegistration();
                     }
                     @Override
                     public void onError(@NonNull Throwable e) {
@@ -67,8 +66,6 @@ public class CustomerActivity extends AppCompatActivity {
 
                     }
                 });
-        openArtistRegistration();
-
     }
     public void noCustomer(View v) {
 

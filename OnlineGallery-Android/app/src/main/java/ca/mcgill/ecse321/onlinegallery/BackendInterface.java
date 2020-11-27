@@ -8,7 +8,7 @@ import retrofit2.http.PUT;
 import retrofit2.http.Path;
 import io.reactivex.Observable;
 
-public interface RegistrationBackend {
+public interface BackendInterface {
 
     @POST("/createRegistration")
     Observable<GalleryRegistrationDto> createRegistration(@Body GalleryRegistrationDto dto);
