@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="registrationTitle" type="id" />
+    <item name="usernameTitle" type="id" />
+    <item name="passwordInput" type="id" />
+    <item name="registerButton" type="id" />
+    <item name="passwordTitle" type="id" />
+    <item name="usernameInput" type="id" />
+    <item name="lastNameTitle" type="id" />
+    <item name="firstNameInput" type="id" />
+    <item name="lastNameInput" type="id" />
+    <item name="emailTitle" type="id" />
+    <item name="firstNameTitle" type="id" />
+    <item name="emailInput" type="id" />
+    <item name="clearButton" type="id" />
+    <item name="backButton" type="id" />
+</resources>
