@@ -8,6 +8,7 @@ import ca.mcgill.ecse321.android_frontend.dto.AvailableNumDto;
 import ca.mcgill.ecse321.android_frontend.dto.GalleryRegistrationDto;
 import ca.mcgill.ecse321.android_frontend.dto.PaymentDto;
 import ca.mcgill.ecse321.android_frontend.dto.PurchaseDto;
+import ca.mcgill.ecse321.android_frontend.dto.PurchaseSummaryDto;
 import ca.mcgill.ecse321.android_frontend.dto.ShipmentDto;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -120,4 +121,8 @@ public interface BackendInterface {
      */
     @POST("/createArtwork")
     Observable<ArtworkDto> createArtwork(@Body ArtworkDto dto);
+
+    @GET("/getPurchasesByCustomerUsername/{username}")
+    Observable<List<PurchaseSummaryDto>> getPurchasesByCustomerUsername(@Path("username") String username);
+
 }
