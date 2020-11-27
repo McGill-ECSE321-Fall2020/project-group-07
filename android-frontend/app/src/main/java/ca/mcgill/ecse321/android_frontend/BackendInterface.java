@@ -9,6 +9,7 @@ import ca.mcgill.ecse321.android_frontend.dto.GalleryRegistrationDto;
 import ca.mcgill.ecse321.android_frontend.dto.PaymentDto;
 import ca.mcgill.ecse321.android_frontend.dto.ProfileDto;
 import ca.mcgill.ecse321.android_frontend.dto.PurchaseDto;
+import ca.mcgill.ecse321.android_frontend.dto.PurchaseSummaryDto;
 import ca.mcgill.ecse321.android_frontend.dto.ShipmentDto;
 import retrofit2.http.Body;
 import retrofit2.http.GET;
@@ -150,4 +151,5 @@ public interface BackendInterface {
      */
     @POST("/createProfile")
     Observable<ProfileDto> createProfile(@Body ProfileDto dto);
+
 }
