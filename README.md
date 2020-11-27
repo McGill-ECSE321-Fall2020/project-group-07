@@ -27,6 +27,6 @@ to login and give your payment method.
 
 
 5. To access the Artist Portal, you need to click the corresponding tap and log in. from there, you will be able to upload your artworks, 
-change your profile and update your bio)
+change your profile and update your bio.
 
 ![artistFunctions gif](https://github.com/McGill-ECSE321-Fall2020/project-group-07/blob/master/misc/frontend-gifs/artistSettings.gif)
