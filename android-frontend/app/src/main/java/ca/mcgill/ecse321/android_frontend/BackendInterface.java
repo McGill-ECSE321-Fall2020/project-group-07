@@ -5,6 +5,7 @@ import java.util.List;
 import ca.mcgill.ecse321.android_frontend.dto.ArtistDto;
 import ca.mcgill.ecse321.android_frontend.dto.ArtworkDto;
 import ca.mcgill.ecse321.android_frontend.dto.AvailableNumDto;
+import ca.mcgill.ecse321.android_frontend.dto.CustomerDto;
 import ca.mcgill.ecse321.android_frontend.dto.GalleryRegistrationDto;
 import ca.mcgill.ecse321.android_frontend.dto.PaymentDto;
 import ca.mcgill.ecse321.android_frontend.dto.ProfileDto;
@@ -152,4 +153,23 @@ public interface BackendInterface {
     @POST("/createProfile")
     Observable<ProfileDto> createProfile(@Body ProfileDto dto);
 
+    /**
+     * call to backend to get customer dto
+     * @param username String
+     * @return
+     */
+
+    @GET("/getCustomerByUsername/{username}")
+    Observable<CustomerDto> getCustomerByUsername(@Path("username") String username);
+    /**
+     * call to backend to get artist dto
+     * @param username String
+     * @return
+     */
+    
+    @GET("/getArtistByUsername/{username}")
+    Observable<ArtistDto> getArtistByUsername(@Path("username") String username);
+
 }
+
+

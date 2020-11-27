@@ -1,4 +1,4 @@
-package ca.mcgill.ecse321.onlinegallery.dto;
+package ca.mcgill.ecse321.android_frontend.dto;
 
 public class CustomerDto {
 
