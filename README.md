@@ -15,6 +15,6 @@
 5. When in doubt, try turning Android Studio and/or your computer on and off
 
 ### Project Documentation
-1. To see documentations on how to use the app and recorded gifs showing it in action, visit this [wiki page](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki/Android-Documentation)
-2. To see documtations for the accompanying Vue-based website frontend developed in sprint 3, visit [this wiki page instead](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki/Web-Documentation)
+1. To see documentations on how to use the app and recorded gifs showing it in action, visit this [wiki page](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki/Frontend-Documentation:-Android)
+2. To see documtations for the accompanying Vue-based website frontend developed in sprint 3, visit [this wiki page instead](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki/Frontend-Documentation:-Web)
 
