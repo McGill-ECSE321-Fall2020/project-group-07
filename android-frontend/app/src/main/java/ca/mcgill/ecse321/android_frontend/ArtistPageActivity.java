@@ -125,7 +125,15 @@ public class ArtistPageActivity extends AppCompatActivity {
 
             @Override
             public void onNext(@NonNull List<ArtworkDto> artworkDtos) {
-                fetchAws(artworkDtos);
+                if (artworkDtos.size()>0) {
+                    fetchAws(artworkDtos);
+                }
+                else{
+                    pBar.setVisibility(View.GONE);
+                    pText.setVisibility(View.GONE);
+                    noArtView.setVisibility(View.VISIBLE);
+                    return;
+                }
             }
 
             @Override
@@ -188,24 +196,22 @@ public class ArtistPageActivity extends AppCompatActivity {
      */
     public void startRecyclerView(List<ArtworkDto> dtos, @NotNull List<String> t) {
 
+        Log.e(TAG, "startRecyclerView: "+((Integer)dtos.size()).toString() );
+
         pBar.setVisibility(View.GONE);
         pText.setVisibility(View.GONE);
 
-        Log.e(TAG, "\n-------------------------------- refresh ----------------------------\n");
-        for (String s:t){
-            Log.e(TAG, "startRecyclerView: "+s );
-        }
-        List<Bitmap> bitmapList = new ArrayList<>();
-        for (int i = 0; i < dtos.size(); i++) {
-            Bitmap artBitmap = Helpers.Base64ToBitmap(t.get(i));
-            dtos.get(i).setArtBitmap(artBitmap);
-        }
+            Log.e(TAG, "\n-------------------------------- refresh ----------------------------\n");
+            List<Bitmap> bitmapList = new ArrayList<>();
+            for (int i = 0; i < dtos.size(); i++) {
+                Bitmap artBitmap = Helpers.Base64ToBitmap(t.get(i));
+                dtos.get(i).setArtBitmap(artBitmap);
+            }
 
 
-
-        RecyclerView rView = findViewById(R.id.artist_page_recyclerview);
-        ImageAdapter adapter = new ImageAdapter(this, dtos,true);
-        rView.setAdapter(adapter);
-        rView.setLayoutManager(new LinearLayoutManager(ArtistPageActivity.this));
+            RecyclerView rView = findViewById(R.id.artist_page_recyclerview);
+            ImageAdapter adapter = new ImageAdapter(this, dtos, true);
+            rView.setAdapter(adapter);
+            rView.setLayoutManager(new LinearLayoutManager(ArtistPageActivity.this));
     }
 }

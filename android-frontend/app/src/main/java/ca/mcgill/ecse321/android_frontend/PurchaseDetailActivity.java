@@ -39,6 +39,7 @@ public class PurchaseDetailActivity extends AppCompatActivity {
 
     ProgressBar pBar;
     TextView pText;
+    TextView noPurchaseView;
 
     // To get a retrofit object in order to do backend calls easily
     Retrofit retrofit = new Retrofit.Builder()
@@ -76,9 +77,11 @@ public class PurchaseDetailActivity extends AppCompatActivity {
 
         pBar=findViewById(R.id.load_purchase_pBar);
         pText=findViewById(R.id.load_purchase_pText);
+        noPurchaseView=findViewById(R.id.no_purchase_msg);
 
         pBar.setVisibility(View.VISIBLE);
         pText.setVisibility(View.VISIBLE);
+        noPurchaseView.setVisibility(View.GONE);
 
         loadData();
     }
@@ -102,7 +105,15 @@ public class PurchaseDetailActivity extends AppCompatActivity {
 
                     @Override
                     public void onNext(@NonNull List<PurchaseSummaryDto> dtos) {
-                        fetchAwsAndBuild(dtos);
+                        if (dtos.size()>0) {
+                            fetchAwsAndBuild(dtos);
+                        }
+                        else{
+                            pBar.setVisibility(View.GONE);
+                            pText.setVisibility(View.GONE);
+                            noPurchaseView.setVisibility(View.VISIBLE);
+                            return;
+                        }
                     }
 
                     @Override
