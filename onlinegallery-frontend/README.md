@@ -1,4 +1,4 @@
-# pinterest-mock
+# onlinegallery-frontend
 
 ## Project setup
 ```
