@@ -42,6 +42,7 @@ public class ArtistPageActivity extends AppCompatActivity {
 
     ProgressBar pBar;
     TextView pText;
+    TextView noArtView;
 
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
@@ -83,6 +84,9 @@ public class ArtistPageActivity extends AppCompatActivity {
 
         pBar.setVisibility(View.VISIBLE);
         pText.setVisibility(View.VISIBLE);
+
+        noArtView=findViewById(R.id.no_artwork_msg);
+        noArtView.setVisibility(View.GONE);
 
         Intent intent = getIntent();
 
@@ -184,6 +188,9 @@ public class ArtistPageActivity extends AppCompatActivity {
      */
     public void startRecyclerView(List<ArtworkDto> dtos, @NotNull List<String> t) {
 
+        pBar.setVisibility(View.GONE);
+        pText.setVisibility(View.GONE);
+
         Log.e(TAG, "\n-------------------------------- refresh ----------------------------\n");
         for (String s:t){
             Log.e(TAG, "startRecyclerView: "+s );
@@ -194,8 +201,7 @@ public class ArtistPageActivity extends AppCompatActivity {
             dtos.get(i).setArtBitmap(artBitmap);
         }
 
-        pBar.setVisibility(View.GONE);
-        pText.setVisibility(View.GONE);
+
 
         RecyclerView rView = findViewById(R.id.artist_page_recyclerview);
         ImageAdapter adapter = new ImageAdapter(this, dtos,true);
