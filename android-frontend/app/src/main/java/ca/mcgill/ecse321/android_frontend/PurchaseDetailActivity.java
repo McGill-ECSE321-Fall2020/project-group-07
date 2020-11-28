@@ -5,7 +5,10 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -33,6 +36,9 @@ public class PurchaseDetailActivity extends AppCompatActivity {
     private static final String BACKEND = "https://onlinegallery-backend-g7.herokuapp.com";
     private static final String AWS = "https://og-img-repo.s3.us-east-1.amazonaws.com";
     private String username;
+
+    ProgressBar pBar;
+    TextView pText;
 
     // To get a retrofit object in order to do backend calls easily
     Retrofit retrofit = new Retrofit.Builder()
@@ -67,6 +73,12 @@ public class PurchaseDetailActivity extends AppCompatActivity {
         // retrieve username that was inserted into the customer login forum
         Intent i = getIntent();
         username=(String) i.getSerializableExtra("USERNAME");
+
+        pBar=findViewById(R.id.load_purchase_pBar);
+        pText=findViewById(R.id.load_purchase_pText);
+
+        pBar.setVisibility(View.VISIBLE);
+        pText.setVisibility(View.VISIBLE);
 
         loadData();
     }
@@ -151,6 +163,9 @@ public class PurchaseDetailActivity extends AppCompatActivity {
             Bitmap artBitmap = Helpers.Base64ToBitmap(t.get(i));
             bitmapList.add(artBitmap);
         }
+
+        pBar.setVisibility(View.GONE);
+        pText.setVisibility(View.GONE);
 
         RecyclerView rView = findViewById(R.id.purchase_recyclerview);
         // Call purchase adapter to fill front-end with dynamic information about this customers purchases
