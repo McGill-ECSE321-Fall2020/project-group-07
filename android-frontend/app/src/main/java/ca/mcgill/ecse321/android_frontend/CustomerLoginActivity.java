@@ -35,6 +35,11 @@ public class CustomerLoginActivity extends AppCompatActivity {
 
     CustomerLoginBackend backendInterface = retrofit.create(CustomerLoginBackend.class);
 
+    /**
+     * initiates the Activity, retrieves Serialized values passed to it by previous activities
+     *
+     * @param savedInstanceState
+     */
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +51,12 @@ public class CustomerLoginActivity extends AppCompatActivity {
         loginButton = findViewById(R.id.loginButton);
 
     }
+
+    /**
+     * backend call that returns Customer dto on login click
+     *
+     * @param view
+     */
 
     public void Login(View view){
 

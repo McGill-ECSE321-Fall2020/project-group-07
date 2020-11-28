@@ -38,6 +38,11 @@ public class ArtistLoginActivity extends AppCompatActivity  {
 
     ArtistLoginBackend backendInterface = retrofit.create(ArtistLoginBackend.class);
 
+    /**
+     * initiates the Activity, retrieves Serialized values passed to it by previous activities
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +53,12 @@ public class ArtistLoginActivity extends AppCompatActivity  {
         loginButton = findViewById(R.id.loginButton);
 
     }
+
+    /**
+     * backend call that returns Artist dto on login click
+     *
+     * @param view
+     */
     public void Login(View view){
 
         String username = usernameInput.getText().toString().trim();
