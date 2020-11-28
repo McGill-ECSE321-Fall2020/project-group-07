@@ -14,6 +14,7 @@ import ca.mcgill.ecse321.android_frontend.dto.PurchaseSummaryDto;
 
 public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHolder>{
 
+    // All information to be retrieved from the purchase Dtos
     private Bitmap[] localBitmapSet;
     private String [] artwork;
     private String [] artist;
@@ -22,6 +23,15 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHo
     private String [] price;
     private String [] commission;
 
+    /**
+     * Associates the RecyclerView with the R.layout.purchase_recycler_row elements as
+     * rows of the RecyclerView, so that one can make multiple copies of a specific layout
+     * with different data in each.
+     *
+     * @param parent ViewGroup
+     * @param viewType int
+     * @return
+     */
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -32,9 +42,17 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHo
         return new PurchaseAdapter.ViewHolder(view);
     }
 
+    /**
+     * Binds each row of the RecyclerView to a bitmap and associated text information
+     * within the data supplied.
+     *
+     * @param holder ViewHolder
+     * @param position int
+     */
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
 
+        //Dynamically change front end information so that user can see their respective purchases
         holder.getImageView().setImageBitmap(localBitmapSet[position]);
         holder.artist.setText(artist[position]);
         holder.artwork.setText(artwork[position]);
@@ -50,6 +68,10 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHo
         return localBitmapSet.length;
     }
 
+    /**
+     * Hold the necessary elements that will hold the user's specific
+     * purchase information.
+     */
     public class ViewHolder extends RecyclerView.ViewHolder{
         private final ImageView imageView;
         private final TextView price;
@@ -61,6 +83,7 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHo
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            // Find individual TextView element in order to change their information dynamically
             imageView = itemView.findViewById(R.id.imageView);
             artwork = itemView.findViewById(R.id.purchase_artwork_name);
             artist = itemView.findViewById(R.id.purchase_artist_name);
@@ -87,6 +110,13 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHo
         setAttributes(dtos);
     }
 
+    /**
+     * Populates this class's attributes with the necessary information
+     * from the dtos, so that the RecyclerView can get the appropriate
+     * information.
+     *
+     * @param dtos List<PurchaseSummaryDto>
+     */
     private void setAttributes(List<PurchaseSummaryDto> dtos){
 
         int size = dtos.size();
@@ -102,6 +132,8 @@ public class PurchaseAdapter extends RecyclerView.Adapter<PurchaseAdapter.ViewHo
 
             PurchaseSummaryDto dto = dtos.get(i);
 
+            // Add each dto information into the list in order to add this information onto the front end
+            // using the recyclerView
             artwork[i] = dto.getName();
             artist[i] = dto.getArtistName();
             date[i] = dto.getDatePurchased();

@@ -34,6 +34,7 @@ public class PurchaseDetailActivity extends AppCompatActivity {
     private static final String AWS = "https://og-img-repo.s3.us-east-1.amazonaws.com";
     private String username;
 
+    // To get a retrofit object in order to do backend calls easily
     Retrofit retrofit = new Retrofit.Builder()
             .baseUrl(BACKEND)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -42,6 +43,7 @@ public class PurchaseDetailActivity extends AppCompatActivity {
 
     BackendInterface backendInterface = retrofit.create(BackendInterface.class);
 
+    // To get a retrofit object in order to retrieve images from AWS
     Retrofit retrofitAWS = new Retrofit.Builder()
             .baseUrl(AWS)
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
@@ -50,19 +52,32 @@ public class PurchaseDetailActivity extends AppCompatActivity {
 
     BackendInterface awsInterface = retrofitAWS.create(BackendInterface.class);
 
+    /**
+     * Initiates the customer purchase activity, retrieves serialized values passed to it
+     * by the previous activity, and instantiates the loadData() function.
+     *
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_customer_purchases);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+        // retrieve username that was inserted into the customer login forum
         Intent i = getIntent();
         username=(String) i.getSerializableExtra("USERNAME");
 
         loadData();
     }
 
+    /**
+     * Makes backend call to retrieve a list of purchases done by the respective customer
+     * in the form of a List<PurchaseSummaryDto>. Furthermore, it then passes the
+     * List<PurchaseSummaryDto> to fetchAwsAndBuild().
+     */
     public void loadData(){
+        // Retrieve this customers respective purchases
         Observable<List<PurchaseSummaryDto>> call = backendInterface.getPurchasesByCustomerUsername(username);
         call
                 .observeOn(AndroidSchedulers.mainThread())
@@ -90,6 +105,12 @@ public class PurchaseDetailActivity extends AppCompatActivity {
                 });
     }
 
+    /**
+     * Fetches each customer's purchased artwork's Base64 photo from aws
+     * and calls beginBuilding() after completion.
+     *
+     * @param dtos List<PurchaseSummaryDto>
+     */
     @SuppressLint("CheckResult")
     public void fetchAwsAndBuild(List<PurchaseSummaryDto> dtos){
 
@@ -115,6 +136,13 @@ public class PurchaseDetailActivity extends AppCompatActivity {
 
     }
 
+    /**
+     * Populates the RecyclerView that displays the customer's purchased artworks
+     * and a brief summary of each purchase.
+     *
+     * @param dtos List<PurchaseSummaryDto>
+     * @param t List<String>  Each string contains each artwork's photo's Base64 representation fetched from AWS
+     */
     public void beginBuilding(List<PurchaseSummaryDto> dtos, List<String> t) {
 
         Log.e(TAG, "\n-------------------------------- refresh ----------------------------\n");
@@ -125,6 +153,7 @@ public class PurchaseDetailActivity extends AppCompatActivity {
         }
 
         RecyclerView rView = findViewById(R.id.purchase_recyclerview);
+        // Call purchase adapter to fill front-end with dynamic information about this customers purchases
         PurchaseAdapter adapter = new PurchaseAdapter(this, bitmapList.toArray(new Bitmap[0]), dtos);
         rView.setAdapter(adapter);
         rView.setLayoutManager(new LinearLayoutManager(PurchaseDetailActivity.this));

@@ -170,6 +170,12 @@ public interface BackendInterface {
     @GET("/getArtistByUsername/{username}")
     Observable<ArtistDto> getArtistByUsername(@Path("username") String username);
 
+    /**
+     * call to backend to get a list of all purchases, containing key information,
+     * from a specific customer.
+     * @param username String
+     * @return
+     */
     @GET("/getPurchasesByCustomerUsername/{username}")
     Observable<List<PurchaseSummaryDto>> getPurchasesByCustomerUsername(@Path("username") String username);
 
