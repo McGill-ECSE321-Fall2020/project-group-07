@@ -59,3 +59,14 @@ The project report for Sprint 3 can be found [here](https://github.com/McGill-EC
 | Massimo Vadacchino     |Frontend Developer <br/> | Website Header, Home Page, Admin Login Portal, Architecture  | 40  | 
 | Keon Olsz              |Frontend Developer <br/> | About Page, Facebook Page, Customer Login Portal |  25  |  
 | Natalia Tabet          |Architecture Setup <br/> | Diagram modeling of the entire software system   |  25 | 
+
+### Sprint 4
+The project report for Sprint 4 can be found [here](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki/Project-Report-(Sprint-4)).
+
+| NAME                   | ROLE | CONTRIBUTIONS | HOURS | 
+|------------------------|----------|---------------|-------|
+| Anthony Dagher         |Frontend Developer <br/> | Registration Activity for Customer and Artist, app user documentation |  30   |
+| Jay Han                |Frontend Developer <br/> Project lead | Browse by Discover Activity, Browse by Artist Activity, Checkout Activity. Teach retrofit and rxjava to the team. Visual design. | 50   | 
+| Massimo Vadacchino     |Frontend Developer <br/> | View Customer Purchases Activity and Frontend Mobile Design, Project Report | 35  | 
+| Keon Olsz              |Frontend Developer <br/> | Customer Login Activity, Artist Login Activity, website user documentation |  30  |  
+| Natalia Tabet          |Frontend Developer <br/> | Access device media for uploading artwork, Uploading Activity, Bitmap to Base64 encoding. | 30 | 
