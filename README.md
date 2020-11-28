@@ -13,3 +13,6 @@
 3. Explore features
 4. If run into issues, may need to do a Cold Boot in the AVD device manager
 
+### Project Documentation
+1. To see documentations on how to use the app and recorded gifs showing it in action, visit this [wiki page](https://github.com/McGill-ECSE321-Fall2020/project-group-07/wiki/Android-Documentation)
+
