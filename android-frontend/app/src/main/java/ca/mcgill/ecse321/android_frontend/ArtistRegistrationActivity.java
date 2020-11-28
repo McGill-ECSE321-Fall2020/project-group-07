@@ -38,7 +38,12 @@ public class ArtistRegistrationActivity extends AppCompatActivity {
             .build();
 
     BackendInterface backendInterface = retrofit.create(BackendInterface.class);
-
+    /**
+     * initiates the Activity, retrieves Serialized values passed to it by previous activities
+     * in this case, the previous values are the registration username
+     *
+     * @param savedInstanceState
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_artist);
@@ -46,7 +51,15 @@ public class ArtistRegistrationActivity extends AppCompatActivity {
         Intent intent=getIntent();
         username = (String) intent.getSerializableExtra("USERNAME");
     }
-    public void yesArtist(View v) {
+    /**
+     * backend call to set a registration as an artist. Uses the username that was retrieved
+     * from the previous activity. Upon completion, stores the artist's ID
+     * by using getArtistId on the artist dto, an calls the createProfile() method
+     * to set up the artist's profile
+     *
+     * @param view
+     */
+    public void yesArtist(View view) {
 
         Observable<GalleryRegistrationDto> createArtistCall=backendInterface.setArtist(username);
 
@@ -75,7 +88,13 @@ public class ArtistRegistrationActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    /**
+     * backend call to set up a profile for an artist. Uses the username that was retrieved
+     * from the previous activity and sets values for the profile dto.
+     * Upon completion, calls the openMainPage() method to return the user to the app's
+     * main page.
+     *
+     */
     public void createProfile(){
         ProfileDto dto = new ProfileDto();
         url = "https://og-img-repo.s3.amazonaws.com/profile-placholder";
@@ -116,10 +135,20 @@ public class ArtistRegistrationActivity extends AppCompatActivity {
                     }
                 });
     }
-    public void noArtist(View v) {
+    /**
+     * calls the openMainPage() method because the user has selected the "no" option
+     *
+     * @param view
+     */
+    public void noArtist(View view) {
         openMainPage();
     }
-
+    /**
+     * method that opens the main page by calling MainActivity using an Intent.
+     * Also stores the username value for later use in other activity classes
+     * by using the putExtra method.
+     *
+     */
     public void openMainPage() {
         Intent i = new Intent(ArtistRegistrationActivity.this,MainActivity.class);
         startActivity(i);

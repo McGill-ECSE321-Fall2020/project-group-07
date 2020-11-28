@@ -31,7 +31,12 @@ public class CustomerRegistrationActivity extends AppCompatActivity {
             .build();
 
     BackendInterface backendInterface = retrofit.create(BackendInterface.class);
-
+    /**
+     * initiates the Activity, retrieves Serialized values passed to it by previous activities.
+     * in this case, the previous values are the registration username.
+     *
+     * @param savedInstanceState
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_customer);
@@ -40,7 +45,14 @@ public class CustomerRegistrationActivity extends AppCompatActivity {
         username = (String) intent.getSerializableExtra("USERNAME");
 
     }
-    public void yesCustomer(View v){
+    /**
+     * backend call to set a registration as a customer. Uses the username that was retrieved
+     * from the previous activity. Upon completion, calls the openArtistRegistration() method
+     * to take the user to the next page.
+     *
+     * @param view
+     */
+    public void yesCustomer(View view){
         Observable<GalleryRegistrationDto> createCustomerCall=backendInterface.setCustomer(username);
 
         createCustomerCall
@@ -68,10 +80,20 @@ public class CustomerRegistrationActivity extends AppCompatActivity {
                     }
                 });
     }
-    public void noCustomer(View v) {
+    /**
+     * calls the openArtistRegistration() method because the user has selected the "no" option
+     *
+     * @param view
+     */
+    public void noCustomer(View view) {
         openArtistRegistration();
     }
-
+    /**
+     * method that opens the artist registration option by calling
+     * ArtistRegistrationActivity using an Intent. Also stores the username value for later use
+     * in other activity classes by using the putExtra method
+     *
+     */
     public void openArtistRegistration() {
         Intent artistIntent = new Intent(this, ArtistRegistrationActivity.class);
         artistIntent.putExtra("USERNAME", username);

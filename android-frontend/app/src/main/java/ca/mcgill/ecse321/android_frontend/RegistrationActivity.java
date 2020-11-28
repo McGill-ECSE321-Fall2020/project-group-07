@@ -43,7 +43,11 @@ public class RegistrationActivity extends AppCompatActivity {
             .build();
 
     BackendInterface backendInterface = retrofit.create(BackendInterface.class);
-
+    /**
+     * initiates the Activity, retrieves Serialized values passed to it by previous activities
+     * initializes all the registration inputs for later use by the registration method
+     * @param savedInstanceState
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration_page);
@@ -56,7 +60,13 @@ public class RegistrationActivity extends AppCompatActivity {
         errorView=findViewById(R.id.errorMsg);
 
     }
-    public void register(View v){
+    /**
+     * backend call to create a registration. Sets all required fields into the registration
+     * dto, uses a Retrofit call, which upon completion calls the openCustomerRegistration() method
+     *
+     * @param view
+     */
+    public void register(View view){
         GalleryRegistrationDto dto = new GalleryRegistrationDto();
         dto.setEmail(emailInput.getText().toString().trim());
         dto.setFirstName(firstNameInput.getText().toString().trim());
@@ -98,7 +108,11 @@ public class RegistrationActivity extends AppCompatActivity {
                     }
                 });
     }
-
+    /**
+     * method that clears the inputs in the text fields for the registration forms
+     *
+     * @param view
+     */
     public void clear(View view) {
         usernameInput.setText("");
         firstNameInput.setText("");
@@ -106,10 +120,12 @@ public class RegistrationActivity extends AppCompatActivity {
         emailInput.setText("");
         passwordInput.setText("");
     }
-    public void back(View view) {
-
-    }
-
+    /**
+     * method that opens the customer registration option by calling
+     * CustomerRegistrationActivity using an Intent. Also stores the username value for later use
+     * in other activity classes by using the putExtra method
+     *
+     */
     public void openCustomerRegistration(){
         Intent customerIntent = new Intent(this, CustomerRegistrationActivity.class);
         username = (usernameInput.getText().toString().trim());
