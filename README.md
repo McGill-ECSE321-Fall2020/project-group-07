@@ -5,6 +5,7 @@
 1. clone this branch
 2. open the android-frontend folder as an existing project in Android Studio
 3. wait for Gradle to build in background
+4. if see import errors do: Clean Build, Rebuild Project, restart Android Studio
 
 
 ### Run Project
