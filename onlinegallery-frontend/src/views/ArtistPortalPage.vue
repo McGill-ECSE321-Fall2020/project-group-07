@@ -24,7 +24,7 @@
 
          <v-row>
               <v-col :cols="3">
-                <v-btn small text @click="uploadProfile=true" >change profile pic</v-btn>
+                <v-btn small text @click="uploadProfile=true" disabled>change profile pic</v-btn>
               </v-col>
 
               <v-col :cols="2">
@@ -32,15 +32,15 @@
               </v-col>
 
               <v-col :cols="3">
-                <v-btn small text  @click="startUpload">upload artworks</v-btn>
+                <v-btn small text  @click="startUpload" disabled>upload artworks</v-btn>
               </v-col>
 
               <v-col :cols="2">
-                <v-btn small text @click="gotoMyPage" >my page</v-btn>
+                <v-btn small text @click="gotoMyPage">my page</v-btn>
               </v-col>
 
               <v-col :cols="2">
-                <v-btn small text  >view sales</v-btn>
+                <v-btn small text>view sales</v-btn>
               </v-col>
           </v-row>
 
